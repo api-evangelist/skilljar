@@ -1,0 +1,249 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Progress Tokens API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Progress Tokens
+paths:
+  /v1/progresstokens:
+    get:
+      operationId: progresstokens_list
+      description: APIs for managing progress tokens, which are used to securely update a learner's progress in a course or lesson. Progress tokens allow for tracking and updating completion status for specific learning activities. Use these endpoints to update progress based on a token, which may also update the corresponding lesson progress and course status for the user.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - Progress Tokens
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProgressTokenList'
+          description: ''
+  /v1/progresstokens/{progress_token_id}:
+    get:
+      operationId: progresstokens_retrieve
+      description: APIs for managing progress tokens, which are used to securely update a learner's progress in a course or lesson. Progress tokens allow for tracking and updating completion status for specific learning activities. Use these endpoints to update progress based on a token, which may also update the corresponding lesson progress and course status for the user.
+      parameters:
+      - in: path
+        name: progress_token_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Progress Tokens
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgressToken'
+          description: ''
+    put:
+      operationId: progresstokens_update
+      description: APIs for managing progress tokens, which are used to securely update a learner's progress in a course or lesson. Progress tokens allow for tracking and updating completion status for specific learning activities. Use these endpoints to update progress based on a token, which may also update the corresponding lesson progress and course status for the user.
+      parameters:
+      - in: path
+        name: progress_token_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Progress Tokens
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProgressTokenRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProgressTokenRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProgressTokenRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgressToken'
+          description: ''
+    patch:
+      operationId: progresstokens_partial_update
+      description: APIs for managing progress tokens, which are used to securely update a learner's progress in a course or lesson. Progress tokens allow for tracking and updating completion status for specific learning activities. Use these endpoints to update progress based on a token, which may also update the corresponding lesson progress and course status for the user.
+      parameters:
+      - in: path
+        name: progress_token_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Progress Tokens
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProgressTokenRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProgressTokenRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProgressTokenRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgressToken'
+          description: ''
+components:
+  schemas:
+    ProgressTokenRequest:
+      type: object
+      properties:
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 formatted datetime string indicating when the user completed the task
+        success_status:
+          $ref: '#/components/schemas/SuccessStatusEnum'
+        score:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          description: Score received
+        max_score:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          description: Max possible score
+    PaginatedProgressTokenList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProgressToken'
+    PatchedProgressTokenRequest:
+      type: object
+      properties:
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 formatted datetime string indicating when the user completed the task
+        success_status:
+          $ref: '#/components/schemas/SuccessStatusEnum'
+        score:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          description: Score received
+        max_score:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          description: Max possible score
+    SuccessStatusEnum:
+      enum:
+      - PASSED
+      - FAILED
+      type: string
+      description: '* `PASSED` - Passed
+
+        * `FAILED` - Failed'
+    ProgressToken:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as progress_token_id within the documentation
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 formatted datetime string indicating when the user completed the task
+        success_status:
+          $ref: '#/components/schemas/SuccessStatusEnum'
+        score:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          description: Score received
+        max_score:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          description: Max possible score
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,445 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Quizzes API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Quizzes
+paths:
+  /v1/quizzes:
+    get:
+      operationId: quizzes_list
+      description: 'Retrieve a paginated list of all quizzes for the current organization.
+
+
+        Returns up to 1000 quizzes per page. Supports filtering by quiz name.'
+      parameters:
+      - in: query
+        name: name
+        schema:
+          type: string
+        description: Filter quizzes by quiz name. Case sensitive and exact match.
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - Quizzes
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedQuizList'
+          description: ''
+    post:
+      operationId: quizzes_create
+      description: 'Create a new quiz.
+
+
+        Required fields:
+
+        - `name`: The name of the quiz.
+
+        - `html`: The HTML description or instructions for the quiz.
+
+        - `passing_percentage_correct`: The percentage of correct answers required to pass.
+
+        - `show_results_on_failure`: Whether to show results when a learner fails.
+
+        - `max_attempts`: Maximum number of attempts allowed.
+
+        - `randomize_questions`: Whether to randomize the order of questions.'
+      tags:
+      - Quizzes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuizRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/QuizRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/QuizRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quiz'
+          description: ''
+  /v1/quizzes/{quiz_id}:
+    get:
+      operationId: quizzes_retrieve
+      description: Retrieve the details of a specific quiz by its ID.
+      parameters:
+      - in: path
+        name: quiz_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Quizzes
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quiz'
+          description: ''
+    put:
+      operationId: quizzes_update
+      description: 'Update an existing quiz.
+
+
+        Allows modification of quiz settings and content.'
+      parameters:
+      - in: path
+        name: quiz_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Quizzes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuizRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/QuizRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/QuizRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quiz'
+          description: ''
+    patch:
+      operationId: quizzes_partial_update
+      description: "Manage quizzes for your organization.\n\nThis endpoint allows you to list, create, retrieve, update, and delete quizzes.\nQuizzes are used to assess learner knowledge and can be configured with various settings\n  such as passing percentage, maximum attempts, and question randomization."
+      parameters:
+      - in: path
+        name: quiz_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Quizzes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedQuizRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedQuizRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedQuizRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quiz'
+          description: ''
+    delete:
+      operationId: quizzes_destroy
+      description: 'Delete a quiz.
+
+
+        Permanently removes the quiz and all associated data.'
+      parameters:
+      - in: path
+        name: quiz_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Quizzes
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    Quiz:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          description: The name of the quiz.
+          maxLength: 500
+        html:
+          type: string
+          description: The HTML content of the quiz.
+        passing_percentage_correct:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: Percentage needed to mark quiz as passing.
+        show_results_on_failure:
+          type: boolean
+          description: If set, students who fail the quiz will be able to see the answers they submitted as well as the correct / incorrect status and feedback for each question. Correct answers will not be displayed.  (Students who pass the quiz are shown correct / incorrect status, feedback, and correct answers by default.)
+        max_attempts:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: By default (0), there is no limit to how many times a student may take the quiz.
+        require_correct_response:
+          type: boolean
+          description: If set, the student must answer each question correctly in order to proceed to the next question. When set, there is no limit to the number of attempts to answer the question correctly.
+        randomize_questions:
+          type: boolean
+          description: If set, the student will receive questions in a random order.
+        limit_question_count:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: By default (0), the student will have to answer every question below. Otherwise, they will receive this many questions selected at random.
+        randomize_answers:
+          type: boolean
+          description: If set, the student will receive question answers in a random order (this applies to every question on the quiz).
+        time_limit_seconds:
+          type: integer
+          maximum: 3600000
+          minimum: 0
+          nullable: true
+          description: Set a time limit on the quiz. If left blank, students will have unlimited time to complete the quiz.
+        show_question_feedback:
+          type: boolean
+          description: If set, students will be able to receive feedback for correct / incorrect answers on their quiz for automatically graded questions (multiple choice, multiple answer, and fill in the blank questions.) If unchecked, all feedback entered previously will be deleted.
+        alignment:
+          allOf:
+          - $ref: '#/components/schemas/AlignmentEnum'
+          description: 'Controls text alignment for quiz description and start screen.
+
+
+            * `left` - Left
+
+            * `center` - Center
+
+            * `right` - Right'
+      required:
+      - name
+    AlignmentEnum:
+      enum:
+      - left
+      - center
+      - right
+      type: string
+      description: '* `left` - Left
+
+        * `center` - Center
+
+        * `right` - Right'
+    QuizRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: The name of the quiz.
+          maxLength: 500
+        html:
+          type: string
+          minLength: 1
+          description: The HTML content of the quiz.
+        passing_percentage_correct:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: Percentage needed to mark quiz as passing.
+        show_results_on_failure:
+          type: boolean
+          description: If set, students who fail the quiz will be able to see the answers they submitted as well as the correct / incorrect status and feedback for each question. Correct answers will not be displayed.  (Students who pass the quiz are shown correct / incorrect status, feedback, and correct answers by default.)
+        max_attempts:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: By default (0), there is no limit to how many times a student may take the quiz.
+        require_correct_response:
+          type: boolean
+          description: If set, the student must answer each question correctly in order to proceed to the next question. When set, there is no limit to the number of attempts to answer the question correctly.
+        randomize_questions:
+          type: boolean
+          description: If set, the student will receive questions in a random order.
+        limit_question_count:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: By default (0), the student will have to answer every question below. Otherwise, they will receive this many questions selected at random.
+        randomize_answers:
+          type: boolean
+          description: If set, the student will receive question answers in a random order (this applies to every question on the quiz).
+        time_limit_seconds:
+          type: integer
+          maximum: 3600000
+          minimum: 0
+          nullable: true
+          description: Set a time limit on the quiz. If left blank, students will have unlimited time to complete the quiz.
+        show_question_feedback:
+          type: boolean
+          description: If set, students will be able to receive feedback for correct / incorrect answers on their quiz for automatically graded questions (multiple choice, multiple answer, and fill in the blank questions.) If unchecked, all feedback entered previously will be deleted.
+        alignment:
+          allOf:
+          - $ref: '#/components/schemas/AlignmentEnum'
+          description: 'Controls text alignment for quiz description and start screen.
+
+
+            * `left` - Left
+
+            * `center` - Center
+
+            * `right` - Right'
+      required:
+      - name
+    PaginatedQuizList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quiz'
+    PatchedQuizRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: The name of the quiz.
+          maxLength: 500
+        html:
+          type: string
+          minLength: 1
+          description: The HTML content of the quiz.
+        passing_percentage_correct:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: Percentage needed to mark quiz as passing.
+        show_results_on_failure:
+          type: boolean
+          description: If set, students who fail the quiz will be able to see the answers they submitted as well as the correct / incorrect status and feedback for each question. Correct answers will not be displayed.  (Students who pass the quiz are shown correct / incorrect status, feedback, and correct answers by default.)
+        max_attempts:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: By default (0), there is no limit to how many times a student may take the quiz.
+        require_correct_response:
+          type: boolean
+          description: If set, the student must answer each question correctly in order to proceed to the next question. When set, there is no limit to the number of attempts to answer the question correctly.
+        randomize_questions:
+          type: boolean
+          description: If set, the student will receive questions in a random order.
+        limit_question_count:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: By default (0), the student will have to answer every question below. Otherwise, they will receive this many questions selected at random.
+        randomize_answers:
+          type: boolean
+          description: If set, the student will receive question answers in a random order (this applies to every question on the quiz).
+        time_limit_seconds:
+          type: integer
+          maximum: 3600000
+          minimum: 0
+          nullable: true
+          description: Set a time limit on the quiz. If left blank, students will have unlimited time to complete the quiz.
+        show_question_feedback:
+          type: boolean
+          description: If set, students will be able to receive feedback for correct / incorrect answers on their quiz for automatically graded questions (multiple choice, multiple answer, and fill in the blank questions.) If unchecked, all feedback entered previously will be deleted.
+        alignment:
+          allOf:
+          - $ref: '#/components/schemas/AlignmentEnum'
+          description: 'Controls text alignment for quiz description and start screen.
+
+
+            * `left` - Left
+
+            * `center` - Center
+
+            * `right` - Right'
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

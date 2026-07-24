@@ -1,0 +1,278 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Question Banks API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Question Banks
+paths:
+  /v1/question-banks:
+    get:
+      operationId: question_banks_list
+      description: 'Retrieve a paginated list of all question banks for the current organization.
+
+
+        Returns up to 1000 question banks per page.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - Question Banks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedQuestionBankList'
+          description: ''
+    post:
+      operationId: question_banks_create
+      description: 'Create a new question bank.
+
+
+        Required fields:
+
+        - `name`: The name of the question bank.'
+      tags:
+      - Question Banks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionBankRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/QuestionBankRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/QuestionBankRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionBank'
+          description: ''
+  /v1/question-banks/{question_bank_id}:
+    get:
+      operationId: question_banks_retrieve
+      description: Retrieve the details of a specific question bank by its ID.
+      parameters:
+      - in: path
+        name: question_bank_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Question Banks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionBank'
+          description: ''
+    put:
+      operationId: question_banks_update
+      description: 'Update an existing question bank.
+
+
+        Allows modification of the question bank''s name and associated questions.'
+      parameters:
+      - in: path
+        name: question_bank_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Question Banks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionBankRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/QuestionBankRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/QuestionBankRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionBank'
+          description: ''
+    patch:
+      operationId: question_banks_partial_update
+      description: 'Manage question banks for your organization.
+
+
+        Question banks are collections of questions that can be reused across multiple quizzes.
+
+        This endpoint allows you to list, create, retrieve, update, and delete question banks.'
+      parameters:
+      - in: path
+        name: question_bank_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Question Banks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedQuestionBankRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedQuestionBankRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedQuestionBankRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionBank'
+          description: ''
+    delete:
+      operationId: question_banks_destroy
+      description: 'Delete a question bank.
+
+
+        Permanently removes the question bank and all associated questions.'
+      parameters:
+      - in: path
+        name: question_bank_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Question Banks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    PatchedQuestionBankRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: The name of the question bank.
+          maxLength: 500
+    QuestionBank:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          description: The name of the question bank.
+          maxLength: 500
+        question_count:
+          type: integer
+          readOnly: true
+        quiz_association_count:
+          type: integer
+          readOnly: true
+      required:
+      - name
+    PaginatedQuestionBankList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionBank'
+    QuestionBankRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: The name of the question bank.
+          maxLength: 500
+      required:
+      - name
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

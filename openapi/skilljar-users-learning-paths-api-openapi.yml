@@ -1,0 +1,129 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Users > Learning Paths API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Users > Learning Paths
+paths:
+  /v1/users/{user_id}/published-path-enrollments:
+    get:
+      operationId: users_published_path_enrollments_list
+      description: 'List Learning Path enrollments for a user.
+
+
+        Returns a list of Learning Path enrollments and progress details for the user.'
+      parameters:
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Users > Learning Paths
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserPublishedPathEnrollments'
+          description: ''
+components:
+  schemas:
+    StudentPathProgress:
+      type: object
+      properties:
+        path_progress_id:
+          type: string
+          readOnly: true
+        completed_course_count:
+          type: integer
+          readOnly: true
+        completed_required_course_count:
+          type: integer
+          readOnly: true
+        completed_at:
+          type: string
+          format: date-time
+          readOnly: true
+        latest_activity:
+          type: string
+          format: date-time
+          readOnly: true
+    UserPublishedPathEnrollments:
+      type: object
+      properties:
+        published_path_id:
+          type: string
+          description: ID of the PublishedPath
+        domain_name:
+          type: string
+          readOnly: true
+          description: Domain name where the path is published.
+        enrolled_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Datetime the user most recently enrolled in the path
+        expires_at:
+          type: string
+          format: date-time
+          readOnly: true
+        active:
+          type: boolean
+          readOnly: true
+        enrollment_id:
+          type: string
+          readOnly: true
+          description: ID of the Enrollment
+        published_path:
+          $ref: '#/components/schemas/UserPublishedPathSummary'
+        published_path_progress:
+          $ref: '#/components/schemas/StudentPathProgress'
+      required:
+      - published_path
+      - published_path_progress
+    UserPublishedPathSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        course_count:
+          type: integer
+          readOnly: true
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

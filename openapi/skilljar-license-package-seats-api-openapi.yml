@@ -1,0 +1,334 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets License Package Seats API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: License Package Seats
+paths:
+  /v1/license-packages/{license_package_id}/students:
+    get:
+      operationId: license_packages_students_list
+      description: '***Note:*** This endpoint is only available if License Packages are enabled for your Organization.
+
+
+        List all students enrolled in a License Package.'
+      parameters:
+      - in: path
+        name: license_package_id
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - License Package Seats
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLicensePackageSeatList'
+          description: ''
+    post:
+      operationId: license_packages_students_create
+      description: '***Note:*** This endpoint is only available if License Packages are enabled for your Organization.
+
+
+        Add a student to a License Package. Either an email or an existing student''s ID can be used to enroll them in a license package.'
+      parameters:
+      - in: path
+        name: license_package_id
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - License Package Seats
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LicensePackageSeatCreateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LicensePackageSeatCreateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LicensePackageSeatCreateRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicensePackageSeatCreate'
+          description: ''
+  /v1/license-packages/{license_package_id}/students/{student_id}:
+    put:
+      operationId: license_packages_students_update
+      description: '***Note:*** This endpoint is only available if License Packages are enabled for your Organization.
+
+
+        Update if a seat is active in a License Package.'
+      parameters:
+      - in: path
+        name: license_package_id
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: student_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - License Package Seats
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LicensePackageSeatUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LicensePackageSeatUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LicensePackageSeatUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicensePackageSeatUpdate'
+          description: ''
+    patch:
+      operationId: license_packages_students_partial_update
+      description: '***Note:*** This endpoint is only available if License Packages are enabled for your Organization.
+
+
+        Update if a seat is active in a License Package.'
+      parameters:
+      - in: path
+        name: license_package_id
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: student_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - License Package Seats
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedLicensePackageSeatUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedLicensePackageSeatUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedLicensePackageSeatUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicensePackageSeatUpdate'
+          description: ''
+components:
+  schemas:
+    LicensePackageSeatUpdateRequest:
+      type: object
+      description: Update serializer for LicensePackageSeat
+      properties:
+        active:
+          type: boolean
+    LicensePackageSeatCreateRequest:
+      type: object
+      description: Create serializer for LicensePackageSeat
+      properties:
+        student:
+          $ref: '#/components/schemas/LicensePackageStudentCreateRequest'
+      required:
+      - student
+    LicensePackageSeat:
+      type: object
+      description: Serializer for LicensePackageSeat
+      properties:
+        id:
+          type: string
+          readOnly: true
+        student:
+          allOf:
+          - $ref: '#/components/schemas/LicensePackageStudent'
+          readOnly: true
+        enrolled_at:
+          type: string
+          format: date-time
+          readOnly: true
+        active:
+          type: boolean
+    LicensePackageStudent:
+      type: object
+      description: Serializer for the student of a LicensePackageSeat
+      properties:
+        id:
+          type: string
+          readOnly: true
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+    LicensePackageSeatCreate:
+      type: object
+      description: Create serializer for LicensePackageSeat
+      properties:
+        id:
+          type: string
+          readOnly: true
+        student:
+          $ref: '#/components/schemas/LicensePackageStudentCreate'
+        enrolled_at:
+          type: string
+          format: date-time
+          readOnly: true
+        active:
+          type: boolean
+          readOnly: true
+      required:
+      - student
+    PatchedLicensePackageSeatUpdateRequest:
+      type: object
+      description: Update serializer for LicensePackageSeat
+      properties:
+        active:
+          type: boolean
+    LicensePackageStudentCreate:
+      type: object
+      description: Create serializer for LicensePackageSeat
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+        email:
+          type: string
+          format: email
+    LicensePackageSeatUpdate:
+      type: object
+      description: Update serializer for LicensePackageSeat
+      properties:
+        id:
+          type: string
+          readOnly: true
+        student:
+          allOf:
+          - $ref: '#/components/schemas/LicensePackageStudent'
+          readOnly: true
+        enrolled_at:
+          type: string
+          format: date-time
+          readOnly: true
+        active:
+          type: boolean
+    PaginatedLicensePackageSeatList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicensePackageSeat'
+    LicensePackageStudentCreateRequest:
+      type: object
+      description: Create serializer for LicensePackageSeat
+      properties:
+        id:
+          type: string
+          minLength: 1
+        email:
+          type: string
+          format: email
+          minLength: 1
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

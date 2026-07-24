@@ -1,0 +1,232 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets VILT > Session Events API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: VILT > Session Events
+paths:
+  /v1/vilt-session-events:
+    get:
+      operationId: vilt_session_events_list
+      description: 'Retrieve a paginated list of VILT session events.
+
+
+        Returns a list of session events matching the provided filters.
+
+        Supports filtering by course, lesson, and date/time.'
+      parameters:
+      - in: query
+        name: ends_at__lte
+        schema:
+          type: string
+        description: Filter where a ViltSessionEvent is less than or equal to the ends at value. Datetime format
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: session__lesson__course__id
+        schema:
+          type: string
+        description: Filter ViltSessionEvents by exact match of a Course ID
+      - in: query
+        name: session__lesson__id
+        schema:
+          type: string
+        description: Filter ViltSessionEvents by exact match of a Lesson ID
+      - in: query
+        name: starts_at__gte
+        schema:
+          type: string
+        description: Filter where a ViltSessionEvent is greater than or equal to the starts at value. Datetime format
+      tags:
+      - VILT > Session Events
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedViltSessionEventList'
+          description: ''
+  /v1/vilt-session-events/{vilt_session_event_id}:
+    get:
+      operationId: vilt_session_events_retrieve
+      description: Retrieve details for a specific VILT session event.
+      parameters:
+      - in: path
+        name: vilt_session_event_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - VILT > Session Events
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViltSessionEvent'
+          description: ''
+components:
+  schemas:
+    PaginatedViltSessionEventList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ViltSessionEvent'
+    CourseListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as course_id within the documentation
+        title:
+          type: string
+          readOnly: true
+          description: Course title
+    ViltSessionEvent:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as vilt_session_event_id within the documentation
+        vilt_session:
+          $ref: '#/components/schemas/ViltSession'
+        starts_at:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the start of the event is scheduled
+        ends_at:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the end of the event is scheduled
+        location:
+          type: string
+          description: The location of where the event will be held
+        event_location:
+          $ref: '#/components/schemas/ViltLocation'
+        timezone:
+          type: string
+          description: ISO 8601 formatted timezone of the event
+      required:
+      - event_location
+      - vilt_session
+    ViltLocation:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the location
+        info_url:
+          type: string
+          description: Link for additional information about the location
+        is_active:
+          type: boolean
+          description: Whether this is an active location
+      required:
+      - is_active
+      - name
+    LessonCourseListItem:
+      type: object
+      description: Lesson information within the user lesson progress endpoint.
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as lesson_id within the documentation
+        title:
+          type: string
+          readOnly: true
+        course:
+          $ref: '#/components/schemas/CourseListItem'
+      required:
+      - course
+    ViltSession:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Known as vilt_session_id within the documentation
+        lesson:
+          $ref: '#/components/schemas/LessonCourseListItem'
+        display_name:
+          type: string
+          title: Event name
+          maxLength: 200
+        instructor_name:
+          type: string
+          maxLength: 100
+        seats_total:
+          type: integer
+          description: How many total seats are available
+        registration_count:
+          type: integer
+          readOnly: true
+          description: How many registrations there currently are
+      required:
+      - display_name
+      - id
+      - lesson
+      - seats_total
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

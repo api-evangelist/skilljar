@@ -1,0 +1,523 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Courses > Lessons API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Courses > Lessons
+paths:
+  /v1/lessons:
+    get:
+      operationId: lessons_list
+      description: 'List all lessons within a specific course.
+
+
+        Returns a paginated list of lessons for the given course. The `course_id` query parameter is required.'
+      parameters:
+      - in: query
+        name: course_id
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - Courses > Lessons
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLessonList'
+          description: ''
+    post:
+      operationId: lessons_create
+      description: 'Create a new lesson within a course.
+
+
+        Allows you to add a new lesson to a course.
+
+        The lesson type and required fields depend on the lesson''s content type.'
+      tags:
+      - Courses > Lessons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LessonRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LessonRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LessonRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lesson'
+          description: ''
+  /v1/lessons/{lesson_id}:
+    get:
+      operationId: lessons_retrieve
+      description: 'Retrieve details for a specific lesson.
+
+
+        Returns all available information about the lesson, including its type, content, and metadata.'
+      parameters:
+      - in: path
+        name: lesson_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Courses > Lessons
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lesson'
+          description: ''
+    put:
+      operationId: lessons_update
+      description: 'Update an existing lesson.
+
+
+        Allows you to modify lesson details. Both PUT and PATCH requests perform partial updates.'
+      parameters:
+      - in: path
+        name: lesson_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Courses > Lessons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LessonUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LessonUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LessonUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LessonUpdate'
+          description: ''
+    patch:
+      operationId: lessons_partial_update
+      description: 'Partially update an existing lesson.
+
+
+        Allows you to modify one or more fields of a lesson. Both PUT and PATCH requests perform partial updates.'
+      parameters:
+      - in: path
+        name: lesson_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Courses > Lessons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedLessonUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedLessonUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedLessonUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LessonUpdate'
+          description: ''
+    delete:
+      operationId: lessons_destroy
+      description: 'Delete a lesson from a course.
+
+
+        Permanently removes the lesson and its associated content from the course.'
+      parameters:
+      - in: path
+        name: lesson_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Courses > Lessons
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    Lesson:
+      type: object
+      description: Lesson Serializer
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as lesson_id within the documentation
+        content_asset_id:
+          type: string
+          nullable: true
+          description: Known as content_asset_id within the documentation
+        content_html:
+          type: string
+        content_quiz_id:
+          type: string
+          nullable: true
+          description: Known as content_quiz_id within the documentation
+        content_web_package_id:
+          type: string
+          nullable: true
+          description: Known as content_web_package_id within the documentation
+        course_id:
+          type: string
+          description: Known as course_id within the documentation
+        description_html:
+          type: string
+        display_fullscreen:
+          type: boolean
+        optional:
+          type: boolean
+        order:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        search_keywords:
+          type: string
+          maxLength: 5000
+        time_seconds:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+        title:
+          type: string
+          maxLength: 500
+        tooltip_html:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type8b7Enum'
+      required:
+      - course_id
+      - order
+      - title
+      - type
+    Type8b7Enum:
+      enum:
+      - ASSET
+      - HTML
+      - WEB_PACKAGE
+      - QUIZ
+      - VILT
+      - MODULAR
+      - SECTION
+      type: string
+      description: '* `ASSET` - ASSET
+
+        * `HTML` - HTML
+
+        * `WEB_PACKAGE` - WEB_PACKAGE
+
+        * `QUIZ` - QUIZ
+
+        * `VILT` - VILT
+
+        * `MODULAR` - MODULAR
+
+        * `SECTION` - SECTION'
+    LessonRequest:
+      type: object
+      description: Lesson Serializer
+      properties:
+        content_asset_id:
+          type: string
+          nullable: true
+          minLength: 1
+          description: Known as content_asset_id within the documentation
+        content_html:
+          type: string
+        content_quiz_id:
+          type: string
+          nullable: true
+          minLength: 1
+          description: Known as content_quiz_id within the documentation
+        content_web_package_id:
+          type: string
+          nullable: true
+          minLength: 1
+          description: Known as content_web_package_id within the documentation
+        course_id:
+          type: string
+          minLength: 1
+          description: Known as course_id within the documentation
+        description_html:
+          type: string
+        display_fullscreen:
+          type: boolean
+        optional:
+          type: boolean
+        order:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        search_keywords:
+          type: string
+          maxLength: 5000
+        time_seconds:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+        title:
+          type: string
+          minLength: 1
+          maxLength: 500
+        tooltip_html:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type8b7Enum'
+      required:
+      - course_id
+      - order
+      - title
+      - type
+    LessonUpdateRequest:
+      type: object
+      description: Lesson Update Serializer
+      properties:
+        content_asset_id:
+          type: string
+          nullable: true
+          minLength: 1
+          description: Known as content_asset_id within the documentation
+        content_html:
+          type: string
+        content_quiz_id:
+          type: string
+          nullable: true
+          minLength: 1
+          description: Known as content_quiz_id within the documentation
+        content_web_package_id:
+          type: string
+          nullable: true
+          minLength: 1
+          description: Known as content_web_package_id within the documentation
+        course_id:
+          type: string
+          minLength: 1
+          description: Known as course_id within the documentation
+        description_html:
+          type: string
+        display_fullscreen:
+          type: boolean
+        optional:
+          type: boolean
+        order:
+          type: integer
+        search_keywords:
+          type: string
+          maxLength: 5000
+        time_seconds:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+        title:
+          type: string
+          minLength: 1
+        tooltip_html:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type8b7Enum'
+    PaginatedLessonList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Lesson'
+    LessonUpdate:
+      type: object
+      description: Lesson Update Serializer
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as lesson_id within the documentation
+        content_asset_id:
+          type: string
+          nullable: true
+          description: Known as content_asset_id within the documentation
+        content_html:
+          type: string
+        content_quiz_id:
+          type: string
+          nullable: true
+          description: Known as content_quiz_id within the documentation
+        content_web_package_id:
+          type: string
+          nullable: true
+          description: Known as content_web_package_id within the documentation
+        course_id:
+          type: string
+          description: Known as course_id within the documentation
+        description_html:
+          type: string
+        display_fullscreen:
+          type: boolean
+        optional:
+          type: boolean
+        order:
+          type: integer
+        search_keywords:
+          type: string
+          maxLength: 5000
+        time_seconds:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+        title:
+          type: string
+        tooltip_html:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type8b7Enum'
+    PatchedLessonUpdateRequest:
+      type: object
+      description: Lesson Update Serializer
+      properties:
+        content_asset_id:
+          type: string
+          nullable: true
+          minLength: 1
+          description: Known as content_asset_id within the documentation
+        content_html:
+          type: string
+        content_quiz_id:
+          type: string
+          nullable: true
+          minLength: 1
+          description: Known as content_quiz_id within the documentation
+        content_web_package_id:
+          type: string
+          nullable: true
+          minLength: 1
+          description: Known as content_web_package_id within the documentation
+        course_id:
+          type: string
+          minLength: 1
+          description: Known as course_id within the documentation
+        description_html:
+          type: string
+        display_fullscreen:
+          type: boolean
+        optional:
+          type: boolean
+        order:
+          type: integer
+        search_keywords:
+          type: string
+          maxLength: 5000
+        time_seconds:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+        title:
+          type: string
+          minLength: 1
+        tooltip_html:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type8b7Enum'
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,241 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Published Courses > Student Group Prerequisites API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Published Courses > Student Group Prerequisites
+paths:
+  /v1/domains/{domain_name}/published-courses/{published_course_id}/student-group-prerequisites:
+    get:
+      operationId: domains_published_courses_student_group_prerequisites_list
+      description: List StudentGroup prerequisites for a PublishedCourse.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Courses > Student Group Prerequisites
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPublishedCourseStudentGroupPrerequisiteList'
+          description: ''
+    post:
+      operationId: domains_published_courses_student_group_prerequisites_create
+      description: Adds a StudentGroup prerequisite for a PublishedCourse and returns a `201` response.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Courses > Student Group Prerequisites
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishedCourseStudentGroupPrerequisiteRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PublishedCourseStudentGroupPrerequisiteRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PublishedCourseStudentGroupPrerequisiteRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishedCourseStudentGroupPrerequisite'
+          description: ''
+  /v1/domains/{domain_name}/published-courses/{published_course_id}/student-group-prerequisites/{student_group_id}:
+    get:
+      operationId: domains_published_courses_student_group_prerequisites_retrieve
+      description: Retrieve a StudentGroup prerequisite for a PublishedCourse.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: student_group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Courses > Student Group Prerequisites
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishedCourseStudentGroupPrerequisite'
+          description: ''
+    delete:
+      operationId: domains_published_courses_student_group_prerequisites_destroy
+      description: Removes a StudentGroup prerequisite for a PublishedCourse and returns a `204` response.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: student_group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Courses > Student Group Prerequisites
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    PublishedCourseStudentGroupPrerequisite:
+      type: object
+      description: Serializer for PublishedCourseStudentGroupPrerequisite
+      properties:
+        student_group:
+          $ref: '#/components/schemas/StudentGroupSummary'
+      required:
+      - student_group
+    StudentGroupSummary:
+      type: object
+      description: Serializer for student groups for use GroupVisibility serializers
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          readOnly: true
+      required:
+      - id
+    StudentGroupSummaryRequest:
+      type: object
+      description: Serializer for student groups for use GroupVisibility serializers
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
+    PaginatedPublishedCourseStudentGroupPrerequisiteList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublishedCourseStudentGroupPrerequisite'
+    PublishedCourseStudentGroupPrerequisiteRequest:
+      type: object
+      description: Serializer for PublishedCourseStudentGroupPrerequisite
+      properties:
+        student_group:
+          $ref: '#/components/schemas/StudentGroupSummaryRequest'
+      required:
+      - student_group
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

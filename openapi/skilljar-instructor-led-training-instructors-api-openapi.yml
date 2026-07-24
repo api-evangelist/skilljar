@@ -1,0 +1,314 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Instructor Led Training > Instructors API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Instructor Led Training > Instructors
+paths:
+  /v1/ilt-instructors:
+    get:
+      operationId: ilt_instructors_list
+      description: 'Retrieve a paginated list of ILT instructors.
+
+
+        You can filter by email or provider. Results are paginated.'
+      parameters:
+      - in: query
+        name: email
+        schema:
+          type: string
+        description: Filter instructors by exact match of an email. (optional)
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: provider
+        schema:
+          type: string
+          enum:
+          - calendar
+          - goto.meeting
+          - goto.training
+          - goto.webcast
+          - goto.webinar
+          - webex.meeting
+          - webex.webinar
+          - zoom.meeting
+          - zoom.webinar
+        description: 'Filter instructors by exact match of a provider. (optional)
+
+
+          * `calendar` - calendar
+
+          * `goto.meeting` - goto.meeting
+
+          * `goto.training` - goto.training
+
+          * `goto.webinar` - goto.webinar
+
+          * `goto.webcast` - goto.webcast
+
+          * `webex.meeting` - webex.meeting
+
+          * `webex.webinar` - webex.webinar
+
+          * `zoom.meeting` - zoom.meeting
+
+          * `zoom.webinar` - zoom.webinar'
+      tags:
+      - Instructor Led Training > Instructors
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedIltInstructorList'
+          description: ''
+    post:
+      operationId: ilt_instructors_create
+      description: 'Create a new ILT instructor.
+
+
+        Provide instructor details in the request body.'
+      tags:
+      - Instructor Led Training > Instructors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IltInstructorRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/IltInstructorRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IltInstructorRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IltInstructor'
+          description: ''
+  /v1/ilt-instructors/{id}:
+    get:
+      operationId: ilt_instructors_retrieve
+      description: Retrieve details for a specific ILT instructor by ID.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this vilt account.
+        required: true
+      tags:
+      - Instructor Led Training > Instructors
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IltInstructor'
+          description: ''
+    put:
+      operationId: ilt_instructors_update
+      description: 'Update an existing ILT instructor.
+
+
+        Provide updated instructor details in the request body.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this vilt account.
+        required: true
+      tags:
+      - Instructor Led Training > Instructors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IltInstructorRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/IltInstructorRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IltInstructorRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IltInstructor'
+          description: ''
+    patch:
+      operationId: ilt_instructors_partial_update
+      description: 'Partially update an existing ILT instructor.
+
+
+        Only the provided fields will be updated.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this vilt account.
+        required: true
+      tags:
+      - Instructor Led Training > Instructors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedIltInstructorRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedIltInstructorRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedIltInstructorRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IltInstructor'
+          description: ''
+    delete:
+      operationId: ilt_instructors_destroy
+      description: 'Delete an ILT instructor.
+
+
+        This will remove the instructor from the organization.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this vilt account.
+        required: true
+      tags:
+      - Instructor Led Training > Instructors
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    IltInstructorRequest:
+      type: object
+      description: Serializer for ILT instructors
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 1
+      required:
+      - email
+    PaginatedIltInstructorList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/IltInstructor'
+    IltInstructor:
+      type: object
+      description: Serializer for ILT instructors
+      properties:
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+          description: Return name of this instructor
+          readOnly: true
+        providers:
+          type: array
+          items:
+            type: string
+          description: Return providers supported by this instructor
+          readOnly: true
+      required:
+      - email
+    PatchedIltInstructorRequest:
+      type: object
+      description: Serializer for ILT instructors
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 1
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

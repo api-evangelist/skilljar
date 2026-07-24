@@ -1,0 +1,236 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Published Paths > Labels API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Published Paths > Labels
+paths:
+  /v1/domains/{domain_name}/published-paths/{published_path_id}/labels:
+    get:
+      operationId: domains_published_paths_labels_list
+      description: List labels on a published path.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - in: path
+        name: published_path_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths > Labels
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedNestedLabelAssociationList'
+          description: ''
+    post:
+      operationId: domains_published_paths_labels_create
+      description: Associate a Label association to a Published Path.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: published_path_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths > Labels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NestedLabelAssociationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/NestedLabelAssociationRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/NestedLabelAssociationRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NestedLabelAssociation'
+          description: ''
+  /v1/domains/{domain_name}/published-paths/{published_path_id}/labels/{label_id}:
+    get:
+      operationId: domains_published_paths_labels_retrieve
+      description: Retrieve label details.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: label_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: published_path_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths > Labels
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NestedLabelAssociation'
+          description: ''
+    delete:
+      operationId: domains_published_paths_labels_destroy
+      description: Deletes a Label association to a Published Path and returns a `204` response.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: label_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: published_path_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths > Labels
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    NestedLabelAssociationRequest:
+      type: object
+      description: Serializer for LabelAssociation tying an object to a Label.
+      properties:
+        label:
+          $ref: '#/components/schemas/NestedLabelAssociationLabelRequest'
+      required:
+      - label
+    NestedLabelAssociationLabel:
+      type: object
+      description: Serializer for Label within a LabelAssociation.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          readOnly: true
+          description: Name of the label
+      required:
+      - id
+    NestedLabelAssociation:
+      type: object
+      description: Serializer for LabelAssociation tying an object to a Label.
+      properties:
+        label:
+          $ref: '#/components/schemas/NestedLabelAssociationLabel'
+      required:
+      - label
+    PaginatedNestedLabelAssociationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NestedLabelAssociation'
+    NestedLabelAssociationLabelRequest:
+      type: object
+      description: Serializer for Label within a LabelAssociation.
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

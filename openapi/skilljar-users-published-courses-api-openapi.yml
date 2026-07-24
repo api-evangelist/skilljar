@@ -1,0 +1,409 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Users > Published Courses API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Users > Published Courses
+paths:
+  /v1/users/{user_id}/published-courses:
+    get:
+      operationId: users_published_courses_list
+      description: 'List published courses with progress for a user.
+
+
+        Returns a list of published courses in which the user is enrolled, including progress details.
+
+        Uses optimized batch enrollment loading to reduce database queries.'
+      parameters:
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Users > Published Courses
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserPublishedCourseProgress'
+          description: ''
+  /v1/users/{user_id}/published-courses/{published_course_id}:
+    get:
+      operationId: users_published_courses_retrieve
+      description: 'Retrieve course progress for a user.
+
+
+        Returns detailed progress information for a specific published course enrollment for the user.'
+      parameters:
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Users > Published Courses
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPublishedCourseProgress'
+          description: ''
+    put:
+      operationId: users_published_courses_update
+      description: 'Update course progress for a user.
+
+
+        Allows updating the user''s progress for a published course. Both PUT and PATCH perform partial updates.
+
+        To mark a course as complete, you only need to set the `completed_at` within the course progress.'
+      parameters:
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Users > Published Courses
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPublishedCourseProgressRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserPublishedCourseProgressRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserPublishedCourseProgressRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPublishedCourseProgress'
+          description: ''
+    patch:
+      operationId: users_published_courses_partial_update
+      description: 'Partially update course progress for a user.
+
+
+        Allows updating the user''s progress for a published course. Both PUT and PATCH perform partial updates.
+
+        To mark a course as complete, you only need to set the `completed_at` within the course progress.'
+      parameters:
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Users > Published Courses
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUserPublishedCourseProgressRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUserPublishedCourseProgressRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUserPublishedCourseProgressRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPublishedCourseProgress'
+          description: ''
+components:
+  schemas:
+    CourseProgress:
+      type: object
+      properties:
+        course_progress_id:
+          type: string
+          readOnly: true
+          description: ID of the CourseProgress
+        completed_lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of lessons the user has completed
+        completed_required_lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of required lessons the user has completed (non-optional lessons that count towards course completion)
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: Datetime at which the user completed the course.  If null, the user hasn't completed
+        latest_activity:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Datetime at which the user most recently viewed the course.
+        score:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          description: Course score achieved by student
+        max_score:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          description: Maximum score possible in course
+        credits_earned:
+          type: string
+          description: Credits earned by completing the course
+          maxLength: 20
+        credit_unit_plural:
+          type: string
+          description: Type of credit earned
+          maxLength: 40
+        success_status:
+          nullable: true
+          description: 'Success status of course progress: ''PASSED'', ''FAILED'' or null
+
+
+            * `PASSED` - Passed
+
+            * `FAILED` - Failed'
+          oneOf:
+          - $ref: '#/components/schemas/SuccessStatusEnum'
+          - $ref: '#/components/schemas/NullEnum'
+    CourseSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as course_id within the documentation
+        title:
+          type: string
+          readOnly: true
+          description: Course title
+        lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of lessons in the course
+        required_lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of required lessons in the course (non-optional lessons that count towards course completion)
+    Certificate:
+      type: object
+      properties:
+        code:
+          type: string
+          readOnly: true
+          description: Certificate validation code
+        validate_url:
+          type: string
+          format: uri
+          readOnly: true
+          description: Link to certificate validation page
+        issued_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When the certificate was issued
+        expires_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+          description: When the certificate expires.  May be null
+    UserEnrollment:
+      type: object
+      properties:
+        course_progress_id:
+          type: string
+          description: ID of the CourseProgress
+        active:
+          type: boolean
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        enrollment_id:
+          type: string
+          description: ID of the Enrollment
+      required:
+      - course_progress_id
+      - enrollment_id
+    UserPublishedCourseProgress:
+      type: object
+      properties:
+        published_course_id:
+          type: string
+          description: ID of the PublishedCourse
+        domain_name:
+          type: string
+          readOnly: true
+          description: Domain name where the course is published.
+        enrolled_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Datetime the user most recently enrolled in the course
+        enrollment_id:
+          type: string
+          readOnly: true
+          description: ID of the Enrollment
+        course:
+          allOf:
+          - $ref: '#/components/schemas/CourseSummary'
+          readOnly: true
+        course_progress:
+          $ref: '#/components/schemas/CourseProgress'
+        certificate:
+          allOf:
+          - $ref: '#/components/schemas/Certificate'
+          readOnly: true
+        all_enrollments:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserEnrollment'
+          readOnly: true
+      required:
+      - course_progress
+    PatchedUserPublishedCourseProgressRequest:
+      type: object
+      properties:
+        published_course_id:
+          type: string
+          minLength: 1
+          description: ID of the PublishedCourse
+        course_progress:
+          $ref: '#/components/schemas/CourseProgressRequest'
+    SuccessStatusEnum:
+      enum:
+      - PASSED
+      - FAILED
+      type: string
+      description: '* `PASSED` - Passed
+
+        * `FAILED` - Failed'
+    NullEnum:
+      enum:
+      - null
+    UserPublishedCourseProgressRequest:
+      type: object
+      properties:
+        published_course_id:
+          type: string
+          minLength: 1
+          description: ID of the PublishedCourse
+        course_progress:
+          $ref: '#/components/schemas/CourseProgressRequest'
+      required:
+      - course_progress
+    CourseProgressRequest:
+      type: object
+      properties:
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: Datetime at which the user completed the course.  If null, the user hasn't completed
+        score:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          description: Course score achieved by student
+        max_score:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          description: Maximum score possible in course
+        credits_earned:
+          type: string
+          description: Credits earned by completing the course
+          maxLength: 20
+        credit_unit_plural:
+          type: string
+          description: Type of credit earned
+          maxLength: 40
+        success_status:
+          nullable: true
+          description: 'Success status of course progress: ''PASSED'', ''FAILED'' or null
+
+
+            * `PASSED` - Passed
+
+            * `FAILED` - Failed'
+          oneOf:
+          - $ref: '#/components/schemas/SuccessStatusEnum'
+          - $ref: '#/components/schemas/NullEnum'
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

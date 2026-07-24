@@ -1,0 +1,586 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Published Courses > Enrollments API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Published Courses > Enrollments
+paths:
+  /v1/domains/{domain_name}/published-courses/{published_course_id}/enrollments:
+    get:
+      operationId: domains_published_courses_enrollments_list
+      description: 'List enrollments for a published course in this domain.
+
+
+        Returns a paginated list of enrollments for the specified published course.
+
+        Each user may have multiple enrollments. Includes purchase details if available.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Courses > Enrollments
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEnrollmentList'
+          description: ''
+    post:
+      operationId: domains_published_courses_enrollments_create
+      description: 'Enroll a user in a published course for this domain.
+
+
+        This operation is idempotent for the same user and enrollment time.
+
+        The user must have a domain membership to be enrolled.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Courses > Enrollments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEnrollmentRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateEnrollmentRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateEnrollmentRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEnrollment'
+          description: ''
+  /v1/domains/{domain_name}/published-courses/{published_course_id}/enrollments/{enrollment_id}:
+    get:
+      operationId: domains_published_courses_enrollments_retrieve
+      description: 'Retrieve enrollment details for a published course in this domain.
+
+
+        Returns information about a specific enrollment, including user and purchase details if applicable.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: enrollment_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Courses > Enrollments
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Enrollment'
+          description: ''
+    put:
+      operationId: domains_published_courses_enrollments_update
+      description: 'Update enrollment details for a published course in this domain.
+
+
+        Allows partial updates to enrollment information, such as status or expiration.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: enrollment_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Courses > Enrollments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEnrollmentRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateEnrollmentRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UpdateEnrollmentRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateEnrollment'
+          description: ''
+    patch:
+      operationId: domains_published_courses_enrollments_partial_update
+      description: 'Update enrollment details for a published course in this domain.
+
+
+        Allows partial updates to enrollment information, such as status or expiration.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: enrollment_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Courses > Enrollments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdateEnrollmentRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdateEnrollmentRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdateEnrollmentRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateEnrollment'
+          description: ''
+components:
+  schemas:
+    PurchaseOfferPrice:
+      type: object
+      properties:
+        amount:
+          type: string
+          default: '0.00'
+        currency_code:
+          type: string
+          default: USD
+    CreateEnrollmentRequest:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/ReadOnlyUserRequest'
+        enrolled_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        active:
+          type: boolean
+          nullable: true
+          default: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentPurchaseRequest'
+          nullable: true
+      required:
+      - user
+    PurchaseStateEnum:
+      enum:
+      - CREATED
+      - SUCCESS
+      - FAILED
+      - REFUNDED
+      - CANCELLED
+      - FLAGGED
+      - PENDING
+      type: string
+      description: '* `CREATED` - CREATED
+
+        * `SUCCESS` - SUCCESS
+
+        * `FAILED` - FAILED
+
+        * `REFUNDED` - REFUNDED
+
+        * `CANCELLED` - CANCELLED
+
+        * `FLAGGED` - FLAGGED
+
+        * `PENDING` - PENDING'
+    UpdateEnrollmentRequest:
+      type: object
+      properties:
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        active:
+          type: boolean
+    PriceRequest:
+      type: object
+      properties:
+        amount:
+          type: string
+          minLength: 1
+          default: '0.00'
+        currency_code:
+          type: string
+          minLength: 1
+          default: USD
+    ReadOnlyUser:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+          description: Email address
+        first_name:
+          type: string
+          readOnly: true
+          description: First name
+        last_name:
+          type: string
+          readOnly: true
+          description: Last name
+      required:
+      - id
+    PatchedUpdateEnrollmentRequest:
+      type: object
+      properties:
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        active:
+          type: boolean
+    EnrollmentPurchase:
+      type: object
+      properties:
+        order_id:
+          type: string
+          readOnly: true
+        offer_price:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseOfferPrice'
+          readOnly: true
+        purchase_price:
+          $ref: '#/components/schemas/Price'
+        quantity:
+          type: integer
+          readOnly: true
+        purchase_state:
+          $ref: '#/components/schemas/PurchaseStateEnum'
+        payment_processor:
+          allOf:
+          - $ref: '#/components/schemas/PaymentProcessorEnum'
+          readOnly: true
+          default: NONE
+        purchase_id:
+          type: string
+          readOnly: true
+        purchased_at:
+          type: string
+          format: date-time
+        tax_price_cents:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+    Enrollment:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/ReadOnlyUser'
+        enrolled_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        active:
+          type: boolean
+          nullable: true
+          default: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentPurchase'
+          readOnly: true
+          nullable: true
+        rating:
+          type: integer
+          nullable: true
+          readOnly: true
+          description: Student's rating of the course (1-5)
+        feedback:
+          type: string
+          nullable: true
+          readOnly: true
+          description: Student's additional feedback about the course
+      required:
+      - user
+    CreateEnrollment:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/ReadOnlyUser'
+        enrolled_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        active:
+          type: boolean
+          nullable: true
+          default: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentPurchase'
+          nullable: true
+        rating:
+          type: integer
+          nullable: true
+          readOnly: true
+          description: Student's rating of the course (1-5)
+        feedback:
+          type: string
+          nullable: true
+          readOnly: true
+          description: Student's additional feedback about the course
+      required:
+      - user
+    PaymentProcessorEnum:
+      enum:
+      - NONE
+      - STRIPE
+      - STRIPE_BTC
+      - PAYPAL
+      - PAYFLOW
+      - CYBERSRC
+      - MES
+      - EXTERNAL
+      type: string
+      description: '* `NONE` - None
+
+        * `STRIPE` - Stripe
+
+        * `STRIPE_BTC` - Stripe Bitcoin
+
+        * `PAYPAL` - PayPal
+
+        * `PAYFLOW` - Payflow
+
+        * `CYBERSRC` - Cybersource
+
+        * `MES` - Merchant e-Solutions
+
+        * `EXTERNAL` - External'
+    UpdateEnrollment:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        user:
+          allOf:
+          - $ref: '#/components/schemas/ReadOnlyUser'
+          readOnly: true
+        enrolled_at:
+          type: string
+          format: date-time
+          readOnly: true
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        active:
+          type: boolean
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentPurchase'
+          readOnly: true
+          nullable: true
+        rating:
+          type: integer
+          nullable: true
+          readOnly: true
+          description: Student's rating of the course (1-5)
+        feedback:
+          type: string
+          nullable: true
+          readOnly: true
+          description: Student's additional feedback about the course
+    ReadOnlyUserRequest:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Known as user_id within the documentation
+      required:
+      - id
+    PaginatedEnrollmentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Enrollment'
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+          default: '0.00'
+        currency_code:
+          type: string
+          default: USD
+    EnrollmentPurchaseRequest:
+      type: object
+      properties:
+        purchase_price:
+          $ref: '#/components/schemas/PriceRequest'
+        purchase_state:
+          $ref: '#/components/schemas/PurchaseStateEnum'
+        purchased_at:
+          type: string
+          format: date-time
+        tax_price_cents:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,376 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Catalog Pages (Builder) > Content Blocks API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Catalog Pages (Builder) > Content Blocks
+paths:
+  /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/content-blocks:
+    get:
+      operationId: domains_catalog_pages_content_blocks_list
+      description: Retrieve a paginated list of all content blocks for the specified builder catalog page.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - Domains > Catalog Pages (Builder) > Content Blocks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPageContentBlockItemList'
+          description: ''
+    post:
+      operationId: domains_catalog_pages_content_blocks_create
+      description: Create a new content block on the specified builder catalog page. Only one item can be added at a time.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages (Builder) > Content Blocks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PageContentBlockItemRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PageContentBlockItemRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PageContentBlockItemRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageContentBlockItem'
+          description: ''
+  /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/content-blocks/{id}:
+    get:
+      operationId: domains_catalog_pages_content_blocks_retrieve
+      description: Retrieve detailed information for a specific content block within the specified builder catalog page.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages (Builder) > Content Blocks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageContentBlockItem'
+          description: ''
+    put:
+      operationId: domains_catalog_pages_content_blocks_update
+      description: Update the order of a specific content block within the specified builder catalog page.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages (Builder) > Content Blocks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PageContentBlockItemOrderUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PageContentBlockItemOrderUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PageContentBlockItemOrderUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageContentBlockItemOrderUpdate'
+          description: ''
+    patch:
+      operationId: domains_catalog_pages_content_blocks_partial_update
+      description: Update the order of a specific content block within the specified builder catalog page
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages (Builder) > Content Blocks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPageContentBlockItemOrderUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPageContentBlockItemOrderUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPageContentBlockItemOrderUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageContentBlockItemOrderUpdate'
+          description: ''
+    delete:
+      operationId: domains_catalog_pages_content_blocks_destroy
+      description: Delete a content block from the specified builder catalog page.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages (Builder) > Content Blocks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    PageContentBlockItemOrderUpdateRequest:
+      type: object
+      description: Serializer for updating the order of existing PageContentBlockItem.
+      properties:
+        order:
+          type: integer
+          minimum: 1
+    PaginatedPageContentBlockItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PageContentBlockItem'
+    PatchedPageContentBlockItemOrderUpdateRequest:
+      type: object
+      description: Serializer for updating the order of existing PageContentBlockItem.
+      properties:
+        order:
+          type: integer
+          minimum: 1
+    PageContentBlockItem:
+      type: object
+      description: Serializer for PageContentBlockItem
+      properties:
+        id:
+          type: string
+          readOnly: true
+        order:
+          type: integer
+          minimum: 1
+        type:
+          $ref: '#/components/schemas/PageContentBlockItemTypeEnum'
+        html_content_block_id:
+          type: string
+          readOnly: true
+        tile_container_content_block_id:
+          type: string
+          readOnly: true
+        component_content_block_id:
+          type: string
+          readOnly: true
+      required:
+      - type
+    PageContentBlockItemRequest:
+      type: object
+      description: Serializer for PageContentBlockItem
+      properties:
+        order:
+          type: integer
+          minimum: 1
+        type:
+          $ref: '#/components/schemas/PageContentBlockItemTypeEnum'
+      required:
+      - type
+    PageContentBlockItemTypeEnum:
+      enum:
+      - HTML
+      - HERO
+      - ANNOUNCEMENT_BAR
+      - TILE_SECTION
+      - IN_PROGRESS_COURSES
+      type: string
+      description: '* `HTML` - HTML
+
+        * `HERO` - HERO
+
+        * `ANNOUNCEMENT_BAR` - ANNOUNCEMENT_BAR
+
+        * `TILE_SECTION` - TILE_SECTION
+
+        * `IN_PROGRESS_COURSES` - IN_PROGRESS_COURSES'
+    PageContentBlockItemOrderUpdate:
+      type: object
+      description: Serializer for updating the order of existing PageContentBlockItem.
+      properties:
+        id:
+          type: string
+          readOnly: true
+        order:
+          type: integer
+          minimum: 1
+        type:
+          type: string
+          readOnly: true
+        html_content_block_id:
+          type: string
+          readOnly: true
+        tile_container_content_block_id:
+          type: string
+          readOnly: true
+        component_content_block_id:
+          type: string
+          readOnly: true
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

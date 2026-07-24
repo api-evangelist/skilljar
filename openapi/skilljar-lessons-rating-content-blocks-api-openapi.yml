@@ -1,0 +1,331 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Lessons > Rating Content Blocks API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Lessons > Rating Content Blocks
+paths:
+  /v1/lessons/{lesson_id}/rating-content-blocks:
+    post:
+      operationId: lessons_rating_content_blocks_create
+      description: 'Create a rating content block on the specified lesson.
+
+
+        Also creates a RATING content item linking the block to the lesson.
+
+        Only one rating is allowed per course.'
+      parameters:
+      - in: path
+        name: lesson_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Lessons > Rating Content Blocks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RatingContentBlockRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RatingContentBlockRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RatingContentBlockRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingContentBlock'
+          description: ''
+  /v1/lessons/{lesson_id}/rating-content-blocks/{rating_content_block_id}:
+    get:
+      operationId: lessons_rating_content_blocks_retrieve
+      description: Retrieve details of a rating content block on the specified lesson.
+      parameters:
+      - in: path
+        name: lesson_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: rating_content_block_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Lessons > Rating Content Blocks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingContentBlock'
+          description: ''
+    put:
+      operationId: lessons_rating_content_blocks_update
+      description: Update a rating content block on the specified lesson.
+      parameters:
+      - in: path
+        name: lesson_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: rating_content_block_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Lessons > Rating Content Blocks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RatingContentBlockRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RatingContentBlockRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RatingContentBlockRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingContentBlock'
+          description: ''
+    patch:
+      operationId: lessons_rating_content_blocks_partial_update
+      description: Partially update a rating content block on the specified lesson.
+      parameters:
+      - in: path
+        name: lesson_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: rating_content_block_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Lessons > Rating Content Blocks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedRatingContentBlockRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedRatingContentBlockRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedRatingContentBlockRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingContentBlock'
+          description: ''
+    delete:
+      operationId: lessons_rating_content_blocks_destroy
+      description: 'Delete a rating content block and its associated content item.
+
+
+        Removes both the RatingContentBlock and the LessonContentItem that links it to the lesson.'
+      parameters:
+      - in: path
+        name: lesson_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: rating_content_block_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Lessons > Rating Content Blocks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    RatingContentBlockRequest:
+      type: object
+      description: 'Public API serializer for RatingContentBlock.
+
+
+        Follows the HtmlContentBlockSerializer pattern: the block is exposed as a
+
+        standalone resource nested under lessons, with ``content_item_id`` annotated
+
+        from the junction model (LessonContentItem).
+
+
+        ``rating_scale`` is a proxy field — the value lives on ``Course.rating_scale``,
+
+        not on the block itself.'
+      properties:
+        rating_question:
+          type: string
+          description: The main rating question shown to learners
+          maxLength: 500
+        additional_feedback_question:
+          type: string
+          description: Optional follow-up question for additional feedback
+          maxLength: 500
+        include_additional_feedback:
+          type: boolean
+          description: Whether to show the additional feedback question
+        rating_scale:
+          type: integer
+          description: Rating scale (5 or 10). Stored on Course, not on the block.
+        rating_scale_low_label:
+          type: string
+          description: Label for the low end of the 10-point scale (ignored for 5-star)
+          maxLength: 100
+        rating_scale_high_label:
+          type: string
+          description: Label for the high end of the 10-point scale (ignored for 5-star)
+          maxLength: 100
+    RatingContentBlock:
+      type: object
+      description: 'Public API serializer for RatingContentBlock.
+
+
+        Follows the HtmlContentBlockSerializer pattern: the block is exposed as a
+
+        standalone resource nested under lessons, with ``content_item_id`` annotated
+
+        from the junction model (LessonContentItem).
+
+
+        ``rating_scale`` is a proxy field — the value lives on ``Course.rating_scale``,
+
+        not on the block itself.'
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Unique identifier for this rating content block
+        content_item_id:
+          type: string
+          readOnly: true
+          description: The associated lesson content item ID (read-only, annotated from LessonContentItem)
+        rating_question:
+          type: string
+          description: The main rating question shown to learners
+          maxLength: 500
+        additional_feedback_question:
+          type: string
+          description: Optional follow-up question for additional feedback
+          maxLength: 500
+        include_additional_feedback:
+          type: boolean
+          description: Whether to show the additional feedback question
+        rating_scale:
+          type: integer
+          description: Rating scale (5 or 10). Stored on Course, not on the block.
+        rating_scale_low_label:
+          type: string
+          description: Label for the low end of the 10-point scale (ignored for 5-star)
+          maxLength: 100
+        rating_scale_high_label:
+          type: string
+          description: Label for the high end of the 10-point scale (ignored for 5-star)
+          maxLength: 100
+    PatchedRatingContentBlockRequest:
+      type: object
+      description: 'Public API serializer for RatingContentBlock.
+
+
+        Follows the HtmlContentBlockSerializer pattern: the block is exposed as a
+
+        standalone resource nested under lessons, with ``content_item_id`` annotated
+
+        from the junction model (LessonContentItem).
+
+
+        ``rating_scale`` is a proxy field — the value lives on ``Course.rating_scale``,
+
+        not on the block itself.'
+      properties:
+        rating_question:
+          type: string
+          description: The main rating question shown to learners
+          maxLength: 500
+        additional_feedback_question:
+          type: string
+          description: Optional follow-up question for additional feedback
+          maxLength: 500
+        include_additional_feedback:
+          type: boolean
+          description: Whether to show the additional feedback question
+        rating_scale:
+          type: integer
+          description: Rating scale (5 or 10). Stored on Course, not on the block.
+        rating_scale_low_label:
+          type: string
+          description: Label for the low end of the 10-point scale (ignored for 5-star)
+          maxLength: 100
+        rating_scale_high_label:
+          type: string
+          description: Label for the high end of the 10-point scale (ignored for 5-star)
+          maxLength: 100
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

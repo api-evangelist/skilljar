@@ -1,0 +1,156 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Quizzes > Question Banks API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Quizzes > Question Banks
+paths:
+  /v1/quizzes/{quiz_id}/question-banks:
+    get:
+      operationId: quizzes_question_banks_list
+      description: 'List all Question Banks assigned to a specific Quiz.
+
+
+        Returns a paginated list of Question Banks associated with the Quiz.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: quiz_id
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Quizzes > Question Banks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedQuestionBankAssignmentList'
+          description: ''
+  /v1/quizzes/{quiz_id}/question-banks/{question_bank_id}:
+    get:
+      operationId: quizzes_question_banks_retrieve
+      description: 'Retrieve details for a specific Question Bank.
+
+
+        Returns all metadata for the Question Bank, including the number of questions and quiz associations.'
+      parameters:
+      - in: path
+        name: question_bank_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: quiz_id
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Quizzes > Question Banks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionBankAssignment'
+          description: ''
+components:
+  schemas:
+    QuestionBankAssignment:
+      type: object
+      description: Serializer for QuestionBank in a Quiz using the through model QuestionBankAssignment.
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        order:
+          type: integer
+          readOnly: true
+        randomize_questions:
+          type: boolean
+          readOnly: true
+        limit_question_count:
+          type: integer
+          readOnly: true
+        question_count:
+          type: integer
+          description: Return the annotated count of questions in the question bank.
+          readOnly: true
+        quiz_association_count:
+          type: integer
+          description: Return the annotated count of quiz associations for the question bank.
+          readOnly: true
+    PaginatedQuestionBankAssignmentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionBankAssignment'
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

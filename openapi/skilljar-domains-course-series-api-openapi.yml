@@ -1,0 +1,174 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Course Series API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Course Series
+paths:
+  /v1/domains/{domain_name}/course-series:
+    get:
+      operationId: domains_course_series_list
+      description: 'Retrieve a paginated list of all course series for the specified domain.
+
+
+        Each course series includes metadata, associated offers, published paths, and published courses.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - Domains > Course Series
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCourseSeriesList'
+          description: ''
+  /v1/domains/{domain_name}/course-series/{course_series_id}:
+    get:
+      operationId: domains_course_series_retrieve
+      description: 'Retrieve detailed information for a specific course series within the domain.
+
+
+        The response includes metadata, offers, published paths, and the list of published courses in the series.'
+      parameters:
+      - in: path
+        name: course_series_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Course Series
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseSeries'
+          description: ''
+components:
+  schemas:
+    CourseSeries:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          maxLength: 500
+        visible_on_catalog:
+          type: boolean
+        series_url:
+          type: string
+          readOnly: true
+          description: Base URL of the series detail or catalog page
+        published_course_count:
+          type: integer
+          readOnly: true
+          description: Number of courses in the course series
+        offer:
+          allOf:
+          - $ref: '#/components/schemas/Offer'
+          readOnly: true
+      required:
+      - title
+    PaginatedCourseSeriesList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CourseSeries'
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+          default: '0.00'
+        currency_code:
+          type: string
+          default: USD
+    Offer:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        registration_open:
+          type: boolean
+        registration_url:
+          type: string
+          readOnly: true
+          description: URL used for course registration
+        price:
+          $ref: '#/components/schemas/Price'
+      required:
+      - price
+      - registration_open
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

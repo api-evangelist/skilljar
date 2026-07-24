@@ -1,0 +1,224 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Courses > Labels API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Courses > Labels
+paths:
+  /v1/courses/{course_id}/labels:
+    get:
+      operationId: courses_labels_list
+      description: 'List all labels associated with a course.
+
+
+        Returns a paginated list of label associations for the specified course.'
+      parameters:
+      - in: path
+        name: course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - Courses > Labels
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedNestedLabelAssociationList'
+          description: ''
+    post:
+      operationId: courses_labels_create
+      description: 'Associate a label with a course.
+
+
+        Creates a new association between the specified label and course.'
+      parameters:
+      - in: path
+        name: course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Courses > Labels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NestedLabelAssociationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/NestedLabelAssociationRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/NestedLabelAssociationRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NestedLabelAssociation'
+          description: ''
+  /v1/courses/{course_id}/labels/{label_id}:
+    get:
+      operationId: courses_labels_retrieve
+      description: 'Retrieve a label association for a course.
+
+
+        Returns details for the label association identified by `label_id` for the given course.'
+      parameters:
+      - in: path
+        name: course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: label_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Courses > Labels
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NestedLabelAssociation'
+          description: ''
+    delete:
+      operationId: courses_labels_destroy
+      description: 'Remove a label association from a course.
+
+
+        Deletes the association between the specified label and course.'
+      parameters:
+      - in: path
+        name: course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: label_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Courses > Labels
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    NestedLabelAssociationRequest:
+      type: object
+      description: Serializer for LabelAssociation tying an object to a Label.
+      properties:
+        label:
+          $ref: '#/components/schemas/NestedLabelAssociationLabelRequest'
+      required:
+      - label
+    NestedLabelAssociationLabel:
+      type: object
+      description: Serializer for Label within a LabelAssociation.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          readOnly: true
+          description: Name of the label
+      required:
+      - id
+    NestedLabelAssociation:
+      type: object
+      description: Serializer for LabelAssociation tying an object to a Label.
+      properties:
+        label:
+          $ref: '#/components/schemas/NestedLabelAssociationLabel'
+      required:
+      - label
+    PaginatedNestedLabelAssociationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/NestedLabelAssociation'
+    NestedLabelAssociationLabelRequest:
+      type: object
+      description: Serializer for Label within a LabelAssociation.
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

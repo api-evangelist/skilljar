@@ -1,0 +1,275 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Instructor Led Training > Multi-Session Events API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Instructor Led Training > Multi-Session Events
+paths:
+  /v1/ilt-multi-session-events:
+    get:
+      operationId: ilt_multi_session_events_list
+      description: 'List all ILT multi-session events.
+
+
+        Retrieve a paginated list of all non-cancelled instructor-led training
+
+        multi-session events in your organization.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - Instructor Led Training > Multi-Session Events
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedIltMultiSessionEventList'
+          description: ''
+    post:
+      operationId: ilt_multi_session_events_create
+      description: 'Create an ILT multi-session event.
+
+
+        Create a new instructor-led training multi-session event associated with a lesson.
+
+        Specify the lesson and seat capacity for the event.'
+      tags:
+      - Instructor Led Training > Multi-Session Events
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IltMultiSessionEventRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/IltMultiSessionEventRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IltMultiSessionEventRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IltMultiSessionEvent'
+          description: ''
+  /v1/ilt-multi-session-events/{multi_session_event_id}:
+    get:
+      operationId: ilt_multi_session_events_retrieve
+      description: 'Retrieve an ILT multi-session event.
+
+
+        Get detailed information about a specific instructor-led training multi-session event by its ID.'
+      parameters:
+      - in: path
+        name: multi_session_event_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Instructor Led Training > Multi-Session Events
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IltMultiSessionEvent'
+          description: ''
+    put:
+      operationId: ilt_multi_session_events_update
+      description: Update an ILT multi-session event.
+      parameters:
+      - in: path
+        name: multi_session_event_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Instructor Led Training > Multi-Session Events
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IltMultiSessionEventRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/IltMultiSessionEventRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IltMultiSessionEventRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IltMultiSessionEvent'
+          description: ''
+    patch:
+      operationId: ilt_multi_session_events_partial_update
+      description: 'Manage instructor-led training (ILT) multi-session events.
+
+
+        Multi-session events are instructor-led training sessions that span multiple meetings or sessions.
+
+        Use this API to create, view, and update ILT multi-session events for your organization.
+
+        Only non-cancelled events are included in queries.'
+      parameters:
+      - in: path
+        name: multi_session_event_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Instructor Led Training > Multi-Session Events
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedIltMultiSessionEventRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedIltMultiSessionEventRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedIltMultiSessionEventRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IltMultiSessionEvent'
+          description: ''
+components:
+  schemas:
+    IltMultiSessionEventRequest:
+      type: object
+      description: Serializer for IltMultiSessionEvent for v1 public api
+      properties:
+        lesson:
+          type: string
+          description: Live training lesson id for the multi-session event
+        display_name:
+          type: string
+          minLength: 1
+          description: Name to be displayed for the multi-session event
+        seats_total:
+          type: integer
+          description: How many total seats are available
+      required:
+      - display_name
+      - lesson
+    PaginatedIltMultiSessionEventList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/IltMultiSessionEvent'
+    PatchedIltMultiSessionEventRequest:
+      type: object
+      description: Serializer for IltMultiSessionEvent for v1 public api
+      properties:
+        lesson:
+          type: string
+          description: Live training lesson id for the multi-session event
+        display_name:
+          type: string
+          minLength: 1
+          description: Name to be displayed for the multi-session event
+        seats_total:
+          type: integer
+          description: How many total seats are available
+    IltMultiSessionEvent:
+      type: object
+      description: Serializer for IltMultiSessionEvent for v1 public api
+      properties:
+        id:
+          type: string
+          readOnly: true
+        lesson:
+          type: string
+          description: Live training lesson id for the multi-session event
+        display_name:
+          type: string
+          description: Name to be displayed for the multi-session event
+        seats_total:
+          type: integer
+          description: How many total seats are available
+      required:
+      - display_name
+      - lesson
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

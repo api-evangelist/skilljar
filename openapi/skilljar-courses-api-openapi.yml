@@ -1,0 +1,446 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Courses API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Courses
+paths:
+  /v1/courses:
+    get:
+      operationId: courses_list
+      description: "List all courses in your organization.\n\nReturns a paginated list of courses with details such as title, description, labels,\n  creation and modification dates, and course time settings. Supports filtering by label name."
+      parameters:
+      - in: query
+        name: label__name
+        schema:
+          type: string
+        description: Filter courses by exact match on label name
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - Courses
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCourseList'
+          description: ''
+    post:
+      operationId: courses_create
+      description: "Create a new course.\n\nCreates a course with the provided details, including title, description, labels,\n  and course time settings. Returns the created course object."
+      tags:
+      - Courses
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourseRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CourseRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CourseRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+          description: ''
+  /v1/courses/{course_id}:
+    get:
+      operationId: courses_retrieve
+      description: "Retrieve a single course.\n\nReturns detailed information about a specific course, including title, description, labels,\n  creation and modification dates, and course time settings."
+      parameters:
+      - in: path
+        name: course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Courses
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+          description: ''
+    put:
+      operationId: courses_update
+      description: 'Update an existing course.
+
+
+        Updates the specified course with the provided data.
+
+        Supports partial updates; only the fields you provide will be updated. Returns the updated course object.'
+      parameters:
+      - in: path
+        name: course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Courses
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourseRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CourseRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CourseRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+          description: ''
+    patch:
+      operationId: courses_partial_update
+      description: 'Partially update a course.
+
+
+        Updates one or more fields of an existing course.
+
+        Only the fields you provide will be updated; all others remain unchanged. Returns the updated course object.'
+      parameters:
+      - in: path
+        name: course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Courses
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCourseRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCourseRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCourseRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+          description: ''
+    delete:
+      operationId: courses_destroy
+      description: 'Delete a course and its drafts.
+
+
+        Permanently deletes the specified course and all associated draft versions.
+
+        This action cannot be undone. Returns a 204 No Content response if successful.'
+      parameters:
+      - in: path
+        name: course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Courses
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    Course:
+      type: object
+      description: Course Serializer
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as course_id within the documentation
+        enforce_sequential_navigation:
+          type: boolean
+          description: Enforce sequential navigation
+        long_description_html:
+          type: string
+          description: The long description as HTML content
+        short_description:
+          type: string
+          description: The short description of the course
+        title:
+          type: string
+          description: The title of the course
+        labels:
+          type: array
+          items:
+            type: string
+          description: 'A comma separated list of labels ex: ["label1", "label2"]'
+        draft_origin_id:
+          type: string
+          readOnly: true
+        promo_image_url:
+          type: string
+          description: The URL to the promo image of the course
+          readOnly: true
+        display_course_and_lesson_time:
+          type: boolean
+          default: false
+          description: Displays course and lesson times on the course tile (course time only) and detail page (both course and lesson times)
+        manual_course_time:
+          type: string
+          default: ''
+          description: Custom text string for the course time.
+          maxLength: 15
+        display_manual_course_time:
+          type: boolean
+          default: false
+          description: The manual course time will display on the detail, curriculum, and lesson pages, as well as the course tile. (If display course and lesson times is also enabled, this will override the summed course time. However, lesson times will still display in the selected format.)
+        course_and_lesson_time_format:
+          allOf:
+          - $ref: '#/components/schemas/CourseAndLessonTimeFormatEnum'
+          description: 'The format to use for displaying course and lesson times. Possible values: "HOURS_MINUTES_SECONDS", "HOURS_MINUTES", "HOURS_MINUTES_VERBOSE", "MINUTES_VERBOSE". If display manual course time is enabled, this will not be used.
+
+
+            * `HOURS_MINUTES_SECONDS` - HH:MM:SS (01:32:47)
+
+            * `HOURS_MINUTES` - HH:MM (01:33)
+
+            * `HOURS_MINUTES_VERBOSE` - X hr Y min (1 hr 33 min)
+
+            * `MINUTES_VERBOSE` - Y min (93 min)'
+        course_time:
+          type: string
+          description: The course time displayed on the course tile.
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        modified_at:
+          type: string
+          format: date-time
+          readOnly: true
+        average_rating:
+          type: number
+          format: double
+          maximum: 10
+          minimum: -10
+          exclusiveMaximum: true
+          exclusiveMinimum: true
+          readOnly: true
+          description: The average rating for this course based on all student course ratings.
+      required:
+      - enforce_sequential_navigation
+      - short_description
+      - title
+    PatchedCourseRequest:
+      type: object
+      description: Course Serializer
+      properties:
+        enforce_sequential_navigation:
+          type: boolean
+          description: Enforce sequential navigation
+        long_description_html:
+          type: string
+          description: The long description as HTML content
+        short_description:
+          type: string
+          minLength: 1
+          description: The short description of the course
+        title:
+          type: string
+          minLength: 1
+          description: The title of the course
+        labels:
+          type: array
+          items:
+            type: string
+            minLength: 1
+          description: 'A comma separated list of labels ex: ["label1", "label2"]'
+        display_course_and_lesson_time:
+          type: boolean
+          default: false
+          description: Displays course and lesson times on the course tile (course time only) and detail page (both course and lesson times)
+        manual_course_time:
+          type: string
+          minLength: 1
+          default: ''
+          description: Custom text string for the course time.
+          maxLength: 15
+        display_manual_course_time:
+          type: boolean
+          default: false
+          description: The manual course time will display on the detail, curriculum, and lesson pages, as well as the course tile. (If display course and lesson times is also enabled, this will override the summed course time. However, lesson times will still display in the selected format.)
+        course_and_lesson_time_format:
+          allOf:
+          - $ref: '#/components/schemas/CourseAndLessonTimeFormatEnum'
+          description: 'The format to use for displaying course and lesson times. Possible values: "HOURS_MINUTES_SECONDS", "HOURS_MINUTES", "HOURS_MINUTES_VERBOSE", "MINUTES_VERBOSE". If display manual course time is enabled, this will not be used.
+
+
+            * `HOURS_MINUTES_SECONDS` - HH:MM:SS (01:32:47)
+
+            * `HOURS_MINUTES` - HH:MM (01:33)
+
+            * `HOURS_MINUTES_VERBOSE` - X hr Y min (1 hr 33 min)
+
+            * `MINUTES_VERBOSE` - Y min (93 min)'
+    PaginatedCourseList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Course'
+    CourseAndLessonTimeFormatEnum:
+      enum:
+      - HOURS_MINUTES_SECONDS
+      - HOURS_MINUTES
+      - HOURS_MINUTES_VERBOSE
+      - MINUTES_VERBOSE
+      type: string
+      description: '* `HOURS_MINUTES_SECONDS` - HH:MM:SS (01:32:47)
+
+        * `HOURS_MINUTES` - HH:MM (01:33)
+
+        * `HOURS_MINUTES_VERBOSE` - X hr Y min (1 hr 33 min)
+
+        * `MINUTES_VERBOSE` - Y min (93 min)'
+    CourseRequest:
+      type: object
+      description: Course Serializer
+      properties:
+        enforce_sequential_navigation:
+          type: boolean
+          description: Enforce sequential navigation
+        long_description_html:
+          type: string
+          description: The long description as HTML content
+        short_description:
+          type: string
+          minLength: 1
+          description: The short description of the course
+        title:
+          type: string
+          minLength: 1
+          description: The title of the course
+        labels:
+          type: array
+          items:
+            type: string
+            minLength: 1
+          description: 'A comma separated list of labels ex: ["label1", "label2"]'
+        display_course_and_lesson_time:
+          type: boolean
+          default: false
+          description: Displays course and lesson times on the course tile (course time only) and detail page (both course and lesson times)
+        manual_course_time:
+          type: string
+          minLength: 1
+          default: ''
+          description: Custom text string for the course time.
+          maxLength: 15
+        display_manual_course_time:
+          type: boolean
+          default: false
+          description: The manual course time will display on the detail, curriculum, and lesson pages, as well as the course tile. (If display course and lesson times is also enabled, this will override the summed course time. However, lesson times will still display in the selected format.)
+        course_and_lesson_time_format:
+          allOf:
+          - $ref: '#/components/schemas/CourseAndLessonTimeFormatEnum'
+          description: 'The format to use for displaying course and lesson times. Possible values: "HOURS_MINUTES_SECONDS", "HOURS_MINUTES", "HOURS_MINUTES_VERBOSE", "MINUTES_VERBOSE". If display manual course time is enabled, this will not be used.
+
+
+            * `HOURS_MINUTES_SECONDS` - HH:MM:SS (01:32:47)
+
+            * `HOURS_MINUTES` - HH:MM (01:33)
+
+            * `HOURS_MINUTES_VERBOSE` - X hr Y min (1 hr 33 min)
+
+            * `MINUTES_VERBOSE` - Y min (93 min)'
+      required:
+      - enforce_sequential_navigation
+      - short_description
+      - title
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

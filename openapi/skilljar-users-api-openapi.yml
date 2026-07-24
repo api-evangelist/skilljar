@@ -1,0 +1,334 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Users API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Users
+paths:
+  /v1/users:
+    get:
+      operationId: users_list
+      description: 'List users registered on at least one domain.
+
+
+        Returns a paginated list of users who have registered on any domain in your organization.
+
+        Supports filtering by email, first name, and last name.
+
+
+        This endpoint uses cursor-based pagination by default — it performs consistently
+
+        regardless of dataset size. Follow the `next` URL in each response to page forward.
+
+        Pass `?page=N` to use page-number pagination instead.'
+      parameters:
+      - in: query
+        name: email
+        schema:
+          type: string
+        description: Filter users by email address
+      - in: query
+        name: first_name
+        schema:
+          type: string
+        description: Filter users by first name - case sensitive
+      - in: query
+        name: is_inactive
+        schema:
+          type: boolean
+        description: Filter users by inactive status (true returns inactive users, false returns active users)
+      - in: query
+        name: last_name
+        schema:
+          type: string
+        description: Filter users by last name - case sensitive
+      tags:
+      - Users
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUserOverviewList'
+          description: ''
+  /v1/users/{user_id}:
+    get:
+      operationId: users_retrieve
+      description: 'Retrieve a user''s registration and course overview.
+
+
+        Returns detailed information about a specific user, including registration and completion counts,
+
+        recent activity, and profile details.'
+      parameters:
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Users
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserOverview'
+          description: ''
+    put:
+      operationId: users_update
+      description: 'Update user details.
+
+
+        Allows updating the user''s name and email address. Both PUT and PATCH perform partial updates.'
+      parameters:
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserUpdate'
+          description: ''
+    patch:
+      operationId: users_partial_update
+      description: 'Partially update user details.
+
+
+        Allows updating the user''s name and email address. Both PUT and PATCH perform partial updates.'
+      parameters:
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUserUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUserUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUserUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserUpdate'
+          description: ''
+  /v1/users/{user_id}/anonymize:
+    post:
+      operationId: users_anonymize_create
+      description: 'Permanently anonymize a user.
+
+
+        Obfuscates all personally identifiable information for the user, making it impossible to identify
+
+        or restore the user. This action is irreversible and prevents future platform access.'
+      parameters:
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Users
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserOverview'
+          description: ''
+components:
+  schemas:
+    ReadOnlyUser:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+          description: Email address
+        first_name:
+          type: string
+          readOnly: true
+          description: First name
+        last_name:
+          type: string
+          readOnly: true
+          description: Last name
+      required:
+      - id
+    UserOverview:
+      type: object
+      properties:
+        user:
+          allOf:
+          - $ref: '#/components/schemas/ReadOnlyUser'
+          readOnly: true
+        registration_count:
+          type: integer
+          readOnly: true
+          description: Number of courses the user has enrolled in
+        completion_count:
+          type: integer
+          readOnly: true
+          description: Total number of courses completed by the user
+        signed_up_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When the user was created
+        latest_activity:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When the user most recently visited a course
+        inactive_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+          description: When the student was set inactive. Null if the student is active.
+    PaginatedUserOverviewList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserOverview'
+    PatchedUserUpdateRequest:
+      type: object
+      description: Version of the user serializer configured to update a user's name and email address.
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email address
+          description: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          description: First name
+          maxLength: 50
+        last_name:
+          type: string
+          description: Last name
+          maxLength: 50
+    UserUpdate:
+      type: object
+      description: Version of the user serializer configured to update a user's name and email address.
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          title: Email address
+          description: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          description: First name
+          maxLength: 50
+        last_name:
+          type: string
+          description: Last name
+          maxLength: 50
+        inactive_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+    UserUpdateRequest:
+      type: object
+      description: Version of the user serializer configured to update a user's name and email address.
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email address
+          description: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          description: First name
+          maxLength: 50
+        last_name:
+          type: string
+          description: Last name
+          maxLength: 50
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

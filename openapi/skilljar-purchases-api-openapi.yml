@@ -1,0 +1,527 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Purchases API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Purchases
+paths:
+  /v1/purchases/{purchase_id}:
+    get:
+      operationId: purchases_retrieve
+      description: 'Retrieve the details of a specific purchase
+
+
+        Includes purchase status, associated user, items, and payment information.
+
+        Use the purchase ID to access all available information for this transaction.'
+      summary: Get purchase details
+      parameters:
+      - in: path
+        name: purchase_id
+        schema:
+          type: string
+          pattern: '[0-9a-z]+'
+        description: ID of a Purchase object
+        required: true
+      tags:
+      - Purchases
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Purchase'
+          description: ''
+    put:
+      operationId: purchases_update
+      description: 'Update the details of a specific purchase. Both PUT and PATCH requests perform partial updates.
+
+
+        You can update fields such as purchase status or metadata.
+
+        Only certain fields may be editable depending on the purchase state.'
+      summary: Update purchase details
+      parameters:
+      - in: path
+        name: purchase_id
+        schema:
+          type: string
+          pattern: '[0-9a-z]+'
+        description: ID of a Purchase object
+        required: true
+      tags:
+      - Purchases
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PurchaseRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PurchaseRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Purchase'
+          description: ''
+    patch:
+      operationId: purchases_partial_update
+      description: 'Update the details of a specific purchase. Both PUT and PATCH requests perform partial updates.
+
+
+        You can update fields such as purchase status or metadata.
+
+        Only certain fields may be editable depending on the purchase state.'
+      summary: Update purchase details
+      parameters:
+      - in: path
+        name: purchase_id
+        schema:
+          type: string
+          pattern: '[0-9a-z]+'
+        description: ID of a Purchase object
+        required: true
+      tags:
+      - Purchases
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPurchaseRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPurchaseRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPurchaseRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Purchase'
+          description: ''
+  /v1/purchases/{purchase_id}/fulfill:
+    post:
+      operationId: purchases_fulfill_create
+      description: 'Mark a purchase as fulfilled. If the purchase state is set to ''SUCCESS'',
+
+        this will trigger fulfillment actions, such as enrolling the user in courses or granting access to domains.
+
+
+        This endpoint is typically used after payment has been confirmed.'
+      summary: Fulfill specific purchase
+      parameters:
+      - in: path
+        name: purchase_id
+        schema:
+          type: string
+          pattern: '[0-9a-z]+'
+        description: ID of a Purchase object
+        required: true
+      tags:
+      - Purchases
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseFulfillmentRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PurchaseFulfillmentRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PurchaseFulfillmentRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseFulfillment'
+          description: ''
+components:
+  schemas:
+    PatchedPurchaseRequest:
+      type: object
+      properties:
+        state:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseStateEnum'
+          description: '''PENDING'', ''SUCCESS'', ''FAILED'', ''REFUNDED'', or ''CANCELLED''
+
+
+            * `PENDING` - PENDING
+
+            * `SUCCESS` - SUCCESS
+
+            * `FAILED` - FAILED
+
+            * `REFUNDED` - REFUNDED
+
+            * `CANCELLED` - CANCELLED'
+        refunded_at:
+          type: string
+          format: date-time
+          nullable: true
+        refund_cents:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+        price_cents:
+          type: integer
+        tax_price_cents:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+    PurchaseStateEnum:
+      enum:
+      - CREATED
+      - SUCCESS
+      - FAILED
+      - REFUNDED
+      - CANCELLED
+      - FLAGGED
+      - PENDING
+      type: string
+      description: '* `CREATED` - CREATED
+
+        * `SUCCESS` - SUCCESS
+
+        * `FAILED` - FAILED
+
+        * `REFUNDED` - REFUNDED
+
+        * `CANCELLED` - CANCELLED
+
+        * `FLAGGED` - FLAGGED
+
+        * `PENDING` - PENDING'
+    PurchaseFulfillmentStateEnum:
+      enum:
+      - SUCCESS
+      - FAILED
+      - CANCELLED
+      type: string
+      description: '* `SUCCESS` - SUCCESS
+
+        * `FAILED` - FAILED
+
+        * `CANCELLED` - CANCELLED'
+    Purchase:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        user:
+          allOf:
+          - $ref: '#/components/schemas/User'
+          readOnly: true
+        state:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseStateEnum'
+          description: '''PENDING'', ''SUCCESS'', ''FAILED'', ''REFUNDED'', or ''CANCELLED''
+
+
+            * `PENDING` - PENDING
+
+            * `SUCCESS` - SUCCESS
+
+            * `FAILED` - FAILED
+
+            * `REFUNDED` - REFUNDED
+
+            * `CANCELLED` - CANCELLED'
+        status_msg:
+          type: string
+          readOnly: true
+        purchased_at:
+          type: string
+          format: date-time
+          readOnly: true
+        refunded_at:
+          type: string
+          format: date-time
+          nullable: true
+        refund_cents:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+        payment_processor:
+          allOf:
+          - $ref: '#/components/schemas/PaymentProcessorEnum'
+          readOnly: true
+        order_id:
+          type: string
+          readOnly: true
+        price_cents:
+          type: integer
+        quantity:
+          type: integer
+          readOnly: true
+        offer_id:
+          type: string
+          readOnly: true
+        offer_sku:
+          type: string
+          readOnly: true
+        offer_description:
+          type: string
+          readOnly: true
+        offer_price_cents:
+          type: integer
+          readOnly: true
+          nullable: true
+        promo_code:
+          type: string
+          readOnly: true
+        promo_code_price_cents:
+          type: integer
+          readOnly: true
+        promo_code_percent_off:
+          type: integer
+          readOnly: true
+        promo_code_quantity:
+          type: integer
+          readOnly: true
+        tax_price_cents:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+        payment_processor_order_id:
+          type: string
+          readOnly: true
+        payment_processor_response_data:
+          type: string
+          readOnly: true
+        currency_code:
+          allOf:
+          - $ref: '#/components/schemas/CurrencyCodeEnum'
+          readOnly: true
+    PurchaseFulfillment:
+      type: object
+      properties:
+        redirect_url:
+          type: string
+          readOnly: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/Purchase'
+          readOnly: true
+    CurrencyCodeEnum:
+      enum:
+      - AUD
+      - BRL
+      - CAD
+      - CNY
+      - EUR
+      - GBP
+      - JPY
+      - KRW
+      - MXN
+      - NZD
+      - RUB
+      - SEK
+      - SGD
+      - USD
+      - ZAR
+      type: string
+      description: '* `AUD` - AUD
+
+        * `BRL` - BRL
+
+        * `CAD` - CAD
+
+        * `CNY` - CNY
+
+        * `EUR` - EUR
+
+        * `GBP` - GBP
+
+        * `JPY` - JPY
+
+        * `KRW` - KRW
+
+        * `MXN` - MXN
+
+        * `NZD` - NZD
+
+        * `RUB` - RUB
+
+        * `SEK` - SEK
+
+        * `SGD` - SGD
+
+        * `USD` - USD
+
+        * `ZAR` - ZAR'
+    PaymentProcessorEnum:
+      enum:
+      - NONE
+      - STRIPE
+      - STRIPE_BTC
+      - PAYPAL
+      - PAYFLOW
+      - CYBERSRC
+      - MES
+      - EXTERNAL
+      type: string
+      description: '* `NONE` - None
+
+        * `STRIPE` - Stripe
+
+        * `STRIPE_BTC` - Stripe Bitcoin
+
+        * `PAYPAL` - PayPal
+
+        * `PAYFLOW` - Payflow
+
+        * `CYBERSRC` - Cybersource
+
+        * `MES` - Merchant e-Solutions
+
+        * `EXTERNAL` - External'
+    User:
+      type: object
+      description: 'Version of the user serializer configured to lookup a user given the user''s email.  If a user with this email does
+
+        not yet exist, it will create a new User with given email, first_name and last_name parameters.'
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          title: Email address
+          description: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          description: First name
+          maxLength: 50
+        last_name:
+          type: string
+          description: Last name
+          maxLength: 50
+        full_name:
+          type: string
+          readOnly: true
+      required:
+      - email
+    PurchaseRequest:
+      type: object
+      properties:
+        state:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseStateEnum'
+          description: '''PENDING'', ''SUCCESS'', ''FAILED'', ''REFUNDED'', or ''CANCELLED''
+
+
+            * `PENDING` - PENDING
+
+            * `SUCCESS` - SUCCESS
+
+            * `FAILED` - FAILED
+
+            * `REFUNDED` - REFUNDED
+
+            * `CANCELLED` - CANCELLED'
+        refunded_at:
+          type: string
+          format: date-time
+          nullable: true
+        refund_cents:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+        price_cents:
+          type: integer
+        tax_price_cents:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+    PurchaseFulfillmentRequest:
+      type: object
+      properties:
+        state:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseFulfillmentStateEnum'
+          writeOnly: true
+          description: '''SUCCESS'', ''FAILED'', or ''CANCELLED''
+
+
+            * `SUCCESS` - SUCCESS
+
+            * `FAILED` - FAILED
+
+            * `CANCELLED` - CANCELLED'
+        error_msg:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: 'Optional: This error message will be presented to the user after they return to Skilljar, and will be set as the status_msg on the Purchase'
+        payment_processor_order_id:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: 'Optional: The id of the transaction within the payment processor system, for reference only'
+        payment_processor_response_data:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: 'Optional: Purchase metadata. For reference only. JSON format is recommended'
+      required:
+      - state
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

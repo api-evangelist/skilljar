@@ -1,0 +1,435 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Access Codes > Codes API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Access Codes > Codes
+paths:
+  /v1/domains/{domain_name}/access-code-pools/{access_code_pool_id}/access-codes:
+    get:
+      operationId: domains_access_code_pools_access_codes_list
+      description: 'List access codes.
+
+
+        Retrieve a paginated list of access codes in a pool.'
+      parameters:
+      - in: path
+        name: access_code_pool_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - Domains > Access Codes > Codes
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDomainAccessCodeListItemList'
+          description: ''
+    post:
+      operationId: domains_access_code_pools_access_codes_create
+      description: 'Create an access code.
+
+
+        Add a new access code to a pool. The code can be distributed to learners for domain access.'
+      parameters:
+      - in: path
+        name: access_code_pool_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Access Codes > Codes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainAccessCodeDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DomainAccessCodeDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DomainAccessCodeDetailRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainAccessCodeDetail'
+          description: ''
+  /v1/domains/{domain_name}/access-code-pools/{access_code_pool_id}/access-codes/{access_code_id}:
+    get:
+      operationId: domains_access_code_pools_access_codes_retrieve
+      description: 'Retrieve an access code.
+
+
+        Get details for a specific access code, including its status, usage limits, and assigned users.'
+      parameters:
+      - in: path
+        name: access_code_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: access_code_pool_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Access Codes > Codes
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainAccessCodeDetail'
+          description: ''
+    put:
+      operationId: domains_access_code_pools_access_codes_update
+      description: 'Update an access code.
+
+
+        Update the properties of an existing access code. Both PUT and PATCH requests are supported.'
+      parameters:
+      - in: path
+        name: access_code_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: access_code_pool_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Access Codes > Codes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainAccessCodeDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DomainAccessCodeDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DomainAccessCodeDetailRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainAccessCodeDetail'
+          description: ''
+    patch:
+      operationId: domains_access_code_pools_access_codes_partial_update
+      description: 'Update an access code.
+
+
+        Update the properties of an existing access code. Both PUT and PATCH requests are supported.'
+      parameters:
+      - in: path
+        name: access_code_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: access_code_pool_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Access Codes > Codes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDomainAccessCodeDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDomainAccessCodeDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDomainAccessCodeDetailRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainAccessCodeDetail'
+          description: ''
+    delete:
+      operationId: domains_access_code_pools_access_codes_destroy
+      description: 'Delete an access code.
+
+
+        Permanently remove an access code from the pool.'
+      parameters:
+      - in: path
+        name: access_code_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: access_code_pool_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Access Codes > Codes
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    DomainAccessCodeDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        code:
+          type: string
+          maxLength: 40
+        active:
+          type: boolean
+          default: true
+        max_uses:
+          type: integer
+          minimum: 0
+        use_count:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          readOnly: true
+        duration:
+          type: integer
+          minimum: 1
+          nullable: true
+        duration_unit:
+          $ref: '#/components/schemas/DurationUnitEnum'
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/DomainAccessCodeUser'
+          readOnly: true
+    PaginatedDomainAccessCodeListItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DomainAccessCodeListItem'
+    DomainAccessCodeListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        code:
+          type: string
+          maxLength: 40
+        active:
+          type: boolean
+          default: true
+        max_uses:
+          type: integer
+          minimum: 0
+        use_count:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          readOnly: true
+        duration:
+          type: integer
+          minimum: 1
+          nullable: true
+        duration_unit:
+          $ref: '#/components/schemas/DurationUnitEnum'
+      required:
+      - code
+    DurationUnitEnum:
+      enum:
+      - MONTHS
+      - DAYS
+      type: string
+      description: '* `MONTHS` - Months
+
+        * `DAYS` - Days'
+    PatchedDomainAccessCodeDetailRequest:
+      type: object
+      properties:
+        code:
+          type: string
+          minLength: 1
+          maxLength: 40
+        active:
+          type: boolean
+          default: true
+        max_uses:
+          type: integer
+          minimum: 0
+        duration:
+          type: integer
+          minimum: 1
+          nullable: true
+        duration_unit:
+          $ref: '#/components/schemas/DurationUnitEnum'
+    DomainAccessCodeUser:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+          title: Email address
+          readOnly: true
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+      required:
+      - id
+    DomainAccessCodeDetailRequest:
+      type: object
+      properties:
+        code:
+          type: string
+          minLength: 1
+          maxLength: 40
+        active:
+          type: boolean
+          default: true
+        max_uses:
+          type: integer
+          minimum: 0
+        duration:
+          type: integer
+          minimum: 1
+          nullable: true
+        duration_unit:
+          $ref: '#/components/schemas/DurationUnitEnum'
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

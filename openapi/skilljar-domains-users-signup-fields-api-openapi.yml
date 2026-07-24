@@ -1,0 +1,304 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Users > Signup Fields API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Users > Signup Fields
+paths:
+  /v1/domains/{domain_name}/users/{user_id}/signup-fields:
+    get:
+      operationId: domains_users_signup_fields_list
+      description: 'Retrieve a list of all signup field values for a user in the specified domain.
+
+
+        Returns a paginated list of all signup field values that have been set for the user.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Users > Signup Fields
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUserSignupFieldValueList'
+          description: ''
+    post:
+      operationId: domains_users_signup_fields_create
+      description: 'Set or update the value of a signup field for a user.
+
+
+        If the user does not have a value for the specified signup field, a new value will be created.
+
+        If a value already exists, it will be updated with the provided value.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Users > Signup Fields
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSignupFieldValueRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserSignupFieldValueRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserSignupFieldValueRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSignupFieldValue'
+          description: ''
+  /v1/domains/{domain_name}/users/{user_id}/signup-fields-bulk:
+    post:
+      operationId: domains_users_signup_fields_bulk_create
+      description: "Create or update multiple signup field values for a user.\n\nAllows setting or updating values for several signup fields in a single request.\nOnly the fields provided will be created or updated; unchanged fields are not included in the response.\nOn success, returns a 201 Created status and a Location header pointing to the list\n  of all signup field values for the user."
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Users > Signup Fields
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkUserSignupInfoRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BulkUserSignupInfoRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BulkUserSignupInfoRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkUserSignupInfo'
+          description: ''
+  /v1/domains/{domain_name}/users/{user_id}/signup-fields/{signup_field_id}:
+    get:
+      operationId: domains_users_signup_fields_retrieve
+      description: 'Retrieve the value of a specific signup field for a user.
+
+
+        Returns the value assigned to the specified signup field for the user.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: signup_field_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Users > Signup Fields
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSignupFieldValue'
+          description: ''
+components:
+  schemas:
+    BulkUserSignupFieldValue:
+      type: object
+      description: Saves a single signup field without reconciliation. Must only be used via BulkUserSignupInfoSerializer.
+      properties:
+        signup_field:
+          allOf:
+          - $ref: '#/components/schemas/SignupFieldSummary'
+          readOnly: true
+        value:
+          type: string
+      required:
+      - value
+    BulkUserSignupInfoRequest:
+      type: object
+      properties:
+        signup_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkUserSignupFieldValueRequest'
+          writeOnly: true
+      required:
+      - signup_fields
+    PaginatedUserSignupFieldValueList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSignupFieldValue'
+    SignupFieldSummaryRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
+    BulkUserSignupFieldValueRequest:
+      type: object
+      description: Saves a single signup field without reconciliation. Must only be used via BulkUserSignupInfoSerializer.
+      properties:
+        id:
+          type: string
+          writeOnly: true
+          minLength: 1
+        value:
+          type: string
+          minLength: 1
+      required:
+      - id
+      - value
+    UserSignupFieldValueRequest:
+      type: object
+      properties:
+        signup_field:
+          $ref: '#/components/schemas/SignupFieldSummaryRequest'
+        value:
+          type: string
+          minLength: 1
+      required:
+      - signup_field
+      - value
+    SignupFieldSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+          readOnly: true
+      required:
+      - id
+    UserSignupFieldValue:
+      type: object
+      properties:
+        signup_field:
+          $ref: '#/components/schemas/SignupFieldSummary'
+        value:
+          type: string
+      required:
+      - signup_field
+      - value
+    BulkUserSignupInfo:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkUserSignupFieldValue'
+          readOnly: true
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

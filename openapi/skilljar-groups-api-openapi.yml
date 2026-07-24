@@ -1,0 +1,447 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Groups API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Groups
+paths:
+  /v1/groups:
+    get:
+      operationId: groups_list
+      description: 'List all groups in your organization.
+
+
+        Returns a paginated list of groups. You can filter by exact group name using the `name` query parameter.'
+      parameters:
+      - in: query
+        name: name
+        schema:
+          type: string
+        description: Filter groups by exact match on group name
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - Groups
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedGroupList'
+          description: ''
+    post:
+      operationId: groups_create
+      description: 'Create a new group.
+
+
+        Groups can be configured with optional sign-up field rules to automate user assignment.'
+      tags:
+      - Groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GroupRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GroupRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: ''
+  /v1/groups/{group_id}:
+    get:
+      operationId: groups_retrieve
+      description: 'Retrieve details for a specific group.
+
+
+        Returns group information including name, discount, user count, and sign-up field rules.'
+      parameters:
+      - in: path
+        name: group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Groups
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: ''
+    put:
+      operationId: groups_update
+      description: "Update group details.\n\nBoth PUT and PATCH requests perform partial updates. You can modify group name, discount,\n  or sign-up field rules."
+      parameters:
+      - in: path
+        name: group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GroupUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GroupUpdateRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupUpdate'
+          description: ''
+    patch:
+      operationId: groups_partial_update
+      description: "Update group details.\n\nBoth PUT and PATCH requests perform partial updates. You can modify group name, discount,\n  or sign-up field rules."
+      parameters:
+      - in: path
+        name: group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedGroupUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedGroupUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedGroupUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupUpdate'
+          description: ''
+    delete:
+      operationId: groups_destroy
+      description: 'Delete a group.
+
+
+        Permanently removes the group and all group-user associations. Users and domain users are not deleted.
+
+        This operation cannot be undone.'
+      parameters:
+      - in: path
+        name: group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Groups
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    SignupFieldOptionLinkRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
+    PaginatedGroupList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+    GroupUpdate:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as group_id within the documentation
+        name:
+          type: string
+          description: Unique name of the group
+          maxLength: 100
+        user_count:
+          type: integer
+          readOnly: true
+          description: Number of users currently in the group
+        discount_percent:
+          type: integer
+          maximum: 100
+          minimum: 0
+          nullable: true
+          description: A percentage based discount that will apply to all purchasable objects/courses
+        group_category_id:
+          type: string
+          nullable: true
+        sign_up_field_rule:
+          allOf:
+          - $ref: '#/components/schemas/SignUpFieldRule'
+          description: Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.
+        rule_email_domains:
+          type: array
+          items:
+            type: string
+          readOnly: true
+          description: Email domains for automatic group assignment. Read-only on update — use the email-domain-rules sub-resource to modify.
+      required:
+      - name
+    PatchedGroupUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Unique name of the group
+          maxLength: 100
+        discount_percent:
+          type: integer
+          maximum: 100
+          minimum: 0
+          nullable: true
+          description: A percentage based discount that will apply to all purchasable objects/courses
+        group_category_id:
+          type: string
+          nullable: true
+          minLength: 1
+        sign_up_field_rule:
+          allOf:
+          - $ref: '#/components/schemas/SignUpFieldRuleRequest'
+          description: Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.
+    SignupFieldOptionLink:
+      type: object
+      properties:
+        id:
+          type: string
+        value:
+          type: string
+          description: 'Given the *incoming* primitive data, return the value for this field
+
+            that should be validated and transformed to a native value.'
+          readOnly: true
+        domain_name:
+          type: string
+          readOnly: true
+      required:
+      - id
+    GroupRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Unique name of the group
+          maxLength: 100
+        discount_percent:
+          type: integer
+          maximum: 100
+          minimum: 0
+          nullable: true
+          description: A percentage based discount that will apply to all purchasable objects/courses
+        group_category_id:
+          type: string
+          nullable: true
+          minLength: 1
+        sign_up_field_rule:
+          allOf:
+          - $ref: '#/components/schemas/SignUpFieldRuleRequest'
+          description: Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.
+        rule_email_domains:
+          type: array
+          items:
+            type: string
+            minLength: 1
+          description: Email domains for automatic group assignment. Users that register with a matching email domain will be added to this group.
+      required:
+      - name
+    SignUpFieldRule:
+      type: object
+      properties:
+        enforce:
+          type: boolean
+          default: false
+          description: When true, users will be removed from this group if membership rules are not satisfied.
+        require_match_all:
+          type: boolean
+          default: false
+          description: When true, users must match all sign up field options. When this option is false, any sign up field match will grant group membership.
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/SignupFieldOptionLink'
+      required:
+      - options
+    Group:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as group_id within the documentation
+        name:
+          type: string
+          description: Unique name of the group
+          maxLength: 100
+        user_count:
+          type: integer
+          readOnly: true
+          description: Number of users currently in the group
+        discount_percent:
+          type: integer
+          maximum: 100
+          minimum: 0
+          nullable: true
+          description: A percentage based discount that will apply to all purchasable objects/courses
+        group_category_id:
+          type: string
+          nullable: true
+        sign_up_field_rule:
+          allOf:
+          - $ref: '#/components/schemas/SignUpFieldRule'
+          description: Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.
+        rule_email_domains:
+          type: array
+          items:
+            type: string
+          description: Email domains for automatic group assignment. Users that register with a matching email domain will be added to this group.
+      required:
+      - name
+    GroupUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Unique name of the group
+          maxLength: 100
+        discount_percent:
+          type: integer
+          maximum: 100
+          minimum: 0
+          nullable: true
+          description: A percentage based discount that will apply to all purchasable objects/courses
+        group_category_id:
+          type: string
+          nullable: true
+          minLength: 1
+        sign_up_field_rule:
+          allOf:
+          - $ref: '#/components/schemas/SignUpFieldRuleRequest'
+          description: Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.
+      required:
+      - name
+    SignUpFieldRuleRequest:
+      type: object
+      properties:
+        enforce:
+          type: boolean
+          default: false
+          description: When true, users will be removed from this group if membership rules are not satisfied.
+        require_match_all:
+          type: boolean
+          default: false
+          description: When true, users must match all sign up field options. When this option is false, any sign up field match will grant group membership.
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/SignupFieldOptionLinkRequest'
+      required:
+      - options
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

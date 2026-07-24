@@ -1,0 +1,249 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Groups > Users API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Groups > Users
+paths:
+  /v1/groups/{group_id}/users:
+    get:
+      operationId: groups_users_list
+      description: 'List all users in a group.
+
+
+        Returns a paginated list of users who are members of the specified group.'
+      parameters:
+      - in: path
+        name: group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - Groups > Users
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedGroupUserList'
+          description: ''
+    post:
+      operationId: groups_users_create
+      description: 'Add a user to a group.
+
+
+        Specify the user to add by their ID.'
+      parameters:
+      - in: path
+        name: group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Groups > Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupUserRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GroupUserRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GroupUserRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupUser'
+          description: ''
+  /v1/groups/{group_id}/users/{user_id}:
+    get:
+      operationId: groups_users_retrieve
+      description: 'Retrieve details about a user''s membership in a group.
+
+
+        Returns user information and membership metadata.'
+      parameters:
+      - in: path
+        name: group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Groups > Users
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupUser'
+          description: ''
+    delete:
+      operationId: groups_users_destroy
+      description: 'Remove a user from a group.
+
+
+        This action only removes the user''s membership from the group; the user account remains active.'
+      parameters:
+      - in: path
+        name: group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Groups > Users
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    ReadOnlyUser:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+          description: Email address
+        first_name:
+          type: string
+          readOnly: true
+          description: First name
+        last_name:
+          type: string
+          readOnly: true
+          description: Last name
+      required:
+      - id
+    GroupUserRequest:
+      type: object
+      properties:
+        user:
+          allOf:
+          - $ref: '#/components/schemas/ReadOnlyUserRequest'
+          description: User details
+      required:
+      - user
+    GroupUser:
+      type: object
+      properties:
+        user:
+          allOf:
+          - $ref: '#/components/schemas/ReadOnlyUser'
+          description: User details
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: ISO 8601 datetime indicating when the User was added to the Group
+      required:
+      - user
+    ReadOnlyUserRequest:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Known as user_id within the documentation
+      required:
+      - id
+    PaginatedGroupUserList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupUser'
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

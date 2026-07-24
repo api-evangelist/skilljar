@@ -1,0 +1,246 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Catalog Pages > Tags API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Catalog Pages > Tags
+paths:
+  /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/tags:
+    get:
+      operationId: domains_catalog_pages_tags_list
+      description: List Tags on a Catalog Page.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - Domains > Catalog Pages > Tags
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCatalogPageTagList'
+          description: ''
+    post:
+      operationId: domains_catalog_pages_tags_create
+      description: Add a Tag to a Catalog Page.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages > Tags
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogPageTagRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CatalogPageTagRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CatalogPageTagRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogPageTag'
+          description: ''
+  /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/tags/{tag_id}:
+    get:
+      operationId: domains_catalog_pages_tags_retrieve
+      description: Retrieve Tag details.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: tag_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages > Tags
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogPageTag'
+          description: ''
+    delete:
+      operationId: domains_catalog_pages_tags_destroy
+      description: Removes a Tag from a Catalog Page and returns a `204` response.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: tag_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages > Tags
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    CatalogPageTagRequest:
+      type: object
+      description: Serializer for CatalogPageTags.
+      properties:
+        tag:
+          $ref: '#/components/schemas/NestedTagRequest'
+      required:
+      - tag
+    NestedTagRequest:
+      type: object
+      description: Serializer for nested Tag models in PublishedCourseTag, PublishedPathTag, etc.
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Known as tag_id within the documentation
+      required:
+      - id
+    NestedTag:
+      type: object
+      description: Serializer for nested Tag models in PublishedCourseTag, PublishedPathTag, etc.
+      properties:
+        id:
+          type: string
+          description: Known as tag_id within the documentation
+        name:
+          type: string
+          readOnly: true
+        slug:
+          type: string
+          readOnly: true
+      required:
+      - id
+    PaginatedCatalogPageTagList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogPageTag'
+    CatalogPageTag:
+      type: object
+      description: Serializer for CatalogPageTags.
+      properties:
+        tag:
+          $ref: '#/components/schemas/NestedTag'
+      required:
+      - tag
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

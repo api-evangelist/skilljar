@@ -1,0 +1,275 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Labels API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Labels
+paths:
+  /v1/labels:
+    get:
+      operationId: labels_list
+      description: 'List all labels.
+
+
+        Returns a paginated list of labels available in your organization.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - Labels
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLabelList'
+          description: ''
+    post:
+      operationId: labels_create
+      description: 'Create a new label.
+
+
+        Use this endpoint to add a label to your organization. Labels help categorize and organize resources.'
+      tags:
+      - Labels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabelRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LabelRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LabelRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+          description: ''
+  /v1/labels/{label_id}:
+    get:
+      operationId: labels_retrieve
+      description: 'Retrieve details for a specific label.
+
+
+        Returns the label''s unique identifier and name.'
+      parameters:
+      - in: path
+        name: label_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Labels
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+          description: ''
+    put:
+      operationId: labels_update
+      description: 'Update label details.
+
+
+        Modify the name or properties of an existing label. Both PUT and PATCH perform partial updates.'
+      parameters:
+      - in: path
+        name: label_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Labels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabelRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LabelRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LabelRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+          description: ''
+    patch:
+      operationId: labels_partial_update
+      description: 'Update label details.
+
+
+        Modify the name or properties of an existing label. Both PUT and PATCH perform partial updates.'
+      parameters:
+      - in: path
+        name: label_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Labels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedLabelRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedLabelRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedLabelRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+          description: ''
+    delete:
+      operationId: labels_destroy
+      description: 'Delete a label.
+
+
+        Permanently removes the label from your organization. This action cannot be undone.'
+      parameters:
+      - in: path
+        name: label_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Labels
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    PatchedLabelRequest:
+      type: object
+      description: Serializer for Label model.
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Name of the label.  This is a required field and must be unique within the organization.
+          maxLength: 255
+    Label:
+      type: object
+      description: Serializer for Label model.
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as label_id within the documentation
+        name:
+          type: string
+          description: Name of the label.  This is a required field and must be unique within the organization.
+          maxLength: 255
+      required:
+      - name
+    PaginatedLabelList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Label'
+    LabelRequest:
+      type: object
+      description: Serializer for Label model.
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Name of the label.  This is a required field and must be unique within the organization.
+          maxLength: 255
+      required:
+      - name
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

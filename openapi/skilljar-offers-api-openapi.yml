@@ -1,0 +1,438 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Offers API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Offers
+paths:
+  /v1/offers:
+    get:
+      operationId: offers_list
+      description: 'Retrieve a paginated list of Offers available to your organization.
+
+
+        Returns a list of Offer resources, filtered and paginated according to the request parameters.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - Offers
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedOfferItemList'
+          description: ''
+  /v1/offers/{offer_id}:
+    get:
+      operationId: offers_retrieve
+      description: 'Retrieve details for a specific Offer.
+
+
+        Returns the Offer resource identified by the given offer ID.'
+      parameters:
+      - in: path
+        name: offer_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Offers
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferItem'
+          description: ''
+    put:
+      operationId: offers_update
+      description: 'Update an Offer price if it is an à la carte Offer for a `PublishedCourse`.
+
+
+        PUT and PATCH are identical - both do partial updates.'
+      parameters:
+      - in: path
+        name: offer_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Offers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OfferItemRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OfferItemRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OfferItemRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferItem'
+          description: ''
+    patch:
+      operationId: offers_partial_update
+      description: 'Update an Offer if it is an à la carte Offer for a `PublishedCourse`.
+
+
+        PUT and PATCH are identical - both do partial updates.'
+      parameters:
+      - in: path
+        name: offer_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Offers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedOfferItemRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedOfferItemRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedOfferItemRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferItem'
+          description: ''
+components:
+  schemas:
+    PatchedOfferItemRequest:
+      type: object
+      properties:
+        price_cents:
+          type: integer
+          minimum: 0
+          description: The price of the offer in cents
+        currency_code:
+          allOf:
+          - $ref: '#/components/schemas/CurrencyCodeEnum'
+          description: 'Available currency codes: AUD, BRL, CAD, CNY, EUR, GBP, JPY, KRW, MXN, NZD, RUB, SEK, SGD, USD, ZAR
+
+
+            * `AUD` - AUD
+
+            * `BRL` - BRL
+
+            * `CAD` - CAD
+
+            * `CNY` - CNY
+
+            * `EUR` - EUR
+
+            * `GBP` - GBP
+
+            * `JPY` - JPY
+
+            * `KRW` - KRW
+
+            * `MXN` - MXN
+
+            * `NZD` - NZD
+
+            * `RUB` - RUB
+
+            * `SEK` - SEK
+
+            * `SGD` - SGD
+
+            * `USD` - USD
+
+            * `ZAR` - ZAR'
+        price_credits:
+          type: integer
+          minimum: 0
+          nullable: true
+          description: Number of credits, if enabled for your organization
+    PaginatedOfferItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferItem'
+    OfferItem:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as offer_id within the documentation
+        course_series_id:
+          type: string
+          readOnly: true
+        published_path_id:
+          type: string
+          readOnly: true
+        published_course_id:
+          type: string
+          readOnly: true
+        plan_id:
+          type: string
+          readOnly: true
+        domain_name:
+          type: string
+          readOnly: true
+          nullable: true
+        offer_type:
+          allOf:
+          - $ref: '#/components/schemas/OfferTypeEnum'
+          readOnly: true
+        price_cents:
+          type: integer
+          minimum: 0
+          description: The price of the offer in cents
+        currency_code:
+          allOf:
+          - $ref: '#/components/schemas/CurrencyCodeEnum'
+          description: 'Available currency codes: AUD, BRL, CAD, CNY, EUR, GBP, JPY, KRW, MXN, NZD, RUB, SEK, SGD, USD, ZAR
+
+
+            * `AUD` - AUD
+
+            * `BRL` - BRL
+
+            * `CAD` - CAD
+
+            * `CNY` - CNY
+
+            * `EUR` - EUR
+
+            * `GBP` - GBP
+
+            * `JPY` - JPY
+
+            * `KRW` - KRW
+
+            * `MXN` - MXN
+
+            * `NZD` - NZD
+
+            * `RUB` - RUB
+
+            * `SEK` - SEK
+
+            * `SGD` - SGD
+
+            * `USD` - USD
+
+            * `ZAR` - ZAR'
+        price_credits:
+          type: integer
+          minimum: 0
+          nullable: true
+          description: Number of credits, if enabled for your organization
+        sku:
+          type: string
+          readOnly: true
+        max_quantity:
+          type: integer
+          readOnly: true
+        active:
+          type: boolean
+          readOnly: true
+        starts_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: ISO 8601 formatted datetime string indicating when the offer starts at
+        ends_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: ISO 8601 formatted datetime string indicating when the offer ends at
+        linked_to_plan:
+          type: boolean
+          description: Returns True if the offer is included in a Plan offer.
+          readOnly: true
+    CurrencyCodeEnum:
+      enum:
+      - AUD
+      - BRL
+      - CAD
+      - CNY
+      - EUR
+      - GBP
+      - JPY
+      - KRW
+      - MXN
+      - NZD
+      - RUB
+      - SEK
+      - SGD
+      - USD
+      - ZAR
+      type: string
+      description: '* `AUD` - AUD
+
+        * `BRL` - BRL
+
+        * `CAD` - CAD
+
+        * `CNY` - CNY
+
+        * `EUR` - EUR
+
+        * `GBP` - GBP
+
+        * `JPY` - JPY
+
+        * `KRW` - KRW
+
+        * `MXN` - MXN
+
+        * `NZD` - NZD
+
+        * `RUB` - RUB
+
+        * `SEK` - SEK
+
+        * `SGD` - SGD
+
+        * `USD` - USD
+
+        * `ZAR` - ZAR'
+    OfferTypeEnum:
+      enum:
+      - published_path
+      - domain
+      - published_course
+      - plan
+      type: string
+      description: '* `published_path` - Course Bundle
+
+        * `domain` - Domain
+
+        * `published_course` - Published Course
+
+        * `plan` - Plan'
+    OfferItemRequest:
+      type: object
+      properties:
+        price_cents:
+          type: integer
+          minimum: 0
+          description: The price of the offer in cents
+        currency_code:
+          allOf:
+          - $ref: '#/components/schemas/CurrencyCodeEnum'
+          description: 'Available currency codes: AUD, BRL, CAD, CNY, EUR, GBP, JPY, KRW, MXN, NZD, RUB, SEK, SGD, USD, ZAR
+
+
+            * `AUD` - AUD
+
+            * `BRL` - BRL
+
+            * `CAD` - CAD
+
+            * `CNY` - CNY
+
+            * `EUR` - EUR
+
+            * `GBP` - GBP
+
+            * `JPY` - JPY
+
+            * `KRW` - KRW
+
+            * `MXN` - MXN
+
+            * `NZD` - NZD
+
+            * `RUB` - RUB
+
+            * `SEK` - SEK
+
+            * `SGD` - SGD
+
+            * `USD` - USD
+
+            * `ZAR` - ZAR'
+        price_credits:
+          type: integer
+          minimum: 0
+          nullable: true
+          description: Number of credits, if enabled for your organization
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

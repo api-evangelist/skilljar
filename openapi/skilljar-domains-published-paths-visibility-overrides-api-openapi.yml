@@ -1,0 +1,247 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Published Paths > Visibility Overrides API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Published Paths > Visibility Overrides
+paths:
+  /v1/domains/{domain_name}/published-paths/{published_path_id}/visibility-overrides:
+    get:
+      operationId: domains_published_paths_visibility_overrides_list
+      description: List StudentGroup visibility overrides for PublishedPath.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: published_path_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths > Visibility Overrides
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPublishedPathGroupVisibilityList'
+          description: ''
+    post:
+      operationId: domains_published_paths_visibility_overrides_create
+      description: Create a StudentGroup visibility override for a Published Path
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: published_path_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths > Visibility Overrides
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishedPathGroupVisibilityRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PublishedPathGroupVisibilityRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PublishedPathGroupVisibilityRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishedPathGroupVisibility'
+          description: ''
+  /v1/domains/{domain_name}/published-paths/{published_path_id}/visibility-overrides/{student_group_id}:
+    get:
+      operationId: domains_published_paths_visibility_overrides_retrieve
+      description: Retrieve StudentGroup visibility override for PublishedPath.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: published_path_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: student_group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths > Visibility Overrides
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishedPathGroupVisibility'
+          description: ''
+    delete:
+      operationId: domains_published_paths_visibility_overrides_destroy
+      description: Deletes a StudentGroup visibility override for a PublishedPath and returns a `204` response.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: published_path_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: student_group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths > Visibility Overrides
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    PublishedPathGroupVisibilityRequest:
+      type: object
+      description: Serializer for PublishedPathGroupVisibility overrides
+      properties:
+        student_group:
+          $ref: '#/components/schemas/StudentGroupSummaryRequest'
+        is_visible:
+          type: boolean
+      required:
+      - is_visible
+      - student_group
+    StudentGroupSummary:
+      type: object
+      description: Serializer for student groups for use GroupVisibility serializers
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          readOnly: true
+      required:
+      - id
+    PaginatedPublishedPathGroupVisibilityList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublishedPathGroupVisibility'
+    StudentGroupSummaryRequest:
+      type: object
+      description: Serializer for student groups for use GroupVisibility serializers
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
+    PublishedPathGroupVisibility:
+      type: object
+      description: Serializer for PublishedPathGroupVisibility overrides
+      properties:
+        student_group:
+          $ref: '#/components/schemas/StudentGroupSummary'
+        is_visible:
+          type: boolean
+      required:
+      - is_visible
+      - student_group
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

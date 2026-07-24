@@ -1,0 +1,231 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Groups > Access Code Pools API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Groups > Access Code Pools
+paths:
+  /v1/groups/{group_id}/access-code-pools:
+    get:
+      operationId: groups_access_code_pools_list
+      description: 'List all access code pools assigned to a group.
+
+
+        Returns a paginated list of access code pools associated with the specified group.'
+      parameters:
+      - in: path
+        name: group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - Groups > Access Code Pools
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedGroupAccessCodePoolList'
+          description: ''
+    post:
+      operationId: groups_access_code_pools_create
+      description: 'Assign an access code pool to a group.
+
+
+        Specify the access code pool to add by its ID.'
+      parameters:
+      - in: path
+        name: group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Groups > Access Code Pools
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupAccessCodePoolRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GroupAccessCodePoolRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GroupAccessCodePoolRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupAccessCodePool'
+          description: ''
+  /v1/groups/{group_id}/access-code-pools/{access_code_pool_id}:
+    get:
+      operationId: groups_access_code_pools_retrieve
+      description: 'Retrieve details about an access code pool assigned to a group.
+
+
+        Returns information about the access code pool and its association with the group.'
+      parameters:
+      - in: path
+        name: access_code_pool_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Groups > Access Code Pools
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupAccessCodePool'
+          description: ''
+    delete:
+      operationId: groups_access_code_pools_destroy
+      description: 'Remove an access code pool from a group.
+
+
+        This action only removes the association; the access code pool itself is not deleted.'
+      parameters:
+      - in: path
+        name: access_code_pool_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Groups > Access Code Pools
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    GroupAccessCodePoolLinkRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
+    GroupAccessCodePool:
+      type: object
+      properties:
+        access_code_pool:
+          $ref: '#/components/schemas/GroupAccessCodePoolLink'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: ISO 8601 datetime indicating when the student group / access code link was created
+      required:
+      - access_code_pool
+    GroupAccessCodePoolRequest:
+      type: object
+      properties:
+        access_code_pool:
+          $ref: '#/components/schemas/GroupAccessCodePoolLinkRequest'
+      required:
+      - access_code_pool
+    PaginatedGroupAccessCodePoolList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupAccessCodePool'
+    GroupAccessCodePoolLink:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          readOnly: true
+          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
+      required:
+      - id
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,140 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Groups > Email Domain Rules API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Groups > Email Domain Rules
+paths:
+  /v1/groups/{group_id}/email-domain-rules:
+    get:
+      operationId: groups_email_domain_rules_list
+      description: 'List email domain auto-enrollment rules for a group.
+
+
+        Returns the current list of email domains configured for automatic group assignment.'
+      parameters:
+      - in: path
+        name: group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Groups > Email Domain Rules
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailDomainRuleResponse'
+          description: ''
+    patch:
+      operationId: groups_email_domain_rules_partial_update
+      description: 'Update email domain auto-enrollment rules for a group.
+
+
+        Add or remove email domains from the group''s auto-enrollment rules. At least one of
+
+        `add` or `remove` must be provided. Domains are normalized to lowercase.
+
+        Adding an existing domain or removing a non-existent domain is idempotent.'
+      parameters:
+      - in: path
+        name: group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Groups > Email Domain Rules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEmailDomainRulePatchRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEmailDomainRulePatchRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEmailDomainRulePatchRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailDomainRulePatch'
+          description: ''
+components:
+  schemas:
+    EmailDomainRuleResponse:
+      type: object
+      properties:
+        email_domains:
+          type: array
+          items:
+            type: string
+          description: List of email domains configured for automatic group assignment.
+      required:
+      - email_domains
+    EmailDomainRulePatch:
+      type: object
+      properties:
+        add:
+          type: array
+          items:
+            type: string
+          description: Email domains to add to the group's auto-enrollment rules.
+        remove:
+          type: array
+          items:
+            type: string
+          description: Email domains to remove from the group's auto-enrollment rules.
+    PatchedEmailDomainRulePatchRequest:
+      type: object
+      properties:
+        add:
+          type: array
+          items:
+            type: string
+            minLength: 1
+          description: Email domains to add to the group's auto-enrollment rules.
+        remove:
+          type: array
+          items:
+            type: string
+            minLength: 1
+          description: Email domains to remove from the group's auto-enrollment rules.
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

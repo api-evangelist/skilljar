@@ -1,0 +1,219 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Manager Access API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Manager Access
+paths:
+  /v1/domains/{domain_name}/users/{user_id}/manager-access:
+    put:
+      operationId: domains_users_manager_access_update
+      description: Grant and update student manager access for a user.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - Domains > Manager Access
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManagerAccessUpdateRequestRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ManagerAccessUpdateRequestRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ManagerAccessUpdateRequestRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagerAccess'
+          description: ''
+    delete:
+      operationId: domains_users_manager_access_destroy
+      description: Revoke student manager access for a user.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - Domains > Manager Access
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    ReadOnlyUser:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+          description: Email address
+        first_name:
+          type: string
+          readOnly: true
+          description: First name
+        last_name:
+          type: string
+          readOnly: true
+          description: Last name
+      required:
+      - id
+    ManagerAccess:
+      type: object
+      description: Serializer for returning a user's third-party manager access settings.
+      properties:
+        user:
+          $ref: '#/components/schemas/ReadOnlyUser'
+        manager_access:
+          allOf:
+          - $ref: '#/components/schemas/ManagerAccessDetails'
+          readOnly: true
+        invalid_ids:
+          allOf:
+          - $ref: '#/components/schemas/InvalidIds'
+          readOnly: true
+      required:
+      - user
+    InvalidIds:
+      type: object
+      description: Serializer for returning invalid IDs from the update request.
+      properties:
+        course_ids:
+          type: array
+          items:
+            type: string
+        path_ids:
+          type: array
+          items:
+            type: string
+        license_ids:
+          type: array
+          items:
+            type: string
+    ManagerAccessUpdateRequestRequest:
+      type: object
+      description: Serializer for updating a user's third-party manager access settings.
+      properties:
+        group_name:
+          type: string
+          minLength: 1
+        can_create_users:
+          type: boolean
+          default: false
+        course_access_level:
+          type: string
+          minLength: 1
+        course_ids:
+          type: array
+          items:
+            type: string
+            minLength: 1
+        path_access_level:
+          type: string
+          minLength: 1
+        path_ids:
+          type: array
+          items:
+            type: string
+            minLength: 1
+        license_ids:
+          type: array
+          items:
+            type: string
+            minLength: 1
+      required:
+      - course_access_level
+      - group_name
+      - path_access_level
+    ManagerAccessDetails:
+      type: object
+      description: Serializer for a user's third-party manager access details.
+      properties:
+        group_id:
+          type: string
+          nullable: true
+        can_create_users:
+          type: boolean
+          nullable: true
+        course_access_level:
+          type: string
+        course_ids:
+          type: array
+          items:
+            type: string
+        path_access_level:
+          type: string
+        path_ids:
+          type: array
+          items:
+            type: string
+        license_ids:
+          type: array
+          items:
+            type: string
+      required:
+      - course_access_level
+      - course_ids
+      - license_ids
+      - path_access_level
+      - path_ids
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,761 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Catalog Pages API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Catalog Pages
+paths:
+  /v1/domains/{domain_name}/catalog-pages:
+    get:
+      operationId: domains_catalog_pages_list
+      description: Retrieve a paginated list of all catalog pages for the specified domain.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - Domains > Catalog Pages
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCatalogPageList'
+          description: ''
+    post:
+      operationId: domains_catalog_pages_create
+      description: Create a new catalog page within the specified domain.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogPageCreateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CatalogPageCreateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CatalogPageCreateRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogPageCreate'
+          description: ''
+  /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}:
+    get:
+      operationId: domains_catalog_pages_retrieve
+      description: Retrieve detailed information for a specific catalog page within the domain.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogPage'
+          description: ''
+    put:
+      operationId: domains_catalog_pages_update
+      description: 'Update a specific catalog page within the domain.
+
+
+        Allows partial updates to catalog page fields such as text fields, visibility, etc.'
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogPageRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CatalogPageRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CatalogPageRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogPage'
+          description: ''
+    patch:
+      operationId: domains_catalog_pages_partial_update
+      description: 'Partially update a specific catalog page within the domain.
+
+
+        Allows partial updates to catalog page fields such as text fields, visibility, etc.'
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCatalogPageRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCatalogPageRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCatalogPageRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogPage'
+          description: ''
+    delete:
+      operationId: domains_catalog_pages_destroy
+      description: Delete a catalog page from the domain.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    PaginatedCatalogPageList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogPage'
+    SearchBehaviorEnum:
+      enum:
+      - GLOBAL
+      - LOCAL
+      - FEDERATED
+      - NONE
+      type: string
+      description: '* `GLOBAL` - Global: Search spans all visible catalog pages
+
+        * `LOCAL` - Local: Search is limited to the current page / container
+
+        * `FEDERATED` - Federated search
+
+        * `NONE` - No search'
+    CatalogPageCreate:
+      type: object
+      description: Serializer for creating catalog pages in api only
+      properties:
+        id:
+          type: string
+          readOnly: true
+        page_title:
+          type: string
+          description: Title of the catalog page
+        slug:
+          type: string
+          description: URL slug of the catalog page.
+          pattern: ^[-a-zA-Z0-9_]+$
+        short_description:
+          type: string
+          description: Short description of the catalog page.
+          maxLength: 300
+        tile_callout:
+          type: string
+          description: Tile callout text for the catalog page when embedded on another catalog page.
+          maxLength: 15
+        hidden:
+          type: boolean
+          default: false
+          description: Whether the catalog page is hidden by default.
+        strict_enforce_group_visibility:
+          type: boolean
+          default: false
+          description: Whether to strictly enforce group visibility.
+        is_classic:
+          type: boolean
+          default: true
+          description: Whether the catalog page is classic, containing only course content, vs. a Builder page containing additional fields.
+        url:
+          type: string
+          description: Returns the URL of the catalog page.
+          readOnly: true
+        header_html:
+          type: string
+          description: HTML page header for classic pages.
+        tile_sort_method:
+          allOf:
+          - $ref: '#/components/schemas/TileSortMethodEnum'
+          default: catalog_settings_order
+          description: 'Tile sort method for classic pages.
+
+
+            * `catalog_settings_order` - Default Catalog Settings Ordering
+
+            * `registered_first_completed_last_order` - Registered, Unregistered, then Completed Courses
+
+            * `alphabetically_a_to_z` - Sort alphabetically A to Z
+
+            * `alphabetically_z_to_a` - Sort alphabetically Z to A'
+        search_location:
+          allOf:
+          - $ref: '#/components/schemas/SearchLocationEnum'
+          default: HEADER_RIGHT
+          description: 'Where the search bar is located for classic pages. The in-place-of-header option requires federated search to be enabled for the domain.
+
+
+            * `HEADER_RIGHT` - Display search box in the header.
+
+            * `LEFT_NAV_TOP` - Display search box in the left nav.
+
+            * `HIDDEN` - Do not display search box.
+
+            * `IN_PLACE_OF_HEADER` - In place of HTML header'
+        search_behavior:
+          allOf:
+          - $ref: '#/components/schemas/SearchBehaviorEnum'
+          default: GLOBAL
+          description: 'Behavior of search bar for classic pages. The federated and no-search options require federated search to be enabled for the domain.
+
+
+            * `GLOBAL` - Global: Search spans all visible catalog pages
+
+            * `LOCAL` - Local: Search is limited to the current page / container
+
+            * `FEDERATED` - Federated search
+
+            * `NONE` - No search'
+        item_layout:
+          allOf:
+          - $ref: '#/components/schemas/ItemLayoutEnum'
+          default: TILE
+          description: 'Layout of items for classic pages.
+
+
+            * `TILE` - Tile view: Catalog items are displayed as tiles.
+
+            * `LIST` - List view: Catalog items are displayed full-width, one per line.'
+      required:
+      - page_title
+    SearchLocationEnum:
+      enum:
+      - HEADER_RIGHT
+      - LEFT_NAV_TOP
+      - HIDDEN
+      - IN_PLACE_OF_HEADER
+      type: string
+      description: '* `HEADER_RIGHT` - Display search box in the header.
+
+        * `LEFT_NAV_TOP` - Display search box in the left nav.
+
+        * `HIDDEN` - Do not display search box.
+
+        * `IN_PLACE_OF_HEADER` - In place of HTML header'
+    CatalogPageCreateRequest:
+      type: object
+      description: Serializer for creating catalog pages in api only
+      properties:
+        page_title:
+          type: string
+          minLength: 1
+          description: Title of the catalog page
+        slug:
+          type: string
+          minLength: 1
+          description: URL slug of the catalog page.
+          pattern: ^[-a-zA-Z0-9_]+$
+        short_description:
+          type: string
+          minLength: 1
+          description: Short description of the catalog page.
+          maxLength: 300
+        tile_callout:
+          type: string
+          minLength: 1
+          description: Tile callout text for the catalog page when embedded on another catalog page.
+          maxLength: 15
+        hidden:
+          type: boolean
+          default: false
+          description: Whether the catalog page is hidden by default.
+        strict_enforce_group_visibility:
+          type: boolean
+          default: false
+          description: Whether to strictly enforce group visibility.
+        is_classic:
+          type: boolean
+          default: true
+          description: Whether the catalog page is classic, containing only course content, vs. a Builder page containing additional fields.
+        header_html:
+          type: string
+          minLength: 1
+          description: HTML page header for classic pages.
+        tile_sort_method:
+          allOf:
+          - $ref: '#/components/schemas/TileSortMethodEnum'
+          default: catalog_settings_order
+          description: 'Tile sort method for classic pages.
+
+
+            * `catalog_settings_order` - Default Catalog Settings Ordering
+
+            * `registered_first_completed_last_order` - Registered, Unregistered, then Completed Courses
+
+            * `alphabetically_a_to_z` - Sort alphabetically A to Z
+
+            * `alphabetically_z_to_a` - Sort alphabetically Z to A'
+        search_location:
+          allOf:
+          - $ref: '#/components/schemas/SearchLocationEnum'
+          default: HEADER_RIGHT
+          description: 'Where the search bar is located for classic pages. The in-place-of-header option requires federated search to be enabled for the domain.
+
+
+            * `HEADER_RIGHT` - Display search box in the header.
+
+            * `LEFT_NAV_TOP` - Display search box in the left nav.
+
+            * `HIDDEN` - Do not display search box.
+
+            * `IN_PLACE_OF_HEADER` - In place of HTML header'
+        search_behavior:
+          allOf:
+          - $ref: '#/components/schemas/SearchBehaviorEnum'
+          default: GLOBAL
+          description: 'Behavior of search bar for classic pages. The federated and no-search options require federated search to be enabled for the domain.
+
+
+            * `GLOBAL` - Global: Search spans all visible catalog pages
+
+            * `LOCAL` - Local: Search is limited to the current page / container
+
+            * `FEDERATED` - Federated search
+
+            * `NONE` - No search'
+        item_layout:
+          allOf:
+          - $ref: '#/components/schemas/ItemLayoutEnum'
+          default: TILE
+          description: 'Layout of items for classic pages.
+
+
+            * `TILE` - Tile view: Catalog items are displayed as tiles.
+
+            * `LIST` - List view: Catalog items are displayed full-width, one per line.'
+      required:
+      - page_title
+    CatalogPage:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        page_title:
+          type: string
+          description: Title of the catalog page
+        slug:
+          type: string
+          description: URL slug of the catalog page.
+          pattern: ^[-a-zA-Z0-9_]+$
+        short_description:
+          type: string
+          description: Short description of the catalog page.
+          maxLength: 300
+        tile_callout:
+          type: string
+          description: Tile callout text for the catalog page when embedded on another catalog page.
+          maxLength: 15
+        hidden:
+          type: boolean
+          default: false
+          description: Whether the catalog page is hidden by default.
+        strict_enforce_group_visibility:
+          type: boolean
+          default: false
+          description: Whether to strictly enforce group visibility.
+        is_classic:
+          type: boolean
+          description: Whether the catalog page is classic, containing only course content, vs. a Builder page containing additional fields.
+          readOnly: true
+        url:
+          type: string
+          description: Returns the URL of the catalog page.
+          readOnly: true
+        header_html:
+          type: string
+          description: HTML page header for classic pages.
+        tile_sort_method:
+          allOf:
+          - $ref: '#/components/schemas/TileSortMethodEnum'
+          default: catalog_settings_order
+          description: 'Tile sort method for classic pages.
+
+
+            * `catalog_settings_order` - Default Catalog Settings Ordering
+
+            * `registered_first_completed_last_order` - Registered, Unregistered, then Completed Courses
+
+            * `alphabetically_a_to_z` - Sort alphabetically A to Z
+
+            * `alphabetically_z_to_a` - Sort alphabetically Z to A'
+        search_location:
+          allOf:
+          - $ref: '#/components/schemas/SearchLocationEnum'
+          default: HEADER_RIGHT
+          description: 'Where the search bar is located for classic pages. The in-place-of-header option requires federated search to be enabled for the domain.
+
+
+            * `HEADER_RIGHT` - Display search box in the header.
+
+            * `LEFT_NAV_TOP` - Display search box in the left nav.
+
+            * `HIDDEN` - Do not display search box.
+
+            * `IN_PLACE_OF_HEADER` - In place of HTML header'
+        search_behavior:
+          allOf:
+          - $ref: '#/components/schemas/SearchBehaviorEnum'
+          default: GLOBAL
+          description: 'Behavior of search bar for classic pages. The federated and no-search options require federated search to be enabled for the domain.
+
+
+            * `GLOBAL` - Global: Search spans all visible catalog pages
+
+            * `LOCAL` - Local: Search is limited to the current page / container
+
+            * `FEDERATED` - Federated search
+
+            * `NONE` - No search'
+        item_layout:
+          allOf:
+          - $ref: '#/components/schemas/ItemLayoutEnum'
+          default: TILE
+          description: 'Layout of items for classic pages.
+
+
+            * `TILE` - Tile view: Catalog items are displayed as tiles.
+
+            * `LIST` - List view: Catalog items are displayed full-width, one per line.'
+    TileSortMethodEnum:
+      enum:
+      - catalog_settings_order
+      - registered_first_completed_last_order
+      - alphabetically_a_to_z
+      - alphabetically_z_to_a
+      type: string
+      description: '* `catalog_settings_order` - Default Catalog Settings Ordering
+
+        * `registered_first_completed_last_order` - Registered, Unregistered, then Completed Courses
+
+        * `alphabetically_a_to_z` - Sort alphabetically A to Z
+
+        * `alphabetically_z_to_a` - Sort alphabetically Z to A'
+    PatchedCatalogPageRequest:
+      type: object
+      properties:
+        page_title:
+          type: string
+          minLength: 1
+          description: Title of the catalog page
+        slug:
+          type: string
+          minLength: 1
+          description: URL slug of the catalog page.
+          pattern: ^[-a-zA-Z0-9_]+$
+        short_description:
+          type: string
+          minLength: 1
+          description: Short description of the catalog page.
+          maxLength: 300
+        tile_callout:
+          type: string
+          minLength: 1
+          description: Tile callout text for the catalog page when embedded on another catalog page.
+          maxLength: 15
+        hidden:
+          type: boolean
+          default: false
+          description: Whether the catalog page is hidden by default.
+        strict_enforce_group_visibility:
+          type: boolean
+          default: false
+          description: Whether to strictly enforce group visibility.
+        header_html:
+          type: string
+          minLength: 1
+          description: HTML page header for classic pages.
+        tile_sort_method:
+          allOf:
+          - $ref: '#/components/schemas/TileSortMethodEnum'
+          default: catalog_settings_order
+          description: 'Tile sort method for classic pages.
+
+
+            * `catalog_settings_order` - Default Catalog Settings Ordering
+
+            * `registered_first_completed_last_order` - Registered, Unregistered, then Completed Courses
+
+            * `alphabetically_a_to_z` - Sort alphabetically A to Z
+
+            * `alphabetically_z_to_a` - Sort alphabetically Z to A'
+        search_location:
+          allOf:
+          - $ref: '#/components/schemas/SearchLocationEnum'
+          default: HEADER_RIGHT
+          description: 'Where the search bar is located for classic pages. The in-place-of-header option requires federated search to be enabled for the domain.
+
+
+            * `HEADER_RIGHT` - Display search box in the header.
+
+            * `LEFT_NAV_TOP` - Display search box in the left nav.
+
+            * `HIDDEN` - Do not display search box.
+
+            * `IN_PLACE_OF_HEADER` - In place of HTML header'
+        search_behavior:
+          allOf:
+          - $ref: '#/components/schemas/SearchBehaviorEnum'
+          default: GLOBAL
+          description: 'Behavior of search bar for classic pages. The federated and no-search options require federated search to be enabled for the domain.
+
+
+            * `GLOBAL` - Global: Search spans all visible catalog pages
+
+            * `LOCAL` - Local: Search is limited to the current page / container
+
+            * `FEDERATED` - Federated search
+
+            * `NONE` - No search'
+        item_layout:
+          allOf:
+          - $ref: '#/components/schemas/ItemLayoutEnum'
+          default: TILE
+          description: 'Layout of items for classic pages.
+
+
+            * `TILE` - Tile view: Catalog items are displayed as tiles.
+
+            * `LIST` - List view: Catalog items are displayed full-width, one per line.'
+    ItemLayoutEnum:
+      enum:
+      - TILE
+      - LIST
+      type: string
+      description: '* `TILE` - Tile view: Catalog items are displayed as tiles.
+
+        * `LIST` - List view: Catalog items are displayed full-width, one per line.'
+    CatalogPageRequest:
+      type: object
+      properties:
+        page_title:
+          type: string
+          minLength: 1
+          description: Title of the catalog page
+        slug:
+          type: string
+          minLength: 1
+          description: URL slug of the catalog page.
+          pattern: ^[-a-zA-Z0-9_]+$
+        short_description:
+          type: string
+          minLength: 1
+          description: Short description of the catalog page.
+          maxLength: 300
+        tile_callout:
+          type: string
+          minLength: 1
+          description: Tile callout text for the catalog page when embedded on another catalog page.
+          maxLength: 15
+        hidden:
+          type: boolean
+          default: false
+          description: Whether the catalog page is hidden by default.
+        strict_enforce_group_visibility:
+          type: boolean
+          default: false
+          description: Whether to strictly enforce group visibility.
+        header_html:
+          type: string
+          minLength: 1
+          description: HTML page header for classic pages.
+        tile_sort_method:
+          allOf:
+          - $ref: '#/components/schemas/TileSortMethodEnum'
+          default: catalog_settings_order
+          description: 'Tile sort method for classic pages.
+
+
+            * `catalog_settings_order` - Default Catalog Settings Ordering
+
+            * `registered_first_completed_last_order` - Registered, Unregistered, then Completed Courses
+
+            * `alphabetically_a_to_z` - Sort alphabetically A to Z
+
+            * `alphabetically_z_to_a` - Sort alphabetically Z to A'
+        search_location:
+          allOf:
+          - $ref: '#/components/schemas/SearchLocationEnum'
+          default: HEADER_RIGHT
+          description: 'Where the search bar is located for classic pages. The in-place-of-header option requires federated search to be enabled for the domain.
+
+
+            * `HEADER_RIGHT` - Display search box in the header.
+
+            * `LEFT_NAV_TOP` - Display search box in the left nav.
+
+            * `HIDDEN` - Do not display search box.
+
+            * `IN_PLACE_OF_HEADER` - In place of HTML header'
+        search_behavior:
+          allOf:
+          - $ref: '#/components/schemas/SearchBehaviorEnum'
+          default: GLOBAL
+          description: 'Behavior of search bar for classic pages. The federated and no-search options require federated search to be enabled for the domain.
+
+
+            * `GLOBAL` - Global: Search spans all visible catalog pages
+
+            * `LOCAL` - Local: Search is limited to the current page / container
+
+            * `FEDERATED` - Federated search
+
+            * `NONE` - No search'
+        item_layout:
+          allOf:
+          - $ref: '#/components/schemas/ItemLayoutEnum'
+          default: TILE
+          description: 'Layout of items for classic pages.
+
+
+            * `TILE` - Tile view: Catalog items are displayed as tiles.
+
+            * `LIST` - List view: Catalog items are displayed full-width, one per line.'
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

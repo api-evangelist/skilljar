@@ -1,0 +1,291 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Paths API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Paths
+paths:
+  /v1/paths:
+    get:
+      operationId: paths_list
+      description: 'Retrieve a paginated list of Paths.
+
+
+        Returns up to 100 Paths per page, filtered by the current organization.
+
+        Use this endpoint to discover all available learning Paths.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - Paths
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPathList'
+          description: ''
+  /v1/paths/{path_id}:
+    get:
+      operationId: paths_retrieve
+      description: 'Retrieve details for a specific Path.
+
+
+        Returns all metadata and configuration for the requested Path, including its items and structure.'
+      parameters:
+      - in: path
+        name: path_id
+        schema:
+          type: string
+          pattern: ^[a-zA-Z0-9]+$
+        required: true
+      tags:
+      - Paths
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Path'
+          description: ''
+    put:
+      operationId: paths_update
+      description: 'Update an existing Path.
+
+
+        Allows modification of Path metadata such as name, description, or status.'
+      parameters:
+      - in: path
+        name: path_id
+        schema:
+          type: string
+          pattern: ^[a-zA-Z0-9]+$
+        required: true
+      tags:
+      - Paths
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PathRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PathRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PathRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Path'
+          description: ''
+    patch:
+      operationId: paths_partial_update
+      description: 'Partially update an existing Path.
+
+
+        Allows updating one or more fields of a Path without modifying the entire resource.'
+      parameters:
+      - in: path
+        name: path_id
+        schema:
+          type: string
+          pattern: ^[a-zA-Z0-9]+$
+        required: true
+      tags:
+      - Paths
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPathRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPathRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPathRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Path'
+          description: ''
+    delete:
+      operationId: paths_destroy
+      description: 'Delete a Path.
+
+
+        Permanently removes the Path and all associated items from your organization.'
+      parameters:
+      - in: path
+        name: path_id
+        schema:
+          type: string
+          pattern: ^[a-zA-Z0-9]+$
+        required: true
+      tags:
+      - Paths
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    PatchedPathRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 500
+        short_description:
+          type: string
+          maxLength: 300
+        long_description_html:
+          type: string
+          maxLength: 100000
+        header_html:
+          type: string
+          maxLength: 100000
+        course_name_singular:
+          type: string
+          minLength: 1
+          description: 'Text to replace the word ''course'' on the catalog tile for this learning path. For example: ''1 course'''
+          maxLength: 50
+        course_name_plural:
+          type: string
+          minLength: 1
+          description: 'Text to replace the word ''courses'' on the catalog tile for this learning path. For example: ''3 courses'''
+          maxLength: 50
+    PathRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 500
+        short_description:
+          type: string
+          maxLength: 300
+        long_description_html:
+          type: string
+          maxLength: 100000
+        header_html:
+          type: string
+          maxLength: 100000
+        course_name_singular:
+          type: string
+          minLength: 1
+          description: 'Text to replace the word ''course'' on the catalog tile for this learning path. For example: ''1 course'''
+          maxLength: 50
+        course_name_plural:
+          type: string
+          minLength: 1
+          description: 'Text to replace the word ''courses'' on the catalog tile for this learning path. For example: ''3 courses'''
+          maxLength: 50
+    Path:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          maxLength: 500
+        promo_image_url:
+          type: string
+          description: The URL to the promo image of the course
+          readOnly: true
+        short_description:
+          type: string
+          maxLength: 300
+        long_description_html:
+          type: string
+          maxLength: 100000
+        header_html:
+          type: string
+          maxLength: 100000
+        course_name_singular:
+          type: string
+          description: 'Text to replace the word ''course'' on the catalog tile for this learning path. For example: ''1 course'''
+          maxLength: 50
+        course_name_plural:
+          type: string
+          description: 'Text to replace the word ''courses'' on the catalog tile for this learning path. For example: ''3 courses'''
+          maxLength: 50
+        path_item_count:
+          type: integer
+          readOnly: true
+    PaginatedPathList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Path'
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,207 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Published Courses > Prerequisites API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Published Courses > Prerequisites
+paths:
+  /v1/domains/{domain_name}/published-courses/{published_course_id}/published-course-prerequisites:
+    get:
+      operationId: domains_published_courses_published_course_prerequisites_list
+      description: Retrieve a paginated list of prerequisites for a PublishedCourse belonging to your organization.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Courses > Prerequisites
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPublishedCoursePrerequisiteList'
+          description: ''
+    post:
+      operationId: domains_published_courses_published_course_prerequisites_create
+      description: 'Link a prerequisite course to a PublishedCourse.
+
+
+        Returns a `201 Created` response on success.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Courses > Prerequisites
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishedCoursePrerequisiteRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PublishedCoursePrerequisiteRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PublishedCoursePrerequisiteRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishedCoursePrerequisite'
+          description: ''
+  ? /v1/domains/{domain_name}/published-courses/{published_course_id}/published-course-prerequisites/{prerequisite_published_course_id}
+  : delete:
+      operationId: domains_published_courses_published_course_prerequisites_destroy
+      description: Unlink a prerequisite from a PublishedCourse. Returns a `204 No Content` response on success.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: prerequisite_published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Courses > Prerequisites
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    PublishedCourseIdOnly:
+      type: object
+      description: Serializer for published course ID only.
+      properties:
+        id:
+          type: string
+          description: The published course ID
+      required:
+      - id
+    PublishedCoursePrerequisite:
+      type: object
+      description: Serializer for prerequisites of a published course.
+      properties:
+        published_course:
+          allOf:
+          - $ref: '#/components/schemas/PublishedCourseIdOnly'
+          description: Json containing he prerequisite published course ID
+      required:
+      - published_course
+    PaginatedPublishedCoursePrerequisiteList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublishedCoursePrerequisite'
+    PublishedCourseIdOnlyRequest:
+      type: object
+      description: Serializer for published course ID only.
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: The published course ID
+      required:
+      - id
+    PublishedCoursePrerequisiteRequest:
+      type: object
+      description: Serializer for prerequisites of a published course.
+      properties:
+        published_course:
+          allOf:
+          - $ref: '#/components/schemas/PublishedCourseIdOnlyRequest'
+          description: Json containing he prerequisite published course ID
+      required:
+      - published_course
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,428 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Promo Codes > Pools API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Promo Codes > Pools
+paths:
+  /v1/promo-code-pools:
+    get:
+      operationId: promo_code_pools_list
+      description: 'Retrieve a paginated list of Promo Code Pools for your organization.
+
+
+        Supports filtering by offer ID and pool name. Results are paginated (1000 per page).'
+      parameters:
+      - in: query
+        name: name
+        schema:
+          type: string
+        description: Filter results by PromoCodePool name
+      - in: query
+        name: offer_id
+        schema:
+          type: string
+        description: Filter results by the id of a Offer
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - Promo Codes > Pools
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPromoCodePoolListItemList'
+          description: ''
+    post:
+      operationId: promo_code_pools_create
+      description: 'Create a new Promo Code Pool.
+
+
+        Configure the pool with a name, discount type, usage limits, and validity period.'
+      tags:
+      - Promo Codes > Pools
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromoCodePoolCreateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PromoCodePoolCreateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PromoCodePoolCreateRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromoCodePoolCreate'
+          description: ''
+  /v1/promo-code-pools/{promo_code_pool_id}:
+    get:
+      operationId: promo_code_pools_retrieve
+      description: 'Retrieve details for a specific Promo Code Pool.
+
+
+        Returns all configuration and status information for the pool.'
+      parameters:
+      - in: path
+        name: promo_code_pool_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Promo Codes > Pools
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromoCodePoolListItem'
+          description: ''
+    put:
+      operationId: promo_code_pools_update
+      description: 'Update one or more fields of a Promo Code Pool.
+
+
+        Both PUT and PATCH requests perform partial updates.'
+      parameters:
+      - in: path
+        name: promo_code_pool_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Promo Codes > Pools
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromoCodePoolUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PromoCodePoolUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PromoCodePoolUpdateRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromoCodePoolUpdate'
+          description: ''
+    patch:
+      operationId: promo_code_pools_partial_update
+      description: 'Update one or more fields of a Promo Code Pool.
+
+
+        Both PUT and PATCH requests perform partial updates.'
+      parameters:
+      - in: path
+        name: promo_code_pool_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Promo Codes > Pools
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPromoCodePoolUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPromoCodePoolUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPromoCodePoolUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromoCodePoolUpdate'
+          description: ''
+    delete:
+      operationId: promo_code_pools_destroy
+      description: 'Delete a Promo Code Pool.
+
+
+        Deleting a pool will also delete all associated promo codes.
+
+        Purchases that used these codes will have their code reference removed.
+
+
+        This action cannot be undone.'
+      parameters:
+      - in: path
+        name: promo_code_pool_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Promo Codes > Pools
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    DiscountTypeEnum:
+      enum:
+      - PRICE_OVERRIDE
+      - PERCENT_OFF
+      type: string
+      description: '* `PRICE_OVERRIDE` - Price in cents
+
+        * `PERCENT_OFF` - Percent off'
+    PatchedPromoCodePoolUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+        active:
+          type: boolean
+          default: true
+        starts_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 formatted datetime string indicating the expiration of the promo code pool
+        expire_content:
+          type: boolean
+    PromoCodePoolUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+        active:
+          type: boolean
+          default: true
+        starts_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 formatted datetime string indicating the expiration of the promo code pool
+        expire_content:
+          type: boolean
+      required:
+      - starts_at
+    PaginatedPromoCodePoolListItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromoCodePoolListItem'
+    PromoCodePoolCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+        active:
+          type: boolean
+          default: true
+        starts_at:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating the start of the promo code pool
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 formatted datetime string indicating the expiration of the promo code pool
+        expire_content:
+          type: boolean
+        discount_type:
+          $ref: '#/components/schemas/DiscountTypeEnum'
+        price_cents:
+          type: integer
+          nullable: true
+        percent_off:
+          type: integer
+          nullable: true
+        single_use_per_user:
+          type: boolean
+      required:
+      - discount_type
+      - name
+      - starts_at
+    PromoCodePoolListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+        active:
+          type: boolean
+          default: true
+        price_cents:
+          type: integer
+          nullable: true
+        percent_off:
+          type: integer
+          nullable: true
+        starts_at:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating the start of the promo code pool
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 formatted datetime string indicating the expiration of the promo code pool
+        expire_content:
+          type: boolean
+      required:
+      - name
+      - starts_at
+    PromoCodePoolCreate:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+        active:
+          type: boolean
+          default: true
+        starts_at:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating the start of the promo code pool
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 formatted datetime string indicating the expiration of the promo code pool
+        expire_content:
+          type: boolean
+        discount_type:
+          $ref: '#/components/schemas/DiscountTypeEnum'
+        price_cents:
+          type: integer
+          nullable: true
+        percent_off:
+          type: integer
+          nullable: true
+        single_use_per_user:
+          type: boolean
+      required:
+      - discount_type
+      - name
+      - starts_at
+    PromoCodePoolUpdate:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+        active:
+          type: boolean
+          default: true
+        starts_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 formatted datetime string indicating the expiration of the promo code pool
+        expire_content:
+          type: boolean
+      required:
+      - starts_at
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

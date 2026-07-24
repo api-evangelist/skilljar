@@ -1,0 +1,348 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Web Packages API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Web Packages
+paths:
+  /v1/web-packages:
+    get:
+      operationId: web_packages_list
+      description: 'Retrieve a paginated list of WebPackages associated with your organization.
+
+
+        Each result includes metadata such as ID, type, title, state, and completion settings.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - Web Packages
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedWebPackageSummaryList'
+          description: ''
+    post:
+      operationId: web_packages_create
+      description: 'Create a new WebPackage by providing a URL to a remotely hosted zip file.
+
+
+        The file will be downloaded and re-hosted in Skilljar.
+
+        The `web_package` object in the request allows you to specify properties such as title, redirect behavior,
+
+        and completion synchronization.
+
+
+        - `title` (required): The title for the web package. This may be overridden after processing.
+
+        - `redirect_on_completion` (optional, default: `true`)
+
+        - `sync_on_completion` (optional, default: `false`)
+
+
+        The response will indicate the initial state of the package.
+
+        Some fields, such as `type` and `download_url`, are not available until processing completes.'
+      tags:
+      - Web Packages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebPackageRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WebPackageRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WebPackageRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebPackage'
+          description: ''
+  /v1/web-packages/{web_package_id}:
+    get:
+      operationId: web_packages_retrieve
+      description: 'Retrieve detailed information for a specific WebPackage in your organization.
+
+
+        The response includes all metadata,
+
+        including a signed `download_url` (valid for 1 hour) for direct package download.
+
+
+        Note: Download links may not be clickable in some API documentation browsers.
+
+        Copy and paste the URL into a new browser window if needed.'
+      parameters:
+      - in: path
+        name: web_package_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Web Packages
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebPackage'
+          description: ''
+    delete:
+      operationId: web_packages_destroy
+      description: 'Delete a WebPackage from your organization.
+
+
+        Deletion is only permitted if the WebPackage is not associated with any lessons.
+
+        If associations exist, a 400 Bad Request is returned.'
+      parameters:
+      - in: path
+        name: web_package_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Web Packages
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /v1/web-packages/{web_package_id}/lessons:
+    put:
+      operationId: web_packages_lessons_update
+      description: 'Update all lesson objects (excluding lesson content items) associated with the specified WebPackage.
+
+
+        This endpoint allows you to update lesson associations for a WebPackage.'
+      parameters:
+      - in: path
+        name: web_package_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Web Packages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebPackageUpdateLessonRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WebPackageUpdateLessonRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WebPackageUpdateLessonRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+components:
+  schemas:
+    PaginatedWebPackageSummaryList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebPackageSummary'
+    WebPackageUpdateLessonRequest:
+      type: object
+      description: 'Used when replacing an existing Web Package in all its lessons with a different Web Package
+
+
+        Inherits from WebPackageSerializer
+
+        Adds in the `replacement_web_package_id` field'
+      properties:
+        web_package_id:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: WebPackage that will replace the other in its lessons
+      required:
+      - web_package_id
+    WebPackageRequest:
+      type: object
+      description: 'Used when creating, updating or reading a single WebPackage object.
+
+
+        Inherits from WebPackageSummarySerializer.
+
+        Adds in the `download_url` field as well as the write fields.'
+      properties:
+        content_url:
+          type: string
+          format: uri
+          writeOnly: true
+          minLength: 1
+        web_package:
+          allOf:
+          - $ref: '#/components/schemas/WebPackageMetadataRequest'
+          writeOnly: true
+      required:
+      - content_url
+      - web_package
+    WebPackage:
+      type: object
+      description: 'Used when creating, updating or reading a single WebPackage object.
+
+
+        Inherits from WebPackageSummarySerializer.
+
+        Adds in the `download_url` field as well as the write fields.'
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as web_package_id within the documentation
+        type:
+          type: string
+          readOnly: true
+        download_url:
+          type: string
+          description: Access URL to download scorm package.
+          readOnly: true
+        redirect_on_completion:
+          type: boolean
+          description: Get redirect_on_completion
+          readOnly: true
+        state:
+          type: string
+          readOnly: true
+        sync_completion:
+          type: boolean
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+    WebPackageSummary:
+      type: object
+      description: 'Only used when listing WebPackages.
+
+
+        Defines the basic fields that will be returned on a WebPackage object in the API.
+
+
+        Does not include the `download_url` field as it is computationally expensive.'
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as web_package_id within the documentation
+        type:
+          type: string
+          readOnly: true
+        redirect_on_completion:
+          type: boolean
+          description: Get redirect_on_completion
+          readOnly: true
+        state:
+          type: string
+          readOnly: true
+        sync_completion:
+          type: boolean
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+    WebPackageMetadataRequest:
+      type: object
+      description: 'This defines the `web_package` section of create & update requests.
+
+
+        Used in `WebPackageSerializer`'
+      properties:
+        title:
+          type: string
+          writeOnly: true
+          minLength: 1
+        sync_completion:
+          type: boolean
+          writeOnly: true
+          default: false
+        redirect_on_completion:
+          type: boolean
+          writeOnly: true
+          default: true
+      required:
+      - title
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

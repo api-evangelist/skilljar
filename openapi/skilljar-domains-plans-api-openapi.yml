@@ -1,0 +1,177 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Plans API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Plans
+paths:
+  /v1/domains/{domain_name}/plan:
+    get:
+      operationId: domains_plan_list
+      description: "List all Plans available in the specified Domain.\n\nReturns a paginated list of Plans, including associated Offer details such as pricing\n  and registration information."
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - Domains > Plans
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPlanList'
+          description: ''
+  /v1/domains/{domain_name}/plan/{plan_id}:
+    get:
+      operationId: domains_plan_retrieve
+      description: 'Retrieve details for a specific Plan within a Domain.
+
+
+        Returns detailed information about the Plan, including its title, associated Offers, and registration URLs.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: plan_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Plans
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+          description: ''
+components:
+  schemas:
+    Plan:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as plan_id within the documentation
+        name:
+          type: string
+          maxLength: 500
+        slug:
+          type: string
+          pattern: ^[a-z0-9]+(-[a-z0-9]+)*$
+          maxLength: 100
+        plan_url:
+          type: string
+          readOnly: true
+        offer:
+          allOf:
+          - $ref: '#/components/schemas/Offer'
+          readOnly: true
+        hidden:
+          type: boolean
+          description: Hidden plans are only visible on the catalog page to associated groups
+        short_description:
+          type: string
+          nullable: true
+          maxLength: 300
+      required:
+      - hidden
+      - name
+    PaginatedPlanList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Plan'
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+          default: '0.00'
+        currency_code:
+          type: string
+          default: USD
+    Offer:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        registration_open:
+          type: boolean
+        registration_url:
+          type: string
+          readOnly: true
+          description: URL used for course registration
+        price:
+          $ref: '#/components/schemas/Price'
+      required:
+      - price
+      - registration_open
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

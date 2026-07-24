@@ -1,0 +1,374 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Published Paths > Path Items API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Published Paths > Path Items
+paths:
+  /v1/domains/{domain_name}/published-paths/{published_path_id}/path-items:
+    get:
+      operationId: domains_published_paths_path_items_list
+      description: 'List Path Items for a Published Path.
+
+
+        Returns a paginated list of Path Items, ordered as configured in the Published Path.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - in: path
+        name: published_path_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths > Path Items
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPublishedPathPathItemList'
+          description: ''
+    post:
+      operationId: domains_published_paths_path_items_create
+      description: 'Create a new Path Item in a Published Path.
+
+
+        Adds a course or learning object to the sequence of the Published Path.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: published_path_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths > Path Items
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishedPathPathItemRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PublishedPathPathItemRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PublishedPathPathItemRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishedPathPathItem'
+          description: ''
+  /v1/domains/{domain_name}/published-paths/{published_path_id}/path-items/{path_item_id}:
+    get:
+      operationId: domains_published_paths_path_items_retrieve
+      description: 'Retrieve details for a specific Path Item.
+
+
+        Returns all metadata for the Path Item, including its order and associated published course.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: path_item_id
+        schema:
+          type: string
+          pattern: ^[a-zA-Z0-9]+$
+        required: true
+      - in: path
+        name: published_path_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths > Path Items
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishedPathPathItem'
+          description: ''
+    put:
+      operationId: domains_published_paths_path_items_update
+      description: 'Update a Path Item.
+
+
+        Allows partial updates to Path Item fields, such as order or associated published course.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: path_item_id
+        schema:
+          type: string
+          pattern: ^[a-zA-Z0-9]+$
+        required: true
+      - in: path
+        name: published_path_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths > Path Items
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishedPathPathItemUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PublishedPathPathItemUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PublishedPathPathItemUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishedPathPathItemUpdate'
+          description: ''
+    patch:
+      operationId: domains_published_paths_path_items_partial_update
+      description: 'Partially update a Path Item.
+
+
+        Allows updating one or more fields of the Path Item.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: path_item_id
+        schema:
+          type: string
+          pattern: ^[a-zA-Z0-9]+$
+        required: true
+      - in: path
+        name: published_path_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths > Path Items
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPublishedPathPathItemUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPublishedPathPathItemUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPublishedPathPathItemUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishedPathPathItemUpdate'
+          description: ''
+    delete:
+      operationId: domains_published_paths_path_items_destroy
+      description: 'Delete a Path Item.
+
+
+        Removes the Path Item from the Published Path sequence.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: path_item_id
+        schema:
+          type: string
+          pattern: ^[a-zA-Z0-9]+$
+        required: true
+      - in: path
+        name: published_path_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths > Path Items
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    PublishedPathPathItemUpdateRequest:
+      type: object
+      properties:
+        order:
+          type: integer
+    PublishedPathPathItemRequest:
+      type: object
+      properties:
+        order:
+          type: integer
+        published_course:
+          $ref: '#/components/schemas/PathItemPublishedCourseSummaryRequest'
+      required:
+      - order
+      - published_course
+    PaginatedPublishedPathPathItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublishedPathPathItem'
+    PublishedPathPathItemUpdate:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        order:
+          type: integer
+        published_course:
+          allOf:
+          - $ref: '#/components/schemas/PathItemPublishedCourseSummary'
+          readOnly: true
+    PathItemPublishedCourseSummaryRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
+    PathItemPublishedCourseSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        course_id:
+          type: string
+          readOnly: true
+        slug:
+          type: string
+          readOnly: true
+          pattern: ^[-a-zA-Z0-9_]+$
+      required:
+      - id
+    PublishedPathPathItem:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        order:
+          type: integer
+        published_course:
+          $ref: '#/components/schemas/PathItemPublishedCourseSummary'
+      required:
+      - order
+      - published_course
+    PatchedPublishedPathPathItemUpdateRequest:
+      type: object
+      properties:
+        order:
+          type: integer
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

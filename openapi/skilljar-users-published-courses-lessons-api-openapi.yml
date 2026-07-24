@@ -1,0 +1,364 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Users > Published Courses > Lessons API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Users > Published Courses > Lessons
+paths:
+  /v1/users/{user_id}/published-courses/{published_course_id}/lessons:
+    get:
+      operationId: users_published_courses_lessons_list
+      description: 'List lessons with progress for a user in a published course.
+
+
+        Returns a paginated list of lessons within a published course, including the user''s progress for each lesson.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Users > Published Courses > Lessons
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUserLessonProgressList'
+          description: ''
+  /v1/users/{user_id}/published-courses/{published_course_id}/lessons/{lesson_id}:
+    get:
+      operationId: users_published_courses_lessons_retrieve
+      description: 'Retrieve lesson progress for a user.
+
+
+        Returns detailed progress information for a specific lesson within a published course for the user.'
+      parameters:
+      - in: path
+        name: lesson_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Users > Published Courses > Lessons
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserLessonProgress'
+          description: ''
+    put:
+      operationId: users_published_courses_lessons_update
+      description: 'Update lesson progress for a user.
+
+
+        PUT and PATCH are identical - both do partial updates.  To mark a lesson as complete, you only need to
+
+        set the `completed_at` within the lesson progress.'
+      parameters:
+      - in: path
+        name: lesson_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Users > Published Courses > Lessons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLessonProgressRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserLessonProgressRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserLessonProgressRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserLessonProgress'
+          description: ''
+    patch:
+      operationId: users_published_courses_lessons_partial_update
+      description: 'Partially update lesson progress for a user.
+
+
+        PUT and PATCH are identical - both do partial updates.  To mark a lesson as complete, you only need to
+
+        set the `completed_at` within the lesson progress.'
+      parameters:
+      - in: path
+        name: lesson_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: published_course_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Users > Published Courses > Lessons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUserLessonProgressRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUserLessonProgressRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUserLessonProgressRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserLessonProgress'
+          description: ''
+components:
+  schemas:
+    UserLessonProgressRequest:
+      type: object
+      properties:
+        lesson_progress:
+          $ref: '#/components/schemas/UserLessonProgressLessonProgressRequest'
+      required:
+      - lesson_progress
+    PatchedUserLessonProgressRequest:
+      type: object
+      properties:
+        lesson_progress:
+          $ref: '#/components/schemas/UserLessonProgressLessonProgressRequest'
+    UserLessonProgressLesson:
+      type: object
+      description: Lesson information within the user lesson progress endpoint.
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as lesson_id within the documentation
+        title:
+          type: string
+          readOnly: true
+    UserLessonProgressLessonProgress:
+      type: object
+      description: Lesson progress within the user lesson progress endpoint.
+      properties:
+        view_count:
+          type: integer
+          readOnly: true
+        last_viewed_on:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: Datetime at which the user completed the lesson.  If null, the user hasn't completed
+        success_status:
+          nullable: true
+          description: '''PASSED'', ''FAILED'' or null
+
+
+            * `PASSED` - Passed
+
+            * `FAILED` - Failed'
+          oneOf:
+          - $ref: '#/components/schemas/SuccessStatusEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        score:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          description: Lesson score achieved by student
+        max_score:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          description: Maximum score possible for the lesson
+        custom_data:
+          type: string
+          nullable: true
+        lesson_progress_id:
+          type: string
+    UserLessonProgressLessonProgressRequest:
+      type: object
+      description: Lesson progress within the user lesson progress endpoint.
+      properties:
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: Datetime at which the user completed the lesson.  If null, the user hasn't completed
+        success_status:
+          nullable: true
+          description: '''PASSED'', ''FAILED'' or null
+
+
+            * `PASSED` - Passed
+
+            * `FAILED` - Failed'
+          oneOf:
+          - $ref: '#/components/schemas/SuccessStatusEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        score:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          description: Lesson score achieved by student
+        max_score:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          description: Maximum score possible for the lesson
+        custom_data:
+          type: string
+          nullable: true
+        lesson_progress_id:
+          type: string
+          minLength: 1
+    PaginatedUserLessonProgressList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserLessonProgress'
+    SuccessStatusEnum:
+      enum:
+      - PASSED
+      - FAILED
+      type: string
+      description: '* `PASSED` - Passed
+
+        * `FAILED` - Failed'
+    NullEnum:
+      enum:
+      - null
+    UserLessonProgress:
+      type: object
+      properties:
+        lesson:
+          allOf:
+          - $ref: '#/components/schemas/UserLessonProgressLesson'
+          readOnly: true
+        lesson_progress:
+          $ref: '#/components/schemas/UserLessonProgressLessonProgress'
+      required:
+      - lesson_progress
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

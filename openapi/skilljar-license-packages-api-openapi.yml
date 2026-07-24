@@ -1,0 +1,387 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets License Packages API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: License Packages
+paths:
+  /v1/license-packages:
+    get:
+      operationId: license_packages_list
+      description: List license packages.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - License Packages
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLicensePackageDetailList'
+          description: ''
+    post:
+      operationId: license_packages_create
+      description: Create a new license package.
+      tags:
+      - License Packages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LicensePackageCreateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LicensePackageCreateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LicensePackageCreateRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicensePackageCreate'
+          description: ''
+  /v1/license-packages/{license_package_id}:
+    get:
+      operationId: license_packages_retrieve
+      description: Retrieve details for a specific license package.
+      parameters:
+      - in: path
+        name: license_package_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - License Packages
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicensePackageDetail'
+          description: ''
+    patch:
+      operationId: license_packages_partial_update
+      description: Update an existing license package.
+      parameters:
+      - in: path
+        name: license_package_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - License Packages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedLicensePackageUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedLicensePackageUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedLicensePackageUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicensePackageUpdate'
+          description: ''
+    delete:
+      operationId: license_packages_destroy
+      description: Delete a license package.
+      parameters:
+      - in: path
+        name: license_package_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - License Packages
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    PatchedLicensePackageUpdateRequest:
+      type: object
+      description: Serializer for the update of a license package for our public API.
+      properties:
+        tracking_id:
+          type: string
+          default: ''
+          description: Arbitrary string used for tracking a license package in an external system.
+          maxLength: 256
+        start_date:
+          type: string
+          format: date-time
+          description: Start date of a license package. Defaults to the current date
+        end_date:
+          type: string
+          format: date-time
+          nullable: true
+          description: End date of a license package (Optional).
+        offers:
+          type: array
+          items:
+            type: string
+            writeOnly: true
+          writeOnly: true
+          description: List of offer IDs included in a license package.
+        license_count:
+          type: integer
+          description: Total number of active licenses allotted to a license package.
+        name:
+          type: string
+          minLength: 1
+          description: Name of a license package.
+          maxLength: 500
+        max_unique_seats:
+          type: integer
+          nullable: true
+          description: Maximum number of unique seats that can be assigned to this license package (Optional).
+    PaginatedLicensePackageDetailList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicensePackageDetail'
+    LicensePackageCreate:
+      type: object
+      description: Serializer for the creation of license packages for our public API.
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: ID of the license package.
+        tracking_id:
+          type: string
+          default: ''
+          description: Arbitrary string used for tracking a license package in an external system.
+          maxLength: 256
+        start_date:
+          type: string
+          format: date-time
+          description: Start date of a license package. Defaults to the current date
+        end_date:
+          type: string
+          format: date-time
+          nullable: true
+          description: End date of a license package (Optional).
+        domain_id:
+          type: string
+          description: Domain ID a license package will be hosted on.
+        license_count:
+          type: integer
+          description: Total number of active licenses allotted to a license package.
+        name:
+          type: string
+          description: Name of a license package.
+          maxLength: 500
+        max_unique_seats:
+          type: integer
+          nullable: true
+          description: Maximum number of unique seats that can be assigned to this license package (Optional).
+      required:
+      - domain_id
+      - license_count
+      - name
+    LicensePackageDetail:
+      type: object
+      description: Serializer to retrieve details of a license agreement.
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 500
+        license_count:
+          type: integer
+          readOnly: true
+        tracking_id:
+          type: string
+          readOnly: true
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+          nullable: true
+        domain_id:
+          type: string
+          readOnly: true
+        license_seats_remaining:
+          type: integer
+          readOnly: true
+        offer_ids:
+          type: array
+          items:
+            type: string
+          description: List of IDs of associated offers or an empty list if none.
+          readOnly: true
+        max_unique_seats:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+      required:
+      - end_date
+      - name
+      - start_date
+    LicensePackageUpdate:
+      type: object
+      description: Serializer for the update of a license package for our public API.
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: ID of the license package.
+        tracking_id:
+          type: string
+          default: ''
+          description: Arbitrary string used for tracking a license package in an external system.
+          maxLength: 256
+        start_date:
+          type: string
+          format: date-time
+          description: Start date of a license package. Defaults to the current date
+        end_date:
+          type: string
+          format: date-time
+          nullable: true
+          description: End date of a license package (Optional).
+        license_count:
+          type: integer
+          description: Total number of active licenses allotted to a license package.
+        name:
+          type: string
+          description: Name of a license package.
+          maxLength: 500
+        max_unique_seats:
+          type: integer
+          nullable: true
+          description: Maximum number of unique seats that can be assigned to this license package (Optional).
+    LicensePackageCreateRequest:
+      type: object
+      description: Serializer for the creation of license packages for our public API.
+      properties:
+        tracking_id:
+          type: string
+          default: ''
+          description: Arbitrary string used for tracking a license package in an external system.
+          maxLength: 256
+        start_date:
+          type: string
+          format: date-time
+          description: Start date of a license package. Defaults to the current date
+        end_date:
+          type: string
+          format: date-time
+          nullable: true
+          description: End date of a license package (Optional).
+        offers:
+          type: array
+          items:
+            type: string
+            writeOnly: true
+          writeOnly: true
+          description: List of offer IDs included in a license package.
+        domain_id:
+          type: string
+          description: Domain ID a license package will be hosted on.
+        license_count:
+          type: integer
+          description: Total number of active licenses allotted to a license package.
+        name:
+          type: string
+          minLength: 1
+          description: Name of a license package.
+          maxLength: 500
+        max_unique_seats:
+          type: integer
+          nullable: true
+          description: Maximum number of unique seats that can be assigned to this license package (Optional).
+      required:
+      - domain_id
+      - license_count
+      - name
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

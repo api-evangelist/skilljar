@@ -1,0 +1,558 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Published Paths API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Published Paths
+paths:
+  /v1/domains/{domain_name}/published-paths:
+    get:
+      operationId: domains_published_paths_list
+      description: 'List all Published Paths for the specified domain.
+
+
+        Returns a paginated list of Published Paths available on the domain. Supports filtering and search.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: query
+        name: include_searchable_content
+        schema:
+          type: boolean
+        description: If set to True, the response also includes the following fields ('path_item_list', 'title', 'short_description', 'long_description_html', 'search_keywords' 'tags', 'hidden')
+      - in: query
+        name: label__name
+        schema:
+          type: string
+        description: Filters published paths by exact match on label name
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: URL encoded string, return the results and the order as if a catalog search. Note - This does not search within the path_item_list.
+      tags:
+      - Domains > Published Paths
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPublishedPathList'
+          description: ''
+    post:
+      operationId: domains_published_paths_create
+      description: 'Create a new Published Path and its associated Path object.
+
+
+        The created Published Path will have a default Offer attached.
+
+        Required and optional fields for the Path object are documented in the schema.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishedPathRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PublishedPathRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PublishedPathRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishedPath'
+          description: ''
+  /v1/domains/{domain_name}/published-paths/{published_path_id}:
+    get:
+      operationId: domains_published_paths_retrieve
+      description: 'Retrieve details for a specific Published Path.
+
+
+        Returns all metadata and configuration for the Published Path, including associated offers and path details.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: published_path_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishedPath'
+          description: ''
+    put:
+      operationId: domains_published_paths_update
+      description: 'Update a Published Path.
+
+
+        Allows partial updates to Published Path fields, such as the slug. Both PUT and PATCH perform partial updates.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: published_path_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePublishedPathRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdatePublishedPathRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UpdatePublishedPathRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePublishedPath'
+          description: ''
+    patch:
+      operationId: domains_published_paths_partial_update
+      description: 'Partially update a Published Path.
+
+
+        Allows updating one or more fields of the Published Path, such as the slug.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: published_path_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdatePublishedPathRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdatePublishedPathRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdatePublishedPathRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePublishedPath'
+          description: ''
+    delete:
+      operationId: domains_published_paths_destroy
+      description: 'Delete a Published Path.
+
+
+        Removes the Published Path and its associated course series from the domain.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: published_path_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Published Paths
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    UpdatePublishedPathRequest:
+      type: object
+      description: Serializer for updating PublishedPath instances
+      properties:
+        slug:
+          type: string
+          minLength: 1
+          description: After your Learning Path has been published, we don't recommend changing the URL
+          pattern: ^[a-z0-9]+(-[a-z0-9]+)*$
+          maxLength: 100
+        hidden:
+          type: boolean
+          description: Hidden paths are only visible on the catalog page to associated groups
+        strict_enforce_group_visibility:
+          type: boolean
+          description: Block access to this path for student it's not visible to
+        unique_progress_per_enrollment:
+          type: boolean
+          description: When enabled, each new enrollment creates a fresh progress record.
+      required:
+      - slug
+    PublishedPath:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        slug:
+          type: string
+          description: After your Learning Path has been published, we don't recommend changing the URL
+          pattern: ^[a-z0-9]+(-[a-z0-9]+)*$
+          maxLength: 100
+        path:
+          $ref: '#/components/schemas/CreatePath'
+        path_url:
+          type: string
+          readOnly: true
+        hidden:
+          type: boolean
+          description: Hidden paths are only visible on the catalog page to associated groups
+        strict_enforce_group_visibility:
+          type: boolean
+          description: Block access to this path for student it's not visible to
+        offer:
+          allOf:
+          - $ref: '#/components/schemas/Offer'
+          readOnly: true
+        unique_progress_per_enrollment:
+          type: boolean
+          description: When enabled, each new enrollment creates a fresh progress record.
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        modified_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - path
+      - slug
+    Offer:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        registration_open:
+          type: boolean
+        registration_url:
+          type: string
+          readOnly: true
+          description: URL used for course registration
+        price:
+          $ref: '#/components/schemas/Price'
+      required:
+      - price
+      - registration_open
+    UpdatePublishedPath:
+      type: object
+      description: Serializer for updating PublishedPath instances
+      properties:
+        id:
+          type: string
+          readOnly: true
+        slug:
+          type: string
+          description: After your Learning Path has been published, we don't recommend changing the URL
+          pattern: ^[a-z0-9]+(-[a-z0-9]+)*$
+          maxLength: 100
+        path:
+          allOf:
+          - $ref: '#/components/schemas/Path'
+          readOnly: true
+        path_url:
+          type: string
+          readOnly: true
+        hidden:
+          type: boolean
+          description: Hidden paths are only visible on the catalog page to associated groups
+        strict_enforce_group_visibility:
+          type: boolean
+          description: Block access to this path for student it's not visible to
+        offer:
+          allOf:
+          - $ref: '#/components/schemas/Offer'
+          readOnly: true
+        unique_progress_per_enrollment:
+          type: boolean
+          description: When enabled, each new enrollment creates a fresh progress record.
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        modified_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - slug
+    PublishedPathRequest:
+      type: object
+      properties:
+        slug:
+          type: string
+          minLength: 1
+          description: After your Learning Path has been published, we don't recommend changing the URL
+          pattern: ^[a-z0-9]+(-[a-z0-9]+)*$
+          maxLength: 100
+        path:
+          $ref: '#/components/schemas/CreatePathRequest'
+        hidden:
+          type: boolean
+          description: Hidden paths are only visible on the catalog page to associated groups
+        strict_enforce_group_visibility:
+          type: boolean
+          description: Block access to this path for student it's not visible to
+        unique_progress_per_enrollment:
+          type: boolean
+          description: When enabled, each new enrollment creates a fresh progress record.
+      required:
+      - path
+      - slug
+    PatchedUpdatePublishedPathRequest:
+      type: object
+      description: Serializer for updating PublishedPath instances
+      properties:
+        slug:
+          type: string
+          minLength: 1
+          description: After your Learning Path has been published, we don't recommend changing the URL
+          pattern: ^[a-z0-9]+(-[a-z0-9]+)*$
+          maxLength: 100
+        hidden:
+          type: boolean
+          description: Hidden paths are only visible on the catalog page to associated groups
+        strict_enforce_group_visibility:
+          type: boolean
+          description: Block access to this path for student it's not visible to
+        unique_progress_per_enrollment:
+          type: boolean
+          description: When enabled, each new enrollment creates a fresh progress record.
+    PaginatedPublishedPathList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublishedPath'
+    CreatePathRequest:
+      type: object
+      description: Serializer to create a new Path when publishing one to a domain. Only title is required.
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 500
+        short_description:
+          type: string
+          maxLength: 300
+        long_description_html:
+          type: string
+          maxLength: 100000
+        header_html:
+          type: string
+          maxLength: 100000
+        course_name_singular:
+          type: string
+          minLength: 1
+          description: 'Text to replace the word ''course'' on the catalog tile for this learning path. For example: ''1 course'''
+          maxLength: 50
+        course_name_plural:
+          type: string
+          minLength: 1
+          description: 'Text to replace the word ''courses'' on the catalog tile for this learning path. For example: ''3 courses'''
+          maxLength: 50
+      required:
+      - title
+    CreatePath:
+      type: object
+      description: Serializer to create a new Path when publishing one to a domain. Only title is required.
+      properties:
+        id:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          maxLength: 500
+        promo_image_url:
+          type: string
+          description: The URL to the promo image of the course
+          readOnly: true
+        short_description:
+          type: string
+          maxLength: 300
+        long_description_html:
+          type: string
+          maxLength: 100000
+        header_html:
+          type: string
+          maxLength: 100000
+        course_name_singular:
+          type: string
+          description: 'Text to replace the word ''course'' on the catalog tile for this learning path. For example: ''1 course'''
+          maxLength: 50
+        course_name_plural:
+          type: string
+          description: 'Text to replace the word ''courses'' on the catalog tile for this learning path. For example: ''3 courses'''
+          maxLength: 50
+        path_item_count:
+          type: integer
+          readOnly: true
+      required:
+      - title
+    Path:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          maxLength: 500
+        promo_image_url:
+          type: string
+          description: The URL to the promo image of the course
+          readOnly: true
+        short_description:
+          type: string
+          maxLength: 300
+        long_description_html:
+          type: string
+          maxLength: 100000
+        header_html:
+          type: string
+          maxLength: 100000
+        course_name_singular:
+          type: string
+          description: 'Text to replace the word ''course'' on the catalog tile for this learning path. For example: ''1 course'''
+          maxLength: 50
+        course_name_plural:
+          type: string
+          description: 'Text to replace the word ''courses'' on the catalog tile for this learning path. For example: ''3 courses'''
+          maxLength: 50
+        path_item_count:
+          type: integer
+          readOnly: true
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+          default: '0.00'
+        currency_code:
+          type: string
+          default: USD
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

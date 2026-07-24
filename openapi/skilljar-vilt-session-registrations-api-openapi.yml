@@ -1,0 +1,396 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets VILT > Session Registrations API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: VILT > Session Registrations
+paths:
+  /v1/vilt-session-registrations:
+    get:
+      operationId: vilt_session_registrations_list
+      description: 'Retrieve a paginated list of VILT session registrations.
+
+
+        Returns a list of registrations for VILT sessions, filtered by session if specified.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: session__id
+        schema:
+          type: string
+        description: Filter results by the id of a ViltSession
+      tags:
+      - VILT > Session Registrations
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedViltSessionRegistrationListItemList'
+          description: ''
+    post:
+      operationId: vilt_session_registrations_create
+      description: 'Register a user for a VILT session.
+
+
+        The user must have an existing enrollment before registration. Returns the created registration details.'
+      tags:
+      - VILT > Session Registrations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ViltSessionRegistrationDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ViltSessionRegistrationDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ViltSessionRegistrationDetailRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViltSessionRegistrationDetail'
+          description: ''
+  /v1/vilt-session-registrations/{vilt_session_registration_id}:
+    get:
+      operationId: vilt_session_registrations_retrieve
+      description: Retrieve details for a specific VILT session registration.
+      parameters:
+      - in: path
+        name: vilt_session_registration_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - VILT > Session Registrations
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViltSessionRegistrationDetail'
+          description: ''
+    put:
+      operationId: vilt_session_registrations_update
+      description: 'Update attendance for a VILT session registration.
+
+
+        Only the attendance status may be changed. Both PATCH and PUT perform partial updates.'
+      parameters:
+      - in: path
+        name: vilt_session_registration_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - VILT > Session Registrations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ViltSessionRegistrationUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ViltSessionRegistrationUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ViltSessionRegistrationUpdateRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViltSessionRegistrationUpdate'
+          description: ''
+    patch:
+      operationId: vilt_session_registrations_partial_update
+      description: 'Update attendance for a VILT session registration.
+
+
+        Only the attendance status may be changed. Both PATCH and PUT perform partial updates.'
+      parameters:
+      - in: path
+        name: vilt_session_registration_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - VILT > Session Registrations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedViltSessionRegistrationUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedViltSessionRegistrationUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedViltSessionRegistrationUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViltSessionRegistrationUpdate'
+          description: ''
+    delete:
+      operationId: vilt_session_registrations_destroy
+      description: 'Delete a VILT session registration.
+
+
+        Removes the registration and marks the student as unattended for the session event.
+
+
+        This action cannot be undone.'
+      parameters:
+      - in: path
+        name: vilt_session_registration_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - VILT > Session Registrations
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    ReadOnlyViltSession:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Known as session_id within the documentation
+      required:
+      - id
+    PatchedViltSessionRegistrationUpdateRequest:
+      type: object
+      properties:
+        attended:
+          type: boolean
+    ViltSessionRegistrationListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as vilt_session_registration_id within the documentation
+        attended:
+          type: boolean
+          readOnly: true
+        vilt_session:
+          $ref: '#/components/schemas/ReadOnlyViltSession'
+        user:
+          allOf:
+          - $ref: '#/components/schemas/User'
+          readOnly: true
+      required:
+      - vilt_session
+    ViltSessionRegistrationDetailRequest:
+      type: object
+      properties:
+        vilt_session:
+          $ref: '#/components/schemas/ReadOnlyViltSessionRequest'
+        enrollment_id:
+          type: string
+          writeOnly: true
+          minLength: 1
+    CourseListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as course_id within the documentation
+        title:
+          type: string
+          readOnly: true
+          description: Course title
+    ReadOnlyViltSessionRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Known as session_id within the documentation
+      required:
+      - id
+    ViltSessionRegistrationDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as vilt_session_registration_id within the documentation
+        attended:
+          type: boolean
+          readOnly: true
+        vilt_session:
+          $ref: '#/components/schemas/ReadOnlyViltSession'
+        student_lesson_progress:
+          allOf:
+          - $ref: '#/components/schemas/StudentLessonProgressCourseItem'
+          readOnly: true
+    ViltSessionRegistrationUpdate:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as vilt_session_registration_id within the documentation
+        attended:
+          type: boolean
+      required:
+      - attended
+    User:
+      type: object
+      description: 'Version of the user serializer configured to lookup a user given the user''s email.  If a user with this email does
+
+        not yet exist, it will create a new User with given email, first_name and last_name parameters.'
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          title: Email address
+          description: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          description: First name
+          maxLength: 50
+        last_name:
+          type: string
+          description: Last name
+          maxLength: 50
+        full_name:
+          type: string
+          readOnly: true
+      required:
+      - email
+    ViltSessionRegistrationUpdateRequest:
+      type: object
+      properties:
+        attended:
+          type: boolean
+      required:
+      - attended
+    PaginatedViltSessionRegistrationListItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ViltSessionRegistrationListItem'
+    StudentLessonProgressCourseItem:
+      type: object
+      properties:
+        id:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+        lesson:
+          $ref: '#/components/schemas/LessonCourseListItem'
+      required:
+      - id
+      - lesson
+      - user
+    LessonCourseListItem:
+      type: object
+      description: Lesson information within the user lesson progress endpoint.
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as lesson_id within the documentation
+        title:
+          type: string
+          readOnly: true
+        course:
+          $ref: '#/components/schemas/CourseListItem'
+      required:
+      - course
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,245 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Catalog Pages (Builder) > Component Content Block API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Catalog Pages (Builder) > Component Content Block
+paths:
+  /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/component-content-blocks/{id}:
+    get:
+      operationId: domains_catalog_pages_component_content_blocks_retrieve
+      description: Retrieve details of the specified content block on the specified builder catalog page
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages (Builder) > Component Content Block
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComponentContentBlock'
+          description: ''
+    put:
+      operationId: domains_catalog_pages_component_content_blocks_update
+      description: Updates content for a specified content block on a specified builder catalog page
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages (Builder) > Component Content Block
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComponentContentBlockRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ComponentContentBlockRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ComponentContentBlockRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComponentContentBlock'
+          description: ''
+    patch:
+      operationId: domains_catalog_pages_component_content_blocks_partial_update
+      description: Updates content for a specified content block on a specified builder catalog page
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages (Builder) > Component Content Block
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedComponentContentBlockRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedComponentContentBlockRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedComponentContentBlockRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComponentContentBlock'
+          description: ''
+components:
+  schemas:
+    AlignmentEnum:
+      enum:
+      - left
+      - center
+      - right
+      type: string
+      description: '* `left` - Left
+
+        * `center` - Center
+
+        * `right` - Right'
+    ComponentContentBlock:
+      type: object
+      description: Serializer flattening selected settings fields onto the root representation.
+      properties:
+        id:
+          type: string
+          readOnly: true
+        component:
+          $ref: '#/components/schemas/ComponentEnum'
+        header_text:
+          type: string
+        header_sub_text:
+          type: string
+        include_profile_link:
+          type: boolean
+          default: true
+        max_tiles:
+          type: integer
+          minimum: 1
+          default: 4
+        alignment:
+          $ref: '#/components/schemas/AlignmentEnum'
+      required:
+      - component
+    ComponentEnum:
+      enum:
+      - in_progress_content
+      - federated_search
+      type: string
+      description: '* `in_progress_content` - In Progress Content
+
+        * `federated_search` - Federated Search'
+    PatchedComponentContentBlockRequest:
+      type: object
+      description: Serializer flattening selected settings fields onto the root representation.
+      properties:
+        component:
+          $ref: '#/components/schemas/ComponentEnum'
+        header_text:
+          type: string
+        header_sub_text:
+          type: string
+        include_profile_link:
+          type: boolean
+          default: true
+        max_tiles:
+          type: integer
+          minimum: 1
+          default: 4
+        alignment:
+          $ref: '#/components/schemas/AlignmentEnum'
+    ComponentContentBlockRequest:
+      type: object
+      description: Serializer flattening selected settings fields onto the root representation.
+      properties:
+        component:
+          $ref: '#/components/schemas/ComponentEnum'
+        header_text:
+          type: string
+        header_sub_text:
+          type: string
+        include_profile_link:
+          type: boolean
+          default: true
+        max_tiles:
+          type: integer
+          minimum: 1
+          default: 4
+        alignment:
+          $ref: '#/components/schemas/AlignmentEnum'
+      required:
+      - component
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

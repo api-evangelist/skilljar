@@ -1,0 +1,811 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Webhooks API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Webhooks
+paths:
+  /v1/webhooks:
+    get:
+      operationId: webhooks_list
+      description: 'List all webhooks for your organization.
+
+
+        Returns a paginated list of webhooks, including their configuration and status.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - Webhooks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedWebHookList'
+          description: ''
+    post:
+      operationId: webhooks_create
+      description: 'Create a new webhook for your organization.
+
+
+        Register a webhook to receive HTTP POST notifications when specified events occur in your Skilljar organization.
+
+        You may specify a particular event type or leave it blank to receive all event types.
+
+
+        - If "event_type" is null, all event types will be sent to the URL.
+
+        - If "event_type" is set, only events matching that type will be sent.
+
+        - If multiple webhooks are created with the same URL and qualify for an event, the event will be sent to the
+
+        URL only once.'
+      tags:
+      - Webhooks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebHookRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WebHookRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WebHookRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebHook'
+          description: ''
+  /v1/webhooks/{webhook_id}:
+    get:
+      operationId: webhooks_retrieve
+      description: 'Retrieve details for a specific webhook.
+
+
+        Returns the configuration and status of the webhook, including its
+
+        target URL, event type, and activation status.'
+      parameters:
+      - in: path
+        name: webhook_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Webhooks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebHook'
+          description: ''
+    put:
+      operationId: webhooks_update
+      description: 'Update an existing webhook.
+
+
+        Allows you to modify the webhook''s configuration, such as the target URL or event type.'
+      parameters:
+      - in: path
+        name: webhook_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Webhooks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebHookRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WebHookRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WebHookRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebHook'
+          description: ''
+    patch:
+      operationId: webhooks_partial_update
+      description: 'Partially update an existing webhook.
+
+
+        Allows you to update one or more fields of the webhook without modifying the entire object.'
+      parameters:
+      - in: path
+        name: webhook_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Webhooks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedWebHookRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedWebHookRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedWebHookRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebHook'
+          description: ''
+    delete:
+      operationId: webhooks_destroy
+      description: 'Delete a webhook.
+
+
+        Permanently removes the webhook and stops sending event notifications to its target URL.'
+      parameters:
+      - in: path
+        name: webhook_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Webhooks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /v1/webhooks/{webhook_id}/ping:
+    post:
+      operationId: webhooks_ping_create
+      description: 'Send a test HTTP POST event of type PING to a webhook.
+
+
+        Allows you to verify that your webhook endpoint is reachable and correctly configured.
+
+        A failed ping will not deactivate the webhook and no retries are attempted.'
+      summary: Ping Webhook
+      parameters:
+      - in: path
+        name: webhook_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Webhooks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  succeeded:
+                    type: boolean
+                  http_status_code:
+                    type: integer
+                  message:
+                    type: string
+          description: ''
+        '404':
+          description: No response body
+  /v1/webhooks/sample-course-completion:
+    get:
+      operationId: webhooks_sample_course_completion_retrieve
+      description: 'Retrieve a sample course completion event.
+
+
+        Returns a single-item list containing either the most recent course completion event for your organization,
+
+        or a generated sample event if no completions exist.
+
+
+        This API is used internally to generate sample data; the body of an actual webhook notification will be a
+
+        single JSON event that is NOT contained within a list.'
+      summary: Sample Course Completion Event
+      tags:
+      - Webhooks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+          description: ''
+  /v1/webhooks/sample-course-enrollment:
+    get:
+      operationId: webhooks_sample_course_enrollment_retrieve
+      description: 'Retrieve a sample course enrollment event.
+
+
+        Returns a single-item list containing either the most recent course enrollment event for your organization,
+
+        or a generated sample event if no enrollments exist.
+
+
+        This API is used internally to generate sample data; the body of an actual webhook notification will be a
+
+        single JSON event that is NOT contained within a list.'
+      summary: Sample Course Enrollment Event
+      tags:
+      - Webhooks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+          description: ''
+  /v1/webhooks/sample-dashboard-task-created:
+    get:
+      operationId: webhooks_sample_dashboard_task_created_retrieve
+      description: 'Retrieve a sample dashboard task created event.
+
+
+        Returns a single-item list containing either the most recent dashboard task created event for your organization,
+
+        or a generated sample event if no tasks exist.
+
+
+        This API is used internally to generate sample data; the body of an actual webhook notification will be a
+
+        single JSON event that is NOT contained within a list.'
+      summary: Sample Dashboard Task Created Event
+      tags:
+      - Webhooks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+          description: ''
+  /v1/webhooks/sample-domain-enrollment:
+    get:
+      operationId: webhooks_sample_domain_enrollment_retrieve
+      description: 'Retrieve a sample domain enrollment event.
+
+
+        Returns a single-item list containing either the most recent domain enrollment event (if available and valid),
+
+        or a generated sample event.
+
+
+        This API is used internally to generate sample data; the body of an actual webhook notification will be a
+
+        single JSON event that is NOT contained within a list.'
+      summary: Sample Domain Enrollment Event
+      tags:
+      - Webhooks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+          description: ''
+  /v1/webhooks/sample-lesson-completion:
+    get:
+      operationId: webhooks_sample_lesson_completion_retrieve
+      description: 'Retrieve a sample lesson completion event.
+
+
+        Returns a single-item list containing either the most recent lesson completion event for your organization,
+
+        or a generated sample event if no completions exist.
+
+
+        This API is used internally to generate sample data; the body of an actual webhook notification will be a
+
+        single JSON event that is NOT contained within a list.'
+      summary: Sample Lesson Completion Event
+      tags:
+      - Webhooks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+          description: ''
+  /v1/webhooks/sample-path-completion:
+    get:
+      operationId: webhooks_sample_path_completion_retrieve
+      description: 'Retrieve a sample path completion event.
+
+
+        Returns a single-item list containing either the most recent path completion event for your organization,
+
+        or a generated sample event if no completions exist.
+
+
+        This API is used internally to generate sample data; the body of an actual webhook notification will be a
+
+        single JSON event that is NOT contained within a list.'
+      summary: Sample Path Completion Event
+      tags:
+      - Webhooks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+          description: ''
+  /v1/webhooks/sample-path-enrollment:
+    get:
+      operationId: webhooks_sample_path_enrollment_retrieve
+      description: 'Retrieve a sample path enrollment event.
+
+
+        Returns a single-item list containing either the most recent path enrollment event for your organization,
+
+        or a generated sample event if no enrollments exist.
+
+
+        This API is used internally to generate sample data; the body of an actual webhook notification will be a
+
+        single JSON event that is NOT contained within a list.'
+      summary: Sample Path Enrollment Event
+      tags:
+      - Webhooks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+          description: ''
+  /v1/webhooks/sample-purchase-fulfillment:
+    get:
+      operationId: webhooks_sample_purchase_fulfillment_retrieve
+      description: 'Retrieve a sample purchase fulfillment event.
+
+
+        Returns a single-item list containing either the most recent purchase fulfillment event for your organization,
+
+        or a generated sample event if no purchase fulfillments exist.
+
+
+        This API is used internally to generate sample data; the body of an actual webhook notification will be a
+
+        single JSON event that is NOT contained within a list.'
+      summary: Sample Purchase Fulfillment Event
+      tags:
+      - Webhooks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+          description: ''
+  /v1/webhooks/sample-quiz-completion:
+    get:
+      operationId: webhooks_sample_quiz_completion_retrieve
+      description: 'Retrieve a sample quiz completion event.
+
+
+        Returns a single-item list containing either the most recent quiz completion event for your organization,
+
+        or a generated sample event if no completions exist.
+
+
+        This API is used internally to generate sample data; the body of an actual webhook notification will be a
+
+        single JSON event that is NOT contained within a list.'
+      summary: Sample Quiz Completion Event
+      tags:
+      - Webhooks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+          description: ''
+  /v1/webhooks/sample-vilt-registration:
+    get:
+      operationId: webhooks_sample_vilt_registration_retrieve
+      description: 'Retrieve a sample VILT event registration event.
+
+
+        Returns a single-item list containing either the most recent VILT event registration for your organization,
+
+        or a generated sample event if no registrations exist.
+
+
+        This API is used internally to generate sample data; the body of an actual webhook notification will be a
+
+        single JSON event that is NOT contained within a list.'
+      summary: Sample VILT Event Registration Event
+      tags:
+      - Webhooks
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+          description: ''
+components:
+  schemas:
+    DeactivateReasonEnum:
+      enum:
+      - HTTP_4XX_RESPONSE
+      - RETRY_COUNT
+      - TOO_MANY_REDIRECTS
+      - ORG_DISABLED
+      type: string
+      description: '* `HTTP_4XX_RESPONSE` - HTTP_4XX_RESPONSE
+
+        * `RETRY_COUNT` - RETRY_COUNT
+
+        * `TOO_MANY_REDIRECTS` - TOO_MANY_REDIRECTS
+
+        * `ORG_DISABLED` - ORG_DISABLED'
+    PatchedWebHookRequest:
+      type: object
+      properties:
+        target_url:
+          type: string
+          format: uri
+          minLength: 1
+          maxLength: 1024
+        active:
+          type: boolean
+          default: true
+        event_type:
+          nullable: true
+          description: '''COURSE_COMPLETION'', ''COURSE_ENROLLMENT'', ''DOMAIN_ENROLLMENT'', ''LESSON_COMPLETION'', ''PATH_COMPLETION'', ''PATH_ENROLLMENT'', ''PURCHASE_FULFILLMENT'', ''QUIZ_COMPLETION'', ''VILT_EVENT_REGISTRATION'', ''DASHBOARD_TASK_CREATED'', or null. If null, all events, regardless of type, will be sent to the webhook URL.
+
+
+            * `COURSE_COMPLETION` - Course Completion
+
+            * `COURSE_ENROLLMENT` - Course Enrollment
+
+            * `DOMAIN_ENROLLMENT` - Domain Enrollment
+
+            * `LESSON_COMPLETION` - Lesson Completion
+
+            * `PATH_COMPLETION` - Path Completion
+
+            * `PATH_ENROLLMENT` - Path Enrollment
+
+            * `PURCHASE_FULFILLMENT` - Purchase Fulfillment
+
+            * `QUIZ_COMPLETION` - Quiz Completion
+
+            * `VILT_EVENT_REGISTRATION` - VILT Event Registration
+
+            * `DASHBOARD_TASK_CREATED` - Dashboard Task Created'
+          oneOf:
+          - $ref: '#/components/schemas/EventTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        basic_auth_username:
+          type: string
+          default: ''
+          description: When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the username.
+        basic_auth_password:
+          type: string
+          default: ''
+          description: When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the password.
+        additional_headers:
+          description: Dictionary of string values to include as additional HTTP headers in the webhook request. Key pairs included in this JSON dictionary will be added as individual HTTP headers to all webhook POST requests. Use double quotes for keys and values
+    PaginatedWebHookList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebHook'
+    NullEnum:
+      enum:
+      - null
+    WebHook:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        target_url:
+          type: string
+          format: uri
+          maxLength: 1024
+        active:
+          type: boolean
+          default: true
+        deactivate_reason:
+          readOnly: true
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/DeactivateReasonEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        event_type:
+          nullable: true
+          description: '''COURSE_COMPLETION'', ''COURSE_ENROLLMENT'', ''DOMAIN_ENROLLMENT'', ''LESSON_COMPLETION'', ''PATH_COMPLETION'', ''PATH_ENROLLMENT'', ''PURCHASE_FULFILLMENT'', ''QUIZ_COMPLETION'', ''VILT_EVENT_REGISTRATION'', ''DASHBOARD_TASK_CREATED'', or null. If null, all events, regardless of type, will be sent to the webhook URL.
+
+
+            * `COURSE_COMPLETION` - Course Completion
+
+            * `COURSE_ENROLLMENT` - Course Enrollment
+
+            * `DOMAIN_ENROLLMENT` - Domain Enrollment
+
+            * `LESSON_COMPLETION` - Lesson Completion
+
+            * `PATH_COMPLETION` - Path Completion
+
+            * `PATH_ENROLLMENT` - Path Enrollment
+
+            * `PURCHASE_FULFILLMENT` - Purchase Fulfillment
+
+            * `QUIZ_COMPLETION` - Quiz Completion
+
+            * `VILT_EVENT_REGISTRATION` - VILT Event Registration
+
+            * `DASHBOARD_TASK_CREATED` - Dashboard Task Created'
+          oneOf:
+          - $ref: '#/components/schemas/EventTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        basic_auth_username:
+          type: string
+          default: ''
+          description: When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the username.
+        basic_auth_password:
+          type: string
+          default: ''
+          description: When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the password.
+        additional_headers:
+          description: Dictionary of string values to include as additional HTTP headers in the webhook request. Key pairs included in this JSON dictionary will be added as individual HTTP headers to all webhook POST requests. Use double quotes for keys and values
+      required:
+      - target_url
+    EventTypeEnum:
+      enum:
+      - COURSE_COMPLETION
+      - COURSE_ENROLLMENT
+      - DOMAIN_ENROLLMENT
+      - LESSON_COMPLETION
+      - PATH_COMPLETION
+      - PATH_ENROLLMENT
+      - PURCHASE_FULFILLMENT
+      - QUIZ_COMPLETION
+      - VILT_EVENT_REGISTRATION
+      - DASHBOARD_TASK_CREATED
+      type: string
+      description: '* `COURSE_COMPLETION` - Course Completion
+
+        * `COURSE_ENROLLMENT` - Course Enrollment
+
+        * `DOMAIN_ENROLLMENT` - Domain Enrollment
+
+        * `LESSON_COMPLETION` - Lesson Completion
+
+        * `PATH_COMPLETION` - Path Completion
+
+        * `PATH_ENROLLMENT` - Path Enrollment
+
+        * `PURCHASE_FULFILLMENT` - Purchase Fulfillment
+
+        * `QUIZ_COMPLETION` - Quiz Completion
+
+        * `VILT_EVENT_REGISTRATION` - VILT Event Registration
+
+        * `DASHBOARD_TASK_CREATED` - Dashboard Task Created'
+    WebHookRequest:
+      type: object
+      properties:
+        target_url:
+          type: string
+          format: uri
+          minLength: 1
+          maxLength: 1024
+        active:
+          type: boolean
+          default: true
+        event_type:
+          nullable: true
+          description: '''COURSE_COMPLETION'', ''COURSE_ENROLLMENT'', ''DOMAIN_ENROLLMENT'', ''LESSON_COMPLETION'', ''PATH_COMPLETION'', ''PATH_ENROLLMENT'', ''PURCHASE_FULFILLMENT'', ''QUIZ_COMPLETION'', ''VILT_EVENT_REGISTRATION'', ''DASHBOARD_TASK_CREATED'', or null. If null, all events, regardless of type, will be sent to the webhook URL.
+
+
+            * `COURSE_COMPLETION` - Course Completion
+
+            * `COURSE_ENROLLMENT` - Course Enrollment
+
+            * `DOMAIN_ENROLLMENT` - Domain Enrollment
+
+            * `LESSON_COMPLETION` - Lesson Completion
+
+            * `PATH_COMPLETION` - Path Completion
+
+            * `PATH_ENROLLMENT` - Path Enrollment
+
+            * `PURCHASE_FULFILLMENT` - Purchase Fulfillment
+
+            * `QUIZ_COMPLETION` - Quiz Completion
+
+            * `VILT_EVENT_REGISTRATION` - VILT Event Registration
+
+            * `DASHBOARD_TASK_CREATED` - Dashboard Task Created'
+          oneOf:
+          - $ref: '#/components/schemas/EventTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        basic_auth_username:
+          type: string
+          default: ''
+          description: When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the username.
+        basic_auth_password:
+          type: string
+          default: ''
+          description: When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the password.
+        additional_headers:
+          description: Dictionary of string values to include as additional HTTP headers in the webhook request. Key pairs included in this JSON dictionary will be added as individual HTTP headers to all webhook POST requests. Use double quotes for keys and values
+      required:
+      - target_url
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

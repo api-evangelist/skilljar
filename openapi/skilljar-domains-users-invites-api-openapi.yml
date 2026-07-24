@@ -1,0 +1,211 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Users > Invites API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Users > Invites
+paths:
+  /v1/domains/{domain_name}/users/{user_id}/invites:
+    get:
+      operationId: domains_users_invites_list
+      description: 'Retrieve a list of all invitations for a specific user within a domain.
+
+
+        Returns all invitations that have been created for the user in the specified domain, ordered by creation date.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Users > Invites
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDomainUserInviteList'
+          description: ''
+    post:
+      operationId: domains_users_invites_create
+      description: 'Create a new invitation for a user to join a domain.
+
+
+        Sends an invitation email to the user unless `send_email` is set to `False`.
+
+        The user must already be a member of the domain before an invitation can be created.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Users > Invites
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainUserInviteRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DomainUserInviteRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DomainUserInviteRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainUserInvite'
+          description: ''
+  /v1/domains/{domain_name}/users/{user_id}/invites/{domain_user_invite_id}:
+    get:
+      operationId: domains_users_invites_retrieve
+      description: 'Retrieve details for a specific domain user invitation.
+
+
+        Provides detailed information about a single invitation sent to a user for domain membership.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_user_invite_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Users > Invites
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainUserInvite'
+          description: ''
+components:
+  schemas:
+    PaginatedDomainUserInviteList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DomainUserInvite'
+    DomainUserInvite:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        token:
+          type: string
+          readOnly: true
+        sent_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+          description: When the invite email was sent to the student.
+        used_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+          description: When the invite was clicked on by the student.
+        invite_url:
+          type: string
+          readOnly: true
+    DomainUserInviteRequest:
+      type: object
+      properties:
+        send_email:
+          type: boolean
+          writeOnly: true
+          default: true
+          description: Whether or not to send the user an email inviting them to the domain. Defaults to True
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

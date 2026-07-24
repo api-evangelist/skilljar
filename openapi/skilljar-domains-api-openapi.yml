@@ -1,0 +1,486 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains
+paths:
+  /v1/domains:
+    get:
+      operationId: domains_list
+      description: "List all domains.\n\nReturns a paginated list of domains for your organization,\n  including their names, access settings, and catalog titles."
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - Domains
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDomainList'
+          description: ''
+  /v1/domains/{domain_name}:
+    get:
+      operationId: domains_retrieve
+      description: "Retrieve a domain.\n\nReturns details for a specific domain,\n  including its name, catalog title, access settings, and marketing messages."
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain'
+          description: ''
+    put:
+      operationId: domains_update
+      description: 'Update a domain.
+
+
+        Allows updating one or more fields of a domain. Both PUT and PATCH requests perform partial updates.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DomainRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DomainRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain'
+          description: ''
+    patch:
+      operationId: domains_partial_update
+      description: 'Partially update a domain.
+
+
+        Allows updating specific fields of a domain.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDomainRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDomainRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDomainRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain'
+          description: ''
+  /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/visibility-overrides:
+    get:
+      operationId: domains_catalog_pages_visibility_overrides_list
+      description: List Student Group visibility overrides for a given Catalog Page.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - Domains
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCatalogPageGroupVisibilityList'
+          description: ''
+    post:
+      operationId: domains_catalog_pages_visibility_overrides_create
+      description: Create a Student Group visibility override for a Catalog Page.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogPageGroupVisibilityRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CatalogPageGroupVisibilityRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CatalogPageGroupVisibilityRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogPageGroupVisibility'
+          description: ''
+  /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/visibility-overrides/{student_group_id}:
+    get:
+      operationId: domains_catalog_pages_visibility_overrides_retrieve
+      description: 'Retrieve Student Group visibility override for Catalog Page.
+
+
+        Returns Student Group information and visibility status.'
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: student_group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogPageGroupVisibility'
+          description: ''
+    delete:
+      operationId: domains_catalog_pages_visibility_overrides_destroy
+      description: Deletes a Student Group visibility override for a Catalog Page and returns a `204` response.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: student_group_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    AccessEnum:
+      enum:
+      - PUBLIC
+      - PRIVATE
+      - PRIVATE_CODE
+      type: string
+      description: '* `PUBLIC` - Public: catalog is visible to anyone.
+
+        * `PRIVATE` - Login required: catalog is visible once the user signs up.
+
+        * `PRIVATE_CODE` - Access code required: catalog is visible once the user signs up with an access code.'
+    Domain:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        catalog_title:
+          type: string
+          description: HTML content displayed at the top of the catalog page
+        private:
+          type: boolean
+          readOnly: true
+          description: Use the access field to determine domain access
+          deprecated: true
+        access:
+          allOf:
+          - $ref: '#/components/schemas/AccessEnum'
+          description: 'Domain access settings
+
+
+            * `PUBLIC` - Public: catalog is visible to anyone.
+
+            * `PRIVATE` - Login required: catalog is visible once the user signs up.
+
+            * `PRIVATE_CODE` - Access code required: catalog is visible once the user signs up with an access code.'
+        access_code_message_html:
+          type: string
+        marketing_message:
+          type: string
+          description: This field has been replaced by the use of Signup Fields.
+          deprecated: true
+    StudentGroupSummary:
+      type: object
+      description: Serializer for student groups for use GroupVisibility serializers
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          readOnly: true
+      required:
+      - id
+    StudentGroupSummaryRequest:
+      type: object
+      description: Serializer for student groups for use GroupVisibility serializers
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
+    PatchedDomainRequest:
+      type: object
+      properties:
+        catalog_title:
+          type: string
+          minLength: 1
+          description: HTML content displayed at the top of the catalog page
+        access:
+          allOf:
+          - $ref: '#/components/schemas/AccessEnum'
+          description: 'Domain access settings
+
+
+            * `PUBLIC` - Public: catalog is visible to anyone.
+
+            * `PRIVATE` - Login required: catalog is visible once the user signs up.
+
+            * `PRIVATE_CODE` - Access code required: catalog is visible once the user signs up with an access code.'
+        access_code_message_html:
+          type: string
+          minLength: 1
+        marketing_message:
+          type: string
+          description: This field has been replaced by the use of Signup Fields.
+          deprecated: true
+    DomainRequest:
+      type: object
+      properties:
+        catalog_title:
+          type: string
+          minLength: 1
+          description: HTML content displayed at the top of the catalog page
+        access:
+          allOf:
+          - $ref: '#/components/schemas/AccessEnum'
+          description: 'Domain access settings
+
+
+            * `PUBLIC` - Public: catalog is visible to anyone.
+
+            * `PRIVATE` - Login required: catalog is visible once the user signs up.
+
+            * `PRIVATE_CODE` - Access code required: catalog is visible once the user signs up with an access code.'
+        access_code_message_html:
+          type: string
+          minLength: 1
+        marketing_message:
+          type: string
+          description: This field has been replaced by the use of Signup Fields.
+          deprecated: true
+    CatalogPageGroupVisibilityRequest:
+      type: object
+      description: Serializer for CatalogPageGroupVisibility overrides
+      properties:
+        student_group:
+          $ref: '#/components/schemas/StudentGroupSummaryRequest'
+        is_visible:
+          type: boolean
+      required:
+      - is_visible
+      - student_group
+    PaginatedCatalogPageGroupVisibilityList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogPageGroupVisibility'
+    CatalogPageGroupVisibility:
+      type: object
+      description: Serializer for CatalogPageGroupVisibility overrides
+      properties:
+        student_group:
+          $ref: '#/components/schemas/StudentGroupSummary'
+        is_visible:
+          type: boolean
+      required:
+      - is_visible
+      - student_group
+    PaginatedDomainList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Domain'
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

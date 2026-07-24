@@ -1,0 +1,464 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Training Credit Codes API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Training Credit Codes
+paths:
+  /v1/training-credit-codes:
+    get:
+      operationId: training_credit_codes_list
+      description: 'Retrieve a paginated list of training credit codes.
+
+
+        Returns a list of training credit codes for your organization.
+
+        Supports filtering by tracking identifier and code value.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: tracking_identifier
+        schema:
+          type: string
+        description: Filter results by tracking_identifier
+      - in: query
+        name: training_credit_code
+        schema:
+          type: string
+        description: Filter results by training credit code name
+      tags:
+      - Training Credit Codes
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTrainingCreditCodesListList'
+          description: ''
+    post:
+      operationId: training_credit_codes_create
+      description: 'Create a new training credit code.
+
+
+        Creates a training credit code that can be distributed and redeemed by learners.
+
+        Specify code details and optional metadata.'
+      tags:
+      - Training Credit Codes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrainingCreditCodesCreateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TrainingCreditCodesCreateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TrainingCreditCodesCreateRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingCreditCodesCreate'
+          description: ''
+  /v1/training-credit-codes/{training_credit_code_id}:
+    get:
+      operationId: training_credit_codes_retrieve
+      description: 'Retrieve details for a specific training credit code.
+
+
+        Returns detailed information about a single training credit code,
+
+        including its status, value, and associated metadata.'
+      parameters:
+      - in: path
+        name: training_credit_code_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Training Credit Codes
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingCreditCodesRetrieve'
+          description: ''
+    patch:
+      operationId: training_credit_codes_partial_update
+      description: 'Update an existing training credit code.
+
+
+        Allows updating fields such as status or metadata for an existing training credit code.'
+      parameters:
+      - in: path
+        name: training_credit_code_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Training Credit Codes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTrainingCreditCodesUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedTrainingCreditCodesUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedTrainingCreditCodesUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingCreditCodesUpdate'
+          description: ''
+components:
+  schemas:
+    TrainingCreditCodesCreate:
+      type: object
+      description: this serializer is used for POST request
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: some help text
+        training_credit_code:
+          type: string
+          description: String used by Learners to apply Training Credit balance on the course platform and purchase Training content.
+        credits_used:
+          type: integer
+          readOnly: true
+        credits_total:
+          type: integer
+          description: Total number of credits stored on this code.
+        expiration_date:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 formatted datetime string indicating the expiration of the training credit code
+        expire_content:
+          type: boolean
+          description: If true, when this code is used, learners will lose access to content when the code expires.
+        tracking_identifier:
+          type: string
+          description: Custom string for teams to identify codes in Financial/reporting tools. Is not used by Skilljar.
+          maxLength: 256
+        available_to_all_students:
+          type: boolean
+          description: Set to "true" if all learners should be able to use this credit code.
+        available_for_all_offers:
+          type: boolean
+          description: Set to "true" if this credit code should be available for all existing and future offers that have credit value.
+      required:
+      - credits_total
+      - training_credit_code
+    TrainingCreditCodesUpdate:
+      type: object
+      description: this serializer is used for PATCH requests
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: some help text
+        training_credit_code:
+          type: string
+          readOnly: true
+          description: String used by Learners to apply Training Credit balance on the course platform and purchase Training content.
+        credits_used:
+          type: integer
+          readOnly: true
+        credits_total:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        expiration_date:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 formatted datetime string indicating the expiration of the training credit code
+        expire_content:
+          type: boolean
+          description: If true, when this code is used, learners will lose access to content when the code expires.
+        tracking_identifier:
+          type: string
+          description: Custom string for teams to identify codes in Financial/reporting tools. Is not used by Skilljar.
+          maxLength: 256
+        available_to_all_students:
+          type: boolean
+          description: Set to "true" if all learners should be able to use this credit code.
+        student_groups:
+          allOf:
+          - $ref: '#/components/schemas/AddRemoveIdLists'
+          description: 'Required if the above option is "false". Use this format to add or remove student_group ids - Add resolves first, then Remove: { "add": ["2d4EXAMPLE0ea32j", "2d4EXAMPLE20esh5y"], "remove": ["9k4EXAMPLE20h5ysK"] }'
+        available_for_all_offers:
+          type: boolean
+          description: Set to "true" if this credit code should be available for all existing and future offers that have credit value.
+        offers:
+          allOf:
+          - $ref: '#/components/schemas/AddRemoveIdLists'
+          description: 'Required if the above option is "false". Use this format to add or remove offer_ids - Add resolves first, then Remove: { "add": ["2d4EXAMPLE0ea32j", "2d4EXAMPLE20esh5y"], "remove": ["9k4EXAMPLE20h5ysK"] }'
+    AddRemoveIdLists:
+      type: object
+      properties:
+        add:
+          type: array
+          items:
+            type: string
+        remove:
+          type: array
+          items:
+            type: string
+    TrainingCreditCodesList:
+      type: object
+      description: this serializer is used for GET requests with optional Query Parameters
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: some help text
+        training_credit_code:
+          type: string
+          readOnly: true
+          description: String used by Learners to apply Training Credit balance on the course platform and purchase Training content.
+        credits_used:
+          type: integer
+          readOnly: true
+        credits_total:
+          type: integer
+          readOnly: true
+        expiration_date:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        expire_content:
+          type: boolean
+          readOnly: true
+        tracking_identifier:
+          type: string
+          readOnly: true
+          description: Custom string for teams to identify codes in Financial/reporting tools. Is not used by Skilljar.
+    AddRemoveIdListsRequest:
+      type: object
+      properties:
+        add:
+          type: array
+          items:
+            type: string
+            minLength: 1
+        remove:
+          type: array
+          items:
+            type: string
+            minLength: 1
+    TrainingCreditCodesCreateRequest:
+      type: object
+      description: this serializer is used for POST request
+      properties:
+        training_credit_code:
+          type: string
+          minLength: 1
+          description: String used by Learners to apply Training Credit balance on the course platform and purchase Training content.
+        credits_total:
+          type: integer
+          description: Total number of credits stored on this code.
+        expiration_date:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 formatted datetime string indicating the expiration of the training credit code
+        expire_content:
+          type: boolean
+          description: If true, when this code is used, learners will lose access to content when the code expires.
+        tracking_identifier:
+          type: string
+          minLength: 1
+          description: Custom string for teams to identify codes in Financial/reporting tools. Is not used by Skilljar.
+          maxLength: 256
+        available_to_all_students:
+          type: boolean
+          description: Set to "true" if all learners should be able to use this credit code.
+        student_groups:
+          type: array
+          items:
+            type: string
+            minLength: 1
+          writeOnly: true
+          description: 'Required if the above option is "false". Use this format to include student_group ids: ["2d4EXAMPLE0ea32j", "2d4EXAMPLE20esh5y"]'
+        available_for_all_offers:
+          type: boolean
+          description: Set to "true" if this credit code should be available for all existing and future offers that have credit value.
+        offers:
+          type: array
+          items:
+            type: string
+            minLength: 1
+          writeOnly: true
+          description: 'Required if the above option is "false". Use this format to include offer_ids: ["2d4EXAMPLE0ea32j", "2d4EXAMPLE20esh5y"]'
+      required:
+      - credits_total
+      - training_credit_code
+    PatchedTrainingCreditCodesUpdateRequest:
+      type: object
+      description: this serializer is used for PATCH requests
+      properties:
+        credits_total:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        expiration_date:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 formatted datetime string indicating the expiration of the training credit code
+        expire_content:
+          type: boolean
+          description: If true, when this code is used, learners will lose access to content when the code expires.
+        tracking_identifier:
+          type: string
+          minLength: 1
+          description: Custom string for teams to identify codes in Financial/reporting tools. Is not used by Skilljar.
+          maxLength: 256
+        available_to_all_students:
+          type: boolean
+          description: Set to "true" if all learners should be able to use this credit code.
+        student_groups:
+          allOf:
+          - $ref: '#/components/schemas/AddRemoveIdListsRequest'
+          description: 'Required if the above option is "false". Use this format to add or remove student_group ids - Add resolves first, then Remove: { "add": ["2d4EXAMPLE0ea32j", "2d4EXAMPLE20esh5y"], "remove": ["9k4EXAMPLE20h5ysK"] }'
+        available_for_all_offers:
+          type: boolean
+          description: Set to "true" if this credit code should be available for all existing and future offers that have credit value.
+        offers:
+          allOf:
+          - $ref: '#/components/schemas/AddRemoveIdListsRequest'
+          description: 'Required if the above option is "false". Use this format to add or remove offer_ids - Add resolves first, then Remove: { "add": ["2d4EXAMPLE0ea32j", "2d4EXAMPLE20esh5y"], "remove": ["9k4EXAMPLE20h5ysK"] }'
+    TrainingCreditCodesRetrieve:
+      type: object
+      description: this serializer is used for GET requests with a required Path Parameter
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: some help text
+        training_credit_code:
+          type: string
+          readOnly: true
+          description: String used by Learners to apply Training Credit balance on the course platform and purchase Training content.
+        credits_used:
+          type: integer
+          readOnly: true
+        credits_total:
+          type: integer
+          readOnly: true
+        expiration_date:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        expire_content:
+          type: boolean
+          readOnly: true
+        tracking_identifier:
+          type: string
+          readOnly: true
+          description: Custom string for teams to identify codes in Financial/reporting tools. Is not used by Skilljar.
+        available_to_all_students:
+          type: boolean
+          readOnly: true
+        student_groups:
+          type: array
+          items:
+            type: string
+          readOnly: true
+        available_for_all_offers:
+          type: boolean
+          readOnly: true
+        offers:
+          type: array
+          items:
+            type: string
+          readOnly: true
+    PaginatedTrainingCreditCodesListList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrainingCreditCodesList'
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

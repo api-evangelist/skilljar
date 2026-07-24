@@ -1,0 +1,387 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Lessons > Lesson Content Items API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Lessons > Lesson Content Items
+paths:
+  /v1/lessons/{lesson_id}/content-items:
+    get:
+      operationId: lessons_content_items_list
+      description: "List all content items for a lesson.\n\nRetrieve a paginated list of all content items within the specified lesson,\n  ordered by their display sequence."
+      parameters:
+      - in: path
+        name: lesson_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - Lessons > Lesson Content Items
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLessonContentItemList'
+          description: ''
+    post:
+      operationId: lessons_content_items_create
+      description: 'Create a new content item in a lesson.
+
+
+        Add a new content item (such as a video, document, or quiz) to the specified lesson.'
+      parameters:
+      - in: path
+        name: lesson_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Lessons > Lesson Content Items
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LessonContentItemRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LessonContentItemRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LessonContentItemRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LessonContentItem'
+          description: ''
+  /v1/lessons/{lesson_id}/content-items/{lesson_content_item_id}:
+    get:
+      operationId: lessons_content_items_retrieve
+      description: Retrieve a single lesson content item.
+      parameters:
+      - in: path
+        name: lesson_content_item_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: lesson_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Lessons > Lesson Content Items
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LessonContentItem'
+          description: ''
+    put:
+      operationId: lessons_content_items_update
+      description: "Update an existing lesson content item.\n\nModify the properties of a content item within a lesson, such as its\n  order, title, or associated content."
+      parameters:
+      - in: path
+        name: lesson_content_item_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: lesson_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Lessons > Lesson Content Items
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LessonContentItemUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LessonContentItemUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LessonContentItemUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LessonContentItemUpdate'
+          description: ''
+    patch:
+      operationId: lessons_content_items_partial_update
+      description: 'Partially update a lesson content item.
+
+
+        Update one or more fields of a content item within a lesson.
+
+        Only the fields provided in the request will be updated.'
+      parameters:
+      - in: path
+        name: lesson_content_item_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: lesson_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Lessons > Lesson Content Items
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedLessonContentItemUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedLessonContentItemUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedLessonContentItemUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LessonContentItemUpdate'
+          description: ''
+components:
+  schemas:
+    PaginatedLessonContentItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/LessonContentItem'
+    Type1d9Enum:
+      enum:
+      - ASSET
+      - HTML
+      - QUIZ
+      - RATING
+      type: string
+      description: '* `ASSET` - ASSET
+
+        * `HTML` - HTML
+
+        * `QUIZ` - QUIZ
+
+        * `RATING` - RATING'
+    LessonContentItemUpdateRequest:
+      type: object
+      description: LessonContentItem Update Serializer
+      properties:
+        content_asset_id:
+          type: string
+          minLength: 1
+        content_html:
+          type: string
+        content_quiz_id:
+          type: string
+          minLength: 1
+        header:
+          type: string
+          minLength: 1
+        lesson_id:
+          type: string
+          minLength: 1
+        order:
+          type: integer
+        type:
+          $ref: '#/components/schemas/Type1d9Enum'
+    LessonContentItemUpdate:
+      type: object
+      description: LessonContentItem Update Serializer
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as lesson_content_item_id within the documentation
+        content_asset_id:
+          type: string
+        content_html:
+          type: string
+        content_quiz_id:
+          type: string
+        content_rating_id:
+          type: string
+          readOnly: true
+          description: The associated RatingContentBlock ID (present only for RATING content items)
+        header:
+          type: string
+        lesson_id:
+          type: string
+        order:
+          type: integer
+        type:
+          $ref: '#/components/schemas/Type1d9Enum'
+    LessonContentItem:
+      type: object
+      description: LessonContentItem Serializer
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as lesson_content_item_id within the documentation
+        content_asset_id:
+          type: string
+        content_html:
+          type: string
+        content_quiz_id:
+          type: string
+        content_rating_id:
+          type: string
+          readOnly: true
+          description: The associated RatingContentBlock ID (present only for RATING content items)
+        header:
+          type: string
+        lesson_id:
+          type: string
+        order:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        type:
+          $ref: '#/components/schemas/Type1d9Enum'
+      required:
+      - header
+      - order
+      - type
+    LessonContentItemRequest:
+      type: object
+      description: LessonContentItem Serializer
+      properties:
+        content_asset_id:
+          type: string
+          minLength: 1
+        content_html:
+          type: string
+        content_quiz_id:
+          type: string
+          minLength: 1
+        header:
+          type: string
+          minLength: 1
+        lesson_id:
+          type: string
+          minLength: 1
+        order:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        type:
+          $ref: '#/components/schemas/Type1d9Enum'
+      required:
+      - header
+      - order
+      - type
+    PatchedLessonContentItemUpdateRequest:
+      type: object
+      description: LessonContentItem Update Serializer
+      properties:
+        content_asset_id:
+          type: string
+          minLength: 1
+        content_html:
+          type: string
+        content_quiz_id:
+          type: string
+          minLength: 1
+        header:
+          type: string
+          minLength: 1
+        lesson_id:
+          type: string
+          minLength: 1
+        order:
+          type: integer
+        type:
+          $ref: '#/components/schemas/Type1d9Enum'
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

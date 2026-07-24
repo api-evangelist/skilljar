@@ -1,0 +1,290 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Assets
+paths:
+  /v1/assets:
+    get:
+      operationId: assets_list
+      description: 'Retrieve a paginated list of all assets in your organization.
+
+
+        Returns summary information for each asset, including name, size, and type.
+
+        Download URLs are not included in this response.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - Assets
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAssetList'
+          description: ''
+    post:
+      operationId: assets_create
+      description: 'Upload a new asset to your organization.
+
+
+        Accepts a file or remote file URL and creates a new asset record.
+
+        The file will be securely downloaded and re-hosted by Skilljar.
+
+        The response includes asset metadata, but excludes download URL and type until processing is complete.'
+      tags:
+      - Assets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AssetRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AssetRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+          description: ''
+  /v1/assets/{asset_id}:
+    get:
+      operationId: assets_retrieve
+      description: 'Retrieve detailed information for a specific asset.
+
+
+        Returns all metadata for the asset, including a signed download URL valid for 1 hour.
+
+        Only assets belonging to your organization are accessible.'
+      parameters:
+      - in: path
+        name: asset_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Assets
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+          description: ''
+    delete:
+      operationId: assets_destroy
+      description: 'Permanently delete an asset from your organization.
+
+
+        The asset will be removed if it is not currently used in any lessons or courses.
+
+        Returns HTTP 204 No Content on success.
+
+        If the asset is in use, returns HTTP 400 Bad Request with an error message.'
+      parameters:
+      - in: path
+        name: asset_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Assets
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    PaginatedAssetList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Asset'
+    Asset:
+      type: object
+      description: 'Used when creating, updating or reading a single Asset object.
+
+
+        Inherits from AssetSummarySerializer.
+
+        Adds in the `download_url` field as well as the write fields.'
+      properties:
+        id:
+          type: string
+          readOnly: true
+        type:
+          allOf:
+          - $ref: '#/components/schemas/AssetTypeEnum'
+          readOnly: true
+          default: FILE
+        embed_link_url:
+          type: string
+          readOnly: true
+        download_url:
+          type: string
+          description: Access URL to download asset (if uploaded).
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+          description: In the Dashboard, this is called “Asset Name” or “Display Name”.
+        aspect_ratio:
+          allOf:
+          - $ref: '#/components/schemas/AspectRatioEnum'
+          readOnly: true
+          description: 'ignored for non-video types
+
+
+            * `16:9` - 16:9
+
+            * `4:3` - 4:3'
+        sync_completion:
+          type: boolean
+          readOnly: true
+    AssetMetadataRequest:
+      type: object
+      description: 'This defines the `asset` section of create & update requests.
+
+
+        Used in `AssetSerializer`'
+      properties:
+        name:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: In the Dashboard, this is called “Asset Name” or “Display Name”.
+        embed_link_url:
+          type: string
+          writeOnly: true
+          minLength: 1
+        aspect_ratio:
+          allOf:
+          - $ref: '#/components/schemas/AspectRatioEnum'
+          writeOnly: true
+        sync_completion:
+          type: boolean
+          writeOnly: true
+          default: false
+    AspectRatioEnum:
+      enum:
+      - '16:9'
+      - '4:3'
+      type: string
+      description: '* `16:9` - 16:9
+
+        * `4:3` - 4:3'
+    AssetRequest:
+      type: object
+      description: 'Used when creating, updating or reading a single Asset object.
+
+
+        Inherits from AssetSummarySerializer.
+
+        Adds in the `download_url` field as well as the write fields.'
+      properties:
+        content_url:
+          type: string
+          format: uri
+          writeOnly: true
+          minLength: 1
+        asset:
+          allOf:
+          - $ref: '#/components/schemas/AssetMetadataRequest'
+          writeOnly: true
+    AssetTypeEnum:
+      enum:
+      - AUDIO_BOTR
+      - HTML
+      - PDF
+      - VIDEO_BOTR
+      - FILE
+      - TEMPLATE
+      type: string
+      description: '* `AUDIO_BOTR` - Audio - JWPlatform
+
+        * `HTML` - HTML Snippet
+
+        * `PDF` - PDF File
+
+        * `VIDEO_BOTR` - Video - JWPlatform
+
+        * `FILE` - Generic File
+
+        * `TEMPLATE` - Template from the database'
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

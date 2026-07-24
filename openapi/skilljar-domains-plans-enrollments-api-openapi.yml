@@ -1,0 +1,558 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Plans > Enrollments API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Plans > Enrollments
+paths:
+  /v1/domains/{domain_name}/plan/{plan_id}/plan-enrollments:
+    get:
+      operationId: domains_plan_plan_enrollments_list
+      description: "List all enrollments for a specific Plan.\n\nReturns a paginated list of enrollments.\nEach enrollment includes user information, enrollment status, and purchase details if available.\nA user may have multiple enrollments for a Plan. Access to a Plan is granted if at least one enrollment\n  is active and not expired."
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: plan_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Plans > Enrollments
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPlanEnrollmentList'
+          description: ''
+    post:
+      operationId: domains_plan_plan_enrollments_create
+      description: 'Enroll a user in a Plan.
+
+
+        This operation is idempotent for the combination of user ID and enrollment date.
+
+        If an enrollment already exists for the specified user and date, a new enrollment will not be created.
+
+        Each call with a new user or enrollment date will create a new enrollment.
+
+
+        The user must already have a domain membership to be enrolled.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: plan_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Plans > Enrollments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePlanEnrollmentRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreatePlanEnrollmentRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreatePlanEnrollmentRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePlanEnrollment'
+          description: ''
+  /v1/domains/{domain_name}/plan/{plan_id}/plan-enrollments/{plan_enrollment_id}:
+    get:
+      operationId: domains_plan_plan_enrollments_retrieve
+      description: 'Retrieve details for a specific Plan enrollment.
+
+
+        Returns enrollment information, including user details, enrollment status, and purchase information if
+
+        the enrollment was associated with a purchase or registration through the platform.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: plan_enrollment_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: plan_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Plans > Enrollments
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanEnrollment'
+          description: ''
+    put:
+      operationId: domains_plan_plan_enrollments_update
+      description: 'Update details for a Plan enrollment.
+
+
+        Both PUT and PATCH requests perform partial updates to the enrollment record.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: plan_enrollment_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: plan_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Plans > Enrollments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePlanEnrollmentRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdatePlanEnrollmentRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UpdatePlanEnrollmentRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePlanEnrollment'
+          description: ''
+    patch:
+      operationId: domains_plan_plan_enrollments_partial_update
+      description: 'Update details for a Plan enrollment.
+
+
+        Both PUT and PATCH requests perform partial updates to the enrollment record.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: plan_enrollment_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: plan_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Plans > Enrollments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdatePlanEnrollmentRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdatePlanEnrollmentRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdatePlanEnrollmentRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePlanEnrollment'
+          description: ''
+components:
+  schemas:
+    CreatePlanEnrollment:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/ReadOnlyUser'
+        enrolled_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        active:
+          type: boolean
+          nullable: true
+          default: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentPurchase'
+          nullable: true
+      required:
+      - user
+    PurchaseOfferPrice:
+      type: object
+      properties:
+        amount:
+          type: string
+          default: '0.00'
+        currency_code:
+          type: string
+          default: USD
+    UpdatePlanEnrollmentRequest:
+      type: object
+      properties:
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        active:
+          type: boolean
+    CreatePlanEnrollmentRequest:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/ReadOnlyUserRequest'
+        enrolled_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        active:
+          type: boolean
+          nullable: true
+          default: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentPurchaseRequest'
+          nullable: true
+      required:
+      - user
+    PurchaseStateEnum:
+      enum:
+      - CREATED
+      - SUCCESS
+      - FAILED
+      - REFUNDED
+      - CANCELLED
+      - FLAGGED
+      - PENDING
+      type: string
+      description: '* `CREATED` - CREATED
+
+        * `SUCCESS` - SUCCESS
+
+        * `FAILED` - FAILED
+
+        * `REFUNDED` - REFUNDED
+
+        * `CANCELLED` - CANCELLED
+
+        * `FLAGGED` - FLAGGED
+
+        * `PENDING` - PENDING'
+    PlanEnrollment:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/ReadOnlyUser'
+        enrolled_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        active:
+          type: boolean
+          nullable: true
+          default: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentPurchase'
+          readOnly: true
+          nullable: true
+      required:
+      - user
+    PriceRequest:
+      type: object
+      properties:
+        amount:
+          type: string
+          minLength: 1
+          default: '0.00'
+        currency_code:
+          type: string
+          minLength: 1
+          default: USD
+    ReadOnlyUser:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+          description: Email address
+        first_name:
+          type: string
+          readOnly: true
+          description: First name
+        last_name:
+          type: string
+          readOnly: true
+          description: Last name
+      required:
+      - id
+    PatchedUpdatePlanEnrollmentRequest:
+      type: object
+      properties:
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        active:
+          type: boolean
+    EnrollmentPurchase:
+      type: object
+      properties:
+        order_id:
+          type: string
+          readOnly: true
+        offer_price:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseOfferPrice'
+          readOnly: true
+        purchase_price:
+          $ref: '#/components/schemas/Price'
+        quantity:
+          type: integer
+          readOnly: true
+        purchase_state:
+          $ref: '#/components/schemas/PurchaseStateEnum'
+        payment_processor:
+          allOf:
+          - $ref: '#/components/schemas/PaymentProcessorEnum'
+          readOnly: true
+          default: NONE
+        purchase_id:
+          type: string
+          readOnly: true
+        purchased_at:
+          type: string
+          format: date-time
+        tax_price_cents:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+    PaymentProcessorEnum:
+      enum:
+      - NONE
+      - STRIPE
+      - STRIPE_BTC
+      - PAYPAL
+      - PAYFLOW
+      - CYBERSRC
+      - MES
+      - EXTERNAL
+      type: string
+      description: '* `NONE` - None
+
+        * `STRIPE` - Stripe
+
+        * `STRIPE_BTC` - Stripe Bitcoin
+
+        * `PAYPAL` - PayPal
+
+        * `PAYFLOW` - Payflow
+
+        * `CYBERSRC` - Cybersource
+
+        * `MES` - Merchant e-Solutions
+
+        * `EXTERNAL` - External'
+    PaginatedPlanEnrollmentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlanEnrollment'
+    ReadOnlyUserRequest:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Known as user_id within the documentation
+      required:
+      - id
+    UpdatePlanEnrollment:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        user:
+          allOf:
+          - $ref: '#/components/schemas/ReadOnlyUser'
+          readOnly: true
+        enrolled_at:
+          type: string
+          format: date-time
+          readOnly: true
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        active:
+          type: boolean
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentPurchase'
+          readOnly: true
+          nullable: true
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+          default: '0.00'
+        currency_code:
+          type: string
+          default: USD
+    EnrollmentPurchaseRequest:
+      type: object
+      properties:
+        purchase_price:
+          $ref: '#/components/schemas/PriceRequest'
+        purchase_state:
+          $ref: '#/components/schemas/PurchaseStateEnum'
+        purchased_at:
+          type: string
+          format: date-time
+        tax_price_cents:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,214 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Catalog Pages (Builder) > Tile Containers API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Catalog Pages (Builder) > Tile Containers
+paths:
+  /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/tile-container-content-blocks/{id}:
+    get:
+      operationId: domains_catalog_pages_tile_container_content_blocks_retrieve
+      description: Retrieve information for a specific tile container content block.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages (Builder) > Tile Containers
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TileContainerContentBlock'
+          description: ''
+    put:
+      operationId: domains_catalog_pages_tile_container_content_blocks_update
+      description: Update a specific tile container content block.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages (Builder) > Tile Containers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TileContainerContentBlockRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TileContainerContentBlockRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TileContainerContentBlockRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TileContainerContentBlock'
+          description: ''
+    patch:
+      operationId: domains_catalog_pages_tile_container_content_blocks_partial_update
+      description: Partially update a specific tile container content block.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Pages (Builder) > Tile Containers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTileContainerContentBlockRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedTileContainerContentBlockRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedTileContainerContentBlockRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TileContainerContentBlock'
+          description: ''
+components:
+  schemas:
+    PatchedTileContainerContentBlockRequest:
+      type: object
+      description: Serializer for TileContainerContentBlock retrieve and update operations
+      properties:
+        header_text:
+          type: string
+          maxLength: 100000
+        header_sub_text:
+          type: string
+          maxLength: 100000
+        alignment:
+          $ref: '#/components/schemas/AlignmentEnum'
+    TileContainerContentBlock:
+      type: object
+      description: Serializer for TileContainerContentBlock retrieve and update operations
+      properties:
+        id:
+          type: string
+          readOnly: true
+        content_block_id:
+          type: string
+          readOnly: true
+        header_text:
+          type: string
+          maxLength: 100000
+        header_sub_text:
+          type: string
+          maxLength: 100000
+        alignment:
+          $ref: '#/components/schemas/AlignmentEnum'
+    TileContainerContentBlockRequest:
+      type: object
+      description: Serializer for TileContainerContentBlock retrieve and update operations
+      properties:
+        header_text:
+          type: string
+          maxLength: 100000
+        header_sub_text:
+          type: string
+          maxLength: 100000
+        alignment:
+          $ref: '#/components/schemas/AlignmentEnum'
+    AlignmentEnum:
+      enum:
+      - left
+      - center
+      - right
+      type: string
+      description: '* `left` - Left
+
+        * `center` - Center
+
+        * `right` - Right'
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

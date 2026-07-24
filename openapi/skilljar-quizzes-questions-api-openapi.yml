@@ -1,0 +1,248 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Quizzes > Questions API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Quizzes > Questions
+paths:
+  /v1/quizzes/{quiz_id}/questions:
+    get:
+      operationId: quizzes_questions_list
+      description: 'List all Questions for the specified Quiz.
+
+
+        Returns a paginated list of Questions associated with the Quiz.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: quiz_id
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Quizzes > Questions
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedQuestionSummaryList'
+          description: ''
+  /v1/quizzes/{quiz_id}/questions/{question_id}:
+    get:
+      operationId: quizzes_questions_retrieve
+      description: 'Retrieve details for a specific Question.
+
+
+        Returns all metadata for the Question, including Answers.'
+      parameters:
+      - in: path
+        name: question_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: quiz_id
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Quizzes > Questions
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionSummary'
+          description: ''
+    delete:
+      operationId: quizzes_questions_destroy
+      description: 'Delete a specific Question from the Quiz.
+
+
+        This will remove the Question and all associated Answers from the Quiz.'
+      parameters:
+      - in: path
+        name: question_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: quiz_id
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Quizzes > Questions
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    QuestionSummary:
+      type: object
+      description: Serializer for Question model within a Question Bank or Quiz.
+      properties:
+        id:
+          type: string
+          readOnly: true
+        html:
+          type: string
+          description: The HTML content of the question.
+        case_sensitive:
+          type: boolean
+          readOnly: true
+          description: If true, student responses must match the case of the answer to be correct. This only impacts FILL_IN_THE_BLANK questions.
+        requires_manual_grading:
+          type: boolean
+          readOnly: true
+          description: If true for any question on the quiz, student responses for the corresponding quiz must be manually graded by a dashboard user.
+        correct_answer_feedback_html:
+          type: string
+          readOnly: true
+          description: The feedback to display if the student answers the question correctly.
+        incorrect_answer_feedback_html:
+          type: string
+          readOnly: true
+          description: The feedback to display if the student answers the question incorrectly.
+        answer_feedback_html:
+          type: string
+          readOnly: true
+          description: The feedback to display for nongraded questions.
+        is_graded:
+          type: boolean
+          readOnly: true
+          description: The question counts toward passing or failing.
+        is_optional:
+          type: boolean
+          readOnly: true
+        type:
+          allOf:
+          - $ref: '#/components/schemas/Type5d1Enum'
+          description: 'The type of question to create. Can be: MULTIPLE_CHOICE, MULTIPLE_ANSWER, FILL_IN_THE_BLANK, FREEFORM.
+
+
+            * `MULTIPLE_CHOICE` - MULTIPLE_CHOICE
+
+            * `MULTIPLE_ANSWER` - MULTIPLE_ANSWER
+
+            * `FILL_IN_THE_BLANK` - FILL_IN_THE_BLANK
+
+            * `FREEFORM` - FREEFORM'
+        order:
+          type: integer
+          readOnly: true
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Answer'
+          default: []
+          description: "The answers for the question. This is required for MULTIPLE_CHOICE, MULTIPLE_ANSWER, and FILL_IN_THE_BLANK question types.<br><br>Example:<pre><code>[\n\t{\"answer_text\": \"Correct answer\", \"correct\": true},\n\t{\"answer_text\": \"Incorrect answer\", \"correct\": false},\n\t{\"answer_text\": \"Second incorrect answer\", \"correct\": false}\n]</pre></code>"
+      required:
+      - html
+      - type
+    PaginatedQuestionSummaryList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionSummary'
+    Answer:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        answer_text:
+          type: string
+          maxLength: 1000
+        correct:
+          type: boolean
+        order:
+          type: integer
+          readOnly: true
+      required:
+      - answer_text
+    Type5d1Enum:
+      enum:
+      - MULTIPLE_CHOICE
+      - MULTIPLE_ANSWER
+      - FILL_IN_THE_BLANK
+      - FREEFORM
+      type: string
+      description: '* `MULTIPLE_CHOICE` - MULTIPLE_CHOICE
+
+        * `MULTIPLE_ANSWER` - MULTIPLE_ANSWER
+
+        * `FILL_IN_THE_BLANK` - FILL_IN_THE_BLANK
+
+        * `FREEFORM` - FREEFORM'
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

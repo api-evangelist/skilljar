@@ -1,0 +1,199 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Course Series > Published Courses API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Course Series > Published Courses
+paths:
+  /v1/domains/{domain_name}/course-series/{course_series_id}/published-courses:
+    get:
+      operationId: domains_course_series_published_courses_list
+      description: 'Retrieve a paginated list of all published courses in the specified course series for this domain.
+
+
+        Each published course includes its order in the series, course details, and related offers.'
+      parameters:
+      - in: path
+        name: course_series_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - Domains > Course Series > Published Courses
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPublishedCourseList'
+          description: ''
+components:
+  schemas:
+    PublishedCourse:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as published_course_id within the documentation
+        course:
+          allOf:
+          - $ref: '#/components/schemas/CourseSummary'
+          readOnly: true
+        slug:
+          type: string
+          description: The URL path of the course on the domain
+          pattern: ^[a-z0-9]+(-[a-z0-9]+)+$
+          maxLength: 100
+        course_url:
+          type: string
+          readOnly: true
+          description: Base URL of the course detail page, or curriculum page if the student is registered
+        hidden:
+          type: boolean
+          description: Hidden courses are only visible on the catalog page to associated groups
+        strict_enforce_group_visibility:
+          type: boolean
+          description: Block access to this course for students it's not visible to
+        registration_required:
+          type: boolean
+          description: Registration is required for student to access course, false signifies that the course content is public
+        registration_starts_at:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the start of the registration period is scheduled
+        registration_ends_at:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the end of the registration period is scheduled
+        restrict_access_start_end_dates:
+          type: boolean
+          description: Restrict access to the course based on the start and end dates of the registration period
+        allow_self_service_reenroll:
+          type: boolean
+          description: When students complete the course, they will be allowed to re-enroll in the course immediately
+        unique_progress_per_enrollment:
+          type: boolean
+          description: Each time a student re-enrolls in the course, create a new course progress
+        require_all_prerequisites:
+          type: boolean
+          description: Require all prerequisites to be completed before the student can enroll in the course
+        timezone:
+          type: string
+          nullable: true
+          readOnly: true
+        offer:
+          allOf:
+          - $ref: '#/components/schemas/Offer'
+          readOnly: true
+    Offer:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        registration_open:
+          type: boolean
+        registration_url:
+          type: string
+          readOnly: true
+          description: URL used for course registration
+        price:
+          $ref: '#/components/schemas/Price'
+      required:
+      - price
+      - registration_open
+    CourseSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as course_id within the documentation
+        title:
+          type: string
+          readOnly: true
+          description: Course title
+        lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of lessons in the course
+        required_lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of required lessons in the course (non-optional lessons that count towards course completion)
+    PaginatedPublishedCourseList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublishedCourse'
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+          default: '0.00'
+        currency_code:
+          type: string
+          default: USD
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

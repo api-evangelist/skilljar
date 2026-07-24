@@ -1,0 +1,157 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Paths > Path Items API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Paths > Path Items
+paths:
+  /v1/paths/{path_id}/path-items:
+    get:
+      operationId: paths_path_items_list
+      description: 'Retrieve a list of Path Items for a specific Path.
+
+
+        Returns all items in the order they appear within the Path, including details about each item.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - in: path
+        name: path_id
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Paths > Path Items
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPathItemList'
+          description: ''
+  /v1/paths/{path_id}/path-items/{path_item_id}:
+    get:
+      operationId: paths_path_items_retrieve
+      description: 'Retrieve details for a specific Path Item.
+
+
+        Returns metadata and configuration for the requested Path Item,
+
+        including its type and associated course or resource.'
+      parameters:
+      - in: path
+        name: path_id
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: path_item_id
+        schema:
+          type: string
+          pattern: ^[a-zA-Z0-9]+$
+        required: true
+      tags:
+      - Paths > Path Items
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PathItem'
+          description: ''
+components:
+  schemas:
+    PathItem:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        slug:
+          type: string
+          readOnly: true
+        course:
+          $ref: '#/components/schemas/CourseSummary'
+      required:
+      - course
+    CourseSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as course_id within the documentation
+        title:
+          type: string
+          readOnly: true
+          description: Course title
+        lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of lessons in the course
+        required_lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of required lessons in the course (non-optional lessons that count towards course completion)
+    PaginatedPathItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PathItem'
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

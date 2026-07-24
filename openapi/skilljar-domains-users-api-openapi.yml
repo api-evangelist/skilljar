@@ -1,0 +1,671 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Users API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Users
+paths:
+  /v1/domains/{domain_name}/users:
+    get:
+      operationId: domains_users_list
+      description: "List users for a domain.\n\nReturns a paginated list of users associated with the domain.\n  Supports filtering by user details, access code, and signup field data."
+      parameters:
+      - in: query
+        name: access_code
+        schema:
+          type: string
+        description: Use a value of "null" to see domain users who accessed the domain without an access code. No other values are accepted for this query.
+      - in: query
+        name: access_code__code
+        schema:
+          type: string
+        description: Filter domain users by access code used - case sensitive
+      - in: query
+        name: access_code__id
+        schema:
+          type: string
+        description: Filter domain users by id of access code used - not case sensitive
+      - in: query
+        name: access_code__pool__id
+        schema:
+          type: string
+        description: Filter domain users by id of access code pool used - not case sensitive
+      - in: query
+        name: active
+        schema:
+          type: boolean
+        description: Filter domain users by active (true or false)
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: query
+        name: include_signup_field_data
+        schema:
+          type: boolean
+        description: If set to true, the response also includes the following data for each user ("signup_fields")
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: signup_field_id
+        schema:
+          type: string
+        description: Filter domain users by a sign up field ID
+      - in: query
+        name: signup_field_label
+        schema:
+          type: string
+        description: Filter domain users by a sign up field Label - case sensitive
+      - in: query
+        name: signup_field_value
+        schema:
+          type: string
+        description: Filter domain users by a sign up field Value - case sensitive
+      - in: query
+        name: user__email
+        schema:
+          type: string
+        description: Filter domain users by email address
+      - in: query
+        name: user__first_name
+        schema:
+          type: string
+        description: Filter domain users by first name - case sensitive
+      - in: query
+        name: user__last_name
+        schema:
+          type: string
+        description: Filter domain users by last name - case sensitive
+      tags:
+      - Domains > Users
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDomainUserListItemList'
+          description: ''
+    post:
+      operationId: domains_users_create
+      description: "Add a user to a domain.\n\nIf the provided email address already exists, the user will be added to the domain\n  and their existing details will be returned.\n\nIf the email is new, a new user will be created and added to the domain."
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainUserCreateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DomainUserCreateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DomainUserCreateRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainUserCreate'
+          description: ''
+  /v1/domains/{domain_name}/users/{user_id}:
+    get:
+      operationId: domains_users_retrieve
+      description: Retrieve details for a specific user within a domain.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Users
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainUserDetail'
+          description: ''
+    put:
+      operationId: domains_users_update
+      description: "Update a user's domain membership.\n\nOnly the `active` status, `expires_at` date, and `access_code`\n  (which can be removed by setting to null) may be updated. Both PUT and PATCH perform partial updates."
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainUserUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DomainUserUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DomainUserUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainUserUpdate'
+          description: ''
+    patch:
+      operationId: domains_users_partial_update
+      description: "Update a user's domain membership.\n\nOnly the `active` status, `expires_at` date, and `access_code`\n  (which can be removed by setting to null) may be updated. Both PUT and PATCH perform partial updates."
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: user_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDomainUserUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDomainUserUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDomainUserUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainUserUpdate'
+          description: ''
+  /v1/domains/{domain_name}/users/bulk-create:
+    post:
+      operationId: bulk_create_domain_users
+      description: Create multiple users in a domain with a single API call. All users are validated before processing. If any user fails validation, the entire request is rejected. The operation is queued for async processing and returns 202 Accepted immediately.
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkDomainUserCreateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BulkDomainUserCreateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BulkDomainUserCreateRequest'
+        required: true
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainUserDetail'
+          description: ''
+components:
+  schemas:
+    AccessCodePool:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard
+          maxLength: 255
+      required:
+      - id
+      - name
+    BulkUserRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 1
+          description: User's email address
+        first_name:
+          type: string
+          description: User's first name
+          maxLength: 150
+        last_name:
+          type: string
+          description: User's last name
+          maxLength: 150
+        active:
+          type: boolean
+          default: true
+          description: Only active users have access to a private domain
+        marketing_optin:
+          type: boolean
+          nullable: true
+          description: Indicates user has accepted or rejected the marketing optin message
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 formatted datetime string indicating when the access to the domain will expire
+      required:
+      - email
+    AccessCodeRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
+    DomainUserCreateRequest:
+      type: object
+      properties:
+        user:
+          allOf:
+          - $ref: '#/components/schemas/UserRequest'
+          description: User details
+        active:
+          type: boolean
+          description: Only active users have access to a private domain
+        marketing_optin:
+          type: boolean
+          nullable: true
+          description: Indicates user has accepted or rejected the marketing optin message.  Null indicates no marketing option message was shown to user
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 formatted datetime string indicating when the access to the domain will expire - ignored on public domains
+      required:
+      - user
+    UserRequest:
+      type: object
+      description: 'Version of the user serializer configured to lookup a user given the user''s email.  If a user with this email does
+
+        not yet exist, it will create a new User with given email, first_name and last_name parameters.'
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email address
+          description: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          description: First name
+          maxLength: 50
+        last_name:
+          type: string
+          description: Last name
+          maxLength: 50
+      required:
+      - email
+    BulkDomainUserCreateRequest:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkUserRequest'
+          description: List of users to create. Maximum 1000 users per request.
+          maxItems: 1000
+          minItems: 1
+      required:
+      - users
+    DomainUserUpdateRequest:
+      type: object
+      properties:
+        active:
+          type: boolean
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        access_code:
+          allOf:
+          - $ref: '#/components/schemas/AccessCodeRequest'
+          nullable: true
+          description: Information about the access code entered by the user, if they used one to join a private domain
+    DomainUserUpdate:
+      type: object
+      properties:
+        user:
+          allOf:
+          - $ref: '#/components/schemas/User'
+          readOnly: true
+          description: User details
+        active:
+          type: boolean
+        marketing_optin:
+          type: boolean
+          readOnly: true
+          nullable: true
+        enrolled_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: ISO 8601 formatted datetime string indicating when the user was first added to the domain
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        access_code:
+          allOf:
+          - $ref: '#/components/schemas/AccessCode'
+          nullable: true
+          description: Information about the access code entered by the user, if they used one to join a private domain
+        signup_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSignupFieldValue'
+          readOnly: true
+        login_token:
+          type: string
+          readOnly: true
+          description: Single-use login token, included in response if the domain is configured to used token-based SSO
+    AccessCode:
+      type: object
+      properties:
+        id:
+          type: string
+        code:
+          type: string
+          readOnly: true
+          description: Code entered by the user to join the private domain
+        pool:
+          allOf:
+          - $ref: '#/components/schemas/AccessCodePool'
+          readOnly: true
+          description: Pool of access codes to which this code belongs
+      required:
+      - id
+    DomainUserListItem:
+      type: object
+      properties:
+        user:
+          allOf:
+          - $ref: '#/components/schemas/User'
+          readOnly: true
+          description: User details
+        active:
+          type: boolean
+          description: Only active users have access to a private domain
+        marketing_optin:
+          type: boolean
+          nullable: true
+          description: Indicates user has accepted or rejected the marketing optin message.  Null indicates no marketing option message was shown to user
+        enrolled_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: ISO 8601 formatted datetime string indicating when the user was first added to the domain
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 formatted datetime string indicating when the access to the domain will expire - ignored on public domains
+        access_code:
+          allOf:
+          - $ref: '#/components/schemas/AccessCode'
+          readOnly: true
+          description: Information about the access code entered by the user, if they used one to join a private domain
+    DomainUserCreate:
+      type: object
+      properties:
+        user:
+          allOf:
+          - $ref: '#/components/schemas/User'
+          description: User details
+        active:
+          type: boolean
+          description: Only active users have access to a private domain
+        marketing_optin:
+          type: boolean
+          nullable: true
+          description: Indicates user has accepted or rejected the marketing optin message.  Null indicates no marketing option message was shown to user
+        enrolled_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: ISO 8601 formatted datetime string indicating when the user was first added to the domain
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 formatted datetime string indicating when the access to the domain will expire - ignored on public domains
+        access_code:
+          allOf:
+          - $ref: '#/components/schemas/AccessCode'
+          readOnly: true
+          description: Information about the access code entered by the user, if they used one to join a private domain
+        signup_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSignupFieldValue'
+          readOnly: true
+        login_token:
+          type: string
+          readOnly: true
+          description: Single-use login token, included in response if the domain is configured to used token-based SSO
+      required:
+      - user
+    SignupFieldSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+          readOnly: true
+      required:
+      - id
+    User:
+      type: object
+      description: 'Version of the user serializer configured to lookup a user given the user''s email.  If a user with this email does
+
+        not yet exist, it will create a new User with given email, first_name and last_name parameters.'
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          title: Email address
+          description: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          description: First name
+          maxLength: 50
+        last_name:
+          type: string
+          description: Last name
+          maxLength: 50
+        full_name:
+          type: string
+          readOnly: true
+      required:
+      - email
+    PatchedDomainUserUpdateRequest:
+      type: object
+      properties:
+        active:
+          type: boolean
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        access_code:
+          allOf:
+          - $ref: '#/components/schemas/AccessCodeRequest'
+          nullable: true
+          description: Information about the access code entered by the user, if they used one to join a private domain
+    UserSignupFieldValue:
+      type: object
+      properties:
+        signup_field:
+          $ref: '#/components/schemas/SignupFieldSummary'
+        value:
+          type: string
+      required:
+      - signup_field
+      - value
+    PaginatedDomainUserListItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DomainUserListItem'
+    DomainUserDetail:
+      type: object
+      properties:
+        user:
+          allOf:
+          - $ref: '#/components/schemas/User'
+          readOnly: true
+          description: User details
+        active:
+          type: boolean
+          description: Only active users have access to a private domain
+        marketing_optin:
+          type: boolean
+          nullable: true
+          description: Indicates user has accepted or rejected the marketing optin message.  Null indicates no marketing option message was shown to user
+        enrolled_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: ISO 8601 formatted datetime string indicating when the user was first added to the domain
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 formatted datetime string indicating when the access to the domain will expire - ignored on public domains
+        access_code:
+          allOf:
+          - $ref: '#/components/schemas/AccessCode'
+          readOnly: true
+          description: Information about the access code entered by the user, if they used one to join a private domain
+        signup_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSignupFieldValue'
+          readOnly: true
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

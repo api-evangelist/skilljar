@@ -1,0 +1,386 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Catalog Page > Page Items (Classic) API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Catalog Page > Page Items (Classic)
+paths:
+  /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/classic-page-items:
+    get:
+      operationId: domains_catalog_pages_classic_page_items_list
+      description: Retrieve a paginated list of all catalog page items for the specified catalog page.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - Domains > Catalog Page > Page Items (Classic)
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedClassicCatalogPageItemList'
+          description: ''
+    post:
+      operationId: domains_catalog_pages_classic_page_items_create
+      description: Create a new catalog page item within the specified catalog page. Only one item can be added at a time.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Page > Page Items (Classic)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClassicCatalogPageItemRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ClassicCatalogPageItemRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ClassicCatalogPageItemRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassicCatalogPageItem'
+          description: ''
+  /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/classic-page-items/{id}:
+    get:
+      operationId: domains_catalog_pages_classic_page_items_retrieve
+      description: Retrieve detailed information for a specific catalog page item within the catalog page.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Page > Page Items (Classic)
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassicCatalogPageItem'
+          description: ''
+    put:
+      operationId: domains_catalog_pages_classic_page_items_update
+      description: Update the order of a specific catalog page item within the catalog page.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Page > Page Items (Classic)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClassicCatalogPageItemOrderUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ClassicCatalogPageItemOrderUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ClassicCatalogPageItemOrderUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassicCatalogPageItemOrderUpdate'
+          description: ''
+    patch:
+      operationId: domains_catalog_pages_classic_page_items_partial_update
+      description: Update the order of a specific catalog page item within the catalog page
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Page > Page Items (Classic)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedClassicCatalogPageItemOrderUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedClassicCatalogPageItemOrderUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedClassicCatalogPageItemOrderUpdateRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassicCatalogPageItemOrderUpdate'
+          description: ''
+    delete:
+      operationId: domains_catalog_pages_classic_page_items_destroy
+      description: Delete a catalog page item from the catalog page.
+      parameters:
+      - in: path
+        name: catalog_page_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Catalog Page > Page Items (Classic)
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    PatchedClassicCatalogPageItemOrderUpdateRequest:
+      type: object
+      description: Serializer for updating the order of existing CatalogPageItem
+      properties:
+        order:
+          type: integer
+          minimum: 1
+    ClassicCatalogPageItemOrderUpdateRequest:
+      type: object
+      description: Serializer for updating the order of existing CatalogPageItem
+      properties:
+        order:
+          type: integer
+          minimum: 1
+    ClassicCatalogPageItem:
+      type: object
+      description: Serializer for Legacy CatalogPageItem
+      properties:
+        id:
+          type: string
+          readOnly: true
+        order:
+          type: integer
+          minimum: 1
+        type:
+          allOf:
+          - $ref: '#/components/schemas/Type62bEnum'
+          readOnly: true
+        item_catalog_page_id:
+          type: string
+        item_published_path_id:
+          type: string
+        item_published_course_id:
+          type: string
+        item_plan_id:
+          type: string
+    Type62bEnum:
+      enum:
+      - CATALOG_PAGE
+      - COURSE_SERIES
+      - PUBLISHED_COURSE
+      - PLAN
+      - PUBLISHED_PATH
+      type: string
+      description: '* `CATALOG_PAGE` - CATALOG_PAGE
+
+        * `COURSE_SERIES` - COURSE_SERIES
+
+        * `PUBLISHED_COURSE` - PUBLISHED_COURSE
+
+        * `PLAN` - PLAN
+
+        * `PUBLISHED_PATH` - PUBLISHED_PATH'
+    ClassicCatalogPageItemRequest:
+      type: object
+      description: Serializer for Legacy CatalogPageItem
+      properties:
+        order:
+          type: integer
+          minimum: 1
+        item_catalog_page_id:
+          type: string
+          minLength: 1
+        item_published_path_id:
+          type: string
+          minLength: 1
+        item_published_course_id:
+          type: string
+          minLength: 1
+        item_plan_id:
+          type: string
+          minLength: 1
+    PaginatedClassicCatalogPageItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClassicCatalogPageItem'
+    ClassicCatalogPageItemOrderUpdate:
+      type: object
+      description: Serializer for updating the order of existing CatalogPageItem
+      properties:
+        id:
+          type: string
+          readOnly: true
+        order:
+          type: integer
+          minimum: 1
+        type:
+          allOf:
+          - $ref: '#/components/schemas/Type62bEnum'
+          readOnly: true
+        item_catalog_page_id:
+          type: string
+          readOnly: true
+        item_published_path_id:
+          type: string
+          readOnly: true
+        item_published_course_id:
+          type: string
+          readOnly: true
+        item_plan_id:
+          type: string
+          readOnly: true
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer

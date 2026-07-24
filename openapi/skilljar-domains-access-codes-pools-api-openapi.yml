@@ -1,0 +1,406 @@
+openapi: 3.0.3
+info:
+  title: Skilljar Assets Domains > Access Codes > Pools API
+  version: 1.0.0
+  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
+
+
+    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
+
+
+    ## Getting Started
+
+
+    New to the Skilljar API? Check out these essential resources:
+
+
+    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
+
+    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
+
+    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
+
+    '
+tags:
+- name: Domains > Access Codes > Pools
+paths:
+  /v1/domains/{domain_name}/access-code-pools:
+    get:
+      operationId: domains_access_code_pools_list
+      description: 'List access code pools.
+
+
+        Retrieve a paginated list of access code pools for a domain.
+
+        Pools can be filtered by name using the `name` query parameter.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      - in: query
+        name: name
+        schema:
+          type: string
+        description: Filter returned access code pools by name
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - Domains > Access Codes > Pools
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDomainAccessCodePoolListItemList'
+          description: ''
+    post:
+      operationId: domains_access_code_pools_create
+      description: 'Create an access code pool.
+
+
+        Create a new, empty pool of access codes for the specified domain.
+
+        The pool can be used to manage and distribute access codes to learners.'
+      parameters:
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Access Codes > Pools
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainAccessCodePoolDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DomainAccessCodePoolDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DomainAccessCodePoolDetailRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainAccessCodePoolDetail'
+          description: ''
+  /v1/domains/{domain_name}/access-code-pools/{access_code_pool_id}:
+    get:
+      operationId: domains_access_code_pools_retrieve
+      description: 'Retrieve an access code pool.
+
+
+        Get details for a specific access code pool, including its name, status, validity period, and code count.'
+      parameters:
+      - in: path
+        name: access_code_pool_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Access Codes > Pools
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainAccessCodePoolDetail'
+          description: ''
+    put:
+      operationId: domains_access_code_pools_update
+      description: 'Update an access code pool.
+
+
+        Update the properties of an existing access code pool. Both PUT and PATCH requests are supported.'
+      parameters:
+      - in: path
+        name: access_code_pool_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Access Codes > Pools
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainAccessCodePoolDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DomainAccessCodePoolDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DomainAccessCodePoolDetailRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainAccessCodePoolDetail'
+          description: ''
+    patch:
+      operationId: domains_access_code_pools_partial_update
+      description: 'Update an access code pool.
+
+
+        Update the properties of an existing access code pool. Both PUT and PATCH requests are supported.'
+      parameters:
+      - in: path
+        name: access_code_pool_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Access Codes > Pools
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDomainAccessCodePoolDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDomainAccessCodePoolDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDomainAccessCodePoolDetailRequest'
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainAccessCodePoolDetail'
+          description: ''
+    delete:
+      operationId: domains_access_code_pools_destroy
+      description: 'Delete an access code pool.
+
+
+        Permanently delete an access code pool and all access codes it contains.'
+      parameters:
+      - in: path
+        name: access_code_pool_id
+        schema:
+          type: string
+          pattern: ^[0-9a-z]+$
+        required: true
+      - in: path
+        name: domain_name
+        schema:
+          type: string
+          pattern: ^[-:\.0-9a-z]+$
+        required: true
+      tags:
+      - Domains > Access Codes > Pools
+      security:
+      - OrganizationApiKey: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    DomainAccessCodePoolListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
+          maxLength: 255
+        active:
+          type: boolean
+          default: true
+        start_date:
+          type: string
+          format: date-time
+          nullable: true
+        end_date:
+          type: string
+          format: date-time
+          nullable: true
+        expire_linked_to_domain_membership:
+          type: boolean
+          description: When this is true and an end_date is set, a user who registers with a code from this pool will lose access to the domain on the end_date.
+        channel:
+          nullable: true
+          readOnly: true
+          oneOf:
+          - $ref: '#/components/schemas/ChannelEnum'
+          - $ref: '#/components/schemas/NullEnum'
+    PatchedDomainAccessCodePoolDetailRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
+          maxLength: 255
+        active:
+          type: boolean
+          default: true
+        start_date:
+          type: string
+          format: date-time
+          nullable: true
+        end_date:
+          type: string
+          format: date-time
+          nullable: true
+        expire_linked_to_domain_membership:
+          type: boolean
+          description: When this is true and an end_date is set, a user who registers with a code from this pool will lose access to the domain on the end_date.
+    PaginatedDomainAccessCodePoolListItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DomainAccessCodePoolListItem'
+    ChannelEnum:
+      enum:
+      - api
+      - import
+      - dashboard
+      - ecommerce
+      - unknown
+      type: string
+      description: '* `api` - API
+
+        * `import` - Import
+
+        * `dashboard` - Dashboard
+
+        * `ecommerce` - E-Commerce
+
+        * `unknown` - Unknown'
+    DomainAccessCodePoolDetailRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
+          maxLength: 255
+        active:
+          type: boolean
+          default: true
+        start_date:
+          type: string
+          format: date-time
+          nullable: true
+        end_date:
+          type: string
+          format: date-time
+          nullable: true
+        expire_linked_to_domain_membership:
+          type: boolean
+          description: When this is true and an end_date is set, a user who registers with a code from this pool will lose access to the domain on the end_date.
+    DomainAccessCodePoolDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
+          maxLength: 255
+        active:
+          type: boolean
+          default: true
+        start_date:
+          type: string
+          format: date-time
+          nullable: true
+        end_date:
+          type: string
+          format: date-time
+          nullable: true
+        expire_linked_to_domain_membership:
+          type: boolean
+          description: When this is true and an end_date is set, a user who registers with a code from this pool will lose access to the domain on the end_date.
+        channel:
+          nullable: true
+          readOnly: true
+          oneOf:
+          - $ref: '#/components/schemas/ChannelEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        code_count:
+          type: integer
+          readOnly: true
+    NullEnum:
+      enum:
+      - null
+  securitySchemes:
+    OrganizationApiKey:
+      type: http
+      scheme: basic
+      description: API key authentication using HTTP Basic Auth. Use your API key as the username and leave password empty.
+    tokenAuth:
+      type: http
+      scheme: bearer
