@@ -1,0 +1,16 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/skilljar-openapi-original.yml
+skills:
+- file: skilljar-enroll-user-in-course.md
+  name: Enroll a user in a published course
+  api: openapi/skilljar-openapi-original.yml
+  operations: [domains_users_create, domains_users_retrieve, domains_published_courses_list, domains_published_courses_enrollments_create, domains_published_courses_enrollments_list]
+- file: skilljar-subscribe-to-webhooks.md
+  name: Subscribe to Skilljar platform events with webhooks
+  api: openapi/skilljar-openapi-original.yml
+  operations: [webhooks_create, webhooks_list, webhooks_ping_create, webhooks_sample_course_completion_retrieve, webhooks_destroy]
+- file: skilljar-report-learner-progress.md
+  name: Report a learner's course progress
+  api: openapi/skilljar-openapi-original.yml
+  operations: [users_list, users_retrieve, users_published_courses_list, users_published_courses_lessons_list, lesson_progress_retrieve]

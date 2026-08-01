@@ -1,8 +1,29 @@
 aid: skilljar
 name: Skilljar
-description: 'Skilljar is a company surfaced as a portfolio company of insight-partners, techstars and
-  added to the API Evangelist network as a stub for enrichment. Sector: education. This profile is a lead
-  awaiting the enrichment pipeline.'
+description: >-
+  Skilljar is a customer education and external learning management (LMS)
+  platform, now part of Gainsight, used to build, publish, and measure training
+  academies, courses, learning paths, and certification programs for customers
+  and partners. Its REST API provides comprehensive programmatic access to the
+  platform: courses and lessons, published courses and catalog pages, learning
+  paths, training domains, users and groups, enrollments and progress, quizzes
+  and question banks, purchases and promo codes, instructor-led and virtual
+  (VILT) training, and real-time webhooks. The published OpenAPI 3.0.3 definition
+  covers 160 paths and 340 operations across 420 schemas, with an HTTP Basic
+  API-key v1 surface and a newer v2 OAuth 2.0 surface (PKCE, ~89 scopes).
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://cdn.prod.website-files.com/65f2e85a59750ccb710adbf3/65f97abc87919ff34fc3f4ea_Favicon.svg
 url: https://raw.githubusercontent.com/api-evangelist/skilljar/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -13,16 +34,1560 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
 - Education
-apis: []
+- Learning Management System
+- Customer Education
+- Training
+- Online Courses
+- Certification
+- Webhooks
+- Enrollment
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: skilljar:skilljar-assets-api
+  name: Skilljar Assets API
+  description: The Assets API from Skilljar — 2 operation(s) for assets.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Assets
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-assets-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-courses-api
+  name: Skilljar Courses API
+  description: The Courses API from Skilljar — 2 operation(s) for courses.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Courses
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-courses-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-courses-labels-api
+  name: Skilljar Courses > Labels API
+  description: The Courses > Labels API from Skilljar — 2 operation(s) for courses > labels.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Courses > Labels
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-courses-labels-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-courses-lessons-api
+  name: Skilljar Courses > Lessons API
+  description: The Courses > Lessons API from Skilljar — 2 operation(s) for courses > lessons.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Courses > Lessons
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-courses-lessons-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-access-codes-codes-api
+  name: Skilljar Domains > Access Codes > Codes API
+  description: >-
+    The Domains > Access Codes > Codes API from Skilljar — 2 operation(s) for domains > access codes >
+    codes.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Access Codes > Codes
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-access-codes-codes-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-access-codes-pools-api
+  name: Skilljar Domains > Access Codes > Pools API
+  description: >-
+    The Domains > Access Codes > Pools API from Skilljar — 2 operation(s) for domains > access codes >
+    pools.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Access Codes > Pools
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-access-codes-pools-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-api
+  name: Skilljar Domains API
+  description: The Domains API from Skilljar — 4 operation(s) for domains.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-catalog-page-page-items-classic-api
+  name: Skilljar Domains > Catalog Page > Page Items (Classic) API
+  description: >-
+    The Domains > Catalog Page > Page Items (Classic) API from Skilljar — 2 operation(s) for domains >
+    catalog page > page items (classic).
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Catalog Page > Page Items (Classic)
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-catalog-page-page-items-classic-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-catalog-pages-api
+  name: Skilljar Domains > Catalog Pages API
+  description: >-
+    The Domains > Catalog Pages API from Skilljar — 2 operation(s) for domains > catalog pages.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Catalog Pages
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-catalog-pages-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-catalog-pages-builder-component-content-block-api
+  name: Skilljar Domains > Catalog Pages (Builder) > Component Content Block API
+  description: >-
+    The Domains > Catalog Pages (Builder) > Component Content Block API from Skilljar — 1 operation(s)
+    for domains > catalog pages (builder) > component content block.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Catalog Pages (Builder) > Component Content Block
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-catalog-pages-builder-component-content-block-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-catalog-pages-builder-content-blocks-api
+  name: Skilljar Domains > Catalog Pages (Builder) > Content Blocks API
+  description: >-
+    The Domains > Catalog Pages (Builder) > Content Blocks API from Skilljar — 2 operation(s) for domains
+    > catalog pages (builder) > content blocks.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Catalog Pages (Builder) > Content Blocks
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-catalog-pages-builder-content-blocks-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-catalog-pages-builder-html-content-blocks-api
+  name: Skilljar Domains > Catalog Pages (Builder) > HTML Content Blocks API
+  description: >-
+    The Domains > Catalog Pages (Builder) > HTML Content Blocks API from Skilljar — 1 operation(s) for
+    domains > catalog pages (builder) > html content blocks.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Catalog Pages (Builder) > HTML Content Blocks
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-catalog-pages-builder-html-content-blocks-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-catalog-pages-builder-tile-containers-api
+  name: Skilljar Domains > Catalog Pages (Builder) > Tile Containers API
+  description: >-
+    The Domains > Catalog Pages (Builder) > Tile Containers API from Skilljar — 1 operation(s) for domains
+    > catalog pages (builder) > tile containers.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Catalog Pages (Builder) > Tile Containers
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-catalog-pages-builder-tile-containers-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-catalog-pages-builder-tile-containers-tile-items-api
+  name: Skilljar Domains > Catalog Pages (Builder) > Tile Containers > Tile Items API
+  description: >-
+    The Domains > Catalog Pages (Builder) > Tile Containers > Tile Items API from Skilljar — 2 operation(s)
+    for domains > catalog pages (builder) > tile containers > tile items.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Catalog Pages (Builder) > Tile Containers > Tile Items
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/skilljar-domains-catalog-pages-builder-tile-containers-tile-items-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-catalog-pages-tags-api
+  name: Skilljar Domains > Catalog Pages > Tags API
+  description: >-
+    The Domains > Catalog Pages > Tags API from Skilljar — 2 operation(s) for domains > catalog pages
+    > tags.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Catalog Pages > Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-catalog-pages-tags-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-course-series-api
+  name: Skilljar Domains > Course Series API
+  description: >-
+    The Domains > Course Series API from Skilljar — 2 operation(s) for domains > course series.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Course Series
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-course-series-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-course-series-published-courses-api
+  name: Skilljar Domains > Course Series > Published Courses API
+  description: >-
+    The Domains > Course Series > Published Courses API from Skilljar — 1 operation(s) for domains > course
+    series > published courses.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Course Series > Published Courses
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-course-series-published-courses-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-manager-access-api
+  name: Skilljar Domains > Manager Access API
+  description: >-
+    The Domains > Manager Access API from Skilljar — 1 operation(s) for domains > manager access.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Manager Access
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-manager-access-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-plans-api
+  name: Skilljar Domains > Plans API
+  description: The Domains > Plans API from Skilljar — 2 operation(s) for domains > plans.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Plans
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-plans-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-plans-enrollments-api
+  name: Skilljar Domains > Plans > Enrollments API
+  description: >-
+    The Domains > Plans > Enrollments API from Skilljar — 2 operation(s) for domains > plans > enrollments.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Plans > Enrollments
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-plans-enrollments-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-published-courses-api
+  name: Skilljar Domains > Published Courses API
+  description: >-
+    The Domains > Published Courses API from Skilljar — 2 operation(s) for domains > published courses.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Published Courses
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-published-courses-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-published-courses-enrollments-api
+  name: Skilljar Domains > Published Courses > Enrollments API
+  description: >-
+    The Domains > Published Courses > Enrollments API from Skilljar — 2 operation(s) for domains > published
+    courses > enrollments.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Published Courses > Enrollments
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-published-courses-enrollments-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-published-courses-prerequisites-api
+  name: Skilljar Domains > Published Courses > Prerequisites API
+  description: >-
+    The Domains > Published Courses > Prerequisites API from Skilljar — 2 operation(s) for domains > published
+    courses > prerequisites.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Published Courses > Prerequisites
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-published-courses-prerequisites-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-published-courses-reenrollment-rule-api
+  name: Skilljar Domains > Published Courses > Reenrollment Rule API
+  description: >-
+    The Domains > Published Courses > Reenrollment Rule API from Skilljar — 1 operation(s) for domains
+    > published courses > reenrollment rule.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Published Courses > Reenrollment Rule
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-published-courses-reenrollment-rule-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-published-courses-student-group-prerequisites-api
+  name: Skilljar Domains > Published Courses > Student Group Prerequisites API
+  description: >-
+    The Domains > Published Courses > Student Group Prerequisites API from Skilljar — 2 operation(s) for
+    domains > published courses > student group prerequisites.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Published Courses > Student Group Prerequisites
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-published-courses-student-group-prerequisites-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-published-courses-tags-api
+  name: Skilljar Domains > Published Courses > Tags API
+  description: >-
+    The Domains > Published Courses > Tags API from Skilljar — 2 operation(s) for domains > published
+    courses > tags.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Published Courses > Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-published-courses-tags-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-published-courses-visibility-overrides-api
+  name: Skilljar Domains > Published Courses > Visibility Overrides API
+  description: >-
+    The Domains > Published Courses > Visibility Overrides API from Skilljar — 2 operation(s) for domains
+    > published courses > visibility overrides.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Published Courses > Visibility Overrides
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-published-courses-visibility-overrides-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-published-paths-api
+  name: Skilljar Domains > Published Paths API
+  description: >-
+    The Domains > Published Paths API from Skilljar — 2 operation(s) for domains > published paths.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Published Paths
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-published-paths-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-published-paths-enrollments-api
+  name: Skilljar Domains > Published Paths > Enrollments API
+  description: >-
+    The Domains > Published Paths > Enrollments API from Skilljar — 2 operation(s) for domains > published
+    paths > enrollments.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Published Paths > Enrollments
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-published-paths-enrollments-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-published-paths-labels-api
+  name: Skilljar Domains > Published Paths > Labels API
+  description: >-
+    The Domains > Published Paths > Labels API from Skilljar — 2 operation(s) for domains > published
+    paths > labels.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Published Paths > Labels
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-published-paths-labels-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-published-paths-path-items-api
+  name: Skilljar Domains > Published Paths > Path Items API
+  description: >-
+    The Domains > Published Paths > Path Items API from Skilljar — 2 operation(s) for domains > published
+    paths > path items.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Published Paths > Path Items
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-published-paths-path-items-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-published-paths-tags-api
+  name: Skilljar Domains > Published Paths > Tags API
+  description: >-
+    The Domains > Published Paths > Tags API from Skilljar — 2 operation(s) for domains > published paths
+    > tags.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Published Paths > Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-published-paths-tags-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-published-paths-visibility-overrides-api
+  name: Skilljar Domains > Published Paths > Visibility Overrides API
+  description: >-
+    The Domains > Published Paths > Visibility Overrides API from Skilljar — 2 operation(s) for domains
+    > published paths > visibility overrides.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Published Paths > Visibility Overrides
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-published-paths-visibility-overrides-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-signup-fields-api
+  name: Skilljar Domains > Signup Fields API
+  description: >-
+    The Domains > Signup Fields API from Skilljar — 1 operation(s) for domains > signup fields.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Signup Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-signup-fields-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-users-api
+  name: Skilljar Domains > Users API
+  description: The Domains > Users API from Skilljar — 3 operation(s) for domains > users.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Users
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-users-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-users-invites-api
+  name: Skilljar Domains > Users > Invites API
+  description: >-
+    The Domains > Users > Invites API from Skilljar — 2 operation(s) for domains > users > invites.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Users > Invites
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-users-invites-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-domains-users-signup-fields-api
+  name: Skilljar Domains > Users > Signup Fields API
+  description: >-
+    The Domains > Users > Signup Fields API from Skilljar — 3 operation(s) for domains > users > signup
+    fields.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Domains > Users > Signup Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-domains-users-signup-fields-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-group-categories-api
+  name: Skilljar Group Categories API
+  description: The Group Categories API from Skilljar — 2 operation(s) for group categories.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Group Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-group-categories-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-groups-access-code-pools-api
+  name: Skilljar Groups > Access Code Pools API
+  description: >-
+    The Groups > Access Code Pools API from Skilljar — 2 operation(s) for groups > access code pools.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Groups > Access Code Pools
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-groups-access-code-pools-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-groups-api
+  name: Skilljar Groups API
+  description: The Groups API from Skilljar — 2 operation(s) for groups.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-groups-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-groups-email-domain-rules-api
+  name: Skilljar Groups > Email Domain Rules API
+  description: >-
+    The Groups > Email Domain Rules API from Skilljar — 1 operation(s) for groups > email domain rules.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Groups > Email Domain Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-groups-email-domain-rules-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-groups-users-api
+  name: Skilljar Groups > Users API
+  description: The Groups > Users API from Skilljar — 2 operation(s) for groups > users.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Groups > Users
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-groups-users-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-instructor-led-events-sessions-api
+  name: Skilljar Instructor Led Events > Sessions API
+  description: >-
+    The Instructor Led Events > Sessions API from Skilljar — 2 operation(s) for instructor led events
+    > sessions.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Instructor Led Events > Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-instructor-led-events-sessions-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-instructor-led-training-instructors-api
+  name: Skilljar Instructor Led Training > Instructors API
+  description: >-
+    The Instructor Led Training > Instructors API from Skilljar — 2 operation(s) for instructor led training
+    > instructors.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Instructor Led Training > Instructors
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-instructor-led-training-instructors-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-instructor-led-training-multi-session-events-api
+  name: Skilljar Instructor Led Training > Multi-Session Events API
+  description: >-
+    The Instructor Led Training > Multi-Session Events API from Skilljar — 2 operation(s) for instructor
+    led training > multi-session events.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Instructor Led Training > Multi-Session Events
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-instructor-led-training-multi-session-events-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-labels-api
+  name: Skilljar Labels API
+  description: The Labels API from Skilljar — 2 operation(s) for labels.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Labels
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-labels-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-lesson-progress-api
+  name: Skilljar Lesson Progress API
+  description: The Lesson Progress API from Skilljar — 1 operation(s) for lesson progress.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Lesson Progress
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-lesson-progress-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-lessons-lesson-content-items-api
+  name: Skilljar Lessons > Lesson Content Items API
+  description: >-
+    The Lessons > Lesson Content Items API from Skilljar — 2 operation(s) for lessons > lesson content
+    items.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Lessons > Lesson Content Items
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-lessons-lesson-content-items-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-lessons-rating-content-blocks-api
+  name: Skilljar Lessons > Rating Content Blocks API
+  description: >-
+    The Lessons > Rating Content Blocks API from Skilljar — 2 operation(s) for lessons > rating content
+    blocks.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Lessons > Rating Content Blocks
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-lessons-rating-content-blocks-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-license-package-seats-api
+  name: Skilljar License Package Seats API
+  description: The License Package Seats API from Skilljar — 2 operation(s) for license package seats.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - License Package Seats
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-license-package-seats-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-license-packages-api
+  name: Skilljar License Packages API
+  description: The License Packages API from Skilljar — 2 operation(s) for license packages.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - License Packages
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-license-packages-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-offers-api
+  name: Skilljar Offers API
+  description: The Offers API from Skilljar — 2 operation(s) for offers.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Offers
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-offers-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-paths-api
+  name: Skilljar Paths API
+  description: The Paths API from Skilljar — 2 operation(s) for paths.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Paths
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-paths-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-paths-path-items-api
+  name: Skilljar Paths > Path Items API
+  description: The Paths > Path Items API from Skilljar — 2 operation(s) for paths > path items.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Paths > Path Items
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-paths-path-items-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-ping-api
+  name: Skilljar Ping API
+  description: The Ping API from Skilljar — 1 operation(s) for ping.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Ping
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-ping-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-progress-tokens-api
+  name: Skilljar Progress Tokens API
+  description: The Progress Tokens API from Skilljar — 2 operation(s) for progress tokens.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Progress Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-progress-tokens-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-promo-codes-codes-api
+  name: Skilljar Promo Codes > Codes API
+  description: The Promo Codes > Codes API from Skilljar — 2 operation(s) for promo codes > codes.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Promo Codes > Codes
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-promo-codes-codes-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-promo-codes-pools-api
+  name: Skilljar Promo Codes > Pools API
+  description: The Promo Codes > Pools API from Skilljar — 2 operation(s) for promo codes > pools.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Promo Codes > Pools
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-promo-codes-pools-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-promo-codes-promo-code-pools-offers-api
+  name: Skilljar Promo Codes > Promo Code Pools > Offers API
+  description: >-
+    The Promo Codes > Promo Code Pools > Offers API from Skilljar — 2 operation(s) for promo codes > promo
+    code pools > offers.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Promo Codes > Promo Code Pools > Offers
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-promo-codes-promo-code-pools-offers-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-purchases-api
+  name: Skilljar Purchases API
+  description: The Purchases API from Skilljar — 2 operation(s) for purchases.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Purchases
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-purchases-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-question-banks-api
+  name: Skilljar Question Banks API
+  description: The Question Banks API from Skilljar — 2 operation(s) for question banks.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Question Banks
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-question-banks-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-question-banks-questions-api
+  name: Skilljar Question Banks > Questions API
+  description: >-
+    The Question Banks > Questions API from Skilljar — 2 operation(s) for question banks > questions.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Question Banks > Questions
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-question-banks-questions-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-quiz-questions-api
+  name: Skilljar Quiz Questions API
+  description: The Quiz Questions API from Skilljar — 2 operation(s) for quiz questions.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Quiz Questions
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-quiz-questions-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-quizzes-api
+  name: Skilljar Quizzes API
+  description: The Quizzes API from Skilljar — 2 operation(s) for quizzes.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Quizzes
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-quizzes-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-quizzes-question-banks-api
+  name: Skilljar Quizzes > Question Banks API
+  description: >-
+    The Quizzes > Question Banks API from Skilljar — 2 operation(s) for quizzes > question banks.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Quizzes > Question Banks
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-quizzes-question-banks-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-quizzes-questions-api
+  name: Skilljar Quizzes > Questions API
+  description: The Quizzes > Questions API from Skilljar — 2 operation(s) for quizzes > questions.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Quizzes > Questions
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-quizzes-questions-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-tags-api
+  name: Skilljar tags API
+  description: The tags API from Skilljar — 2 operation(s) for tags.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - tags
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-tags-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-training-credit-codes-api
+  name: Skilljar Training Credit Codes API
+  description: The Training Credit Codes API from Skilljar — 2 operation(s) for training credit codes.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Training Credit Codes
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-training-credit-codes-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-users-api
+  name: Skilljar Users API
+  description: The Users API from Skilljar — 3 operation(s) for users.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-users-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-users-groups-api
+  name: Skilljar Users > Groups API
+  description: The Users > Groups API from Skilljar — 1 operation(s) for users > groups.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Users > Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-users-groups-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-users-learning-paths-api
+  name: Skilljar Users > Learning Paths API
+  description: >-
+    The Users > Learning Paths API from Skilljar — 1 operation(s) for users > learning paths.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Users > Learning Paths
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-users-learning-paths-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-users-plans-api
+  name: Skilljar Users > Plans API
+  description: The Users > Plans API from Skilljar — 1 operation(s) for users > plans.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Users > Plans
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-users-plans-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-users-published-courses-api
+  name: Skilljar Users > Published Courses API
+  description: >-
+    The Users > Published Courses API from Skilljar — 2 operation(s) for users > published courses.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Users > Published Courses
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-users-published-courses-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-users-published-courses-lessons-api
+  name: Skilljar Users > Published Courses > Lessons API
+  description: >-
+    The Users > Published Courses > Lessons API from Skilljar — 2 operation(s) for users > published courses
+    > lessons.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Users > Published Courses > Lessons
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-users-published-courses-lessons-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-vilt-session-events-api
+  name: Skilljar VILT > Session Events API
+  description: The VILT > Session Events API from Skilljar — 2 operation(s) for vilt > session events.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - VILT > Session Events
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-vilt-session-events-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-vilt-session-registrations-api
+  name: Skilljar VILT > Session Registrations API
+  description: >-
+    The VILT > Session Registrations API from Skilljar — 2 operation(s) for vilt > session registrations.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - VILT > Session Registrations
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-vilt-session-registrations-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-web-packages-api
+  name: Skilljar Web Packages API
+  description: The Web Packages API from Skilljar — 3 operation(s) for web packages.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Web Packages
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-web-packages-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
+- aid: skilljar:skilljar-webhooks-api
+  name: Skilljar Webhooks API
+  description: The Webhooks API from Skilljar — 13 operation(s) for webhooks.
+  humanURL: https://api.skilljar.com/
+  baseURL: https://api.skilljar.com/v1/
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/skilljar-webhooks-api-openapi.yml
+  - type: x-openapi-original
+    url: https://api.skilljar.com/docs/schema.yml
+  - type: APIReference
+    url: https://api.skilljar.com/
+  - type: Webhooks
+    url: asyncapi/skilljar-webhooks.yml
+  - type: OAuthScopes
+    url: scopes/skilljar-scopes.yml
 common:
 - type: Website
-  url: https://info.skilljar.com/insight-portfolio/
+  url: https://www.skilljar.com/
+- type: DeveloperPortal
+  url: https://api.skilljar.com/
+- type: Documentation
+  url: https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API
+- type: APIReference
+  url: https://api.skilljar.com/
+- type: GettingStarted
+  url: https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API
+- type: Support
+  url: https://support.gainsight.com/Skilljar
+- type: Blog
+  url: https://www.skilljar.com/blog
+- type: GitHubOrganization
+  url: https://github.com/skilljar
+- type: Pricing
+  url: https://www.skilljar.com/pricing
+- type: SignUp
+  url: https://dashboard.skilljar.com/
+- type: TermsOfService
+  url: https://www.skilljar.com/terms
+- type: PrivacyPolicy
+  url: https://www.skilljar.com/privacy
+- type: StatusPage
+  url: https://status.skilljar.com/
+- type: Authentication
+  url: authentication/skilljar-authentication.yml
+- type: OAuthScopes
+  url: scopes/skilljar-scopes.yml
+- type: Conventions
+  url: conventions/skilljar-conventions.yml
+- type: Idempotency
+  url: conventions/skilljar-conventions.yml
+- type: ErrorCatalog
+  url: errors/skilljar-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/skilljar-lifecycle.yml
+- type: WellKnown
+  url: well-known/skilljar-well-known.yml
+- type: Conformance
+  url: conformance/skilljar-conformance.yml
+- type: DomainSecurity
+  url: security/skilljar-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/skilljar-agentic-access.yml
+- type: MCPServer
+  url: mcp/skilljar-mcp.yml
+- type: LLMsTxt
+  url: llms/skilljar-llms.txt
+- type: DataModel
+  url: data-model/skilljar-data-model.yml
+- type: Webhooks
+  url: asyncapi/skilljar-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 20
+  pass: local-v1

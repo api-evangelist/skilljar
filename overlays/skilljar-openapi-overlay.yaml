@@ -1,0 +1,17 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Skilljar API
+  version: 1.0.0
+extends: openapi/skilljar-openapi-original.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-21'
+    x-apievangelist-provider: skilljar
+    x-apievangelist-notes: 'Base URL https://api.skilljar.com/v1/. Two auth surfaces: v1 HTTP Basic API
+      key + v2 OAuth 2.0 (PKCE, 89 scopes). Page-number pagination. Webhooks with 10 event types. Acquired
+      by Gainsight; docs on support.gainsight.com/Skilljar.'
+- target: $.servers
+  update:
+  - url: https://api.skilljar.com/v1
+    description: Skilljar v1 REST API (production)

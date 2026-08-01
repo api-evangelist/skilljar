@@ -1,0 +1,33 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/skilljar-openapi-original.yml
+standards:
+- id: oauth2
+  conforms: true
+  evidence: >-
+    v2 OAuth 2.0 authorization_code + refresh_token advertised via RFC 8414
+    metadata at /.well-known/oauth-authorization-server.
+- id: oauth2-pkce
+  conforms: true
+  evidence: code_challenge_methods_supported includes S256.
+- id: rfc8414-oauth-metadata
+  conforms: true
+  evidence: /.well-known/oauth-authorization-server returns 200 with full metadata.
+- id: rfc7591-dynamic-client-registration
+  conforms: true
+  evidence: registration_endpoint advertised at /v2/oauth/register.
+- id: oidc-discovery
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 (OAuth AS metadata only, not OIDC).
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Error envelope is a JSON:API-style errors[] array, not application/problem+json.
+- id: pagination
+  conforms: true
+  evidence: Page-number pagination (page/page_size) with count/next/previous/results envelope.
+- id: http-basic-auth
+  conforms: true
+  evidence: v1 Organization API key via HTTP Basic (RFC 7617).
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on api and www hosts.

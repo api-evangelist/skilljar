@@ -1,0 +1,1728 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/skilljar-openapi-original.yml
+note: No official hosted Skilljar MCP server was found. This is a candidate tool list derived one-to-one
+  from the published OpenAPI operations.
+server:
+  name: skilljar
+  transport: stdio
+tool_count: 340
+tools:
+- name: assets_list
+  description: Retrieve a paginated list of all assets in your organization.
+  method: GET
+  path: /v1/assets
+  source_operation: openapi/skilljar-openapi-original.yml#assets_list
+- name: assets_create
+  description: Upload a new asset to your organization.
+  method: POST
+  path: /v1/assets
+  source_operation: openapi/skilljar-openapi-original.yml#assets_create
+- name: assets_retrieve
+  description: Retrieve detailed information for a specific asset.
+  method: GET
+  path: /v1/assets/{asset_id}
+  source_operation: openapi/skilljar-openapi-original.yml#assets_retrieve
+- name: assets_destroy
+  description: Permanently delete an asset from your organization.
+  method: DELETE
+  path: /v1/assets/{asset_id}
+  source_operation: openapi/skilljar-openapi-original.yml#assets_destroy
+- name: courses_list
+  description: List all courses in your organization.
+  method: GET
+  path: /v1/courses
+  source_operation: openapi/skilljar-openapi-original.yml#courses_list
+- name: courses_create
+  description: Create a new course.
+  method: POST
+  path: /v1/courses
+  source_operation: openapi/skilljar-openapi-original.yml#courses_create
+- name: courses_retrieve
+  description: Retrieve a single course.
+  method: GET
+  path: /v1/courses/{course_id}
+  source_operation: openapi/skilljar-openapi-original.yml#courses_retrieve
+- name: courses_update
+  description: Update an existing course.
+  method: PUT
+  path: /v1/courses/{course_id}
+  source_operation: openapi/skilljar-openapi-original.yml#courses_update
+- name: courses_partial_update
+  description: Partially update a course.
+  method: PATCH
+  path: /v1/courses/{course_id}
+  source_operation: openapi/skilljar-openapi-original.yml#courses_partial_update
+- name: courses_destroy
+  description: Delete a course and its drafts.
+  method: DELETE
+  path: /v1/courses/{course_id}
+  source_operation: openapi/skilljar-openapi-original.yml#courses_destroy
+- name: courses_labels_list
+  description: List all labels associated with a course.
+  method: GET
+  path: /v1/courses/{course_id}/labels
+  source_operation: openapi/skilljar-openapi-original.yml#courses_labels_list
+- name: courses_labels_create
+  description: Associate a label with a course.
+  method: POST
+  path: /v1/courses/{course_id}/labels
+  source_operation: openapi/skilljar-openapi-original.yml#courses_labels_create
+- name: courses_labels_retrieve
+  description: Retrieve a label association for a course.
+  method: GET
+  path: /v1/courses/{course_id}/labels/{label_id}
+  source_operation: openapi/skilljar-openapi-original.yml#courses_labels_retrieve
+- name: courses_labels_destroy
+  description: Remove a label association from a course.
+  method: DELETE
+  path: /v1/courses/{course_id}/labels/{label_id}
+  source_operation: openapi/skilljar-openapi-original.yml#courses_labels_destroy
+- name: domains_list
+  description: List all domains.
+  method: GET
+  path: /v1/domains
+  source_operation: openapi/skilljar-openapi-original.yml#domains_list
+- name: domains_retrieve
+  description: Retrieve a domain.
+  method: GET
+  path: /v1/domains/{domain_name}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_retrieve
+- name: domains_update
+  description: Update a domain.
+  method: PUT
+  path: /v1/domains/{domain_name}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_update
+- name: domains_partial_update
+  description: Partially update a domain.
+  method: PATCH
+  path: /v1/domains/{domain_name}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_partial_update
+- name: domains_access_code_pools_list
+  description: List access code pools.
+  method: GET
+  path: /v1/domains/{domain_name}/access-code-pools
+  source_operation: openapi/skilljar-openapi-original.yml#domains_access_code_pools_list
+- name: domains_access_code_pools_create
+  description: Create an access code pool.
+  method: POST
+  path: /v1/domains/{domain_name}/access-code-pools
+  source_operation: openapi/skilljar-openapi-original.yml#domains_access_code_pools_create
+- name: domains_access_code_pools_retrieve
+  description: Retrieve an access code pool.
+  method: GET
+  path: /v1/domains/{domain_name}/access-code-pools/{access_code_pool_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_access_code_pools_retrieve
+- name: domains_access_code_pools_update
+  description: Update an access code pool.
+  method: PUT
+  path: /v1/domains/{domain_name}/access-code-pools/{access_code_pool_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_access_code_pools_update
+- name: domains_access_code_pools_partial_update
+  description: Update an access code pool.
+  method: PATCH
+  path: /v1/domains/{domain_name}/access-code-pools/{access_code_pool_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_access_code_pools_partial_update
+- name: domains_access_code_pools_destroy
+  description: Delete an access code pool.
+  method: DELETE
+  path: /v1/domains/{domain_name}/access-code-pools/{access_code_pool_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_access_code_pools_destroy
+- name: domains_access_code_pools_access_codes_list
+  description: List access codes.
+  method: GET
+  path: /v1/domains/{domain_name}/access-code-pools/{access_code_pool_id}/access-codes
+  source_operation: openapi/skilljar-openapi-original.yml#domains_access_code_pools_access_codes_list
+- name: domains_access_code_pools_access_codes_create
+  description: Create an access code.
+  method: POST
+  path: /v1/domains/{domain_name}/access-code-pools/{access_code_pool_id}/access-codes
+  source_operation: openapi/skilljar-openapi-original.yml#domains_access_code_pools_access_codes_create
+- name: domains_access_code_pools_access_codes_retrieve
+  description: Retrieve an access code.
+  method: GET
+  path: /v1/domains/{domain_name}/access-code-pools/{access_code_pool_id}/access-codes/{access_code_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_access_code_pools_access_codes_retrieve
+- name: domains_access_code_pools_access_codes_update
+  description: Update an access code.
+  method: PUT
+  path: /v1/domains/{domain_name}/access-code-pools/{access_code_pool_id}/access-codes/{access_code_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_access_code_pools_access_codes_update
+- name: domains_access_code_pools_access_codes_partial_update
+  description: Update an access code.
+  method: PATCH
+  path: /v1/domains/{domain_name}/access-code-pools/{access_code_pool_id}/access-codes/{access_code_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_access_code_pools_access_codes_partial_update
+- name: domains_access_code_pools_access_codes_destroy
+  description: Delete an access code.
+  method: DELETE
+  path: /v1/domains/{domain_name}/access-code-pools/{access_code_pool_id}/access-codes/{access_code_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_access_code_pools_access_codes_destroy
+- name: domains_catalog_pages_list
+  description: Retrieve a paginated list of all catalog pages for the specified domain.
+  method: GET
+  path: /v1/domains/{domain_name}/catalog-pages
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_list
+- name: domains_catalog_pages_create
+  description: Create a new catalog page within the specified domain.
+  method: POST
+  path: /v1/domains/{domain_name}/catalog-pages
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_create
+- name: domains_catalog_pages_retrieve
+  description: Retrieve detailed information for a specific catalog page within the domain.
+  method: GET
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_retrieve
+- name: domains_catalog_pages_update
+  description: Update a specific catalog page within the domain.
+  method: PUT
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_update
+- name: domains_catalog_pages_partial_update
+  description: Partially update a specific catalog page within the domain.
+  method: PATCH
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_partial_update
+- name: domains_catalog_pages_destroy
+  description: Delete a catalog page from the domain.
+  method: DELETE
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_destroy
+- name: domains_catalog_pages_classic_page_items_list
+  description: Retrieve a paginated list of all catalog page items for the specified catalog page.
+  method: GET
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/classic-page-items
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_classic_page_items_list
+- name: domains_catalog_pages_classic_page_items_create
+  description: Create a new catalog page item within the specified catalog page. Only one item can be
+    added at a time.
+  method: POST
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/classic-page-items
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_classic_page_items_create
+- name: domains_catalog_pages_classic_page_items_retrieve
+  description: Retrieve detailed information for a specific catalog page item within the catalog page.
+  method: GET
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/classic-page-items/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_classic_page_items_retrieve
+- name: domains_catalog_pages_classic_page_items_update
+  description: Update the order of a specific catalog page item within the catalog page.
+  method: PUT
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/classic-page-items/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_classic_page_items_update
+- name: domains_catalog_pages_classic_page_items_partial_update
+  description: Update the order of a specific catalog page item within the catalog page
+  method: PATCH
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/classic-page-items/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_classic_page_items_partial_update
+- name: domains_catalog_pages_classic_page_items_destroy
+  description: Delete a catalog page item from the catalog page.
+  method: DELETE
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/classic-page-items/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_classic_page_items_destroy
+- name: domains_catalog_pages_component_content_blocks_retrieve
+  description: Retrieve details of the specified content block on the specified builder catalog page
+  method: GET
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/component-content-blocks/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_component_content_blocks_retrieve
+- name: domains_catalog_pages_component_content_blocks_update
+  description: Updates content for a specified content block on a specified builder catalog page
+  method: PUT
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/component-content-blocks/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_component_content_blocks_update
+- name: domains_catalog_pages_component_content_blocks_partial_update
+  description: Updates content for a specified content block on a specified builder catalog page
+  method: PATCH
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/component-content-blocks/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_component_content_blocks_partial_update
+- name: domains_catalog_pages_content_blocks_list
+  description: Retrieve a paginated list of all content blocks for the specified builder catalog page.
+  method: GET
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/content-blocks
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_content_blocks_list
+- name: domains_catalog_pages_content_blocks_create
+  description: Create a new content block on the specified builder catalog page. Only one item can be
+    added at a time.
+  method: POST
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/content-blocks
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_content_blocks_create
+- name: domains_catalog_pages_content_blocks_retrieve
+  description: Retrieve detailed information for a specific content block within the specified builder
+    catalog page.
+  method: GET
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/content-blocks/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_content_blocks_retrieve
+- name: domains_catalog_pages_content_blocks_update
+  description: Update the order of a specific content block within the specified builder catalog page.
+  method: PUT
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/content-blocks/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_content_blocks_update
+- name: domains_catalog_pages_content_blocks_partial_update
+  description: Update the order of a specific content block within the specified builder catalog page
+  method: PATCH
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/content-blocks/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_content_blocks_partial_update
+- name: domains_catalog_pages_content_blocks_destroy
+  description: Delete a content block from the specified builder catalog page.
+  method: DELETE
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/content-blocks/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_content_blocks_destroy
+- name: domains_catalog_pages_html_content_blocks_retrieve
+  description: Retrieve details of the specified HTML content block on the specified builder catalog page
+  method: GET
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/html-content-blocks/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_html_content_blocks_retrieve
+- name: domains_catalog_pages_html_content_blocks_update
+  description: Updates HTML content for a specified html content block on a specified builder catalog
+    page
+  method: PUT
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/html-content-blocks/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_html_content_blocks_update
+- name: domains_catalog_pages_html_content_blocks_partial_update
+  description: Updates HTML content for a specified html content block on a specified catalog page
+  method: PATCH
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/html-content-blocks/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_html_content_blocks_partial_update
+- name: domains_catalog_pages_tags_list
+  description: List Tags on a Catalog Page.
+  method: GET
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/tags
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_tags_list
+- name: domains_catalog_pages_tags_create
+  description: Add a Tag to a Catalog Page.
+  method: POST
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/tags
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_tags_create
+- name: domains_catalog_pages_tags_retrieve
+  description: Retrieve Tag details.
+  method: GET
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/tags/{tag_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_tags_retrieve
+- name: domains_catalog_pages_tags_destroy
+  description: Removes a Tag from a Catalog Page and returns a `204` response.
+  method: DELETE
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/tags/{tag_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_tags_destroy
+- name: domains_catalog_pages_tile_container_content_blocks_retrieve
+  description: Retrieve information for a specific tile container content block.
+  method: GET
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/tile-container-content-blocks/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_tile_container_content_blocks_retrieve
+- name: domains_catalog_pages_tile_container_content_blocks_update
+  description: Update a specific tile container content block.
+  method: PUT
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/tile-container-content-blocks/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_tile_container_content_blocks_update
+- name: domains_catalog_pages_tile_container_content_blocks_partial_update
+  description: Partially update a specific tile container content block.
+  method: PATCH
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/tile-container-content-blocks/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_tile_container_content_blocks_partial_update
+- name: domains_catalog_pages_tile_container_content_blocks_items_list
+  description: Retrieve a paginated list of all catalog page items for the specified builder catalog page
+    content block.
+  method: GET
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/tile-container-content-blocks/{tile_container_id}/items
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_tile_container_content_blocks_items_list
+- name: domains_catalog_pages_tile_container_content_blocks_items_create
+  description: Create a new catalog page item within the specified builder catalog page content block.
+  method: POST
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/tile-container-content-blocks/{tile_container_id}/items
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_tile_container_content_blocks_items_create
+- name: domains_catalog_pages_tile_container_content_blocks_items_retrieve
+  description: Retrieve information for a specific catalog page item within the builder catalog page content
+    block.
+  method: GET
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/tile-container-content-blocks/{tile_container_id}/items/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_tile_container_content_blocks_items_retrieve
+- name: domains_catalog_pages_tile_container_content_blocks_items_update
+  description: Update the order of a specific catalog page item within the builder catalog page content
+    block.
+  method: PUT
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/tile-container-content-blocks/{tile_container_id}/items/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_tile_container_content_blocks_items_update
+- name: domains_catalog_pages_tile_container_content_blocks_items_partial_update
+  description: Update the order of a specific catalog page item within the builder catalog page content
+    block.
+  method: PATCH
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/tile-container-content-blocks/{tile_container_id}/items/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_tile_container_content_blocks_items_partial_update
+- name: domains_catalog_pages_tile_container_content_blocks_items_destroy
+  description: Manage items in a Catalog Tile Content Block on a Builder Catalog Page.
+  method: DELETE
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/tile-container-content-blocks/{tile_container_id}/items/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_tile_container_content_blocks_items_destroy
+- name: domains_catalog_pages_visibility_overrides_list
+  description: List Student Group visibility overrides for a given Catalog Page.
+  method: GET
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/visibility-overrides
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_visibility_overrides_list
+- name: domains_catalog_pages_visibility_overrides_create
+  description: Create a Student Group visibility override for a Catalog Page.
+  method: POST
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/visibility-overrides
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_visibility_overrides_create
+- name: domains_catalog_pages_visibility_overrides_retrieve
+  description: Retrieve Student Group visibility override for Catalog Page.
+  method: GET
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/visibility-overrides/{student_group_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_visibility_overrides_retrieve
+- name: domains_catalog_pages_visibility_overrides_destroy
+  description: Deletes a Student Group visibility override for a Catalog Page and returns a `204` response.
+  method: DELETE
+  path: /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/visibility-overrides/{student_group_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_catalog_pages_visibility_overrides_destroy
+- name: domains_course_series_list
+  description: Retrieve a paginated list of all course series for the specified domain.
+  method: GET
+  path: /v1/domains/{domain_name}/course-series
+  source_operation: openapi/skilljar-openapi-original.yml#domains_course_series_list
+- name: domains_course_series_retrieve
+  description: Retrieve detailed information for a specific course series within the domain.
+  method: GET
+  path: /v1/domains/{domain_name}/course-series/{course_series_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_course_series_retrieve
+- name: domains_course_series_published_courses_list
+  description: Retrieve a paginated list of all published courses in the specified course series for this
+    domain.
+  method: GET
+  path: /v1/domains/{domain_name}/course-series/{course_series_id}/published-courses
+  source_operation: openapi/skilljar-openapi-original.yml#domains_course_series_published_courses_list
+- name: domains_plan_list
+  description: List all Plans available in the specified Domain.
+  method: GET
+  path: /v1/domains/{domain_name}/plan
+  source_operation: openapi/skilljar-openapi-original.yml#domains_plan_list
+- name: domains_plan_retrieve
+  description: Retrieve details for a specific Plan within a Domain.
+  method: GET
+  path: /v1/domains/{domain_name}/plan/{plan_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_plan_retrieve
+- name: domains_plan_plan_enrollments_list
+  description: List all enrollments for a specific Plan.
+  method: GET
+  path: /v1/domains/{domain_name}/plan/{plan_id}/plan-enrollments
+  source_operation: openapi/skilljar-openapi-original.yml#domains_plan_plan_enrollments_list
+- name: domains_plan_plan_enrollments_create
+  description: Enroll a user in a Plan.
+  method: POST
+  path: /v1/domains/{domain_name}/plan/{plan_id}/plan-enrollments
+  source_operation: openapi/skilljar-openapi-original.yml#domains_plan_plan_enrollments_create
+- name: domains_plan_plan_enrollments_retrieve
+  description: Retrieve details for a specific Plan enrollment.
+  method: GET
+  path: /v1/domains/{domain_name}/plan/{plan_id}/plan-enrollments/{plan_enrollment_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_plan_plan_enrollments_retrieve
+- name: domains_plan_plan_enrollments_update
+  description: Update details for a Plan enrollment.
+  method: PUT
+  path: /v1/domains/{domain_name}/plan/{plan_id}/plan-enrollments/{plan_enrollment_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_plan_plan_enrollments_update
+- name: domains_plan_plan_enrollments_partial_update
+  description: Update details for a Plan enrollment.
+  method: PATCH
+  path: /v1/domains/{domain_name}/plan/{plan_id}/plan-enrollments/{plan_enrollment_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_plan_plan_enrollments_partial_update
+- name: domains_published_courses_list
+  description: List all courses published to this domain.
+  method: GET
+  path: /v1/domains/{domain_name}/published-courses
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_list
+- name: domains_published_courses_create
+  description: Publish a course to this domain.
+  method: POST
+  path: /v1/domains/{domain_name}/published-courses
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_create
+- name: domains_published_courses_retrieve
+  description: Retrieve a published course for this domain.
+  method: GET
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_retrieve
+- name: domains_published_courses_update
+  description: Update a published course in this domain.
+  method: PUT
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_update
+- name: domains_published_courses_partial_update
+  description: Partially update a published course in this domain.
+  method: PATCH
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_partial_update
+- name: domains_published_courses_destroy
+  description: Unpublish a course from this domain.
+  method: DELETE
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_destroy
+- name: domains_published_courses_enrollments_list
+  description: List enrollments for a published course in this domain.
+  method: GET
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/enrollments
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_enrollments_list
+- name: domains_published_courses_enrollments_create
+  description: Enroll a user in a published course for this domain.
+  method: POST
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/enrollments
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_enrollments_create
+- name: domains_published_courses_enrollments_retrieve
+  description: Retrieve enrollment details for a published course in this domain.
+  method: GET
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/enrollments/{enrollment_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_enrollments_retrieve
+- name: domains_published_courses_enrollments_update
+  description: Update enrollment details for a published course in this domain.
+  method: PUT
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/enrollments/{enrollment_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_enrollments_update
+- name: domains_published_courses_enrollments_partial_update
+  description: Update enrollment details for a published course in this domain.
+  method: PATCH
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/enrollments/{enrollment_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_enrollments_partial_update
+- name: domains_published_courses_published_course_prerequisites_list
+  description: Retrieve a paginated list of prerequisites for a PublishedCourse belonging to your organization.
+  method: GET
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/published-course-prerequisites
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_published_course_prerequisites_list
+- name: domains_published_courses_published_course_prerequisites_create
+  description: Link a prerequisite course to a PublishedCourse.
+  method: POST
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/published-course-prerequisites
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_published_course_prerequisites_create
+- name: domains_published_courses_published_course_prerequisites_destroy
+  description: Unlink a prerequisite from a PublishedCourse. Returns a `204 No Content` response on success.
+  method: DELETE
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/published-course-prerequisites/{prerequisite_published_course_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_published_course_prerequisites_destroy
+- name: domains_published_courses_reenrollment_rule_retrieve
+  description: Get the reenrollment rule for a `PublishedCourse` instance.
+  method: GET
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/reenrollment_rule
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_reenrollment_rule_retrieve
+- name: domains_published_courses_reenrollment_rule_create
+  description: Create the reenrollment rule for a `PublishedCourse` instance.
+  method: POST
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/reenrollment_rule
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_reenrollment_rule_create
+- name: domains_published_courses_reenrollment_rule_update
+  description: Update the reenrollment rule for a `PublishedCourse`.
+  method: PUT
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/reenrollment_rule
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_reenrollment_rule_update
+- name: domains_published_courses_reenrollment_rule_partial_update
+  description: Update the reenrollment rule for a `PublishedCourse`.
+  method: PATCH
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/reenrollment_rule
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_reenrollment_rule_partial_update
+- name: domains_published_courses_reenrollment_rule_destroy
+  description: Delete the reenrollment rule for a published course. Returns a `204 No Content` response
+    on success.
+  method: DELETE
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/reenrollment_rule
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_reenrollment_rule_destroy
+- name: domains_published_courses_student_group_prerequisites_list
+  description: List StudentGroup prerequisites for a PublishedCourse.
+  method: GET
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/student-group-prerequisites
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_student_group_prerequisites_list
+- name: domains_published_courses_student_group_prerequisites_create
+  description: Adds a StudentGroup prerequisite for a PublishedCourse and returns a `201` response.
+  method: POST
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/student-group-prerequisites
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_student_group_prerequisites_create
+- name: domains_published_courses_student_group_prerequisites_retrieve
+  description: Retrieve a StudentGroup prerequisite for a PublishedCourse.
+  method: GET
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/student-group-prerequisites/{student_group_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_student_group_prerequisites_retrieve
+- name: domains_published_courses_student_group_prerequisites_destroy
+  description: Removes a StudentGroup prerequisite for a PublishedCourse and returns a `204` response.
+  method: DELETE
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/student-group-prerequisites/{student_group_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_student_group_prerequisites_destroy
+- name: domains_published_courses_tags_list
+  description: List Tags on a Published Course.
+  method: GET
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/tags
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_tags_list
+- name: domains_published_courses_tags_create
+  description: Add a Tag to a Published Course.
+  method: POST
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/tags
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_tags_create
+- name: domains_published_courses_tags_retrieve
+  description: Retrieve Tag details.
+  method: GET
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/tags/{tag_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_tags_retrieve
+- name: domains_published_courses_tags_destroy
+  description: Removes a Tag from a Published Course and returns a `204` response.
+  method: DELETE
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/tags/{tag_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_tags_destroy
+- name: domains_published_courses_visibility_overrides_list
+  description: List StudentGroup visibility overrides for PublishedCourse.
+  method: GET
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/visibility-overrides
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_visibility_overrides_list
+- name: domains_published_courses_visibility_overrides_create
+  description: Create StudentGroup visibility override for a PublishedCourse
+  method: POST
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/visibility-overrides
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_visibility_overrides_create
+- name: domains_published_courses_visibility_overrides_retrieve
+  description: Retrieve StudentGroup visibility override for PublishedCourse.
+  method: GET
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/visibility-overrides/{student_group_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_visibility_overrides_retrieve
+- name: domains_published_courses_visibility_overrides_destroy
+  description: Deletes a StudentGroup visibility override for a PublishedCourse and returns a `204` response.
+  method: DELETE
+  path: /v1/domains/{domain_name}/published-courses/{published_course_id}/visibility-overrides/{student_group_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_courses_visibility_overrides_destroy
+- name: domains_published_paths_list
+  description: List all Published Paths for the specified domain.
+  method: GET
+  path: /v1/domains/{domain_name}/published-paths
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_list
+- name: domains_published_paths_create
+  description: Create a new Published Path and its associated Path object.
+  method: POST
+  path: /v1/domains/{domain_name}/published-paths
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_create
+- name: domains_published_paths_retrieve
+  description: Retrieve details for a specific Published Path.
+  method: GET
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_retrieve
+- name: domains_published_paths_update
+  description: Update a Published Path.
+  method: PUT
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_update
+- name: domains_published_paths_partial_update
+  description: Partially update a Published Path.
+  method: PATCH
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_partial_update
+- name: domains_published_paths_destroy
+  description: Delete a Published Path.
+  method: DELETE
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_destroy
+- name: domains_published_paths_labels_list
+  description: List labels on a published path.
+  method: GET
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/labels
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_labels_list
+- name: domains_published_paths_labels_create
+  description: Associate a Label association to a Published Path.
+  method: POST
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/labels
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_labels_create
+- name: domains_published_paths_labels_retrieve
+  description: Retrieve label details.
+  method: GET
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/labels/{label_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_labels_retrieve
+- name: domains_published_paths_labels_destroy
+  description: Deletes a Label association to a Published Path and returns a `204` response.
+  method: DELETE
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/labels/{label_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_labels_destroy
+- name: domains_published_paths_path_items_list
+  description: List Path Items for a Published Path.
+  method: GET
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/path-items
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_path_items_list
+- name: domains_published_paths_path_items_create
+  description: Create a new Path Item in a Published Path.
+  method: POST
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/path-items
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_path_items_create
+- name: domains_published_paths_path_items_retrieve
+  description: Retrieve details for a specific Path Item.
+  method: GET
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/path-items/{path_item_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_path_items_retrieve
+- name: domains_published_paths_path_items_update
+  description: Update a Path Item.
+  method: PUT
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/path-items/{path_item_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_path_items_update
+- name: domains_published_paths_path_items_partial_update
+  description: Partially update a Path Item.
+  method: PATCH
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/path-items/{path_item_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_path_items_partial_update
+- name: domains_published_paths_path_items_destroy
+  description: Delete a Path Item.
+  method: DELETE
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/path-items/{path_item_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_path_items_destroy
+- name: domains_published_paths_published_path_enrollments_list
+  description: List enrollments for a Published Path.
+  method: GET
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/published-path-enrollments
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_published_path_enrollments_list
+- name: domains_published_paths_published_path_enrollments_create
+  description: Enroll a user in a Published Path.
+  method: POST
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/published-path-enrollments
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_published_path_enrollments_create
+- name: domains_published_paths_published_path_enrollments_retrieve
+  description: Retrieve details for a Published Path enrollment.
+  method: GET
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/published-path-enrollments/{published_path_enrollment_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_published_path_enrollments_retrieve
+- name: domains_published_paths_published_path_enrollments_update
+  description: Manage enrollments for a Published Path.
+  method: PUT
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/published-path-enrollments/{published_path_enrollment_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_published_path_enrollments_update
+- name: domains_published_paths_published_path_enrollments_partial_update
+  description: Manage enrollments for a Published Path.
+  method: PATCH
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/published-path-enrollments/{published_path_enrollment_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_published_path_enrollments_partial_update
+- name: domains_published_paths_tags_list
+  description: List Tags on a Published Path.
+  method: GET
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/tags
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_tags_list
+- name: domains_published_paths_tags_create
+  description: Add a Tag to a Published Path.
+  method: POST
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/tags
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_tags_create
+- name: domains_published_paths_tags_retrieve
+  description: Retrieve Tag details.
+  method: GET
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/tags/{tag_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_tags_retrieve
+- name: domains_published_paths_tags_destroy
+  description: Removes a Tag from a Published Path and returns a `204` response.
+  method: DELETE
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/tags/{tag_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_tags_destroy
+- name: domains_published_paths_visibility_overrides_list
+  description: List StudentGroup visibility overrides for PublishedPath.
+  method: GET
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/visibility-overrides
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_visibility_overrides_list
+- name: domains_published_paths_visibility_overrides_create
+  description: Create a StudentGroup visibility override for a Published Path
+  method: POST
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/visibility-overrides
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_visibility_overrides_create
+- name: domains_published_paths_visibility_overrides_retrieve
+  description: Retrieve StudentGroup visibility override for PublishedPath.
+  method: GET
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/visibility-overrides/{student_group_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_visibility_overrides_retrieve
+- name: domains_published_paths_visibility_overrides_destroy
+  description: Deletes a StudentGroup visibility override for a PublishedPath and returns a `204` response.
+  method: DELETE
+  path: /v1/domains/{domain_name}/published-paths/{published_path_id}/visibility-overrides/{student_group_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_published_paths_visibility_overrides_destroy
+- name: domains_signup_fields_list
+  description: Manage signup fields for a domain. Signup fields define the information collected from
+    users during the signup process f
+  method: GET
+  path: /v1/domains/{domain_name}/signup-fields
+  source_operation: openapi/skilljar-openapi-original.yml#domains_signup_fields_list
+- name: domains_users_list
+  description: List users for a domain.
+  method: GET
+  path: /v1/domains/{domain_name}/users
+  source_operation: openapi/skilljar-openapi-original.yml#domains_users_list
+- name: domains_users_create
+  description: Add a user to a domain.
+  method: POST
+  path: /v1/domains/{domain_name}/users
+  source_operation: openapi/skilljar-openapi-original.yml#domains_users_create
+- name: domains_users_retrieve
+  description: Retrieve details for a specific user within a domain.
+  method: GET
+  path: /v1/domains/{domain_name}/users/{user_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_users_retrieve
+- name: domains_users_update
+  description: Update a user's domain membership.
+  method: PUT
+  path: /v1/domains/{domain_name}/users/{user_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_users_update
+- name: domains_users_partial_update
+  description: Update a user's domain membership.
+  method: PATCH
+  path: /v1/domains/{domain_name}/users/{user_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_users_partial_update
+- name: domains_users_invites_list
+  description: Retrieve a list of all invitations for a specific user within a domain.
+  method: GET
+  path: /v1/domains/{domain_name}/users/{user_id}/invites
+  source_operation: openapi/skilljar-openapi-original.yml#domains_users_invites_list
+- name: domains_users_invites_create
+  description: Create a new invitation for a user to join a domain.
+  method: POST
+  path: /v1/domains/{domain_name}/users/{user_id}/invites
+  source_operation: openapi/skilljar-openapi-original.yml#domains_users_invites_create
+- name: domains_users_invites_retrieve
+  description: Retrieve details for a specific domain user invitation.
+  method: GET
+  path: /v1/domains/{domain_name}/users/{user_id}/invites/{domain_user_invite_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_users_invites_retrieve
+- name: domains_users_manager_access_update
+  description: Grant and update student manager access for a user.
+  method: PUT
+  path: /v1/domains/{domain_name}/users/{user_id}/manager-access
+  source_operation: openapi/skilljar-openapi-original.yml#domains_users_manager_access_update
+- name: domains_users_manager_access_destroy
+  description: Revoke student manager access for a user.
+  method: DELETE
+  path: /v1/domains/{domain_name}/users/{user_id}/manager-access
+  source_operation: openapi/skilljar-openapi-original.yml#domains_users_manager_access_destroy
+- name: domains_users_signup_fields_list
+  description: Retrieve a list of all signup field values for a user in the specified domain.
+  method: GET
+  path: /v1/domains/{domain_name}/users/{user_id}/signup-fields
+  source_operation: openapi/skilljar-openapi-original.yml#domains_users_signup_fields_list
+- name: domains_users_signup_fields_create
+  description: Set or update the value of a signup field for a user.
+  method: POST
+  path: /v1/domains/{domain_name}/users/{user_id}/signup-fields
+  source_operation: openapi/skilljar-openapi-original.yml#domains_users_signup_fields_create
+- name: domains_users_signup_fields_bulk_create
+  description: Create or update multiple signup field values for a user.
+  method: POST
+  path: /v1/domains/{domain_name}/users/{user_id}/signup-fields-bulk
+  source_operation: openapi/skilljar-openapi-original.yml#domains_users_signup_fields_bulk_create
+- name: domains_users_signup_fields_retrieve
+  description: Retrieve the value of a specific signup field for a user.
+  method: GET
+  path: /v1/domains/{domain_name}/users/{user_id}/signup-fields/{signup_field_id}
+  source_operation: openapi/skilljar-openapi-original.yml#domains_users_signup_fields_retrieve
+- name: bulk_create_domain_users
+  description: Create multiple users in a domain with a single API call. All users are validated before
+    processing. If any user fails v
+  method: POST
+  path: /v1/domains/{domain_name}/users/bulk-create
+  source_operation: openapi/skilljar-openapi-original.yml#bulk_create_domain_users
+- name: group_categories_list
+  description: List all group categories.
+  method: GET
+  path: /v1/group-categories
+  source_operation: openapi/skilljar-openapi-original.yml#group_categories_list
+- name: group_categories_retrieve
+  description: Retrieve a specific group category by its ID.
+  method: GET
+  path: /v1/group-categories/{group_category_id}
+  source_operation: openapi/skilljar-openapi-original.yml#group_categories_retrieve
+- name: groups_list
+  description: List all groups in your organization.
+  method: GET
+  path: /v1/groups
+  source_operation: openapi/skilljar-openapi-original.yml#groups_list
+- name: groups_create
+  description: Create a new group.
+  method: POST
+  path: /v1/groups
+  source_operation: openapi/skilljar-openapi-original.yml#groups_create
+- name: groups_retrieve
+  description: Retrieve details for a specific group.
+  method: GET
+  path: /v1/groups/{group_id}
+  source_operation: openapi/skilljar-openapi-original.yml#groups_retrieve
+- name: groups_update
+  description: Update group details.
+  method: PUT
+  path: /v1/groups/{group_id}
+  source_operation: openapi/skilljar-openapi-original.yml#groups_update
+- name: groups_partial_update
+  description: Update group details.
+  method: PATCH
+  path: /v1/groups/{group_id}
+  source_operation: openapi/skilljar-openapi-original.yml#groups_partial_update
+- name: groups_destroy
+  description: Delete a group.
+  method: DELETE
+  path: /v1/groups/{group_id}
+  source_operation: openapi/skilljar-openapi-original.yml#groups_destroy
+- name: groups_access_code_pools_list
+  description: List all access code pools assigned to a group.
+  method: GET
+  path: /v1/groups/{group_id}/access-code-pools
+  source_operation: openapi/skilljar-openapi-original.yml#groups_access_code_pools_list
+- name: groups_access_code_pools_create
+  description: Assign an access code pool to a group.
+  method: POST
+  path: /v1/groups/{group_id}/access-code-pools
+  source_operation: openapi/skilljar-openapi-original.yml#groups_access_code_pools_create
+- name: groups_access_code_pools_retrieve
+  description: Retrieve details about an access code pool assigned to a group.
+  method: GET
+  path: /v1/groups/{group_id}/access-code-pools/{access_code_pool_id}
+  source_operation: openapi/skilljar-openapi-original.yml#groups_access_code_pools_retrieve
+- name: groups_access_code_pools_destroy
+  description: Remove an access code pool from a group.
+  method: DELETE
+  path: /v1/groups/{group_id}/access-code-pools/{access_code_pool_id}
+  source_operation: openapi/skilljar-openapi-original.yml#groups_access_code_pools_destroy
+- name: groups_email_domain_rules_list
+  description: List email domain auto-enrollment rules for a group.
+  method: GET
+  path: /v1/groups/{group_id}/email-domain-rules
+  source_operation: openapi/skilljar-openapi-original.yml#groups_email_domain_rules_list
+- name: groups_email_domain_rules_partial_update
+  description: Update email domain auto-enrollment rules for a group.
+  method: PATCH
+  path: /v1/groups/{group_id}/email-domain-rules
+  source_operation: openapi/skilljar-openapi-original.yml#groups_email_domain_rules_partial_update
+- name: groups_users_list
+  description: List all users in a group.
+  method: GET
+  path: /v1/groups/{group_id}/users
+  source_operation: openapi/skilljar-openapi-original.yml#groups_users_list
+- name: groups_users_create
+  description: Add a user to a group.
+  method: POST
+  path: /v1/groups/{group_id}/users
+  source_operation: openapi/skilljar-openapi-original.yml#groups_users_create
+- name: groups_users_retrieve
+  description: Retrieve details about a user's membership in a group.
+  method: GET
+  path: /v1/groups/{group_id}/users/{user_id}
+  source_operation: openapi/skilljar-openapi-original.yml#groups_users_retrieve
+- name: groups_users_destroy
+  description: Remove a user from a group.
+  method: DELETE
+  path: /v1/groups/{group_id}/users/{user_id}
+  source_operation: openapi/skilljar-openapi-original.yml#groups_users_destroy
+- name: ilt_instructors_list
+  description: Retrieve a paginated list of ILT instructors.
+  method: GET
+  path: /v1/ilt-instructors
+  source_operation: openapi/skilljar-openapi-original.yml#ilt_instructors_list
+- name: ilt_instructors_create
+  description: Create a new ILT instructor.
+  method: POST
+  path: /v1/ilt-instructors
+  source_operation: openapi/skilljar-openapi-original.yml#ilt_instructors_create
+- name: ilt_instructors_retrieve
+  description: Retrieve details for a specific ILT instructor by ID.
+  method: GET
+  path: /v1/ilt-instructors/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#ilt_instructors_retrieve
+- name: ilt_instructors_update
+  description: Update an existing ILT instructor.
+  method: PUT
+  path: /v1/ilt-instructors/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#ilt_instructors_update
+- name: ilt_instructors_partial_update
+  description: Partially update an existing ILT instructor.
+  method: PATCH
+  path: /v1/ilt-instructors/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#ilt_instructors_partial_update
+- name: ilt_instructors_destroy
+  description: Delete an ILT instructor.
+  method: DELETE
+  path: /v1/ilt-instructors/{id}
+  source_operation: openapi/skilljar-openapi-original.yml#ilt_instructors_destroy
+- name: ilt_multi_session_events_list
+  description: List all ILT multi-session events.
+  method: GET
+  path: /v1/ilt-multi-session-events
+  source_operation: openapi/skilljar-openapi-original.yml#ilt_multi_session_events_list
+- name: ilt_multi_session_events_create
+  description: Create an ILT multi-session event.
+  method: POST
+  path: /v1/ilt-multi-session-events
+  source_operation: openapi/skilljar-openapi-original.yml#ilt_multi_session_events_create
+- name: ilt_multi_session_events_retrieve
+  description: Retrieve an ILT multi-session event.
+  method: GET
+  path: /v1/ilt-multi-session-events/{multi_session_event_id}
+  source_operation: openapi/skilljar-openapi-original.yml#ilt_multi_session_events_retrieve
+- name: ilt_multi_session_events_update
+  description: Update an ILT multi-session event.
+  method: PUT
+  path: /v1/ilt-multi-session-events/{multi_session_event_id}
+  source_operation: openapi/skilljar-openapi-original.yml#ilt_multi_session_events_update
+- name: ilt_multi_session_events_partial_update
+  description: Manage instructor-led training (ILT) multi-session events.
+  method: PATCH
+  path: /v1/ilt-multi-session-events/{multi_session_event_id}
+  source_operation: openapi/skilljar-openapi-original.yml#ilt_multi_session_events_partial_update
+- name: ilt_sessions_list
+  description: List all ILT sessions.
+  method: GET
+  path: /v1/ilt-sessions
+  source_operation: openapi/skilljar-openapi-original.yml#ilt_sessions_list
+- name: ilt_sessions_create
+  description: Create a new ILT session.
+  method: POST
+  path: /v1/ilt-sessions
+  source_operation: openapi/skilljar-openapi-original.yml#ilt_sessions_create
+- name: ilt_sessions_retrieve
+  description: Retrieve details for a specific ILT session.
+  method: GET
+  path: /v1/ilt-sessions/{ilt_session_id}
+  source_operation: openapi/skilljar-openapi-original.yml#ilt_sessions_retrieve
+- name: ilt_sessions_update
+  description: Update an existing ILT session.
+  method: PUT
+  path: /v1/ilt-sessions/{ilt_session_id}
+  source_operation: openapi/skilljar-openapi-original.yml#ilt_sessions_update
+- name: labels_list
+  description: List all labels.
+  method: GET
+  path: /v1/labels
+  source_operation: openapi/skilljar-openapi-original.yml#labels_list
+- name: labels_create
+  description: Create a new label.
+  method: POST
+  path: /v1/labels
+  source_operation: openapi/skilljar-openapi-original.yml#labels_create
+- name: labels_retrieve
+  description: Retrieve details for a specific label.
+  method: GET
+  path: /v1/labels/{label_id}
+  source_operation: openapi/skilljar-openapi-original.yml#labels_retrieve
+- name: labels_update
+  description: Update label details.
+  method: PUT
+  path: /v1/labels/{label_id}
+  source_operation: openapi/skilljar-openapi-original.yml#labels_update
+- name: labels_partial_update
+  description: Update label details.
+  method: PATCH
+  path: /v1/labels/{label_id}
+  source_operation: openapi/skilljar-openapi-original.yml#labels_partial_update
+- name: labels_destroy
+  description: Delete a label.
+  method: DELETE
+  path: /v1/labels/{label_id}
+  source_operation: openapi/skilljar-openapi-original.yml#labels_destroy
+- name: lesson_progress_retrieve
+  description: Retrieve the progress details for a specific lesson progress object.
+  method: GET
+  path: /v1/lesson-progress/{lesson_progress_id}
+  source_operation: openapi/skilljar-openapi-original.yml#lesson_progress_retrieve
+- name: lesson_progress_update
+  description: Update the progress for a specific lesson progress object.
+  method: PUT
+  path: /v1/lesson-progress/{lesson_progress_id}
+  source_operation: openapi/skilljar-openapi-original.yml#lesson_progress_update
+- name: lesson_progress_partial_update
+  description: Partially update the progress for a specific lesson progress object.
+  method: PATCH
+  path: /v1/lesson-progress/{lesson_progress_id}
+  source_operation: openapi/skilljar-openapi-original.yml#lesson_progress_partial_update
+- name: lessons_list
+  description: List all lessons within a specific course.
+  method: GET
+  path: /v1/lessons
+  source_operation: openapi/skilljar-openapi-original.yml#lessons_list
+- name: lessons_create
+  description: Create a new lesson within a course.
+  method: POST
+  path: /v1/lessons
+  source_operation: openapi/skilljar-openapi-original.yml#lessons_create
+- name: lessons_retrieve
+  description: Retrieve details for a specific lesson.
+  method: GET
+  path: /v1/lessons/{lesson_id}
+  source_operation: openapi/skilljar-openapi-original.yml#lessons_retrieve
+- name: lessons_update
+  description: Update an existing lesson.
+  method: PUT
+  path: /v1/lessons/{lesson_id}
+  source_operation: openapi/skilljar-openapi-original.yml#lessons_update
+- name: lessons_partial_update
+  description: Partially update an existing lesson.
+  method: PATCH
+  path: /v1/lessons/{lesson_id}
+  source_operation: openapi/skilljar-openapi-original.yml#lessons_partial_update
+- name: lessons_destroy
+  description: Delete a lesson from a course.
+  method: DELETE
+  path: /v1/lessons/{lesson_id}
+  source_operation: openapi/skilljar-openapi-original.yml#lessons_destroy
+- name: lessons_content_items_list
+  description: List all content items for a lesson.
+  method: GET
+  path: /v1/lessons/{lesson_id}/content-items
+  source_operation: openapi/skilljar-openapi-original.yml#lessons_content_items_list
+- name: lessons_content_items_create
+  description: Create a new content item in a lesson.
+  method: POST
+  path: /v1/lessons/{lesson_id}/content-items
+  source_operation: openapi/skilljar-openapi-original.yml#lessons_content_items_create
+- name: lessons_content_items_retrieve
+  description: Retrieve a single lesson content item.
+  method: GET
+  path: /v1/lessons/{lesson_id}/content-items/{lesson_content_item_id}
+  source_operation: openapi/skilljar-openapi-original.yml#lessons_content_items_retrieve
+- name: lessons_content_items_update
+  description: Update an existing lesson content item.
+  method: PUT
+  path: /v1/lessons/{lesson_id}/content-items/{lesson_content_item_id}
+  source_operation: openapi/skilljar-openapi-original.yml#lessons_content_items_update
+- name: lessons_content_items_partial_update
+  description: Partially update a lesson content item.
+  method: PATCH
+  path: /v1/lessons/{lesson_id}/content-items/{lesson_content_item_id}
+  source_operation: openapi/skilljar-openapi-original.yml#lessons_content_items_partial_update
+- name: lessons_rating_content_blocks_create
+  description: Create a rating content block on the specified lesson.
+  method: POST
+  path: /v1/lessons/{lesson_id}/rating-content-blocks
+  source_operation: openapi/skilljar-openapi-original.yml#lessons_rating_content_blocks_create
+- name: lessons_rating_content_blocks_retrieve
+  description: Retrieve details of a rating content block on the specified lesson.
+  method: GET
+  path: /v1/lessons/{lesson_id}/rating-content-blocks/{rating_content_block_id}
+  source_operation: openapi/skilljar-openapi-original.yml#lessons_rating_content_blocks_retrieve
+- name: lessons_rating_content_blocks_update
+  description: Update a rating content block on the specified lesson.
+  method: PUT
+  path: /v1/lessons/{lesson_id}/rating-content-blocks/{rating_content_block_id}
+  source_operation: openapi/skilljar-openapi-original.yml#lessons_rating_content_blocks_update
+- name: lessons_rating_content_blocks_partial_update
+  description: Partially update a rating content block on the specified lesson.
+  method: PATCH
+  path: /v1/lessons/{lesson_id}/rating-content-blocks/{rating_content_block_id}
+  source_operation: openapi/skilljar-openapi-original.yml#lessons_rating_content_blocks_partial_update
+- name: lessons_rating_content_blocks_destroy
+  description: Delete a rating content block and its associated content item.
+  method: DELETE
+  path: /v1/lessons/{lesson_id}/rating-content-blocks/{rating_content_block_id}
+  source_operation: openapi/skilljar-openapi-original.yml#lessons_rating_content_blocks_destroy
+- name: license_packages_list
+  description: List license packages.
+  method: GET
+  path: /v1/license-packages
+  source_operation: openapi/skilljar-openapi-original.yml#license_packages_list
+- name: license_packages_create
+  description: Create a new license package.
+  method: POST
+  path: /v1/license-packages
+  source_operation: openapi/skilljar-openapi-original.yml#license_packages_create
+- name: license_packages_retrieve
+  description: Retrieve details for a specific license package.
+  method: GET
+  path: /v1/license-packages/{license_package_id}
+  source_operation: openapi/skilljar-openapi-original.yml#license_packages_retrieve
+- name: license_packages_partial_update
+  description: Update an existing license package.
+  method: PATCH
+  path: /v1/license-packages/{license_package_id}
+  source_operation: openapi/skilljar-openapi-original.yml#license_packages_partial_update
+- name: license_packages_destroy
+  description: Delete a license package.
+  method: DELETE
+  path: /v1/license-packages/{license_package_id}
+  source_operation: openapi/skilljar-openapi-original.yml#license_packages_destroy
+- name: license_packages_students_list
+  description: '***Note:*** This endpoint is only available if License Packages are enabled for your Organization.'
+  method: GET
+  path: /v1/license-packages/{license_package_id}/students
+  source_operation: openapi/skilljar-openapi-original.yml#license_packages_students_list
+- name: license_packages_students_create
+  description: '***Note:*** This endpoint is only available if License Packages are enabled for your Organization.'
+  method: POST
+  path: /v1/license-packages/{license_package_id}/students
+  source_operation: openapi/skilljar-openapi-original.yml#license_packages_students_create
+- name: license_packages_students_update
+  description: '***Note:*** This endpoint is only available if License Packages are enabled for your Organization.'
+  method: PUT
+  path: /v1/license-packages/{license_package_id}/students/{student_id}
+  source_operation: openapi/skilljar-openapi-original.yml#license_packages_students_update
+- name: license_packages_students_partial_update
+  description: '***Note:*** This endpoint is only available if License Packages are enabled for your Organization.'
+  method: PATCH
+  path: /v1/license-packages/{license_package_id}/students/{student_id}
+  source_operation: openapi/skilljar-openapi-original.yml#license_packages_students_partial_update
+- name: offers_list
+  description: Retrieve a paginated list of Offers available to your organization.
+  method: GET
+  path: /v1/offers
+  source_operation: openapi/skilljar-openapi-original.yml#offers_list
+- name: offers_retrieve
+  description: Retrieve details for a specific Offer.
+  method: GET
+  path: /v1/offers/{offer_id}
+  source_operation: openapi/skilljar-openapi-original.yml#offers_retrieve
+- name: offers_update
+  description: "Update an Offer price if it is an \xE0 la carte Offer for a `PublishedCourse`."
+  method: PUT
+  path: /v1/offers/{offer_id}
+  source_operation: openapi/skilljar-openapi-original.yml#offers_update
+- name: offers_partial_update
+  description: "Update an Offer if it is an \xE0 la carte Offer for a `PublishedCourse`."
+  method: PATCH
+  path: /v1/offers/{offer_id}
+  source_operation: openapi/skilljar-openapi-original.yml#offers_partial_update
+- name: paths_list
+  description: Retrieve a paginated list of Paths.
+  method: GET
+  path: /v1/paths
+  source_operation: openapi/skilljar-openapi-original.yml#paths_list
+- name: paths_retrieve
+  description: Retrieve details for a specific Path.
+  method: GET
+  path: /v1/paths/{path_id}
+  source_operation: openapi/skilljar-openapi-original.yml#paths_retrieve
+- name: paths_update
+  description: Update an existing Path.
+  method: PUT
+  path: /v1/paths/{path_id}
+  source_operation: openapi/skilljar-openapi-original.yml#paths_update
+- name: paths_partial_update
+  description: Partially update an existing Path.
+  method: PATCH
+  path: /v1/paths/{path_id}
+  source_operation: openapi/skilljar-openapi-original.yml#paths_partial_update
+- name: paths_destroy
+  description: Delete a Path.
+  method: DELETE
+  path: /v1/paths/{path_id}
+  source_operation: openapi/skilljar-openapi-original.yml#paths_destroy
+- name: paths_path_items_list
+  description: Retrieve a list of Path Items for a specific Path.
+  method: GET
+  path: /v1/paths/{path_id}/path-items
+  source_operation: openapi/skilljar-openapi-original.yml#paths_path_items_list
+- name: paths_path_items_retrieve
+  description: Retrieve details for a specific Path Item.
+  method: GET
+  path: /v1/paths/{path_id}/path-items/{path_item_id}
+  source_operation: openapi/skilljar-openapi-original.yml#paths_path_items_retrieve
+- name: ping_retrieve
+  description: Ping API
+  method: GET
+  path: /v1/ping
+  source_operation: openapi/skilljar-openapi-original.yml#ping_retrieve
+- name: progresstokens_list
+  description: APIs for managing progress tokens, which are used to securely update a learner's progress
+    in a course or lesson. Progres
+  method: GET
+  path: /v1/progresstokens
+  source_operation: openapi/skilljar-openapi-original.yml#progresstokens_list
+- name: progresstokens_retrieve
+  description: APIs for managing progress tokens, which are used to securely update a learner's progress
+    in a course or lesson. Progres
+  method: GET
+  path: /v1/progresstokens/{progress_token_id}
+  source_operation: openapi/skilljar-openapi-original.yml#progresstokens_retrieve
+- name: progresstokens_update
+  description: APIs for managing progress tokens, which are used to securely update a learner's progress
+    in a course or lesson. Progres
+  method: PUT
+  path: /v1/progresstokens/{progress_token_id}
+  source_operation: openapi/skilljar-openapi-original.yml#progresstokens_update
+- name: progresstokens_partial_update
+  description: APIs for managing progress tokens, which are used to securely update a learner's progress
+    in a course or lesson. Progres
+  method: PATCH
+  path: /v1/progresstokens/{progress_token_id}
+  source_operation: openapi/skilljar-openapi-original.yml#progresstokens_partial_update
+- name: promo_code_pools_list
+  description: Retrieve a paginated list of Promo Code Pools for your organization.
+  method: GET
+  path: /v1/promo-code-pools
+  source_operation: openapi/skilljar-openapi-original.yml#promo_code_pools_list
+- name: promo_code_pools_create
+  description: Create a new Promo Code Pool.
+  method: POST
+  path: /v1/promo-code-pools
+  source_operation: openapi/skilljar-openapi-original.yml#promo_code_pools_create
+- name: promo_code_pools_retrieve
+  description: Retrieve details for a specific Promo Code Pool.
+  method: GET
+  path: /v1/promo-code-pools/{promo_code_pool_id}
+  source_operation: openapi/skilljar-openapi-original.yml#promo_code_pools_retrieve
+- name: promo_code_pools_update
+  description: Update one or more fields of a Promo Code Pool.
+  method: PUT
+  path: /v1/promo-code-pools/{promo_code_pool_id}
+  source_operation: openapi/skilljar-openapi-original.yml#promo_code_pools_update
+- name: promo_code_pools_partial_update
+  description: Update one or more fields of a Promo Code Pool.
+  method: PATCH
+  path: /v1/promo-code-pools/{promo_code_pool_id}
+  source_operation: openapi/skilljar-openapi-original.yml#promo_code_pools_partial_update
+- name: promo_code_pools_destroy
+  description: Delete a Promo Code Pool.
+  method: DELETE
+  path: /v1/promo-code-pools/{promo_code_pool_id}
+  source_operation: openapi/skilljar-openapi-original.yml#promo_code_pools_destroy
+- name: promo_code_pools_offers_list
+  description: Retrieve a paginated list of Offers attached to a Promo Code Pool.
+  method: GET
+  path: /v1/promo-code-pools/{promo_code_pool_id}/offers
+  source_operation: openapi/skilljar-openapi-original.yml#promo_code_pools_offers_list
+- name: promo_code_pools_offers_create
+  description: Attach one or more Offers to a Promo Code Pool.
+  method: POST
+  path: /v1/promo-code-pools/{promo_code_pool_id}/offers
+  source_operation: openapi/skilljar-openapi-original.yml#promo_code_pools_offers_create
+- name: promo_code_pools_offers_destroy
+  description: Remove an Offer from a Promo Code Pool.
+  method: DELETE
+  path: /v1/promo-code-pools/{promo_code_pool_id}/offers/{offer_id}
+  source_operation: openapi/skilljar-openapi-original.yml#promo_code_pools_offers_destroy
+- name: promo_codes_list
+  description: Retrieve a paginated list of Promo Codes for your organization.
+  method: GET
+  path: /v1/promo-codes
+  source_operation: openapi/skilljar-openapi-original.yml#promo_codes_list
+- name: promo_codes_create
+  description: Create a new Promo Code.
+  method: POST
+  path: /v1/promo-codes
+  source_operation: openapi/skilljar-openapi-original.yml#promo_codes_create
+- name: promo_codes_retrieve
+  description: Retrieve details for a specific Promo Code.
+  method: GET
+  path: /v1/promo-codes/{promo_code_id}
+  source_operation: openapi/skilljar-openapi-original.yml#promo_codes_retrieve
+- name: promo_codes_update
+  description: Update one or more fields of a Promo Code.
+  method: PUT
+  path: /v1/promo-codes/{promo_code_id}
+  source_operation: openapi/skilljar-openapi-original.yml#promo_codes_update
+- name: promo_codes_partial_update
+  description: Update one or more fields of a Promo Code.
+  method: PATCH
+  path: /v1/promo-codes/{promo_code_id}
+  source_operation: openapi/skilljar-openapi-original.yml#promo_codes_partial_update
+- name: promo_codes_destroy
+  description: Delete a Promo Code.
+  method: DELETE
+  path: /v1/promo-codes/{promo_code_id}
+  source_operation: openapi/skilljar-openapi-original.yml#promo_codes_destroy
+- name: purchases_retrieve
+  description: Get purchase details
+  method: GET
+  path: /v1/purchases/{purchase_id}
+  source_operation: openapi/skilljar-openapi-original.yml#purchases_retrieve
+- name: purchases_update
+  description: Update purchase details
+  method: PUT
+  path: /v1/purchases/{purchase_id}
+  source_operation: openapi/skilljar-openapi-original.yml#purchases_update
+- name: purchases_partial_update
+  description: Update purchase details
+  method: PATCH
+  path: /v1/purchases/{purchase_id}
+  source_operation: openapi/skilljar-openapi-original.yml#purchases_partial_update
+- name: purchases_fulfill_create
+  description: Fulfill specific purchase
+  method: POST
+  path: /v1/purchases/{purchase_id}/fulfill
+  source_operation: openapi/skilljar-openapi-original.yml#purchases_fulfill_create
+- name: question_banks_list
+  description: Retrieve a paginated list of all question banks for the current organization.
+  method: GET
+  path: /v1/question-banks
+  source_operation: openapi/skilljar-openapi-original.yml#question_banks_list
+- name: question_banks_create
+  description: Create a new question bank.
+  method: POST
+  path: /v1/question-banks
+  source_operation: openapi/skilljar-openapi-original.yml#question_banks_create
+- name: question_banks_retrieve
+  description: Retrieve the details of a specific question bank by its ID.
+  method: GET
+  path: /v1/question-banks/{question_bank_id}
+  source_operation: openapi/skilljar-openapi-original.yml#question_banks_retrieve
+- name: question_banks_update
+  description: Update an existing question bank.
+  method: PUT
+  path: /v1/question-banks/{question_bank_id}
+  source_operation: openapi/skilljar-openapi-original.yml#question_banks_update
+- name: question_banks_partial_update
+  description: Manage question banks for your organization.
+  method: PATCH
+  path: /v1/question-banks/{question_bank_id}
+  source_operation: openapi/skilljar-openapi-original.yml#question_banks_partial_update
+- name: question_banks_destroy
+  description: Delete a question bank.
+  method: DELETE
+  path: /v1/question-banks/{question_bank_id}
+  source_operation: openapi/skilljar-openapi-original.yml#question_banks_destroy
+- name: question_banks_questions_list
+  description: List all Questions for the specified Question Bank.
+  method: GET
+  path: /v1/question-banks/{question_bank_id}/questions
+  source_operation: openapi/skilljar-openapi-original.yml#question_banks_questions_list
+- name: question_banks_questions_retrieve
+  description: Retrieve details for a specific Question.
+  method: GET
+  path: /v1/question-banks/{question_bank_id}/questions/{question_id}
+  source_operation: openapi/skilljar-openapi-original.yml#question_banks_questions_retrieve
+- name: question_banks_questions_destroy
+  description: Delete a specific Question from the Question Bank.
+  method: DELETE
+  path: /v1/question-banks/{question_bank_id}/questions/{question_id}
+  source_operation: openapi/skilljar-openapi-original.yml#question_banks_questions_destroy
+- name: quiz_questions_create
+  description: Create a new quiz question.
+  method: POST
+  path: /v1/quiz-questions
+  source_operation: openapi/skilljar-openapi-original.yml#quiz_questions_create
+- name: quiz_questions_retrieve
+  description: Retrieve the details of a specific quiz question by its ID.
+  method: GET
+  path: /v1/quiz-questions/{question_id}
+  source_operation: openapi/skilljar-openapi-original.yml#quiz_questions_retrieve
+- name: quiz_questions_update
+  description: Update an existing quiz question.
+  method: PUT
+  path: /v1/quiz-questions/{question_id}
+  source_operation: openapi/skilljar-openapi-original.yml#quiz_questions_update
+- name: quiz_questions_partial_update
+  description: Manage quiz questions for your organization.
+  method: PATCH
+  path: /v1/quiz-questions/{question_id}
+  source_operation: openapi/skilljar-openapi-original.yml#quiz_questions_partial_update
+- name: quiz_questions_destroy
+  description: Delete a Question.
+  method: DELETE
+  path: /v1/quiz-questions/{question_id}
+  source_operation: openapi/skilljar-openapi-original.yml#quiz_questions_destroy
+- name: quizzes_list
+  description: Retrieve a paginated list of all quizzes for the current organization.
+  method: GET
+  path: /v1/quizzes
+  source_operation: openapi/skilljar-openapi-original.yml#quizzes_list
+- name: quizzes_create
+  description: Create a new quiz.
+  method: POST
+  path: /v1/quizzes
+  source_operation: openapi/skilljar-openapi-original.yml#quizzes_create
+- name: quizzes_retrieve
+  description: Retrieve the details of a specific quiz by its ID.
+  method: GET
+  path: /v1/quizzes/{quiz_id}
+  source_operation: openapi/skilljar-openapi-original.yml#quizzes_retrieve
+- name: quizzes_update
+  description: Update an existing quiz.
+  method: PUT
+  path: /v1/quizzes/{quiz_id}
+  source_operation: openapi/skilljar-openapi-original.yml#quizzes_update
+- name: quizzes_partial_update
+  description: Manage quizzes for your organization.
+  method: PATCH
+  path: /v1/quizzes/{quiz_id}
+  source_operation: openapi/skilljar-openapi-original.yml#quizzes_partial_update
+- name: quizzes_destroy
+  description: Delete a quiz.
+  method: DELETE
+  path: /v1/quizzes/{quiz_id}
+  source_operation: openapi/skilljar-openapi-original.yml#quizzes_destroy
+- name: quizzes_question_banks_list
+  description: List all Question Banks assigned to a specific Quiz.
+  method: GET
+  path: /v1/quizzes/{quiz_id}/question-banks
+  source_operation: openapi/skilljar-openapi-original.yml#quizzes_question_banks_list
+- name: quizzes_question_banks_retrieve
+  description: Retrieve details for a specific Question Bank.
+  method: GET
+  path: /v1/quizzes/{quiz_id}/question-banks/{question_bank_id}
+  source_operation: openapi/skilljar-openapi-original.yml#quizzes_question_banks_retrieve
+- name: quizzes_questions_list
+  description: List all Questions for the specified Quiz.
+  method: GET
+  path: /v1/quizzes/{quiz_id}/questions
+  source_operation: openapi/skilljar-openapi-original.yml#quizzes_questions_list
+- name: quizzes_questions_retrieve
+  description: Retrieve details for a specific Question.
+  method: GET
+  path: /v1/quizzes/{quiz_id}/questions/{question_id}
+  source_operation: openapi/skilljar-openapi-original.yml#quizzes_questions_retrieve
+- name: quizzes_questions_destroy
+  description: Delete a specific Question from the Quiz.
+  method: DELETE
+  path: /v1/quizzes/{quiz_id}/questions/{question_id}
+  source_operation: openapi/skilljar-openapi-original.yml#quizzes_questions_destroy
+- name: tags_list
+  description: List Tags.  Returns a paginated list (1000 results per page) of Tags.
+  method: GET
+  path: /v1/tags
+  source_operation: openapi/skilljar-openapi-original.yml#tags_list
+- name: tags_create
+  description: Creates a new `Tag`.
+  method: POST
+  path: /v1/tags
+  source_operation: openapi/skilljar-openapi-original.yml#tags_create
+- name: tags_retrieve
+  description: Get Tag details.
+  method: GET
+  path: /v1/tags/{tag_id}
+  source_operation: openapi/skilljar-openapi-original.yml#tags_retrieve
+- name: tags_update
+  description: Update Tag details. PUT and PATCH are identical - both do partial updates.
+  method: PUT
+  path: /v1/tags/{tag_id}
+  source_operation: openapi/skilljar-openapi-original.yml#tags_update
+- name: tags_partial_update
+  description: Update Tag details. PUT and PATCH are identical - both do partial updates.
+  method: PATCH
+  path: /v1/tags/{tag_id}
+  source_operation: openapi/skilljar-openapi-original.yml#tags_partial_update
+- name: tags_destroy
+  description: tags destroy
+  method: DELETE
+  path: /v1/tags/{tag_id}
+  source_operation: openapi/skilljar-openapi-original.yml#tags_destroy
+- name: training_credit_codes_list
+  description: Retrieve a paginated list of training credit codes.
+  method: GET
+  path: /v1/training-credit-codes
+  source_operation: openapi/skilljar-openapi-original.yml#training_credit_codes_list
+- name: training_credit_codes_create
+  description: Create a new training credit code.
+  method: POST
+  path: /v1/training-credit-codes
+  source_operation: openapi/skilljar-openapi-original.yml#training_credit_codes_create
+- name: training_credit_codes_retrieve
+  description: Retrieve details for a specific training credit code.
+  method: GET
+  path: /v1/training-credit-codes/{training_credit_code_id}
+  source_operation: openapi/skilljar-openapi-original.yml#training_credit_codes_retrieve
+- name: training_credit_codes_partial_update
+  description: Update an existing training credit code.
+  method: PATCH
+  path: /v1/training-credit-codes/{training_credit_code_id}
+  source_operation: openapi/skilljar-openapi-original.yml#training_credit_codes_partial_update
+- name: users_list
+  description: List users registered on at least one domain.
+  method: GET
+  path: /v1/users
+  source_operation: openapi/skilljar-openapi-original.yml#users_list
+- name: users_retrieve
+  description: Retrieve a user's registration and course overview.
+  method: GET
+  path: /v1/users/{user_id}
+  source_operation: openapi/skilljar-openapi-original.yml#users_retrieve
+- name: users_update
+  description: Update user details.
+  method: PUT
+  path: /v1/users/{user_id}
+  source_operation: openapi/skilljar-openapi-original.yml#users_update
+- name: users_partial_update
+  description: Partially update user details.
+  method: PATCH
+  path: /v1/users/{user_id}
+  source_operation: openapi/skilljar-openapi-original.yml#users_partial_update
+- name: users_anonymize_create
+  description: Permanently anonymize a user.
+  method: POST
+  path: /v1/users/{user_id}/anonymize
+  source_operation: openapi/skilljar-openapi-original.yml#users_anonymize_create
+- name: users_groups_list
+  description: List groups for a user.
+  method: GET
+  path: /v1/users/{user_id}/groups
+  source_operation: openapi/skilljar-openapi-original.yml#users_groups_list
+- name: users_plan_enrollments_list
+  description: List plan enrollments for a user.
+  method: GET
+  path: /v1/users/{user_id}/plan-enrollments
+  source_operation: openapi/skilljar-openapi-original.yml#users_plan_enrollments_list
+- name: users_published_courses_list
+  description: List published courses with progress for a user.
+  method: GET
+  path: /v1/users/{user_id}/published-courses
+  source_operation: openapi/skilljar-openapi-original.yml#users_published_courses_list
+- name: users_published_courses_retrieve
+  description: Retrieve course progress for a user.
+  method: GET
+  path: /v1/users/{user_id}/published-courses/{published_course_id}
+  source_operation: openapi/skilljar-openapi-original.yml#users_published_courses_retrieve
+- name: users_published_courses_update
+  description: Update course progress for a user.
+  method: PUT
+  path: /v1/users/{user_id}/published-courses/{published_course_id}
+  source_operation: openapi/skilljar-openapi-original.yml#users_published_courses_update
+- name: users_published_courses_partial_update
+  description: Partially update course progress for a user.
+  method: PATCH
+  path: /v1/users/{user_id}/published-courses/{published_course_id}
+  source_operation: openapi/skilljar-openapi-original.yml#users_published_courses_partial_update
+- name: users_published_courses_lessons_list
+  description: List lessons with progress for a user in a published course.
+  method: GET
+  path: /v1/users/{user_id}/published-courses/{published_course_id}/lessons
+  source_operation: openapi/skilljar-openapi-original.yml#users_published_courses_lessons_list
+- name: users_published_courses_lessons_retrieve
+  description: Retrieve lesson progress for a user.
+  method: GET
+  path: /v1/users/{user_id}/published-courses/{published_course_id}/lessons/{lesson_id}
+  source_operation: openapi/skilljar-openapi-original.yml#users_published_courses_lessons_retrieve
+- name: users_published_courses_lessons_update
+  description: Update lesson progress for a user.
+  method: PUT
+  path: /v1/users/{user_id}/published-courses/{published_course_id}/lessons/{lesson_id}
+  source_operation: openapi/skilljar-openapi-original.yml#users_published_courses_lessons_update
+- name: users_published_courses_lessons_partial_update
+  description: Partially update lesson progress for a user.
+  method: PATCH
+  path: /v1/users/{user_id}/published-courses/{published_course_id}/lessons/{lesson_id}
+  source_operation: openapi/skilljar-openapi-original.yml#users_published_courses_lessons_partial_update
+- name: users_published_path_enrollments_list
+  description: List Learning Path enrollments for a user.
+  method: GET
+  path: /v1/users/{user_id}/published-path-enrollments
+  source_operation: openapi/skilljar-openapi-original.yml#users_published_path_enrollments_list
+- name: vilt_session_events_list
+  description: Retrieve a paginated list of VILT session events.
+  method: GET
+  path: /v1/vilt-session-events
+  source_operation: openapi/skilljar-openapi-original.yml#vilt_session_events_list
+- name: vilt_session_events_retrieve
+  description: Retrieve details for a specific VILT session event.
+  method: GET
+  path: /v1/vilt-session-events/{vilt_session_event_id}
+  source_operation: openapi/skilljar-openapi-original.yml#vilt_session_events_retrieve
+- name: vilt_session_registrations_list
+  description: Retrieve a paginated list of VILT session registrations.
+  method: GET
+  path: /v1/vilt-session-registrations
+  source_operation: openapi/skilljar-openapi-original.yml#vilt_session_registrations_list
+- name: vilt_session_registrations_create
+  description: Register a user for a VILT session.
+  method: POST
+  path: /v1/vilt-session-registrations
+  source_operation: openapi/skilljar-openapi-original.yml#vilt_session_registrations_create
+- name: vilt_session_registrations_retrieve
+  description: Retrieve details for a specific VILT session registration.
+  method: GET
+  path: /v1/vilt-session-registrations/{vilt_session_registration_id}
+  source_operation: openapi/skilljar-openapi-original.yml#vilt_session_registrations_retrieve
+- name: vilt_session_registrations_update
+  description: Update attendance for a VILT session registration.
+  method: PUT
+  path: /v1/vilt-session-registrations/{vilt_session_registration_id}
+  source_operation: openapi/skilljar-openapi-original.yml#vilt_session_registrations_update
+- name: vilt_session_registrations_partial_update
+  description: Update attendance for a VILT session registration.
+  method: PATCH
+  path: /v1/vilt-session-registrations/{vilt_session_registration_id}
+  source_operation: openapi/skilljar-openapi-original.yml#vilt_session_registrations_partial_update
+- name: vilt_session_registrations_destroy
+  description: Delete a VILT session registration.
+  method: DELETE
+  path: /v1/vilt-session-registrations/{vilt_session_registration_id}
+  source_operation: openapi/skilljar-openapi-original.yml#vilt_session_registrations_destroy
+- name: web_packages_list
+  description: Retrieve a paginated list of WebPackages associated with your organization.
+  method: GET
+  path: /v1/web-packages
+  source_operation: openapi/skilljar-openapi-original.yml#web_packages_list
+- name: web_packages_create
+  description: Create a new WebPackage by providing a URL to a remotely hosted zip file.
+  method: POST
+  path: /v1/web-packages
+  source_operation: openapi/skilljar-openapi-original.yml#web_packages_create
+- name: web_packages_retrieve
+  description: Retrieve detailed information for a specific WebPackage in your organization.
+  method: GET
+  path: /v1/web-packages/{web_package_id}
+  source_operation: openapi/skilljar-openapi-original.yml#web_packages_retrieve
+- name: web_packages_destroy
+  description: Delete a WebPackage from your organization.
+  method: DELETE
+  path: /v1/web-packages/{web_package_id}
+  source_operation: openapi/skilljar-openapi-original.yml#web_packages_destroy
+- name: web_packages_lessons_update
+  description: Update all lesson objects (excluding lesson content items) associated with the specified
+    WebPackage.
+  method: PUT
+  path: /v1/web-packages/{web_package_id}/lessons
+  source_operation: openapi/skilljar-openapi-original.yml#web_packages_lessons_update
+- name: webhooks_list
+  description: List all webhooks for your organization.
+  method: GET
+  path: /v1/webhooks
+  source_operation: openapi/skilljar-openapi-original.yml#webhooks_list
+- name: webhooks_create
+  description: Create a new webhook for your organization.
+  method: POST
+  path: /v1/webhooks
+  source_operation: openapi/skilljar-openapi-original.yml#webhooks_create
+- name: webhooks_retrieve
+  description: Retrieve details for a specific webhook.
+  method: GET
+  path: /v1/webhooks/{webhook_id}
+  source_operation: openapi/skilljar-openapi-original.yml#webhooks_retrieve
+- name: webhooks_update
+  description: Update an existing webhook.
+  method: PUT
+  path: /v1/webhooks/{webhook_id}
+  source_operation: openapi/skilljar-openapi-original.yml#webhooks_update
+- name: webhooks_partial_update
+  description: Partially update an existing webhook.
+  method: PATCH
+  path: /v1/webhooks/{webhook_id}
+  source_operation: openapi/skilljar-openapi-original.yml#webhooks_partial_update
+- name: webhooks_destroy
+  description: Delete a webhook.
+  method: DELETE
+  path: /v1/webhooks/{webhook_id}
+  source_operation: openapi/skilljar-openapi-original.yml#webhooks_destroy
+- name: webhooks_ping_create
+  description: Ping Webhook
+  method: POST
+  path: /v1/webhooks/{webhook_id}/ping
+  source_operation: openapi/skilljar-openapi-original.yml#webhooks_ping_create
+- name: webhooks_sample_course_completion_retrieve
+  description: Sample Course Completion Event
+  method: GET
+  path: /v1/webhooks/sample-course-completion
+  source_operation: openapi/skilljar-openapi-original.yml#webhooks_sample_course_completion_retrieve
+- name: webhooks_sample_course_enrollment_retrieve
+  description: Sample Course Enrollment Event
+  method: GET
+  path: /v1/webhooks/sample-course-enrollment
+  source_operation: openapi/skilljar-openapi-original.yml#webhooks_sample_course_enrollment_retrieve
+- name: webhooks_sample_dashboard_task_created_retrieve
+  description: Sample Dashboard Task Created Event
+  method: GET
+  path: /v1/webhooks/sample-dashboard-task-created
+  source_operation: openapi/skilljar-openapi-original.yml#webhooks_sample_dashboard_task_created_retrieve
+- name: webhooks_sample_domain_enrollment_retrieve
+  description: Sample Domain Enrollment Event
+  method: GET
+  path: /v1/webhooks/sample-domain-enrollment
+  source_operation: openapi/skilljar-openapi-original.yml#webhooks_sample_domain_enrollment_retrieve
+- name: webhooks_sample_lesson_completion_retrieve
+  description: Sample Lesson Completion Event
+  method: GET
+  path: /v1/webhooks/sample-lesson-completion
+  source_operation: openapi/skilljar-openapi-original.yml#webhooks_sample_lesson_completion_retrieve
+- name: webhooks_sample_path_completion_retrieve
+  description: Sample Path Completion Event
+  method: GET
+  path: /v1/webhooks/sample-path-completion
+  source_operation: openapi/skilljar-openapi-original.yml#webhooks_sample_path_completion_retrieve
+- name: webhooks_sample_path_enrollment_retrieve
+  description: Sample Path Enrollment Event
+  method: GET
+  path: /v1/webhooks/sample-path-enrollment
+  source_operation: openapi/skilljar-openapi-original.yml#webhooks_sample_path_enrollment_retrieve
+- name: webhooks_sample_purchase_fulfillment_retrieve
+  description: Sample Purchase Fulfillment Event
+  method: GET
+  path: /v1/webhooks/sample-purchase-fulfillment
+  source_operation: openapi/skilljar-openapi-original.yml#webhooks_sample_purchase_fulfillment_retrieve
+- name: webhooks_sample_quiz_completion_retrieve
+  description: Sample Quiz Completion Event
+  method: GET
+  path: /v1/webhooks/sample-quiz-completion
+  source_operation: openapi/skilljar-openapi-original.yml#webhooks_sample_quiz_completion_retrieve
+- name: webhooks_sample_vilt_registration_retrieve
+  description: Sample VILT Event Registration Event
+  method: GET
+  path: /v1/webhooks/sample-vilt-registration
+  source_operation: openapi/skilljar-openapi-original.yml#webhooks_sample_vilt_registration_retrieve

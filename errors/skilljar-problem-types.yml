@@ -1,0 +1,38 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/skilljar-openapi-original.yml
+format: json-api-like
+envelope: '{"errors": [{"status": "...", "code": "...", "title": "...", "detail": "..."}]}'
+envelope_fields:
+- status
+- code
+- title
+- detail
+note: >-
+  The published OpenAPI (drf-spectacular generated) enumerates only a 404
+  response across its 340 operations and does not use RFC 9457
+  application/problem+json. The error envelope shape below was observed live
+  from a 503 response on the JWKS endpoint. Standard HTTP status semantics
+  apply; a full error-code registry is not published.
+problems:
+- status: 400
+  title: Bad Request
+  detail: The request was malformed or failed validation.
+- status: 401
+  title: Unauthorized
+  detail: Missing or invalid API key / OAuth token.
+- status: 403
+  title: Forbidden
+  detail: The authenticated principal lacks permission (or scope) for the resource.
+- status: 404
+  title: Not Found
+  detail: The requested resource does not exist.
+  source_operation: openapi/skilljar-openapi-original.yml
+- status: 429
+  title: Too Many Requests
+  detail: Rate limiting is not documented but standard throttling may apply.
+- status: 503
+  code: jwks_unavailable
+  title: JWKS Unavailable
+  detail: Unable to fetch signing keys. Please try again later.
+  source: https://api.skilljar.com/.well-known/jwks.json

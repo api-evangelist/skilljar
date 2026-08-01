@@ -1,0 +1,24 @@
+generated: '2026-07-21'
+method: searched
+host: https://api.skilljar.com
+documents:
+- path: /.well-known/oauth-authorization-server
+  status: 200
+  file: skilljar-oauth-authorization-server.json
+  note: RFC 8414 OAuth 2.0 Authorization Server Metadata (89 scopes, PKCE S256).
+- path: /.well-known/jwks.json
+  status: 503
+  note: >-
+    JSON Web Key Set endpoint is advertised (jwks_uri) but returned 503
+    jwks_unavailable when probed on 2026-07-21; not saved.
+- path: /.well-known/openid-configuration
+  status: 404
+- path: /.well-known/security.txt
+  status: 404
+- path: /.well-known/api-catalog
+  status: 404
+other_hosts:
+- host: https://www.skilljar.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404

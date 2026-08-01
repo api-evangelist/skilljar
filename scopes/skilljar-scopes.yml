@@ -1,0 +1,379 @@
+generated: '2026-07-21'
+method: searched
+source: https://api.skilljar.com/.well-known/oauth-authorization-server
+docs: https://support.gainsight.com/Skilljar/Develop_and_Customize/API
+note: Scopes harvested from the RFC 8414 OAuth 2.0 Authorization Server Metadata document. Applies to
+  the Skilljar v2 OAuth API (authorization_code + refresh_token, PKCE S256). The v1 API uses HTTP Basic
+  API-key auth and is not scope-gated.
+schemes:
+- name: OAuth2
+  source: https://api.skilljar.com
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://dashboard.skilljar.com/oauth/authorize
+    tokenUrl: https://api.skilljar.com/v2/auth/token
+    refreshUrl: https://api.skilljar.com/v2/auth/token
+    pkce: S256
+    grant_types:
+    - authorization_code
+    - refresh_token
+  registration_endpoint: https://api.skilljar.com/v2/oauth/register
+  revocation_endpoint: https://api.skilljar.com/v2/auth/revoke
+  jwks_uri: https://api.skilljar.com/.well-known/jwks.json
+scopes:
+- scope: courses:read
+  description: Read access to courses
+  flows:
+  - authorizationCode
+- scope: courses:write
+  description: Write access to courses
+  flows:
+  - authorizationCode
+- scope: lessons:read
+  description: Read access to lessons
+  flows:
+  - authorizationCode
+- scope: lessons:write
+  description: Write access to lessons
+  flows:
+  - authorizationCode
+- scope: assets:read
+  description: Read access to assets
+  flows:
+  - authorizationCode
+- scope: assets:write
+  description: Write access to assets
+  flows:
+  - authorizationCode
+- scope: quizzes:read
+  description: Read access to quizzes
+  flows:
+  - authorizationCode
+- scope: quizzes:write
+  description: Write access to quizzes
+  flows:
+  - authorizationCode
+- scope: question-banks:read
+  description: Read access to question banks
+  flows:
+  - authorizationCode
+- scope: question-banks:write
+  description: Write access to question banks
+  flows:
+  - authorizationCode
+- scope: web-packages:read
+  description: Read access to web packages
+  flows:
+  - authorizationCode
+- scope: web-packages:write
+  description: Write access to web packages
+  flows:
+  - authorizationCode
+- scope: content-items:read
+  description: Read access to content items
+  flows:
+  - authorizationCode
+- scope: content-items:write
+  description: Write access to content items
+  flows:
+  - authorizationCode
+- scope: labels:read
+  description: Read access to labels
+  flows:
+  - authorizationCode
+- scope: labels:write
+  description: Write access to labels
+  flows:
+  - authorizationCode
+- scope: instructors:read
+  description: Read access to instructors
+  flows:
+  - authorizationCode
+- scope: instructors:write
+  description: Write access to instructors
+  flows:
+  - authorizationCode
+- scope: course-families:read
+  description: Read access to course families
+  flows:
+  - authorizationCode
+- scope: course-families:write
+  description: Write access to course families
+  flows:
+  - authorizationCode
+- scope: domains:read
+  description: Read access to domains
+  flows:
+  - authorizationCode
+- scope: domains:write
+  description: Write access to domains
+  flows:
+  - authorizationCode
+- scope: published-courses:read
+  description: Read access to published courses
+  flows:
+  - authorizationCode
+- scope: published-courses:write
+  description: Write access to published courses
+  flows:
+  - authorizationCode
+- scope: catalog-pages:read
+  description: Read access to catalog pages
+  flows:
+  - authorizationCode
+- scope: catalog-pages:write
+  description: Write access to catalog pages
+  flows:
+  - authorizationCode
+- scope: paths:read
+  description: Read access to paths
+  flows:
+  - authorizationCode
+- scope: paths:write
+  description: Write access to paths
+  flows:
+  - authorizationCode
+- scope: plans:read
+  description: Read access to plans
+  flows:
+  - authorizationCode
+- scope: plans:write
+  description: Write access to plans
+  flows:
+  - authorizationCode
+- scope: tags:read
+  description: Read access to tags
+  flows:
+  - authorizationCode
+- scope: tags:write
+  description: Write access to tags
+  flows:
+  - authorizationCode
+- scope: themes:read
+  description: Read access to themes
+  flows:
+  - authorizationCode
+- scope: themes:write
+  description: Write access to themes
+  flows:
+  - authorizationCode
+- scope: enrollments:read
+  description: Read access to enrollments
+  flows:
+  - authorizationCode
+- scope: enrollments:write
+  description: Write access to enrollments
+  flows:
+  - authorizationCode
+- scope: students:read
+  description: Read access to students
+  flows:
+  - authorizationCode
+- scope: students:write
+  description: Write access to students
+  flows:
+  - authorizationCode
+- scope: students:deactivate
+  description: Deactivate students
+  flows:
+  - authorizationCode
+- scope: students:anonymize
+  description: Anonymize students
+  flows:
+  - authorizationCode
+- scope: students:manage-password
+  description: Manage students passwords
+  flows:
+  - authorizationCode
+- scope: signup-fields:read
+  description: Read access to signup fields
+  flows:
+  - authorizationCode
+- scope: student-groups:read
+  description: Read access to student groups
+  flows:
+  - authorizationCode
+- scope: student-groups:write
+  description: Write access to student groups
+  flows:
+  - authorizationCode
+- scope: certificates:read
+  description: Read access to certificates
+  flows:
+  - authorizationCode
+- scope: certificates:write
+  description: Write access to certificates
+  flows:
+  - authorizationCode
+- scope: email-templates:read
+  description: Read access to email templates
+  flows:
+  - authorizationCode
+- scope: email-templates:write
+  description: Write access to email templates
+  flows:
+  - authorizationCode
+- scope: language-packs:read
+  description: Read access to language packs
+  flows:
+  - authorizationCode
+- scope: language-packs:write
+  description: Write access to language packs
+  flows:
+  - authorizationCode
+- scope: admin-users:read
+  description: Read access to admin users
+  flows:
+  - authorizationCode
+- scope: admin-users:write
+  description: Write access to admin users
+  flows:
+  - authorizationCode
+- scope: roles:read
+  description: Read access to roles
+  flows:
+  - authorizationCode
+- scope: roles:write
+  description: Write access to roles
+  flows:
+  - authorizationCode
+- scope: analytics:read
+  description: Read access to analytics
+  flows:
+  - authorizationCode
+- scope: audit:read
+  description: Read access to audit
+  flows:
+  - authorizationCode
+- scope: promo-codes:read
+  description: Read access to promo codes
+  flows:
+  - authorizationCode
+- scope: promo-codes:write
+  description: Write access to promo codes
+  flows:
+  - authorizationCode
+- scope: training-credits:read
+  description: Read access to training credits
+  flows:
+  - authorizationCode
+- scope: training-credits:write
+  description: Write access to training credits
+  flows:
+  - authorizationCode
+- scope: licensing:read
+  description: Read access to licensing
+  flows:
+  - authorizationCode
+- scope: licensing:write
+  description: Write access to licensing
+  flows:
+  - authorizationCode
+- scope: offers:read
+  description: Read access to offers
+  flows:
+  - authorizationCode
+- scope: offers:write
+  description: Write access to offers
+  flows:
+  - authorizationCode
+- scope: orders:read
+  description: Read access to orders
+  flows:
+  - authorizationCode
+- scope: access-codes:read
+  description: Read access to access codes
+  flows:
+  - authorizationCode
+- scope: access-codes:write
+  description: Write access to access codes
+  flows:
+  - authorizationCode
+- scope: vilt-sessions:read
+  description: Read access to vilt sessions
+  flows:
+  - authorizationCode
+- scope: vilt-sessions:write
+  description: Write access to vilt sessions
+  flows:
+  - authorizationCode
+- scope: scheduled-reports:read
+  description: Read access to scheduled reports
+  flows:
+  - authorizationCode
+- scope: scheduled-reports:write
+  description: Write access to scheduled reports
+  flows:
+  - authorizationCode
+- scope: data-export:read
+  description: Read access to data export
+  flows:
+  - authorizationCode
+- scope: data-export:write
+  description: Write access to data export
+  flows:
+  - authorizationCode
+- scope: workflows:read
+  description: Read access to workflows
+  flows:
+  - authorizationCode
+- scope: workflows:write
+  description: Write access to workflows
+  flows:
+  - authorizationCode
+- scope: syndication:read
+  description: Read access to syndication
+  flows:
+  - authorizationCode
+- scope: syndication:write
+  description: Write access to syndication
+  flows:
+  - authorizationCode
+- scope: announcements:read
+  description: Read access to announcements
+  flows:
+  - authorizationCode
+- scope: announcements:write
+  description: Write access to announcements
+  flows:
+  - authorizationCode
+- scope: action-items:read
+  description: Read access to action items
+  flows:
+  - authorizationCode
+- scope: action-items:write
+  description: Write access to action items
+  flows:
+  - authorizationCode
+- scope: organization:read
+  description: Read access to organization
+  flows:
+  - authorizationCode
+- scope: organization:write
+  description: Write access to organization
+  flows:
+  - authorizationCode
+- scope: webhooks:read
+  description: Read access to webhooks
+  flows:
+  - authorizationCode
+- scope: webhooks:write
+  description: Write access to webhooks
+  flows:
+  - authorizationCode
+- scope: integrations:read
+  description: Read access to integrations
+  flows:
+  - authorizationCode
+- scope: integrations:write
+  description: Write access to integrations
+  flows:
+  - authorizationCode
+- scope: clients:read
+  description: Read access to clients
+  flows:
+  - authorizationCode
+- scope: clients:write
+  description: Write access to clients
+  flows:
+  - authorizationCode

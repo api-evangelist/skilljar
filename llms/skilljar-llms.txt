@@ -1,0 +1,24 @@
+# Skilljar
+
+> Skilljar is a customer education / external LMS platform (part of Gainsight) for creating, publishing, and measuring training programs, academies, and certification. Its REST API exposes courses, lessons, learning paths, domains, users, enrollments, quizzes, purchases, instructor-led/VILT training, and real-time webhooks.
+
+The Skilljar API is a large OpenAPI 3.0.3 surface: 160 paths, 340 operations, 420 schemas. Base URL `https://api.skilljar.com/v1/`. v1 authenticates with an Organization API key over HTTP Basic (key as username, empty password); a v2 OAuth 2.0 surface (authorization_code + refresh_token, PKCE S256, ~89 scopes) is advertised via RFC 8414 metadata. Pagination is page-number (`page`/`page_size`, `count`/`next`/`previous`/`results`).
+
+## APIs
+- [Skilljar API (interactive docs)](https://api.skilljar.com/): Swagger UI for the v1 REST API.
+- [OpenAPI schema](https://api.skilljar.com/docs/schema.yml): machine-readable OpenAPI 3.0.3 definition.
+
+## Specs
+- [OpenAPI (harvested)](https://raw.githubusercontent.com/api-evangelist/skilljar/refs/heads/main/openapi/skilljar-openapi-original.yml)
+- [Webhooks / event catalog](https://raw.githubusercontent.com/api-evangelist/skilljar/refs/heads/main/asyncapi/skilljar-webhooks.yml)
+- [OAuth scopes](https://raw.githubusercontent.com/api-evangelist/skilljar/refs/heads/main/scopes/skilljar-scopes.yml)
+- [Authentication profile](https://raw.githubusercontent.com/api-evangelist/skilljar/refs/heads/main/authentication/skilljar-authentication.yml)
+- [API conventions](https://raw.githubusercontent.com/api-evangelist/skilljar/refs/heads/main/conventions/skilljar-conventions.yml)
+
+## Docs
+- [API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)
+- [Using Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)
+- [Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))
+- [Pricing](https://www.skilljar.com/pricing)
+- [Status](https://status.skilljar.com/)
+- [Blog](https://www.skilljar.com/blog)

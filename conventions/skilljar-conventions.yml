@@ -1,0 +1,63 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/skilljar-openapi-original.yml
+docs: https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API
+authentication:
+  style: http-basic-api-key
+  detail: >-
+    v1: Organization API key sent as the HTTP Basic username with an empty
+    password. v2: OAuth 2.0 authorization_code + refresh_token with PKCE (S256)
+    and ~89 granular scopes.
+  see: authentication/skilljar-authentication.yml
+base_url: https://api.skilljar.com/v1/
+versioning:
+  scheme: uri-path
+  versions:
+  - v1
+  - v2
+  current: v1
+  note: >-
+    v1 is the stable API-key REST surface documented at api.skilljar.com. v2 is
+    the OAuth 2.0 surface (token/registration/revocation under /v2/).
+pagination:
+  style: page-number
+  request_params:
+  - page
+  - page_size
+  response_fields:
+    count: total number of results
+    next: URI of the next page (nullable)
+    previous: URI of the previous page (nullable)
+    results: array of items
+  note: Standard Django REST Framework PageNumberPagination envelope.
+idempotency:
+  supported: partial
+  mechanism: natural
+  detail: >-
+    Skilljar does not document an Idempotency-Key request header. Instead
+    several write operations are documented as naturally idempotent: enrollment
+    creation is idempotent for the same user and enrollment time, and
+    adding/removing a domain association is idempotent. Retrying these
+    operations does not create duplicates.
+  see: openapi/skilljar-openapi-original.yml
+error_envelope:
+  format: json-api-like
+  shape: '{"errors": [{"status": "503", "code": "jwks_unavailable", "title": "...", "detail": "..."}]}'
+  fields:
+  - status
+  - code
+  - title
+  - detail
+  note: >-
+    Observed error envelope is a JSON:API-style errors[] array (not RFC 9457
+    application/problem+json). The published OpenAPI documents 404 responses but
+    does not enumerate the full error catalog.
+  see: errors/skilljar-problem-types.yml
+rate_limiting:
+  documented: false
+  note: No rate-limit headers or 429 responses are documented in the OpenAPI or docs.
+request_tracing:
+  documented: false
+webhooks:
+  supported: true
+  see: asyncapi/skilljar-webhooks.yml

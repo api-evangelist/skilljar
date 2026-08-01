@@ -1,0 +1,64 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/skilljar-openapi-original.yml
+docs: https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API
+spec_type: Webhooks
+description: Skilljar delivers real-time platform events to subscriber target_url endpoints. Webhooks
+  are managed via the /v1/webhooks CRUD operations; each subscription filters on one event_type (or all
+  events when null). Sample payloads are retrievable per event type.
+transport: http-post
+management:
+  list: webhooks_list
+  create: webhooks_create
+  retrieve: webhooks_retrieve
+  update: webhooks_update
+  partial_update: webhooks_partial_update
+  delete: webhooks_destroy
+  ping: webhooks_ping_create
+subscription_fields:
+- target_url
+- active
+- event_type
+- deactivate_reason
+event_types:
+- type: COURSE_COMPLETION
+  label: Course Completion
+- type: COURSE_ENROLLMENT
+  label: Course Enrollment
+- type: DOMAIN_ENROLLMENT
+  label: Domain Enrollment
+- type: LESSON_COMPLETION
+  label: Lesson Completion
+- type: PATH_COMPLETION
+  label: Path Completion
+- type: PATH_ENROLLMENT
+  label: Path Enrollment
+- type: PURCHASE_FULFILLMENT
+  label: Purchase Fulfillment
+- type: QUIZ_COMPLETION
+  label: Quiz Completion
+- type: VILT_EVENT_REGISTRATION
+  label: VILT Event Registration
+- type: DASHBOARD_TASK_CREATED
+  label: Dashboard Task Created
+sample_payload_operations:
+- event: sample-course-completion
+  operationId: webhooks_sample_course_completion_retrieve
+- event: sample-course-enrollment
+  operationId: webhooks_sample_course_enrollment_retrieve
+- event: sample-dashboard-task-created
+  operationId: webhooks_sample_dashboard_task_created_retrieve
+- event: sample-domain-enrollment
+  operationId: webhooks_sample_domain_enrollment_retrieve
+- event: sample-lesson-completion
+  operationId: webhooks_sample_lesson_completion_retrieve
+- event: sample-path-completion
+  operationId: webhooks_sample_path_completion_retrieve
+- event: sample-path-enrollment
+  operationId: webhooks_sample_path_enrollment_retrieve
+- event: sample-purchase-fulfillment
+  operationId: webhooks_sample_purchase_fulfillment_retrieve
+- event: sample-quiz-completion
+  operationId: webhooks_sample_quiz_completion_retrieve
+- event: sample-vilt-registration
+  operationId: webhooks_sample_vilt_registration_retrieve
