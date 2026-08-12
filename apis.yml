@@ -1530,6 +1530,8 @@ apis:
   - type: OAuthScopes
     url: scopes/skilljar-scopes.yml
 common:
+- type: Overlay
+  url: overlays/skilljar-openapi-overlay.yaml
 - type: Website
   url: https://www.skilljar.com/
 - type: DeveloperPortal
