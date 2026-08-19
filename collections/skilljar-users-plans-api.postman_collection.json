@@ -1,0 +1,143 @@
+{
+  "item": [
+    {
+      "id": "b99978c1-f79e-4b66-ae2f-fed653710b1c",
+      "name": "Users > Plans",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ba6aaa2d-c192-4b0a-ab39-947f6ff946e6",
+          "name": "users plan enrollments list",
+          "request": {
+            "name": "users plan enrollments list",
+            "description": {
+              "content": "List plan enrollments for a user.\n\nReturns a list of plan enrollments and related details for the user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users",
+                ":user_id",
+                "plan-enrollments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5dc85f15-7c1e-4d8e-9ec4-d884ee028215",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":user_id",
+                    "plan-enrollments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"enrollment_id\": \"string\",\n    \"plan_id\": \"string\",\n    \"domain_name\": \"string\",\n    \"enrolled_at\": \"1992-07-17T08:55:10.661Z\",\n    \"expires_at\": \"1961-10-24T19:13:38.965Z\",\n    \"active\": true,\n    \"plan\": {\n      \"id\": \"string\",\n      \"title\": \"string\"\n    }\n  },\n  {\n    \"enrollment_id\": \"string\",\n    \"plan_id\": \"string\",\n    \"domain_name\": \"string\",\n    \"enrolled_at\": \"1967-12-30T17:08:36.190Z\",\n    \"expires_at\": \"1974-04-17T16:38:27.809Z\",\n    \"active\": true,\n    \"plan\": {\n      \"id\": \"string\",\n      \"title\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0d6ead1f-f3bd-462b-bd90-f0e9688c8a74",
+    "name": "Skilljar Assets Users > Plans API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

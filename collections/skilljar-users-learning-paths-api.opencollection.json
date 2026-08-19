@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Users > Learning Paths API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users > Learning Paths",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "users_published_path_enrollments_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/users/:user_id/published-path-enrollments",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List Learning Path enrollments for a user.\n\nReturns a list of Learning Path enrollments and progress details for the user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,911 @@
+{
+  "item": [
+    {
+      "id": "a0a82b7d-3db3-4d12-bc66-ae9ea1eb322f",
+      "name": "Domains > Published Paths > Enrollments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ecc80225-c388-49c7-9d0d-1d8f142c181f",
+          "name": "domains published paths published path enrollments list",
+          "request": {
+            "name": "domains published paths published path enrollments list",
+            "description": {
+              "content": "List enrollments for a Published Path.\n\nReturns a paginated list of enrollments for the specified Published Path, including user and purchase details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "published-paths",
+                ":published_path_id",
+                "published-path-enrollments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_path_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bbcf07e3-d97a-4b46-bb1a-ec7d52b71ae0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "published-paths",
+                    ":published_path_id",
+                    "published-path-enrollments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_path_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"user\": {\n        \"id\": \"string\",\n        \"email\": \"7ZRHayrlN4@pyzihIjsAAHxrDIdCKm.fleq\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\"\n      },\n      \"id\": \"string\",\n      \"enrolled_at\": \"1985-02-07T13:32:48.176Z\",\n      \"expires_at\": \"2024-08-04T11:11:39.130Z\",\n      \"active\": true,\n      \"purchase\": {\n        \"order_id\": \"string\",\n        \"offer_price\": {\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"currency_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"purchase_price\": {\n          \"amount\": \"0.00\",\n          \"currency_code\": \"USD\"\n        },\n        \"quantity\": 4999,\n        \"purchase_state\": \"SUCCESS\",\n        \"payment_processor\": \"NONE\",\n        \"purchase_id\": \"string\",\n        \"purchased_at\": \"2024-04-12T00:43:51.501Z\",\n        \"tax_price_cents\": 744137308\n      }\n    },\n    {\n      \"user\": {\n        \"id\": \"string\",\n        \"email\": \"rliU@OWWdekizcGZJxcvJcdXziw.oq\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\"\n      },\n      \"id\": \"string\",\n      \"enrolled_at\": \"1972-09-03T22:52:10.526Z\",\n      \"expires_at\": \"1948-06-09T18:08:39.850Z\",\n      \"active\": true,\n      \"purchase\": {\n        \"order_id\": \"string\",\n        \"offer_price\": {\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"currency_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"purchase_price\": {\n          \"amount\": \"0.00\",\n          \"currency_code\": \"USD\"\n        },\n        \"quantity\": 292,\n        \"purchase_state\": \"PENDING\",\n        \"payment_processor\": \"NONE\",\n        \"purchase_id\": \"string\",\n        \"purchased_at\": \"2018-10-28T18:53:21.678Z\",\n        \"tax_price_cents\": 985512782\n      }\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc42ef6f-6e3c-4300-8929-be2f14d94ff4",
+          "name": "domains published paths published path enrollments create",
+          "request": {
+            "name": "domains published paths published path enrollments create",
+            "description": {
+              "content": "Enroll a user in a Published Path.\n\nThis operation is idempotent for the same user and enrollment time.\nOnly users with an existing domain membership can be enrolled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "published-paths",
+                ":published_path_id",
+                "published-path-enrollments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_path_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "enrolled_at",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "expires_at",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "key": "purchase_price",
+                  "value": "{\"amount\":\"0.00\",\"currency_code\":\"USD\"}"
+                },
+                {
+                  "disabled": false,
+                  "key": "purchase_state",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "purchased_at",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "tax_price_cents",
+                  "value": "<integer>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "54d6a16b-7a0b-41a9-8555-d9b1b9364f19",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "published-paths",
+                    ":published_path_id",
+                    "published-path-enrollments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_path_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "enrolled_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "expires_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "purchase_price",
+                      "value": "{\"amount\":\"0.00\",\"currency_code\":\"USD\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "purchase_state",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "purchased_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "tax_price_cents",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"user\": {\n    \"id\": \"string\",\n    \"email\": \"yEN@dBjxh.shic\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\"\n  },\n  \"id\": \"string\",\n  \"enrolled_at\": \"1949-10-18T12:20:22.937Z\",\n  \"expires_at\": \"2018-04-22T12:38:00.658Z\",\n  \"active\": true,\n  \"purchase\": {\n    \"order_id\": \"string\",\n    \"offer_price\": {\n      \"amount\": \"0.00\",\n      \"currency_code\": \"USD\"\n    },\n    \"purchase_price\": {\n      \"amount\": \"0.00\",\n      \"currency_code\": \"USD\"\n    },\n    \"quantity\": 213,\n    \"purchase_state\": \"<string>\",\n    \"payment_processor\": \"NONE\",\n    \"purchase_id\": \"string\",\n    \"purchased_at\": \"1964-09-17T11:00:00.772Z\",\n    \"tax_price_cents\": 995794233\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4700f93d-dd0a-4915-8899-3454fe3a748e",
+          "name": "domains published paths published path enrollments retrieve",
+          "request": {
+            "name": "domains published paths published path enrollments retrieve",
+            "description": {
+              "content": "Retrieve details for a Published Path enrollment.\n\nReturns enrollment information, including user details and purchase information if applicable.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "published-paths",
+                ":published_path_id",
+                "published-path-enrollments",
+                ":published_path_enrollment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_path_enrollment_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_path_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "66d4860c-dcd0-4fe7-9d60-f7df43f40144",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "published-paths",
+                    ":published_path_id",
+                    "published-path-enrollments",
+                    ":published_path_enrollment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_path_enrollment_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_path_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"user\": {\n    \"id\": \"string\",\n    \"email\": \"2S1naHUj@hs.fxdz\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\"\n  },\n  \"id\": \"string\",\n  \"enrolled_at\": \"1951-01-14T19:24:44.772Z\",\n  \"expires_at\": \"1990-01-19T23:54:27.007Z\",\n  \"active\": true,\n  \"purchase\": {\n    \"order_id\": \"string\",\n    \"offer_price\": {\n      \"amount\": \"0.00\",\n      \"currency_code\": \"USD\"\n    },\n    \"purchase_price\": {\n      \"amount\": \"0.00\",\n      \"currency_code\": \"USD\"\n    },\n    \"quantity\": 7351,\n    \"purchase_state\": \"<string>\",\n    \"payment_processor\": \"NONE\",\n    \"purchase_id\": \"string\",\n    \"purchased_at\": \"2007-07-15T06:32:12.939Z\",\n    \"tax_price_cents\": 360957746\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "983ee00c-3142-4b70-ac96-944b08250342",
+          "name": "domains published paths published path enrollments update",
+          "request": {
+            "name": "domains published paths published path enrollments update",
+            "description": {
+              "content": "Manage enrollments for a Published Path.\n\nEnrollments represent a user's access to a Published Path.\nThis API allows you to list, retrieve, create, and update enrollments for a specific Published Path.\n\nEnrollment states:\n- A user may have multiple enrollments for a path.\n- Access is granted if at least one enrollment is active and not expired.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "published-paths",
+                ":published_path_id",
+                "published-path-enrollments",
+                ":published_path_enrollment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_path_enrollment_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_path_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "expires_at",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "010f8f47-e42e-446a-8def-c9b853a28127",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "published-paths",
+                    ":published_path_id",
+                    "published-path-enrollments",
+                    ":published_path_enrollment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_path_enrollment_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_path_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "expires_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"user\": {\n    \"id\": \"string\",\n    \"email\": \"O2Rw6h@AxXabZWCWh.ky\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\"\n  },\n  \"enrolled_at\": \"1979-04-08T10:55:39.508Z\",\n  \"expires_at\": \"2000-05-09T12:40:38.188Z\",\n  \"active\": true,\n  \"purchase\": {\n    \"order_id\": \"string\",\n    \"offer_price\": {\n      \"amount\": \"0.00\",\n      \"currency_code\": \"USD\"\n    },\n    \"purchase_price\": {\n      \"amount\": \"0.00\",\n      \"currency_code\": \"USD\"\n    },\n    \"quantity\": 1544,\n    \"purchase_state\": \"<string>\",\n    \"payment_processor\": \"NONE\",\n    \"purchase_id\": \"string\",\n    \"purchased_at\": \"1947-10-13T14:38:24.572Z\",\n    \"tax_price_cents\": 824114685\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a213cac-ac0b-45cf-9f10-5e3a6c125971",
+          "name": "domains published paths published path enrollments partial update",
+          "request": {
+            "name": "domains published paths published path enrollments partial update",
+            "description": {
+              "content": "Manage enrollments for a Published Path.\n\nEnrollments represent a user's access to a Published Path.\nThis API allows you to list, retrieve, create, and update enrollments for a specific Published Path.\n\nEnrollment states:\n- A user may have multiple enrollments for a path.\n- Access is granted if at least one enrollment is active and not expired.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "published-paths",
+                ":published_path_id",
+                "published-path-enrollments",
+                ":published_path_enrollment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_path_enrollment_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_path_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "expires_at",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f68d9314-d595-4c77-b959-0ebeed8743bf",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "published-paths",
+                    ":published_path_id",
+                    "published-path-enrollments",
+                    ":published_path_enrollment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_path_enrollment_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_path_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "expires_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"user\": {\n    \"id\": \"string\",\n    \"email\": \"O2Rw6h@AxXabZWCWh.ky\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\"\n  },\n  \"enrolled_at\": \"1979-04-08T10:55:39.508Z\",\n  \"expires_at\": \"2000-05-09T12:40:38.188Z\",\n  \"active\": true,\n  \"purchase\": {\n    \"order_id\": \"string\",\n    \"offer_price\": {\n      \"amount\": \"0.00\",\n      \"currency_code\": \"USD\"\n    },\n    \"purchase_price\": {\n      \"amount\": \"0.00\",\n      \"currency_code\": \"USD\"\n    },\n    \"quantity\": 1544,\n    \"purchase_state\": \"<string>\",\n    \"payment_processor\": \"NONE\",\n    \"purchase_id\": \"string\",\n    \"purchased_at\": \"1947-10-13T14:38:24.572Z\",\n    \"tax_price_cents\": 824114685\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "57a09fef-1bd8-4a6a-ad15-3cea366391bd",
+    "name": "Skilljar Assets Domains > Published Paths > Enrollments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

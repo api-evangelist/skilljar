@@ -1,0 +1,730 @@
+{
+  "item": [
+    {
+      "id": "f9ce893b-aa3d-44ea-ba71-1774b6778623",
+      "name": "Users > Published Courses",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "28a49a26-a19e-4b41-8f31-336ce2b1dfcd",
+          "name": "users published courses list",
+          "request": {
+            "name": "users published courses list",
+            "description": {
+              "content": "List published courses with progress for a user.\n\nReturns a list of published courses in which the user is enrolled, including progress details.\nUses optimized batch enrollment loading to reduce database queries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users",
+                ":user_id",
+                "published-courses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "01949790-a630-4c60-a2a5-939e2df147df",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":user_id",
+                    "published-courses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"course_progress\": {\n      \"course_progress_id\": \"string\",\n      \"completed_lesson_count\": 3364,\n      \"completed_required_lesson_count\": 2455,\n      \"completed_at\": \"2025-06-23T23:32:09.487Z\",\n      \"latest_activity\": \"1971-07-25T10:57:39.304Z\",\n      \"score\": 2126621020,\n      \"max_score\": 821375910,\n      \"credits_earned\": \"string\",\n      \"credit_unit_plural\": \"string\",\n      \"success_status\": \"FAILED\"\n    },\n    \"published_course_id\": \"string\",\n    \"domain_name\": \"string\",\n    \"enrolled_at\": \"1946-12-07T20:53:27.617Z\",\n    \"enrollment_id\": \"string\",\n    \"course\": {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"lesson_count\": 771,\n      \"required_lesson_count\": 2962\n    },\n    \"certificate\": {\n      \"code\": \"string\",\n      \"validate_url\": \"http://ypsXNDvUZyQBmCQzOL.pdcYz-D.f\",\n      \"issued_at\": \"2017-12-30T09:41:15.191Z\",\n      \"expires_at\": \"2018-11-02T17:34:04.438Z\"\n    },\n    \"all_enrollments\": [\n      {\n        \"course_progress_id\": \"string\",\n        \"enrollment_id\": \"string\",\n        \"active\": false,\n        \"expires_at\": \"1959-09-17T22:44:12.401Z\"\n      },\n      {\n        \"course_progress_id\": \"string\",\n        \"enrollment_id\": \"string\",\n        \"active\": false,\n        \"expires_at\": \"1986-04-20T14:28:20.696Z\"\n      }\n    ]\n  },\n  {\n    \"course_progress\": {\n      \"course_progress_id\": \"string\",\n      \"completed_lesson_count\": 6618,\n      \"completed_required_lesson_count\": 6091,\n      \"completed_at\": \"1991-04-08T12:04:30.900Z\",\n      \"latest_activity\": \"2012-12-14T11:11:24.533Z\",\n      \"score\": 1195402895,\n      \"max_score\": 1821946362,\n      \"credits_earned\": \"string\",\n      \"credit_unit_plural\": \"string\",\n      \"success_status\": \"FAILED\"\n    },\n    \"published_course_id\": \"string\",\n    \"domain_name\": \"string\",\n    \"enrolled_at\": \"2008-03-26T06:52:29.108Z\",\n    \"enrollment_id\": \"string\",\n    \"course\": {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"lesson_count\": 8654,\n      \"required_lesson_count\": 7998\n    },\n    \"certificate\": {\n      \"code\": \"string\",\n      \"validate_url\": \"https://dDvqLUSSFWWiRtZtZxxTAbH.yvQXxPzjwx65KVSjUsTNzjer1\",\n      \"issued_at\": \"1981-08-15T19:29:11.463Z\",\n      \"expires_at\": \"1968-12-10T03:39:43.451Z\"\n    },\n    \"all_enrollments\": [\n      {\n        \"course_progress_id\": \"string\",\n        \"enrollment_id\": \"string\",\n        \"active\": false,\n        \"expires_at\": \"2003-01-12T15:43:53.181Z\"\n      },\n      {\n        \"course_progress_id\": \"string\",\n        \"enrollment_id\": \"string\",\n        \"active\": true,\n        \"expires_at\": \"2011-11-09T04:22:03.486Z\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f06cfa5c-e579-4610-a7c3-de75095c8c44",
+          "name": "users published courses retrieve",
+          "request": {
+            "name": "users published courses retrieve",
+            "description": {
+              "content": "Retrieve course progress for a user.\n\nReturns detailed progress information for a specific published course enrollment for the user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users",
+                ":user_id",
+                "published-courses",
+                ":published_course_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_course_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "69f0a169-3354-4a57-adc2-eac98a6f8909",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":user_id",
+                    "published-courses",
+                    ":published_course_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_course_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"course_progress\": {\n    \"course_progress_id\": \"string\",\n    \"completed_lesson_count\": 1227,\n    \"completed_required_lesson_count\": 2068,\n    \"completed_at\": \"1958-10-06T13:28:35.330Z\",\n    \"latest_activity\": \"2011-05-13T08:45:35.548Z\",\n    \"score\": 739508235,\n    \"max_score\": 1387066617,\n    \"credits_earned\": \"string\",\n    \"credit_unit_plural\": \"string\",\n    \"success_status\": \"PASSED\"\n  },\n  \"published_course_id\": \"string\",\n  \"domain_name\": \"string\",\n  \"enrolled_at\": \"2015-06-24T20:31:25.673Z\",\n  \"enrollment_id\": \"string\",\n  \"course\": {\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"lesson_count\": 3424,\n    \"required_lesson_count\": 1779\n  },\n  \"certificate\": {\n    \"code\": \"string\",\n    \"validate_url\": \"http://VphFkMQLEnnOwF.zafIZvGxZnsI6x7KdR6ejh.h+roH2bl5Pm2nNHV34mEOfim.tdmge\",\n    \"issued_at\": \"1981-05-08T13:19:31.618Z\",\n    \"expires_at\": \"1961-04-12T16:54:58.691Z\"\n  },\n  \"all_enrollments\": [\n    {\n      \"course_progress_id\": \"string\",\n      \"enrollment_id\": \"string\",\n      \"active\": true,\n      \"expires_at\": \"1956-03-02T16:36:36.613Z\"\n    },\n    {\n      \"course_progress_id\": \"string\",\n      \"enrollment_id\": \"string\",\n      \"active\": false,\n      \"expires_at\": \"1981-01-08T23:24:20.276Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf1de7aa-d74b-43af-924f-a2bcbb181362",
+          "name": "users published courses update",
+          "request": {
+            "name": "users published courses update",
+            "description": {
+              "content": "Update course progress for a user.\n\nAllows updating the user's progress for a published course. Both PUT and PATCH perform partial updates.\nTo mark a course as complete, you only need to set the `completed_at` within the course progress.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users",
+                ":user_id",
+                "published-courses",
+                ":published_course_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_course_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "completed_at",
+                  "value": "<dateTime>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "score",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "max_score",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "credits_earned",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "credit_unit_plural",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "success_status",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "published_course_id",
+                  "value": "<string>",
+                  "description": "ID of the PublishedCourse"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "44682b24-a71a-4eb6-a81e-8b67f1a6e870",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":user_id",
+                    "published-courses",
+                    ":published_course_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_course_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "completed_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "score",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "max_score",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "credits_earned",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "credit_unit_plural",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "success_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "ID of the PublishedCourse",
+                        "type": "text/plain"
+                      },
+                      "key": "published_course_id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"course_progress\": {\n    \"course_progress_id\": \"string\",\n    \"completed_lesson_count\": 6632,\n    \"completed_required_lesson_count\": 1595,\n    \"completed_at\": \"1955-11-20T19:27:13.810Z\",\n    \"latest_activity\": \"1992-07-12T06:03:09.139Z\",\n    \"score\": 51261194,\n    \"max_score\": 1070083434,\n    \"credits_earned\": \"string\",\n    \"credit_unit_plural\": \"string\",\n    \"success_status\": \"<string>\"\n  },\n  \"published_course_id\": \"string\",\n  \"domain_name\": \"string\",\n  \"enrolled_at\": \"1982-02-25T18:05:33.141Z\",\n  \"enrollment_id\": \"string\",\n  \"course\": {\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"lesson_count\": 2014,\n    \"required_lesson_count\": 4381\n  },\n  \"certificate\": {\n    \"code\": \"string\",\n    \"validate_url\": \"https://bHxdeXtTtGmzsDBOQPmqbYarKlIXIbOv.lfVuLD+kHQCFZ63cq6nMFu.U7GCd4adI,wAeLO9\",\n    \"issued_at\": \"1965-02-20T03:42:41.995Z\",\n    \"expires_at\": \"1974-04-20T10:00:32.350Z\"\n  },\n  \"all_enrollments\": [\n    {\n      \"course_progress_id\": \"string\",\n      \"enrollment_id\": \"string\",\n      \"active\": true,\n      \"expires_at\": \"1982-09-22T13:44:35.410Z\"\n    },\n    {\n      \"course_progress_id\": \"string\",\n      \"enrollment_id\": \"string\",\n      \"active\": true,\n      \"expires_at\": \"1975-02-09T01:46:09.309Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6daaf5ce-d511-4457-87d1-bab02016a621",
+          "name": "users published courses partial update",
+          "request": {
+            "name": "users published courses partial update",
+            "description": {
+              "content": "Partially update course progress for a user.\n\nAllows updating the user's progress for a published course. Both PUT and PATCH perform partial updates.\nTo mark a course as complete, you only need to set the `completed_at` within the course progress.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users",
+                ":user_id",
+                "published-courses",
+                ":published_course_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_course_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "published_course_id",
+                  "value": "<string>",
+                  "description": "ID of the PublishedCourse"
+                },
+                {
+                  "disabled": false,
+                  "key": "completed_at",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "score",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_score",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "credits_earned",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "credit_unit_plural",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "success_status",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "030c662a-c4ba-41af-aa6b-fb0fb652f150",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":user_id",
+                    "published-courses",
+                    ":published_course_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_course_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "ID of the PublishedCourse",
+                        "type": "text/plain"
+                      },
+                      "key": "published_course_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "completed_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "score",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "max_score",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "credits_earned",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "credit_unit_plural",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "success_status",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"course_progress\": {\n    \"course_progress_id\": \"string\",\n    \"completed_lesson_count\": 6632,\n    \"completed_required_lesson_count\": 1595,\n    \"completed_at\": \"1955-11-20T19:27:13.810Z\",\n    \"latest_activity\": \"1992-07-12T06:03:09.139Z\",\n    \"score\": 51261194,\n    \"max_score\": 1070083434,\n    \"credits_earned\": \"string\",\n    \"credit_unit_plural\": \"string\",\n    \"success_status\": \"<string>\"\n  },\n  \"published_course_id\": \"string\",\n  \"domain_name\": \"string\",\n  \"enrolled_at\": \"1982-02-25T18:05:33.141Z\",\n  \"enrollment_id\": \"string\",\n  \"course\": {\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"lesson_count\": 2014,\n    \"required_lesson_count\": 4381\n  },\n  \"certificate\": {\n    \"code\": \"string\",\n    \"validate_url\": \"https://bHxdeXtTtGmzsDBOQPmqbYarKlIXIbOv.lfVuLD+kHQCFZ63cq6nMFu.U7GCd4adI,wAeLO9\",\n    \"issued_at\": \"1965-02-20T03:42:41.995Z\",\n    \"expires_at\": \"1974-04-20T10:00:32.350Z\"\n  },\n  \"all_enrollments\": [\n    {\n      \"course_progress_id\": \"string\",\n      \"enrollment_id\": \"string\",\n      \"active\": true,\n      \"expires_at\": \"1982-09-22T13:44:35.410Z\"\n    },\n    {\n      \"course_progress_id\": \"string\",\n      \"enrollment_id\": \"string\",\n      \"active\": true,\n      \"expires_at\": \"1975-02-09T01:46:09.309Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "38b4ef04-2e08-4f75-9410-99dc56afe355",
+    "name": "Skilljar Assets Users > Published Courses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

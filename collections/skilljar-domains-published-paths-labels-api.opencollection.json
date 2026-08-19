@@ -1,0 +1,150 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Domains > Published Paths > Labels API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domains > Published Paths > Labels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "domains_published_paths_labels_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-paths/:published_path_id/labels",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "published_path_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List labels on a published path."
+        },
+        {
+          "info": {
+            "name": "domains_published_paths_labels_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-paths/:published_path_id/labels",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_path_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Associate a Label association to a Published Path."
+        },
+        {
+          "info": {
+            "name": "domains_published_paths_labels_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-paths/:published_path_id/labels/:label_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "label_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_path_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve label details."
+        },
+        {
+          "info": {
+            "name": "domains_published_paths_labels_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-paths/:published_path_id/labels/:label_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "label_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_path_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Deletes a Label association to a Published Path and returns a `204` response."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

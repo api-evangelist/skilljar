@@ -1,0 +1,141 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Web Packages API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Web Packages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "web_packages_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/web-packages",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a paginated list of WebPackages associated with your organization.\n\nEach result includes metadata such as ID, type, title, state, and completion settings."
+        },
+        {
+          "info": {
+            "name": "web_packages_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/web-packages",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a new WebPackage by providing a URL to a remotely hosted zip file.\n\nThe file will be downloaded and re-hosted in Skilljar.\nThe `web_package` object in the request allows you to specify properties such as title, redirect behavior,\nand completion synchronization.\n\n- `title` (required): The title for the web package. This may be overridden after processing.\n- `redirect_on_completion` (optional, default: `true`)\n- `sync_on_completion` (optional, default: `false`)\n\nThe response will indicate t"
+        },
+        {
+          "info": {
+            "name": "web_packages_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/web-packages/:web_package_id",
+            "params": [
+              {
+                "name": "web_package_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve detailed information for a specific WebPackage in your organization.\n\nThe response includes all metadata,\nincluding a signed `download_url` (valid for 1 hour) for direct package download.\n\nNote: Download links may not be clickable in some API documentation browsers.\nCopy and paste the URL into a new browser window if needed."
+        },
+        {
+          "info": {
+            "name": "web_packages_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/web-packages/:web_package_id",
+            "params": [
+              {
+                "name": "web_package_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete a WebPackage from your organization.\n\nDeletion is only permitted if the WebPackage is not associated with any lessons.\nIf associations exist, a 400 Bad Request is returned."
+        },
+        {
+          "info": {
+            "name": "web_packages_lessons_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/web-packages/:web_package_id/lessons",
+            "params": [
+              {
+                "name": "web_package_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update all lesson objects (excluding lesson content items) associated with the specified WebPackage.\n\nThis endpoint allows you to update lesson associations for a WebPackage."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

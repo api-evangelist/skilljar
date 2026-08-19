@@ -1,0 +1,271 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Domains > Users API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domains > Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "domains_users_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/users",
+            "params": [
+              {
+                "name": "access_code",
+                "value": "",
+                "type": "query",
+                "description": "Use a value of \"null\" to see domain users who accessed the domain without an access code. No other values are accepted for this query."
+              },
+              {
+                "name": "access_code__code",
+                "value": "",
+                "type": "query",
+                "description": "Filter domain users by access code used - case sensitive"
+              },
+              {
+                "name": "access_code__id",
+                "value": "",
+                "type": "query",
+                "description": "Filter domain users by id of access code used - not case sensitive"
+              },
+              {
+                "name": "access_code__pool__id",
+                "value": "",
+                "type": "query",
+                "description": "Filter domain users by id of access code pool used - not case sensitive"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Filter domain users by active (true or false)"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_signup_field_data",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the response also includes the following data for each user (\"signup_fields\")"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "signup_field_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter domain users by a sign up field ID"
+              },
+              {
+                "name": "signup_field_label",
+                "value": "",
+                "type": "query",
+                "description": "Filter domain users by a sign up field Label - case sensitive"
+              },
+              {
+                "name": "signup_field_value",
+                "value": "",
+                "type": "query",
+                "description": "Filter domain users by a sign up field Value - case sensitive"
+              },
+              {
+                "name": "user__email",
+                "value": "",
+                "type": "query",
+                "description": "Filter domain users by email address"
+              },
+              {
+                "name": "user__first_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter domain users by first name - case sensitive"
+              },
+              {
+                "name": "user__last_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter domain users by last name - case sensitive"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List users for a domain.\n\nReturns a paginated list of users associated with the domain.\n  Supports filtering by user details, access code, and signup field data."
+        },
+        {
+          "info": {
+            "name": "domains_users_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/users",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Add a user to a domain.\n\nIf the provided email address already exists, the user will be added to the domain\n  and their existing details will be returned.\n\nIf the email is new, a new user will be created and added to the domain."
+        },
+        {
+          "info": {
+            "name": "domains_users_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/users/:user_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve details for a specific user within a domain."
+        },
+        {
+          "info": {
+            "name": "domains_users_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/users/:user_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update a user's domain membership.\n\nOnly the `active` status, `expires_at` date, and `access_code`\n  (which can be removed by setting to null) may be updated. Both PUT and PATCH perform partial updates."
+        },
+        {
+          "info": {
+            "name": "domains_users_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/users/:user_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update a user's domain membership.\n\nOnly the `active` status, `expires_at` date, and `access_code`\n  (which can be removed by setting to null) may be updated. Both PUT and PATCH perform partial updates."
+        },
+        {
+          "info": {
+            "name": "bulk_create_domain_users",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/users/bulk-create",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create multiple users in a domain with a single API call. All users are validated before processing. If any user fails validation, the entire request is rejected. The operation is queued for async processing and returns 202 Accepted immediately."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

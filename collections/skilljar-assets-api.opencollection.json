@@ -1,0 +1,114 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Assets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "assets_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/assets",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a paginated list of all assets in your organization.\n\nReturns summary information for each asset, including name, size, and type.\nDownload URLs are not included in this response."
+        },
+        {
+          "info": {
+            "name": "assets_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/assets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Upload a new asset to your organization.\n\nAccepts a file or remote file URL and creates a new asset record.\nThe file will be securely downloaded and re-hosted by Skilljar.\nThe response includes asset metadata, but excludes download URL and type until processing is complete."
+        },
+        {
+          "info": {
+            "name": "assets_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/assets/:asset_id",
+            "params": [
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve detailed information for a specific asset.\n\nReturns all metadata for the asset, including a signed download URL valid for 1 hour.\nOnly assets belonging to your organization are accessible."
+        },
+        {
+          "info": {
+            "name": "assets_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/assets/:asset_id",
+            "params": [
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Permanently delete an asset from your organization.\n\nThe asset will be removed if it is not currently used in any lessons or courses.\nReturns HTTP 204 No Content on success.\nIf the asset is in use, returns HTTP 400 Bad Request with an error message."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

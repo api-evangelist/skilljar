@@ -1,0 +1,728 @@
+{
+  "item": [
+    {
+      "id": "69ac3527-c7a2-4e45-81f9-09c9a5ed0bc1",
+      "name": "Paths",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ea5af980-1668-4914-aa14-650f3e96afd3",
+          "name": "paths list",
+          "request": {
+            "name": "paths list",
+            "description": {
+              "content": "Retrieve a paginated list of Paths.\n\nReturns up to 100 Paths per page, filtered by the current organization.\nUse this endpoint to discover all available learning Paths.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "paths"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6b9d042c-1334-472c-8af7-35b6b6fb620e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paths"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"promo_image_url\": \"string\",\n      \"short_description\": \"string\",\n      \"long_description_html\": \"string\",\n      \"header_html\": \"string\",\n      \"course_name_singular\": \"string\",\n      \"course_name_plural\": \"string\",\n      \"path_item_count\": 4358\n    },\n    {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"promo_image_url\": \"string\",\n      \"short_description\": \"string\",\n      \"long_description_html\": \"string\",\n      \"header_html\": \"string\",\n      \"course_name_singular\": \"string\",\n      \"course_name_plural\": \"string\",\n      \"path_item_count\": 1965\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "910d572f-e419-452c-84e0-62cea187930d",
+          "name": "paths retrieve",
+          "request": {
+            "name": "paths retrieve",
+            "description": {
+              "content": "Retrieve details for a specific Path.\n\nReturns all metadata and configuration for the requested Path, including its items and structure.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "paths",
+                ":path_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c93891cf-58b8-4177-8b1d-0ff15cd5f856",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paths",
+                    ":path_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"promo_image_url\": \"string\",\n  \"short_description\": \"string\",\n  \"long_description_html\": \"string\",\n  \"header_html\": \"string\",\n  \"course_name_singular\": \"string\",\n  \"course_name_plural\": \"string\",\n  \"path_item_count\": 685\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d3559fd-0528-4591-828e-55f434129443",
+          "name": "paths update",
+          "request": {
+            "name": "paths update",
+            "description": {
+              "content": "Update an existing Path.\n\nAllows modification of Path metadata such as name, description, or status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "paths",
+                ":path_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "title",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "short_description",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "long_description_html",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "header_html",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "course_name_singular",
+                  "value": "<string>",
+                  "description": "Text to replace the word 'course' on the catalog tile for this learning path. For example: '1 course'"
+                },
+                {
+                  "disabled": false,
+                  "key": "course_name_plural",
+                  "value": "<string>",
+                  "description": "Text to replace the word 'courses' on the catalog tile for this learning path. For example: '3 courses'"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f4d2a1a0-2ac9-456b-8314-abb2710d6058",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paths",
+                    ":path_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "title",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "short_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "long_description_html",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "header_html",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Text to replace the word 'course' on the catalog tile for this learning path. For example: '1 course'",
+                        "type": "text/plain"
+                      },
+                      "key": "course_name_singular",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Text to replace the word 'courses' on the catalog tile for this learning path. For example: '3 courses'",
+                        "type": "text/plain"
+                      },
+                      "key": "course_name_plural",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"promo_image_url\": \"string\",\n  \"short_description\": \"string\",\n  \"long_description_html\": \"string\",\n  \"header_html\": \"string\",\n  \"course_name_singular\": \"string\",\n  \"course_name_plural\": \"string\",\n  \"path_item_count\": 685\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8cd180e2-f80f-4677-8203-6738feb0e49f",
+          "name": "paths partial update",
+          "request": {
+            "name": "paths partial update",
+            "description": {
+              "content": "Partially update an existing Path.\n\nAllows updating one or more fields of a Path without modifying the entire resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "paths",
+                ":path_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "title",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "short_description",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "long_description_html",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "header_html",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "course_name_singular",
+                  "value": "<string>",
+                  "description": "Text to replace the word 'course' on the catalog tile for this learning path. For example: '1 course'"
+                },
+                {
+                  "disabled": false,
+                  "key": "course_name_plural",
+                  "value": "<string>",
+                  "description": "Text to replace the word 'courses' on the catalog tile for this learning path. For example: '3 courses'"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1f848143-1b35-4145-9ef8-b16912797bb0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paths",
+                    ":path_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "title",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "short_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "long_description_html",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "header_html",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Text to replace the word 'course' on the catalog tile for this learning path. For example: '1 course'",
+                        "type": "text/plain"
+                      },
+                      "key": "course_name_singular",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Text to replace the word 'courses' on the catalog tile for this learning path. For example: '3 courses'",
+                        "type": "text/plain"
+                      },
+                      "key": "course_name_plural",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"promo_image_url\": \"string\",\n  \"short_description\": \"string\",\n  \"long_description_html\": \"string\",\n  \"header_html\": \"string\",\n  \"course_name_singular\": \"string\",\n  \"course_name_plural\": \"string\",\n  \"path_item_count\": 685\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1531c112-e3ba-431b-96ed-1cfee8f60bd1",
+          "name": "paths destroy",
+          "request": {
+            "name": "paths destroy",
+            "description": {
+              "content": "Delete a Path.\n\nPermanently removes the Path and all associated items from your organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "paths",
+                ":path_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ecdbfe35-03b8-4827-a80b-efcf478b5f9a",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "paths",
+                    ":path_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "783649ba-17da-4229-9b10-a03e0f555aa1",
+    "name": "Skilljar Assets Paths API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

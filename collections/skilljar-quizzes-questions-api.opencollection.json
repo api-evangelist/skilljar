@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Quizzes > Questions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quizzes > Questions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "quizzes_questions_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/quizzes/:quiz_id/questions",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "quiz_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List all Questions for the specified Quiz.\n\nReturns a paginated list of Questions associated with the Quiz."
+        },
+        {
+          "info": {
+            "name": "quizzes_questions_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/quizzes/:quiz_id/questions/:question_id",
+            "params": [
+              {
+                "name": "question_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "quiz_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve details for a specific Question.\n\nReturns all metadata for the Question, including Answers."
+        },
+        {
+          "info": {
+            "name": "quizzes_questions_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/quizzes/:quiz_id/questions/:question_id",
+            "params": [
+              {
+                "name": "question_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "quiz_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete a specific Question from the Quiz.\n\nThis will remove the Question and all associated Answers from the Quiz."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

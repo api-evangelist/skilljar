@@ -1,0 +1,194 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Domains > Catalog Pages API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domains > Catalog Pages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "domains_catalog_pages_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/catalog-pages",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a paginated list of all catalog pages for the specified domain."
+        },
+        {
+          "info": {
+            "name": "domains_catalog_pages_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/catalog-pages",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a new catalog page within the specified domain."
+        },
+        {
+          "info": {
+            "name": "domains_catalog_pages_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/catalog-pages/:catalog_page_id",
+            "params": [
+              {
+                "name": "catalog_page_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve detailed information for a specific catalog page within the domain."
+        },
+        {
+          "info": {
+            "name": "domains_catalog_pages_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/catalog-pages/:catalog_page_id",
+            "params": [
+              {
+                "name": "catalog_page_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update a specific catalog page within the domain.\n\nAllows partial updates to catalog page fields such as text fields, visibility, etc."
+        },
+        {
+          "info": {
+            "name": "domains_catalog_pages_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/catalog-pages/:catalog_page_id",
+            "params": [
+              {
+                "name": "catalog_page_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Partially update a specific catalog page within the domain.\n\nAllows partial updates to catalog page fields such as text fields, visibility, etc."
+        },
+        {
+          "info": {
+            "name": "domains_catalog_pages_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/catalog-pages/:catalog_page_id",
+            "params": [
+              {
+                "name": "catalog_page_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete a catalog page from the domain."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,588 @@
+{
+  "item": [
+    {
+      "id": "2a6ba5e9-085f-4245-9f12-7efb302c1715",
+      "name": "Offers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3fb90bd8-24f6-4c1e-901a-b68c8798273a",
+          "name": "offers list",
+          "request": {
+            "name": "offers list",
+            "description": {
+              "content": "Retrieve a paginated list of Offers available to your organization.\n\nReturns a list of Offer resources, filtered and paginated according to the request parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4ba3ca8f-8ad6-442f-a137-7e0e3b08632a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"id\": \"string\",\n      \"course_series_id\": \"string\",\n      \"published_path_id\": \"string\",\n      \"published_course_id\": \"string\",\n      \"plan_id\": \"string\",\n      \"domain_name\": \"string\",\n      \"offer_type\": \"published_path\",\n      \"price_cents\": 6992,\n      \"currency_code\": \"MXN\",\n      \"price_credits\": 1506,\n      \"sku\": \"string\",\n      \"max_quantity\": 2737,\n      \"active\": false,\n      \"starts_at\": \"1955-11-23T17:36:09.245Z\",\n      \"ends_at\": \"2019-03-20T06:41:30.078Z\",\n      \"linked_to_plan\": false\n    },\n    {\n      \"id\": \"string\",\n      \"course_series_id\": \"string\",\n      \"published_path_id\": \"string\",\n      \"published_course_id\": \"string\",\n      \"plan_id\": \"string\",\n      \"domain_name\": \"string\",\n      \"offer_type\": \"domain\",\n      \"price_cents\": 2920,\n      \"currency_code\": \"JPY\",\n      \"price_credits\": 2245,\n      \"sku\": \"string\",\n      \"max_quantity\": 3327,\n      \"active\": true,\n      \"starts_at\": \"2009-09-19T22:13:53.926Z\",\n      \"ends_at\": \"1979-08-02T13:49:50.472Z\",\n      \"linked_to_plan\": false\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6cd37eed-3bf0-4a68-9535-ed16bfc68188",
+          "name": "offers retrieve",
+          "request": {
+            "name": "offers retrieve",
+            "description": {
+              "content": "Retrieve details for a specific Offer.\n\nReturns the Offer resource identified by the given offer ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "offers",
+                ":offer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "offer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1ed8c824-c1ee-47a5-a2a1-350914037791",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "offers",
+                    ":offer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "offer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"course_series_id\": \"string\",\n  \"published_path_id\": \"string\",\n  \"published_course_id\": \"string\",\n  \"plan_id\": \"string\",\n  \"domain_name\": \"string\",\n  \"offer_type\": \"published_path\",\n  \"price_cents\": 3277,\n  \"currency_code\": \"KRW\",\n  \"price_credits\": 6823,\n  \"sku\": \"string\",\n  \"max_quantity\": 1954,\n  \"active\": true,\n  \"starts_at\": \"1994-05-08T20:53:05.887Z\",\n  \"ends_at\": \"1957-07-16T13:57:38.984Z\",\n  \"linked_to_plan\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c57b0d0-6be9-4cc8-ab27-bea779ebe14b",
+          "name": "offers update",
+          "request": {
+            "name": "offers update",
+            "description": {
+              "content": "Update an Offer price if it is an à la carte Offer for a `PublishedCourse`.\n\nPUT and PATCH are identical - both do partial updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "offers",
+                ":offer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "offer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "price_cents",
+                  "value": "<integer>",
+                  "description": "The price of the offer in cents"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency_code",
+                  "value": "<string>",
+                  "description": "Available currency codes: AUD, BRL, CAD, CNY, EUR, GBP, JPY, KRW, MXN, NZD, RUB, SEK, SGD, USD, ZAR\n\n* `AUD` - AUD\n* `BRL` - BRL\n* `CAD` - CAD\n* `CNY` - CNY\n* `EUR` - EUR\n* `GBP` - GBP\n* `JPY` - JPY\n* `KRW` - KRW\n* `MXN` - MXN\n* `NZD` - NZD\n* `RUB` - RUB\n* `SEK` - SEK\n* `SGD` - SGD\n* `USD` - USD\n* `ZAR` - ZAR"
+                },
+                {
+                  "disabled": false,
+                  "key": "price_credits",
+                  "value": "<integer>",
+                  "description": "Number of credits, if enabled for your organization"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ed620a0d-637b-4dfc-8970-f2266e4a5edc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "offers",
+                    ":offer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "offer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The price of the offer in cents",
+                        "type": "text/plain"
+                      },
+                      "key": "price_cents",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Available currency codes: AUD, BRL, CAD, CNY, EUR, GBP, JPY, KRW, MXN, NZD, RUB, SEK, SGD, USD, ZAR\n\n* `AUD` - AUD\n* `BRL` - BRL\n* `CAD` - CAD\n* `CNY` - CNY\n* `EUR` - EUR\n* `GBP` - GBP\n* `JPY` - JPY\n* `KRW` - KRW\n* `MXN` - MXN\n* `NZD` - NZD\n* `RUB` - RUB\n* `SEK` - SEK\n* `SGD` - SGD\n* `USD` - USD\n* `ZAR` - ZAR",
+                        "type": "text/plain"
+                      },
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Number of credits, if enabled for your organization",
+                        "type": "text/plain"
+                      },
+                      "key": "price_credits",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"course_series_id\": \"string\",\n  \"published_path_id\": \"string\",\n  \"published_course_id\": \"string\",\n  \"plan_id\": \"string\",\n  \"domain_name\": \"string\",\n  \"offer_type\": \"published_course\",\n  \"price_cents\": 4595,\n  \"currency_code\": \"<string>\",\n  \"price_credits\": 2140,\n  \"sku\": \"string\",\n  \"max_quantity\": 2896,\n  \"active\": false,\n  \"starts_at\": \"1981-07-02T14:08:14.299Z\",\n  \"ends_at\": \"1952-05-28T18:00:23.374Z\",\n  \"linked_to_plan\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ec2723e-075a-4cff-bfa7-d0cec77df396",
+          "name": "offers partial update",
+          "request": {
+            "name": "offers partial update",
+            "description": {
+              "content": "Update an Offer if it is an à la carte Offer for a `PublishedCourse`.\n\nPUT and PATCH are identical - both do partial updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "offers",
+                ":offer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "offer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "price_cents",
+                  "value": "<integer>",
+                  "description": "The price of the offer in cents"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency_code",
+                  "value": "<string>",
+                  "description": "Available currency codes: AUD, BRL, CAD, CNY, EUR, GBP, JPY, KRW, MXN, NZD, RUB, SEK, SGD, USD, ZAR\n\n* `AUD` - AUD\n* `BRL` - BRL\n* `CAD` - CAD\n* `CNY` - CNY\n* `EUR` - EUR\n* `GBP` - GBP\n* `JPY` - JPY\n* `KRW` - KRW\n* `MXN` - MXN\n* `NZD` - NZD\n* `RUB` - RUB\n* `SEK` - SEK\n* `SGD` - SGD\n* `USD` - USD\n* `ZAR` - ZAR"
+                },
+                {
+                  "disabled": false,
+                  "key": "price_credits",
+                  "value": "<integer>",
+                  "description": "Number of credits, if enabled for your organization"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "95ff7598-0c33-43fa-9b5e-3428d5d6c57f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "offers",
+                    ":offer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "offer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The price of the offer in cents",
+                        "type": "text/plain"
+                      },
+                      "key": "price_cents",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Available currency codes: AUD, BRL, CAD, CNY, EUR, GBP, JPY, KRW, MXN, NZD, RUB, SEK, SGD, USD, ZAR\n\n* `AUD` - AUD\n* `BRL` - BRL\n* `CAD` - CAD\n* `CNY` - CNY\n* `EUR` - EUR\n* `GBP` - GBP\n* `JPY` - JPY\n* `KRW` - KRW\n* `MXN` - MXN\n* `NZD` - NZD\n* `RUB` - RUB\n* `SEK` - SEK\n* `SGD` - SGD\n* `USD` - USD\n* `ZAR` - ZAR",
+                        "type": "text/plain"
+                      },
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Number of credits, if enabled for your organization",
+                        "type": "text/plain"
+                      },
+                      "key": "price_credits",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"course_series_id\": \"string\",\n  \"published_path_id\": \"string\",\n  \"published_course_id\": \"string\",\n  \"plan_id\": \"string\",\n  \"domain_name\": \"string\",\n  \"offer_type\": \"published_course\",\n  \"price_cents\": 4595,\n  \"currency_code\": \"<string>\",\n  \"price_credits\": 2140,\n  \"sku\": \"string\",\n  \"max_quantity\": 2896,\n  \"active\": false,\n  \"starts_at\": \"1981-07-02T14:08:14.299Z\",\n  \"ends_at\": \"1952-05-28T18:00:23.374Z\",\n  \"linked_to_plan\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "35675486-e261-4f50-91bf-5294f205c68a",
+    "name": "Skilljar Assets Offers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

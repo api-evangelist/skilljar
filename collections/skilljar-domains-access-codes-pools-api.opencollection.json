@@ -1,0 +1,200 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Domains > Access Codes > Pools API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domains > Access Codes > Pools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "domains_access_code_pools_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/access-code-pools",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter returned access code pools by name"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List access code pools.\n\nRetrieve a paginated list of access code pools for a domain.\nPools can be filtered by name using the `name` query parameter."
+        },
+        {
+          "info": {
+            "name": "domains_access_code_pools_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/access-code-pools",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create an access code pool.\n\nCreate a new, empty pool of access codes for the specified domain.\nThe pool can be used to manage and distribute access codes to learners."
+        },
+        {
+          "info": {
+            "name": "domains_access_code_pools_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/access-code-pools/:access_code_pool_id",
+            "params": [
+              {
+                "name": "access_code_pool_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve an access code pool.\n\nGet details for a specific access code pool, including its name, status, validity period, and code count."
+        },
+        {
+          "info": {
+            "name": "domains_access_code_pools_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/access-code-pools/:access_code_pool_id",
+            "params": [
+              {
+                "name": "access_code_pool_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update an access code pool.\n\nUpdate the properties of an existing access code pool. Both PUT and PATCH requests are supported."
+        },
+        {
+          "info": {
+            "name": "domains_access_code_pools_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/access-code-pools/:access_code_pool_id",
+            "params": [
+              {
+                "name": "access_code_pool_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update an access code pool.\n\nUpdate the properties of an existing access code pool. Both PUT and PATCH requests are supported."
+        },
+        {
+          "info": {
+            "name": "domains_access_code_pools_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/access-code-pools/:access_code_pool_id",
+            "params": [
+              {
+                "name": "access_code_pool_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete an access code pool.\n\nPermanently delete an access code pool and all access codes it contains."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

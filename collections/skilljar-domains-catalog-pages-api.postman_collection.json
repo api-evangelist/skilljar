@@ -1,0 +1,1314 @@
+{
+  "item": [
+    {
+      "id": "90cf2077-722f-471e-a78e-ada87534327a",
+      "name": "Domains > Catalog Pages",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "84d246fa-e65e-48cd-8289-f62ceec4df9d",
+          "name": "domains catalog pages list",
+          "request": {
+            "name": "domains catalog pages list",
+            "description": {
+              "content": "Retrieve a paginated list of all catalog pages for the specified domain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "catalog-pages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a21c6819-b428-4ebd-bca4-2090bf589a73",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "catalog-pages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"id\": \"string\",\n      \"page_title\": \"string\",\n      \"slug\": \"FIw\",\n      \"short_description\": \"string\",\n      \"tile_callout\": \"string\",\n      \"hidden\": false,\n      \"strict_enforce_group_visibility\": false,\n      \"is_classic\": true,\n      \"url\": \"string\",\n      \"header_html\": \"string\",\n      \"tile_sort_method\": \"catalog_settings_order\",\n      \"search_location\": \"HEADER_RIGHT\",\n      \"search_behavior\": \"GLOBAL\",\n      \"item_layout\": \"TILE\"\n    },\n    {\n      \"id\": \"string\",\n      \"page_title\": \"string\",\n      \"slug\": \"8E9Ow1V4or\",\n      \"short_description\": \"string\",\n      \"tile_callout\": \"string\",\n      \"hidden\": false,\n      \"strict_enforce_group_visibility\": false,\n      \"is_classic\": true,\n      \"url\": \"string\",\n      \"header_html\": \"string\",\n      \"tile_sort_method\": \"catalog_settings_order\",\n      \"search_location\": \"HEADER_RIGHT\",\n      \"search_behavior\": \"GLOBAL\",\n      \"item_layout\": \"TILE\"\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b52e66f6-6801-4b9f-b247-1774f53813d2",
+          "name": "domains catalog pages create",
+          "request": {
+            "name": "domains catalog pages create",
+            "description": {
+              "content": "Create a new catalog page within the specified domain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "catalog-pages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "page_title",
+                  "value": "<string>",
+                  "description": "(Required) Title of the catalog page"
+                },
+                {
+                  "disabled": false,
+                  "key": "slug",
+                  "value": "<string>",
+                  "description": "URL slug of the catalog page."
+                },
+                {
+                  "disabled": false,
+                  "key": "short_description",
+                  "value": "<string>",
+                  "description": "Short description of the catalog page."
+                },
+                {
+                  "disabled": false,
+                  "key": "tile_callout",
+                  "value": "<string>",
+                  "description": "Tile callout text for the catalog page when embedded on another catalog page."
+                },
+                {
+                  "disabled": false,
+                  "key": "hidden",
+                  "value": "false",
+                  "description": "Whether the catalog page is hidden by default."
+                },
+                {
+                  "disabled": false,
+                  "key": "strict_enforce_group_visibility",
+                  "value": "false",
+                  "description": "Whether to strictly enforce group visibility."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_classic",
+                  "value": "true",
+                  "description": "Whether the catalog page is classic, containing only course content, vs. a Builder page containing additional fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "header_html",
+                  "value": "<string>",
+                  "description": "HTML page header for classic pages."
+                },
+                {
+                  "disabled": false,
+                  "key": "tile_sort_method",
+                  "value": "catalog_settings_order",
+                  "description": "Tile sort method for classic pages.\n\n* `catalog_settings_order` - Default Catalog Settings Ordering\n* `registered_first_completed_last_order` - Registered, Unregistered, then Completed Courses\n* `alphabetically_a_to_z` - Sort alphabetically A to Z\n* `alphabetically_z_to_a` - Sort alphabetically Z to A"
+                },
+                {
+                  "disabled": false,
+                  "key": "search_location",
+                  "value": "HEADER_RIGHT",
+                  "description": "Where the search bar is located for classic pages. The in-place-of-header option requires federated search to be enabled for the domain.\n\n* `HEADER_RIGHT` - Display search box in the header.\n* `LEFT_NAV_TOP` - Display search box in the left nav.\n* `HIDDEN` - Do not display search box.\n* `IN_PLACE_OF_HEADER` - In place of HTML header"
+                },
+                {
+                  "disabled": false,
+                  "key": "search_behavior",
+                  "value": "GLOBAL",
+                  "description": "Behavior of search bar for classic pages. The federated and no-search options require federated search to be enabled for the domain.\n\n* `GLOBAL` - Global: Search spans all visible catalog pages\n* `LOCAL` - Local: Search is limited to the current page / container\n* `FEDERATED` - Federated search\n* `NONE` - No search"
+                },
+                {
+                  "disabled": false,
+                  "key": "item_layout",
+                  "value": "TILE",
+                  "description": "Layout of items for classic pages.\n\n* `TILE` - Tile view: Catalog items are displayed as tiles.\n* `LIST` - List view: Catalog items are displayed full-width, one per line."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "975090d2-45ef-4522-bee6-848aba059b3f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "catalog-pages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Title of the catalog page",
+                        "type": "text/plain"
+                      },
+                      "key": "page_title",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL slug of the catalog page.",
+                        "type": "text/plain"
+                      },
+                      "key": "slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Short description of the catalog page.",
+                        "type": "text/plain"
+                      },
+                      "key": "short_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Tile callout text for the catalog page when embedded on another catalog page.",
+                        "type": "text/plain"
+                      },
+                      "key": "tile_callout",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the catalog page is hidden by default.",
+                        "type": "text/plain"
+                      },
+                      "key": "hidden",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to strictly enforce group visibility.",
+                        "type": "text/plain"
+                      },
+                      "key": "strict_enforce_group_visibility",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the catalog page is classic, containing only course content, vs. a Builder page containing additional fields.",
+                        "type": "text/plain"
+                      },
+                      "key": "is_classic",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "HTML page header for classic pages.",
+                        "type": "text/plain"
+                      },
+                      "key": "header_html",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Tile sort method for classic pages.\n\n* `catalog_settings_order` - Default Catalog Settings Ordering\n* `registered_first_completed_last_order` - Registered, Unregistered, then Completed Courses\n* `alphabetically_a_to_z` - Sort alphabetically A to Z\n* `alphabetically_z_to_a` - Sort alphabetically Z to A",
+                        "type": "text/plain"
+                      },
+                      "key": "tile_sort_method",
+                      "value": "catalog_settings_order"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Where the search bar is located for classic pages. The in-place-of-header option requires federated search to be enabled for the domain.\n\n* `HEADER_RIGHT` - Display search box in the header.\n* `LEFT_NAV_TOP` - Display search box in the left nav.\n* `HIDDEN` - Do not display search box.\n* `IN_PLACE_OF_HEADER` - In place of HTML header",
+                        "type": "text/plain"
+                      },
+                      "key": "search_location",
+                      "value": "HEADER_RIGHT"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Behavior of search bar for classic pages. The federated and no-search options require federated search to be enabled for the domain.\n\n* `GLOBAL` - Global: Search spans all visible catalog pages\n* `LOCAL` - Local: Search is limited to the current page / container\n* `FEDERATED` - Federated search\n* `NONE` - No search",
+                        "type": "text/plain"
+                      },
+                      "key": "search_behavior",
+                      "value": "GLOBAL"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Layout of items for classic pages.\n\n* `TILE` - Tile view: Catalog items are displayed as tiles.\n* `LIST` - List view: Catalog items are displayed full-width, one per line.",
+                        "type": "text/plain"
+                      },
+                      "key": "item_layout",
+                      "value": "TILE"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page_title\": \"string\",\n  \"id\": \"string\",\n  \"slug\": \"uGma\",\n  \"short_description\": \"string\",\n  \"tile_callout\": \"string\",\n  \"hidden\": false,\n  \"strict_enforce_group_visibility\": false,\n  \"is_classic\": true,\n  \"url\": \"string\",\n  \"header_html\": \"string\",\n  \"tile_sort_method\": \"catalog_settings_order\",\n  \"search_location\": \"HEADER_RIGHT\",\n  \"search_behavior\": \"GLOBAL\",\n  \"item_layout\": \"TILE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2fffc5e6-ba13-4730-aca0-36c1cf45bcde",
+          "name": "domains catalog pages retrieve",
+          "request": {
+            "name": "domains catalog pages retrieve",
+            "description": {
+              "content": "Retrieve detailed information for a specific catalog page within the domain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "catalog-pages",
+                ":catalog_page_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_page_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "768ddd0c-65a9-4f40-95c5-8c98aa93ef72",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "catalog-pages",
+                    ":catalog_page_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_page_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"page_title\": \"string\",\n  \"slug\": \"qpyzaWuttO\",\n  \"short_description\": \"string\",\n  \"tile_callout\": \"string\",\n  \"hidden\": false,\n  \"strict_enforce_group_visibility\": false,\n  \"is_classic\": false,\n  \"url\": \"string\",\n  \"header_html\": \"string\",\n  \"tile_sort_method\": \"catalog_settings_order\",\n  \"search_location\": \"HEADER_RIGHT\",\n  \"search_behavior\": \"GLOBAL\",\n  \"item_layout\": \"TILE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc7e92f2-74e6-4f24-a19c-948fcd69dadc",
+          "name": "domains catalog pages update",
+          "request": {
+            "name": "domains catalog pages update",
+            "description": {
+              "content": "Update a specific catalog page within the domain.\n\nAllows partial updates to catalog page fields such as text fields, visibility, etc.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "catalog-pages",
+                ":catalog_page_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_page_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "page_title",
+                  "value": "<string>",
+                  "description": "Title of the catalog page"
+                },
+                {
+                  "disabled": false,
+                  "key": "slug",
+                  "value": "<string>",
+                  "description": "URL slug of the catalog page."
+                },
+                {
+                  "disabled": false,
+                  "key": "short_description",
+                  "value": "<string>",
+                  "description": "Short description of the catalog page."
+                },
+                {
+                  "disabled": false,
+                  "key": "tile_callout",
+                  "value": "<string>",
+                  "description": "Tile callout text for the catalog page when embedded on another catalog page."
+                },
+                {
+                  "disabled": false,
+                  "key": "hidden",
+                  "value": "false",
+                  "description": "Whether the catalog page is hidden by default."
+                },
+                {
+                  "disabled": false,
+                  "key": "strict_enforce_group_visibility",
+                  "value": "false",
+                  "description": "Whether to strictly enforce group visibility."
+                },
+                {
+                  "disabled": false,
+                  "key": "header_html",
+                  "value": "<string>",
+                  "description": "HTML page header for classic pages."
+                },
+                {
+                  "disabled": false,
+                  "key": "tile_sort_method",
+                  "value": "catalog_settings_order",
+                  "description": "Tile sort method for classic pages.\n\n* `catalog_settings_order` - Default Catalog Settings Ordering\n* `registered_first_completed_last_order` - Registered, Unregistered, then Completed Courses\n* `alphabetically_a_to_z` - Sort alphabetically A to Z\n* `alphabetically_z_to_a` - Sort alphabetically Z to A"
+                },
+                {
+                  "disabled": false,
+                  "key": "search_location",
+                  "value": "HEADER_RIGHT",
+                  "description": "Where the search bar is located for classic pages. The in-place-of-header option requires federated search to be enabled for the domain.\n\n* `HEADER_RIGHT` - Display search box in the header.\n* `LEFT_NAV_TOP` - Display search box in the left nav.\n* `HIDDEN` - Do not display search box.\n* `IN_PLACE_OF_HEADER` - In place of HTML header"
+                },
+                {
+                  "disabled": false,
+                  "key": "search_behavior",
+                  "value": "GLOBAL",
+                  "description": "Behavior of search bar for classic pages. The federated and no-search options require federated search to be enabled for the domain.\n\n* `GLOBAL` - Global: Search spans all visible catalog pages\n* `LOCAL` - Local: Search is limited to the current page / container\n* `FEDERATED` - Federated search\n* `NONE` - No search"
+                },
+                {
+                  "disabled": false,
+                  "key": "item_layout",
+                  "value": "TILE",
+                  "description": "Layout of items for classic pages.\n\n* `TILE` - Tile view: Catalog items are displayed as tiles.\n* `LIST` - List view: Catalog items are displayed full-width, one per line."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fb03f896-9a55-4e5b-8be9-f7e93c136337",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "catalog-pages",
+                    ":catalog_page_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_page_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Title of the catalog page",
+                        "type": "text/plain"
+                      },
+                      "key": "page_title",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL slug of the catalog page.",
+                        "type": "text/plain"
+                      },
+                      "key": "slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Short description of the catalog page.",
+                        "type": "text/plain"
+                      },
+                      "key": "short_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Tile callout text for the catalog page when embedded on another catalog page.",
+                        "type": "text/plain"
+                      },
+                      "key": "tile_callout",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the catalog page is hidden by default.",
+                        "type": "text/plain"
+                      },
+                      "key": "hidden",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to strictly enforce group visibility.",
+                        "type": "text/plain"
+                      },
+                      "key": "strict_enforce_group_visibility",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "HTML page header for classic pages.",
+                        "type": "text/plain"
+                      },
+                      "key": "header_html",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Tile sort method for classic pages.\n\n* `catalog_settings_order` - Default Catalog Settings Ordering\n* `registered_first_completed_last_order` - Registered, Unregistered, then Completed Courses\n* `alphabetically_a_to_z` - Sort alphabetically A to Z\n* `alphabetically_z_to_a` - Sort alphabetically Z to A",
+                        "type": "text/plain"
+                      },
+                      "key": "tile_sort_method",
+                      "value": "catalog_settings_order"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Where the search bar is located for classic pages. The in-place-of-header option requires federated search to be enabled for the domain.\n\n* `HEADER_RIGHT` - Display search box in the header.\n* `LEFT_NAV_TOP` - Display search box in the left nav.\n* `HIDDEN` - Do not display search box.\n* `IN_PLACE_OF_HEADER` - In place of HTML header",
+                        "type": "text/plain"
+                      },
+                      "key": "search_location",
+                      "value": "HEADER_RIGHT"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Behavior of search bar for classic pages. The federated and no-search options require federated search to be enabled for the domain.\n\n* `GLOBAL` - Global: Search spans all visible catalog pages\n* `LOCAL` - Local: Search is limited to the current page / container\n* `FEDERATED` - Federated search\n* `NONE` - No search",
+                        "type": "text/plain"
+                      },
+                      "key": "search_behavior",
+                      "value": "GLOBAL"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Layout of items for classic pages.\n\n* `TILE` - Tile view: Catalog items are displayed as tiles.\n* `LIST` - List view: Catalog items are displayed full-width, one per line.",
+                        "type": "text/plain"
+                      },
+                      "key": "item_layout",
+                      "value": "TILE"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"page_title\": \"string\",\n  \"slug\": \"qpyzaWuttO\",\n  \"short_description\": \"string\",\n  \"tile_callout\": \"string\",\n  \"hidden\": false,\n  \"strict_enforce_group_visibility\": false,\n  \"is_classic\": false,\n  \"url\": \"string\",\n  \"header_html\": \"string\",\n  \"tile_sort_method\": \"catalog_settings_order\",\n  \"search_location\": \"HEADER_RIGHT\",\n  \"search_behavior\": \"GLOBAL\",\n  \"item_layout\": \"TILE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cafd6266-5065-4afe-b2f0-b67ac2d42c2e",
+          "name": "domains catalog pages partial update",
+          "request": {
+            "name": "domains catalog pages partial update",
+            "description": {
+              "content": "Partially update a specific catalog page within the domain.\n\nAllows partial updates to catalog page fields such as text fields, visibility, etc.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "catalog-pages",
+                ":catalog_page_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_page_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "page_title",
+                  "value": "<string>",
+                  "description": "Title of the catalog page"
+                },
+                {
+                  "disabled": false,
+                  "key": "slug",
+                  "value": "<string>",
+                  "description": "URL slug of the catalog page."
+                },
+                {
+                  "disabled": false,
+                  "key": "short_description",
+                  "value": "<string>",
+                  "description": "Short description of the catalog page."
+                },
+                {
+                  "disabled": false,
+                  "key": "tile_callout",
+                  "value": "<string>",
+                  "description": "Tile callout text for the catalog page when embedded on another catalog page."
+                },
+                {
+                  "disabled": false,
+                  "key": "hidden",
+                  "value": "false",
+                  "description": "Whether the catalog page is hidden by default."
+                },
+                {
+                  "disabled": false,
+                  "key": "strict_enforce_group_visibility",
+                  "value": "false",
+                  "description": "Whether to strictly enforce group visibility."
+                },
+                {
+                  "disabled": false,
+                  "key": "header_html",
+                  "value": "<string>",
+                  "description": "HTML page header for classic pages."
+                },
+                {
+                  "disabled": false,
+                  "key": "tile_sort_method",
+                  "value": "catalog_settings_order",
+                  "description": "Tile sort method for classic pages.\n\n* `catalog_settings_order` - Default Catalog Settings Ordering\n* `registered_first_completed_last_order` - Registered, Unregistered, then Completed Courses\n* `alphabetically_a_to_z` - Sort alphabetically A to Z\n* `alphabetically_z_to_a` - Sort alphabetically Z to A"
+                },
+                {
+                  "disabled": false,
+                  "key": "search_location",
+                  "value": "HEADER_RIGHT",
+                  "description": "Where the search bar is located for classic pages. The in-place-of-header option requires federated search to be enabled for the domain.\n\n* `HEADER_RIGHT` - Display search box in the header.\n* `LEFT_NAV_TOP` - Display search box in the left nav.\n* `HIDDEN` - Do not display search box.\n* `IN_PLACE_OF_HEADER` - In place of HTML header"
+                },
+                {
+                  "disabled": false,
+                  "key": "search_behavior",
+                  "value": "GLOBAL",
+                  "description": "Behavior of search bar for classic pages. The federated and no-search options require federated search to be enabled for the domain.\n\n* `GLOBAL` - Global: Search spans all visible catalog pages\n* `LOCAL` - Local: Search is limited to the current page / container\n* `FEDERATED` - Federated search\n* `NONE` - No search"
+                },
+                {
+                  "disabled": false,
+                  "key": "item_layout",
+                  "value": "TILE",
+                  "description": "Layout of items for classic pages.\n\n* `TILE` - Tile view: Catalog items are displayed as tiles.\n* `LIST` - List view: Catalog items are displayed full-width, one per line."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "54199e67-464d-4017-b1cc-21e0446c5964",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "catalog-pages",
+                    ":catalog_page_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_page_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Title of the catalog page",
+                        "type": "text/plain"
+                      },
+                      "key": "page_title",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL slug of the catalog page.",
+                        "type": "text/plain"
+                      },
+                      "key": "slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Short description of the catalog page.",
+                        "type": "text/plain"
+                      },
+                      "key": "short_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Tile callout text for the catalog page when embedded on another catalog page.",
+                        "type": "text/plain"
+                      },
+                      "key": "tile_callout",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the catalog page is hidden by default.",
+                        "type": "text/plain"
+                      },
+                      "key": "hidden",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to strictly enforce group visibility.",
+                        "type": "text/plain"
+                      },
+                      "key": "strict_enforce_group_visibility",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "HTML page header for classic pages.",
+                        "type": "text/plain"
+                      },
+                      "key": "header_html",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Tile sort method for classic pages.\n\n* `catalog_settings_order` - Default Catalog Settings Ordering\n* `registered_first_completed_last_order` - Registered, Unregistered, then Completed Courses\n* `alphabetically_a_to_z` - Sort alphabetically A to Z\n* `alphabetically_z_to_a` - Sort alphabetically Z to A",
+                        "type": "text/plain"
+                      },
+                      "key": "tile_sort_method",
+                      "value": "catalog_settings_order"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Where the search bar is located for classic pages. The in-place-of-header option requires federated search to be enabled for the domain.\n\n* `HEADER_RIGHT` - Display search box in the header.\n* `LEFT_NAV_TOP` - Display search box in the left nav.\n* `HIDDEN` - Do not display search box.\n* `IN_PLACE_OF_HEADER` - In place of HTML header",
+                        "type": "text/plain"
+                      },
+                      "key": "search_location",
+                      "value": "HEADER_RIGHT"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Behavior of search bar for classic pages. The federated and no-search options require federated search to be enabled for the domain.\n\n* `GLOBAL` - Global: Search spans all visible catalog pages\n* `LOCAL` - Local: Search is limited to the current page / container\n* `FEDERATED` - Federated search\n* `NONE` - No search",
+                        "type": "text/plain"
+                      },
+                      "key": "search_behavior",
+                      "value": "GLOBAL"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Layout of items for classic pages.\n\n* `TILE` - Tile view: Catalog items are displayed as tiles.\n* `LIST` - List view: Catalog items are displayed full-width, one per line.",
+                        "type": "text/plain"
+                      },
+                      "key": "item_layout",
+                      "value": "TILE"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"page_title\": \"string\",\n  \"slug\": \"qpyzaWuttO\",\n  \"short_description\": \"string\",\n  \"tile_callout\": \"string\",\n  \"hidden\": false,\n  \"strict_enforce_group_visibility\": false,\n  \"is_classic\": false,\n  \"url\": \"string\",\n  \"header_html\": \"string\",\n  \"tile_sort_method\": \"catalog_settings_order\",\n  \"search_location\": \"HEADER_RIGHT\",\n  \"search_behavior\": \"GLOBAL\",\n  \"item_layout\": \"TILE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b78f0161-1966-4c4f-9fb6-eec37d6c40b0",
+          "name": "domains catalog pages destroy",
+          "request": {
+            "name": "domains catalog pages destroy",
+            "description": {
+              "content": "Delete a catalog page from the domain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "catalog-pages",
+                ":catalog_page_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_page_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4a7871c1-403f-4e56-88f2-b5e3174d01f8",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "catalog-pages",
+                    ":catalog_page_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_page_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8e6d2f9a-5c32-4859-b37a-7bf8042730a3",
+    "name": "Skilljar Assets Domains > Catalog Pages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

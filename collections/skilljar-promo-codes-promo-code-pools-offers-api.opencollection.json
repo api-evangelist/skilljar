@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Promo Codes > Promo Code Pools > Offers API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Promo Codes > Promo Code Pools > Offers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "promo_code_pools_offers_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/promo-code-pools/:promo_code_pool_id/offers",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "promo_code_pool_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a paginated list of Offers attached to a Promo Code Pool.\n\nReturns all offers currently associated with the specified promo code pool."
+        },
+        {
+          "info": {
+            "name": "promo_code_pools_offers_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/promo-code-pools/:promo_code_pool_id/offers",
+            "params": [
+              {
+                "name": "promo_code_pool_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Attach one or more Offers to a Promo Code Pool.\n\nYou may attach up to 500 offers per request. Each offer must be identified by its ID."
+        },
+        {
+          "info": {
+            "name": "promo_code_pools_offers_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/promo-code-pools/:promo_code_pool_id/offers/:offer_id",
+            "params": [
+              {
+                "name": "offer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "promo_code_pool_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Remove an Offer from a Promo Code Pool.\n\nThis does not delete the offer or the promo code pool, only the association between them."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

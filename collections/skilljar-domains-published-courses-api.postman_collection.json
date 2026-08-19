@@ -1,0 +1,1299 @@
+{
+  "item": [
+    {
+      "id": "bd4cde6c-9cca-4597-b1be-19a04ac9283f",
+      "name": "Domains > Published Courses",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1df4e997-38b6-4e0f-8ba4-0284e46db090",
+          "name": "domains published courses list",
+          "request": {
+            "name": "domains published courses list",
+            "description": {
+              "content": "List all courses published to this domain.\n\nReturns a paginated list of published courses for the domain.\nSupports filtering by course ID and searching by keyword.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "published-courses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "course__id",
+                  "value": "<string>",
+                  "description": "Filter by course id, e.g. `course__id=abcd1234`"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_searchable_content",
+                  "value": "<boolean>",
+                  "description": "If set to True, the response also includes the following fields ('lesson_list', 'tags', 'short_description', 'long_description_html', 'search_keywords')"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "URL encoded string, return the results and the order as if a catalog search"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6f7edb7b-fe71-4a51-a94e-aec17ec5c219",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "published-courses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "course__id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_searchable_content",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"id\": \"string\",\n      \"course\": {\n        \"id\": \"string\",\n        \"title\": \"string\",\n        \"lesson_count\": 8890,\n        \"required_lesson_count\": 5947\n      },\n      \"slug\": \"u5ylyntk-v\",\n      \"course_url\": \"string\",\n      \"hidden\": true,\n      \"strict_enforce_group_visibility\": true,\n      \"registration_required\": false,\n      \"registration_starts_at\": \"2006-04-16T07:28:40.504Z\",\n      \"registration_ends_at\": \"1996-12-15T01:25:32.147Z\",\n      \"restrict_access_start_end_dates\": false,\n      \"allow_self_service_reenroll\": true,\n      \"unique_progress_per_enrollment\": false,\n      \"require_all_prerequisites\": true,\n      \"timezone\": \"string\",\n      \"offer\": {\n        \"price\": {\n          \"amount\": \"0.00\",\n          \"currency_code\": \"USD\"\n        },\n        \"registration_open\": true,\n        \"id\": \"string\",\n        \"registration_url\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"course\": {\n        \"id\": \"string\",\n        \"title\": \"string\",\n        \"lesson_count\": 289,\n        \"required_lesson_count\": 9038\n      },\n      \"slug\": \"7r208vyag-h6cf-fin-7fqkcq19r-7da44xesq-872rs91d-1cfzl9z-gy0dd3bg-1hmw5p3ctx\",\n      \"course_url\": \"string\",\n      \"hidden\": true,\n      \"strict_enforce_group_visibility\": false,\n      \"registration_required\": false,\n      \"registration_starts_at\": \"1991-11-23T02:43:10.660Z\",\n      \"registration_ends_at\": \"1948-05-18T16:02:09.813Z\",\n      \"restrict_access_start_end_dates\": true,\n      \"allow_self_service_reenroll\": false,\n      \"unique_progress_per_enrollment\": true,\n      \"require_all_prerequisites\": true,\n      \"timezone\": \"string\",\n      \"offer\": {\n        \"price\": {\n          \"amount\": \"0.00\",\n          \"currency_code\": \"USD\"\n        },\n        \"registration_open\": false,\n        \"id\": \"string\",\n        \"registration_url\": \"string\"\n      }\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "453a9e54-e579-4c2d-b3b8-6f13c02b7cd1",
+          "name": "domains published courses create",
+          "request": {
+            "name": "domains published courses create",
+            "description": {
+              "content": "Publish a course to this domain.\n\nMakes a course available to learners on the specified domain.\nThe course must not already be published to this domain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "published-courses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) Id of the course to publish"
+                },
+                {
+                  "disabled": false,
+                  "key": "slug",
+                  "value": "<string>",
+                  "description": "The URL path of the course on the domain"
+                },
+                {
+                  "disabled": false,
+                  "key": "hidden",
+                  "value": "<boolean>",
+                  "description": "Hidden courses are only visible on the catalog page to associated groups"
+                },
+                {
+                  "disabled": false,
+                  "key": "strict_enforce_group_visibility",
+                  "value": "<boolean>",
+                  "description": "Block access to this course for students it's not visible to"
+                },
+                {
+                  "disabled": false,
+                  "key": "registration_required",
+                  "value": "<boolean>",
+                  "description": "Registration is required for student to access course, false signifies that the course content is public"
+                },
+                {
+                  "disabled": false,
+                  "key": "registration_starts_at",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601 formatted datetime string indicating when the start of the registration period is scheduled"
+                },
+                {
+                  "disabled": false,
+                  "key": "registration_ends_at",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601 formatted datetime string indicating when the end of the registration period is scheduled"
+                },
+                {
+                  "disabled": false,
+                  "key": "restrict_access_start_end_dates",
+                  "value": "<boolean>",
+                  "description": "Restrict access to the course based on the start and end dates of the registration period"
+                },
+                {
+                  "disabled": false,
+                  "key": "allow_self_service_reenroll",
+                  "value": "<boolean>",
+                  "description": "When students complete the course, they will be allowed to re-enroll in the course immediately"
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_progress_per_enrollment",
+                  "value": "<boolean>",
+                  "description": "Each time a student re-enrolls in the course, create a new course progress"
+                },
+                {
+                  "disabled": false,
+                  "key": "require_all_prerequisites",
+                  "value": "<boolean>",
+                  "description": "Require all prerequisites to be completed before the student can enroll in the course"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "03142ea8-c8b1-4fbc-9680-7e6613506a77",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "published-courses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Id of the course to publish",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The URL path of the course on the domain",
+                        "type": "text/plain"
+                      },
+                      "key": "slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Hidden courses are only visible on the catalog page to associated groups",
+                        "type": "text/plain"
+                      },
+                      "key": "hidden",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Block access to this course for students it's not visible to",
+                        "type": "text/plain"
+                      },
+                      "key": "strict_enforce_group_visibility",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Registration is required for student to access course, false signifies that the course content is public",
+                        "type": "text/plain"
+                      },
+                      "key": "registration_required",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "ISO 8601 formatted datetime string indicating when the start of the registration period is scheduled",
+                        "type": "text/plain"
+                      },
+                      "key": "registration_starts_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "ISO 8601 formatted datetime string indicating when the end of the registration period is scheduled",
+                        "type": "text/plain"
+                      },
+                      "key": "registration_ends_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Restrict access to the course based on the start and end dates of the registration period",
+                        "type": "text/plain"
+                      },
+                      "key": "restrict_access_start_end_dates",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "When students complete the course, they will be allowed to re-enroll in the course immediately",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_self_service_reenroll",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Each time a student re-enrolls in the course, create a new course progress",
+                        "type": "text/plain"
+                      },
+                      "key": "unique_progress_per_enrollment",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Require all prerequisites to be completed before the student can enroll in the course",
+                        "type": "text/plain"
+                      },
+                      "key": "require_all_prerequisites",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"course\": {\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"lesson_count\": 2286,\n    \"required_lesson_count\": 1390\n  },\n  \"id\": \"string\",\n  \"slug\": \"mc2-8v6kh-my0ijktkp-h3a81ag0i7\",\n  \"course_url\": \"string\",\n  \"hidden\": true,\n  \"strict_enforce_group_visibility\": false,\n  \"registration_required\": true,\n  \"registration_starts_at\": \"1980-02-13T15:31:08.925Z\",\n  \"registration_ends_at\": \"1967-07-13T23:58:19.536Z\",\n  \"restrict_access_start_end_dates\": false,\n  \"allow_self_service_reenroll\": true,\n  \"unique_progress_per_enrollment\": false,\n  \"require_all_prerequisites\": false,\n  \"timezone\": \"string\",\n  \"offer\": {\n    \"price\": {\n      \"amount\": \"0.00\",\n      \"currency_code\": \"USD\"\n    },\n    \"registration_open\": true,\n    \"id\": \"string\",\n    \"registration_url\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cdf9aa40-bd55-4e28-b603-129eb31bc426",
+          "name": "domains published courses retrieve",
+          "request": {
+            "name": "domains published courses retrieve",
+            "description": {
+              "content": "Retrieve a published course for this domain.\n\nReturns detailed information about a published course, including metadata, publishing settings,\n  and catalog ordering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "published-courses",
+                ":published_course_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_course_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3e879402-8164-4afa-b058-aca208274129",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "published-courses",
+                    ":published_course_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_course_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"course\": {\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"lesson_count\": 7795,\n    \"required_lesson_count\": 5222,\n    \"short_description\": \"string\",\n    \"long_description_html\": \"string\"\n  },\n  \"id\": \"string\",\n  \"slug\": \"qxe23-a8-whovr61-7a8gr2zeep0-9jy02tvn6-lug1d-6\",\n  \"course_url\": \"string\",\n  \"hidden\": false,\n  \"strict_enforce_group_visibility\": false,\n  \"registration_required\": true,\n  \"registration_starts_at\": \"1990-12-01T14:53:01.292Z\",\n  \"registration_ends_at\": \"2018-11-10T23:52:56.685Z\",\n  \"restrict_access_start_end_dates\": false,\n  \"allow_self_service_reenroll\": true,\n  \"unique_progress_per_enrollment\": true,\n  \"require_all_prerequisites\": true,\n  \"timezone\": \"string\",\n  \"offer\": {\n    \"price\": {\n      \"amount\": \"0.00\",\n      \"currency_code\": \"USD\"\n    },\n    \"registration_open\": true,\n    \"id\": \"string\",\n    \"registration_url\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9971b2be-1a18-4802-8f64-31b1b373e7de",
+          "name": "domains published courses update",
+          "request": {
+            "name": "domains published courses update",
+            "description": {
+              "content": "Update a published course in this domain.\n\nAllows partial updates to published course settings, such as visibility, registration, or slug.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "published-courses",
+                ":published_course_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_course_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "slug",
+                  "value": "<string>",
+                  "description": "The URL path of the course on the domain"
+                },
+                {
+                  "disabled": false,
+                  "key": "hidden",
+                  "value": "<boolean>",
+                  "description": "Hidden courses are only visible on the catalog page to associated groups"
+                },
+                {
+                  "disabled": false,
+                  "key": "strict_enforce_group_visibility",
+                  "value": "<boolean>",
+                  "description": "Block access to this course for students it's not visible to"
+                },
+                {
+                  "disabled": false,
+                  "key": "registration_required",
+                  "value": "<boolean>",
+                  "description": "Registration is required for student to access course, false signifies that the course content is public"
+                },
+                {
+                  "disabled": false,
+                  "key": "registration_starts_at",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601 formatted datetime string indicating when the start of the registration period is scheduled"
+                },
+                {
+                  "disabled": false,
+                  "key": "registration_ends_at",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601 formatted datetime string indicating when the end of the registration period is scheduled"
+                },
+                {
+                  "disabled": false,
+                  "key": "restrict_access_start_end_dates",
+                  "value": "<boolean>",
+                  "description": "Restrict access to the course based on the start and end dates of the registration period"
+                },
+                {
+                  "disabled": false,
+                  "key": "allow_self_service_reenroll",
+                  "value": "<boolean>",
+                  "description": "When students complete the course, they will be allowed to re-enroll in the course immediately"
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_progress_per_enrollment",
+                  "value": "<boolean>",
+                  "description": "Each time a student re-enrolls in the course, create a new course progress"
+                },
+                {
+                  "disabled": false,
+                  "key": "require_all_prerequisites",
+                  "value": "<boolean>",
+                  "description": "Require all prerequisites to be completed before the student can enroll in the course"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "966af01e-17b5-40a9-b03e-9352dc4f5ebb",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "published-courses",
+                    ":published_course_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_course_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The URL path of the course on the domain",
+                        "type": "text/plain"
+                      },
+                      "key": "slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Hidden courses are only visible on the catalog page to associated groups",
+                        "type": "text/plain"
+                      },
+                      "key": "hidden",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Block access to this course for students it's not visible to",
+                        "type": "text/plain"
+                      },
+                      "key": "strict_enforce_group_visibility",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Registration is required for student to access course, false signifies that the course content is public",
+                        "type": "text/plain"
+                      },
+                      "key": "registration_required",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "ISO 8601 formatted datetime string indicating when the start of the registration period is scheduled",
+                        "type": "text/plain"
+                      },
+                      "key": "registration_starts_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "ISO 8601 formatted datetime string indicating when the end of the registration period is scheduled",
+                        "type": "text/plain"
+                      },
+                      "key": "registration_ends_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Restrict access to the course based on the start and end dates of the registration period",
+                        "type": "text/plain"
+                      },
+                      "key": "restrict_access_start_end_dates",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "When students complete the course, they will be allowed to re-enroll in the course immediately",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_self_service_reenroll",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Each time a student re-enrolls in the course, create a new course progress",
+                        "type": "text/plain"
+                      },
+                      "key": "unique_progress_per_enrollment",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Require all prerequisites to be completed before the student can enroll in the course",
+                        "type": "text/plain"
+                      },
+                      "key": "require_all_prerequisites",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"course\": {\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"lesson_count\": 5771,\n    \"required_lesson_count\": 5015\n  },\n  \"slug\": \"2ehn-fm-gjl89-k1902m2w0d1-4jk51rzvg2-h0bp\",\n  \"course_url\": \"string\",\n  \"hidden\": false,\n  \"strict_enforce_group_visibility\": true,\n  \"registration_required\": true,\n  \"registration_starts_at\": \"2001-05-23T01:16:08.681Z\",\n  \"registration_ends_at\": \"2024-01-06T04:47:38.996Z\",\n  \"restrict_access_start_end_dates\": false,\n  \"allow_self_service_reenroll\": false,\n  \"unique_progress_per_enrollment\": false,\n  \"require_all_prerequisites\": false,\n  \"timezone\": \"string\",\n  \"offer\": {\n    \"price\": {\n      \"amount\": \"0.00\",\n      \"currency_code\": \"USD\"\n    },\n    \"registration_open\": false,\n    \"id\": \"string\",\n    \"registration_url\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "122fd3c4-6f74-41da-8db1-a25a14d2e41d",
+          "name": "domains published courses partial update",
+          "request": {
+            "name": "domains published courses partial update",
+            "description": {
+              "content": "Partially update a published course in this domain.\n\nAllows partial updates to published course settings, such as visibility, registration, or slug.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "published-courses",
+                ":published_course_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_course_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "slug",
+                  "value": "<string>",
+                  "description": "The URL path of the course on the domain"
+                },
+                {
+                  "disabled": false,
+                  "key": "hidden",
+                  "value": "<boolean>",
+                  "description": "Hidden courses are only visible on the catalog page to associated groups"
+                },
+                {
+                  "disabled": false,
+                  "key": "strict_enforce_group_visibility",
+                  "value": "<boolean>",
+                  "description": "Block access to this course for students it's not visible to"
+                },
+                {
+                  "disabled": false,
+                  "key": "registration_required",
+                  "value": "<boolean>",
+                  "description": "Registration is required for student to access course, false signifies that the course content is public"
+                },
+                {
+                  "disabled": false,
+                  "key": "registration_starts_at",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601 formatted datetime string indicating when the start of the registration period is scheduled"
+                },
+                {
+                  "disabled": false,
+                  "key": "registration_ends_at",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601 formatted datetime string indicating when the end of the registration period is scheduled"
+                },
+                {
+                  "disabled": false,
+                  "key": "restrict_access_start_end_dates",
+                  "value": "<boolean>",
+                  "description": "Restrict access to the course based on the start and end dates of the registration period"
+                },
+                {
+                  "disabled": false,
+                  "key": "allow_self_service_reenroll",
+                  "value": "<boolean>",
+                  "description": "When students complete the course, they will be allowed to re-enroll in the course immediately"
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_progress_per_enrollment",
+                  "value": "<boolean>",
+                  "description": "Each time a student re-enrolls in the course, create a new course progress"
+                },
+                {
+                  "disabled": false,
+                  "key": "require_all_prerequisites",
+                  "value": "<boolean>",
+                  "description": "Require all prerequisites to be completed before the student can enroll in the course"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b3874bfb-007c-4384-a746-28bf692953c5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "published-courses",
+                    ":published_course_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_course_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The URL path of the course on the domain",
+                        "type": "text/plain"
+                      },
+                      "key": "slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Hidden courses are only visible on the catalog page to associated groups",
+                        "type": "text/plain"
+                      },
+                      "key": "hidden",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Block access to this course for students it's not visible to",
+                        "type": "text/plain"
+                      },
+                      "key": "strict_enforce_group_visibility",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Registration is required for student to access course, false signifies that the course content is public",
+                        "type": "text/plain"
+                      },
+                      "key": "registration_required",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "ISO 8601 formatted datetime string indicating when the start of the registration period is scheduled",
+                        "type": "text/plain"
+                      },
+                      "key": "registration_starts_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "ISO 8601 formatted datetime string indicating when the end of the registration period is scheduled",
+                        "type": "text/plain"
+                      },
+                      "key": "registration_ends_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Restrict access to the course based on the start and end dates of the registration period",
+                        "type": "text/plain"
+                      },
+                      "key": "restrict_access_start_end_dates",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "When students complete the course, they will be allowed to re-enroll in the course immediately",
+                        "type": "text/plain"
+                      },
+                      "key": "allow_self_service_reenroll",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Each time a student re-enrolls in the course, create a new course progress",
+                        "type": "text/plain"
+                      },
+                      "key": "unique_progress_per_enrollment",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Require all prerequisites to be completed before the student can enroll in the course",
+                        "type": "text/plain"
+                      },
+                      "key": "require_all_prerequisites",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"course\": {\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"lesson_count\": 5771,\n    \"required_lesson_count\": 5015\n  },\n  \"slug\": \"2ehn-fm-gjl89-k1902m2w0d1-4jk51rzvg2-h0bp\",\n  \"course_url\": \"string\",\n  \"hidden\": false,\n  \"strict_enforce_group_visibility\": true,\n  \"registration_required\": true,\n  \"registration_starts_at\": \"2001-05-23T01:16:08.681Z\",\n  \"registration_ends_at\": \"2024-01-06T04:47:38.996Z\",\n  \"restrict_access_start_end_dates\": false,\n  \"allow_self_service_reenroll\": false,\n  \"unique_progress_per_enrollment\": false,\n  \"require_all_prerequisites\": false,\n  \"timezone\": \"string\",\n  \"offer\": {\n    \"price\": {\n      \"amount\": \"0.00\",\n      \"currency_code\": \"USD\"\n    },\n    \"registration_open\": false,\n    \"id\": \"string\",\n    \"registration_url\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea8208ec-9961-49a4-be3f-65805ccc3f76",
+          "name": "domains published courses destroy",
+          "request": {
+            "name": "domains published courses destroy",
+            "description": {
+              "content": "Unpublish a course from this domain.\n\nRemoves the course from the domain, making it inaccessible to learners.\nThis action is irreversible and also removes the course from all associated\n  content syndication configurations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "published-courses",
+                ":published_course_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_course_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e80130b4-06a3-42d6-9f65-1667f989d2a2",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "published-courses",
+                    ":published_course_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_course_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d6dc87f6-0339-4080-bab2-11e733c4ac47",
+    "name": "Skilljar Assets Domains > Published Courses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

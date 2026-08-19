@@ -1,0 +1,224 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Domains > Published Paths > Path Items API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domains > Published Paths > Path Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "domains_published_paths_path_items_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-paths/:published_path_id/path-items",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "published_path_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List Path Items for a Published Path.\n\nReturns a paginated list of Path Items, ordered as configured in the Published Path."
+        },
+        {
+          "info": {
+            "name": "domains_published_paths_path_items_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-paths/:published_path_id/path-items",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_path_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a new Path Item in a Published Path.\n\nAdds a course or learning object to the sequence of the Published Path."
+        },
+        {
+          "info": {
+            "name": "domains_published_paths_path_items_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-paths/:published_path_id/path-items/:path_item_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path_item_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_path_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve details for a specific Path Item.\n\nReturns all metadata for the Path Item, including its order and associated published course."
+        },
+        {
+          "info": {
+            "name": "domains_published_paths_path_items_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-paths/:published_path_id/path-items/:path_item_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path_item_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_path_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update a Path Item.\n\nAllows partial updates to Path Item fields, such as order or associated published course."
+        },
+        {
+          "info": {
+            "name": "domains_published_paths_path_items_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-paths/:published_path_id/path-items/:path_item_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path_item_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_path_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Partially update a Path Item.\n\nAllows updating one or more fields of the Path Item."
+        },
+        {
+          "info": {
+            "name": "domains_published_paths_path_items_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-paths/:published_path_id/path-items/:path_item_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path_item_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_path_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete a Path Item.\n\nRemoves the Path Item from the Published Path sequence."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

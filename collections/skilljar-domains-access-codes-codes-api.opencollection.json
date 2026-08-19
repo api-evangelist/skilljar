@@ -1,0 +1,230 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Domains > Access Codes > Codes API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domains > Access Codes > Codes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "domains_access_code_pools_access_codes_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/access-code-pools/:access_code_pool_id/access-codes",
+            "params": [
+              {
+                "name": "access_code_pool_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List access codes.\n\nRetrieve a paginated list of access codes in a pool."
+        },
+        {
+          "info": {
+            "name": "domains_access_code_pools_access_codes_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/access-code-pools/:access_code_pool_id/access-codes",
+            "params": [
+              {
+                "name": "access_code_pool_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create an access code.\n\nAdd a new access code to a pool. The code can be distributed to learners for domain access."
+        },
+        {
+          "info": {
+            "name": "domains_access_code_pools_access_codes_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/access-code-pools/:access_code_pool_id/access-codes/:access_code_id",
+            "params": [
+              {
+                "name": "access_code_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "access_code_pool_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve an access code.\n\nGet details for a specific access code, including its status, usage limits, and assigned users."
+        },
+        {
+          "info": {
+            "name": "domains_access_code_pools_access_codes_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/access-code-pools/:access_code_pool_id/access-codes/:access_code_id",
+            "params": [
+              {
+                "name": "access_code_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "access_code_pool_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update an access code.\n\nUpdate the properties of an existing access code. Both PUT and PATCH requests are supported."
+        },
+        {
+          "info": {
+            "name": "domains_access_code_pools_access_codes_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/access-code-pools/:access_code_pool_id/access-codes/:access_code_id",
+            "params": [
+              {
+                "name": "access_code_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "access_code_pool_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update an access code.\n\nUpdate the properties of an existing access code. Both PUT and PATCH requests are supported."
+        },
+        {
+          "info": {
+            "name": "domains_access_code_pools_access_codes_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/access-code-pools/:access_code_pool_id/access-codes/:access_code_id",
+            "params": [
+              {
+                "name": "access_code_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "access_code_pool_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete an access code.\n\nPermanently remove an access code from the pool."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

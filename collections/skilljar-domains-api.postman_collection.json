@@ -1,0 +1,1202 @@
+{
+  "item": [
+    {
+      "id": "22bf045f-7bb4-45cc-86a7-d1d88b55b328",
+      "name": "Domains",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4f75ee51-17ad-4fd0-8f8b-2e1e0331c80f",
+          "name": "domains list",
+          "request": {
+            "name": "domains list",
+            "description": {
+              "content": "List all domains.\n\nReturns a paginated list of domains for your organization,\n  including their names, access settings, and catalog titles.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "20545e9d-0ee6-4b97-8b80-4b09c10c6826",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"catalog_title\": \"string\",\n      \"private\": true,\n      \"access\": \"PRIVATE\",\n      \"access_code_message_html\": \"string\",\n      \"marketing_message\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"catalog_title\": \"string\",\n      \"private\": false,\n      \"access\": \"PRIVATE_CODE\",\n      \"access_code_message_html\": \"string\",\n      \"marketing_message\": \"string\"\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be7d5f69-8416-42a7-84ff-a6a3c5ed2f33",
+          "name": "domains retrieve",
+          "request": {
+            "name": "domains retrieve",
+            "description": {
+              "content": "Retrieve a domain.\n\nReturns details for a specific domain,\n  including its name, catalog title, access settings, and marketing messages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "155adfcd-5159-4631-918e-0bc10493a0d6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"catalog_title\": \"string\",\n  \"private\": true,\n  \"access\": \"PRIVATE\",\n  \"access_code_message_html\": \"string\",\n  \"marketing_message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4bdd783b-a7f9-4aba-9ac2-b3a702acdd8f",
+          "name": "domains update",
+          "request": {
+            "name": "domains update",
+            "description": {
+              "content": "Update a domain.\n\nAllows updating one or more fields of a domain. Both PUT and PATCH requests perform partial updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "catalog_title",
+                  "value": "<string>",
+                  "description": "HTML content displayed at the top of the catalog page"
+                },
+                {
+                  "disabled": false,
+                  "key": "access",
+                  "value": "<string>",
+                  "description": "Domain access settings\n\n* `PUBLIC` - Public: catalog is visible to anyone.\n* `PRIVATE` - Login required: catalog is visible once the user signs up.\n* `PRIVATE_CODE` - Access code required: catalog is visible once the user signs up with an access code."
+                },
+                {
+                  "disabled": false,
+                  "key": "access_code_message_html",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "marketing_message",
+                  "value": "<string>",
+                  "description": "This field has been replaced by the use of Signup Fields."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9c286d28-2b0d-4570-8779-c45f9a0a51ca",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "HTML content displayed at the top of the catalog page",
+                        "type": "text/plain"
+                      },
+                      "key": "catalog_title",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Domain access settings\n\n* `PUBLIC` - Public: catalog is visible to anyone.\n* `PRIVATE` - Login required: catalog is visible once the user signs up.\n* `PRIVATE_CODE` - Access code required: catalog is visible once the user signs up with an access code.",
+                        "type": "text/plain"
+                      },
+                      "key": "access",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "access_code_message_html",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "This field has been replaced by the use of Signup Fields.",
+                        "type": "text/plain"
+                      },
+                      "key": "marketing_message",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"catalog_title\": \"string\",\n  \"private\": false,\n  \"access\": \"<string>\",\n  \"access_code_message_html\": \"string\",\n  \"marketing_message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b42eea11-0e6c-4d2d-8a91-68c1f7bfd323",
+          "name": "domains partial update",
+          "request": {
+            "name": "domains partial update",
+            "description": {
+              "content": "Partially update a domain.\n\nAllows updating specific fields of a domain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "catalog_title",
+                  "value": "<string>",
+                  "description": "HTML content displayed at the top of the catalog page"
+                },
+                {
+                  "disabled": false,
+                  "key": "access",
+                  "value": "<string>",
+                  "description": "Domain access settings\n\n* `PUBLIC` - Public: catalog is visible to anyone.\n* `PRIVATE` - Login required: catalog is visible once the user signs up.\n* `PRIVATE_CODE` - Access code required: catalog is visible once the user signs up with an access code."
+                },
+                {
+                  "disabled": false,
+                  "key": "access_code_message_html",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "marketing_message",
+                  "value": "<string>",
+                  "description": "This field has been replaced by the use of Signup Fields."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "db7b5bfd-1133-4520-8e97-108dcc953f51",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "HTML content displayed at the top of the catalog page",
+                        "type": "text/plain"
+                      },
+                      "key": "catalog_title",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Domain access settings\n\n* `PUBLIC` - Public: catalog is visible to anyone.\n* `PRIVATE` - Login required: catalog is visible once the user signs up.\n* `PRIVATE_CODE` - Access code required: catalog is visible once the user signs up with an access code.",
+                        "type": "text/plain"
+                      },
+                      "key": "access",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "access_code_message_html",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "This field has been replaced by the use of Signup Fields.",
+                        "type": "text/plain"
+                      },
+                      "key": "marketing_message",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"catalog_title\": \"string\",\n  \"private\": false,\n  \"access\": \"<string>\",\n  \"access_code_message_html\": \"string\",\n  \"marketing_message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c766012-1034-47c5-b9bd-ca1df56bac89",
+          "name": "domains catalog pages visibility overrides list",
+          "request": {
+            "name": "domains catalog pages visibility overrides list",
+            "description": {
+              "content": "List Student Group visibility overrides for a given Catalog Page.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "catalog-pages",
+                ":catalog_page_id",
+                "visibility-overrides"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_page_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6a0c57de-2945-4a12-966d-5b8493a8f562",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "catalog-pages",
+                    ":catalog_page_id",
+                    "visibility-overrides"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_page_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"is_visible\": true,\n      \"student_group\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      }\n    },\n    {\n      \"is_visible\": true,\n      \"student_group\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      }\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fde8e204-bb01-4081-abbc-f8757363b632",
+          "name": "domains catalog pages visibility overrides create",
+          "request": {
+            "name": "domains catalog pages visibility overrides create",
+            "description": {
+              "content": "Create a Student Group visibility override for a Catalog Page.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "catalog-pages",
+                ":catalog_page_id",
+                "visibility-overrides"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_page_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "is_visible",
+                  "value": "<boolean>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "57437a2e-d78e-4d7b-98d2-4bac899deee0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "catalog-pages",
+                    ":catalog_page_id",
+                    "visibility-overrides"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_page_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "is_visible",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"is_visible\": false,\n  \"student_group\": {\n    \"id\": \"string\",\n    \"name\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb84daf5-c084-4df1-a7f4-35fc6188ed49",
+          "name": "domains catalog pages visibility overrides retrieve",
+          "request": {
+            "name": "domains catalog pages visibility overrides retrieve",
+            "description": {
+              "content": "Retrieve Student Group visibility override for Catalog Page.\n\nReturns Student Group information and visibility status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "catalog-pages",
+                ":catalog_page_id",
+                "visibility-overrides",
+                ":student_group_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_page_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "student_group_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bd728ac0-6fc4-47fb-a346-6abbdceb6839",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "catalog-pages",
+                    ":catalog_page_id",
+                    "visibility-overrides",
+                    ":student_group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_page_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "student_group_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"is_visible\": false,\n  \"student_group\": {\n    \"id\": \"string\",\n    \"name\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36e33891-faff-4f54-af67-b06396cf7e8e",
+          "name": "domains catalog pages visibility overrides destroy",
+          "request": {
+            "name": "domains catalog pages visibility overrides destroy",
+            "description": {
+              "content": "Deletes a Student Group visibility override for a Catalog Page and returns a `204` response.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "catalog-pages",
+                ":catalog_page_id",
+                "visibility-overrides",
+                ":student_group_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_page_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "student_group_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "45d36935-0055-497b-a693-ac518c16454c",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "catalog-pages",
+                    ":catalog_page_id",
+                    "visibility-overrides",
+                    ":student_group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_page_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "student_group_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3d69bae8-eef1-45f7-bbf8-722d6ef89025",
+    "name": "Skilljar Assets Domains API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

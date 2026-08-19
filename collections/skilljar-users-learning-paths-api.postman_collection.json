@@ -1,0 +1,143 @@
+{
+  "item": [
+    {
+      "id": "e6b202f2-443c-4938-ad45-87020edc02d9",
+      "name": "Users > Learning Paths",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "69a8e297-2d23-4ab0-8e2d-81e483fccfad",
+          "name": "users published path enrollments list",
+          "request": {
+            "name": "users published path enrollments list",
+            "description": {
+              "content": "List Learning Path enrollments for a user.\n\nReturns a list of Learning Path enrollments and progress details for the user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users",
+                ":user_id",
+                "published-path-enrollments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "015d3d54-abdf-4ed4-ac11-862e0a2110b8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":user_id",
+                    "published-path-enrollments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"published_path\": {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"course_count\": 5048\n    },\n    \"published_path_progress\": {\n      \"path_progress_id\": \"string\",\n      \"completed_course_count\": 4391,\n      \"completed_required_course_count\": 8732,\n      \"completed_at\": \"1982-09-20T10:33:11.142Z\",\n      \"latest_activity\": \"1966-03-31T06:39:24.718Z\"\n    },\n    \"published_path_id\": \"string\",\n    \"domain_name\": \"string\",\n    \"enrolled_at\": \"1993-08-08T16:13:51.830Z\",\n    \"expires_at\": \"2025-09-30T11:47:34.682Z\",\n    \"active\": false,\n    \"enrollment_id\": \"string\"\n  },\n  {\n    \"published_path\": {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"course_count\": 2935\n    },\n    \"published_path_progress\": {\n      \"path_progress_id\": \"string\",\n      \"completed_course_count\": 6335,\n      \"completed_required_course_count\": 1077,\n      \"completed_at\": \"1950-08-17T14:51:34.540Z\",\n      \"latest_activity\": \"1976-07-04T11:15:39.703Z\"\n    },\n    \"published_path_id\": \"string\",\n    \"domain_name\": \"string\",\n    \"enrolled_at\": \"2012-03-01T23:39:20.505Z\",\n    \"expires_at\": \"1962-07-13T02:37:52.969Z\",\n    \"active\": false,\n    \"enrollment_id\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7a2d4412-4730-48d8-a9d8-21b3ae89ec11",
+    "name": "Skilljar Assets Users > Learning Paths API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

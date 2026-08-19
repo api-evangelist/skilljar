@@ -1,0 +1,165 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Lessons > Rating Content Blocks API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lessons > Rating Content Blocks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "lessons_rating_content_blocks_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/lessons/:lesson_id/rating-content-blocks",
+            "params": [
+              {
+                "name": "lesson_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a rating content block on the specified lesson.\n\nAlso creates a RATING content item linking the block to the lesson.\nOnly one rating is allowed per course."
+        },
+        {
+          "info": {
+            "name": "lessons_rating_content_blocks_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/lessons/:lesson_id/rating-content-blocks/:rating_content_block_id",
+            "params": [
+              {
+                "name": "lesson_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "rating_content_block_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve details of a rating content block on the specified lesson."
+        },
+        {
+          "info": {
+            "name": "lessons_rating_content_blocks_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/lessons/:lesson_id/rating-content-blocks/:rating_content_block_id",
+            "params": [
+              {
+                "name": "lesson_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "rating_content_block_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update a rating content block on the specified lesson."
+        },
+        {
+          "info": {
+            "name": "lessons_rating_content_blocks_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/lessons/:lesson_id/rating-content-blocks/:rating_content_block_id",
+            "params": [
+              {
+                "name": "lesson_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "rating_content_block_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Partially update a rating content block on the specified lesson."
+        },
+        {
+          "info": {
+            "name": "lessons_rating_content_blocks_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/lessons/:lesson_id/rating-content-blocks/:rating_content_block_id",
+            "params": [
+              {
+                "name": "lesson_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "rating_content_block_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete a rating content block and its associated content item.\n\nRemoves both the RatingContentBlock and the LessonContentItem that links it to the lesson."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

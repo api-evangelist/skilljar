@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Purchases API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Purchases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get purchase details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/purchases/:purchase_id",
+            "params": [
+              {
+                "name": "purchase_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a Purchase object"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve the details of a specific purchase\n\nIncludes purchase status, associated user, items, and payment information.\nUse the purchase ID to access all available information for this transaction."
+        },
+        {
+          "info": {
+            "name": "Update purchase details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/purchases/:purchase_id",
+            "params": [
+              {
+                "name": "purchase_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a Purchase object"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update the details of a specific purchase. Both PUT and PATCH requests perform partial updates.\n\nYou can update fields such as purchase status or metadata.\nOnly certain fields may be editable depending on the purchase state."
+        },
+        {
+          "info": {
+            "name": "Update purchase details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/purchases/:purchase_id",
+            "params": [
+              {
+                "name": "purchase_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a Purchase object"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update the details of a specific purchase. Both PUT and PATCH requests perform partial updates.\n\nYou can update fields such as purchase status or metadata.\nOnly certain fields may be editable depending on the purchase state."
+        },
+        {
+          "info": {
+            "name": "Fulfill specific purchase",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/purchases/:purchase_id/fulfill",
+            "params": [
+              {
+                "name": "purchase_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a Purchase object"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Mark a purchase as fulfilled. If the purchase state is set to 'SUCCESS',\nthis will trigger fulfillment actions, such as enrolling the user in courses or granting access to domains.\n\nThis endpoint is typically used after payment has been confirmed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

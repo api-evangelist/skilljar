@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Domains > Catalog Pages (Builder) > Tile Containers API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domains > Catalog Pages (Builder) > Tile Containers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "domains_catalog_pages_tile_container_content_blocks_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/catalog-pages/:catalog_page_id/tile-container-content-blocks/:id",
+            "params": [
+              {
+                "name": "catalog_page_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve information for a specific tile container content block."
+        },
+        {
+          "info": {
+            "name": "domains_catalog_pages_tile_container_content_blocks_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/catalog-pages/:catalog_page_id/tile-container-content-blocks/:id",
+            "params": [
+              {
+                "name": "catalog_page_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update a specific tile container content block."
+        },
+        {
+          "info": {
+            "name": "domains_catalog_pages_tile_container_content_blocks_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/catalog-pages/:catalog_page_id/tile-container-content-blocks/:id",
+            "params": [
+              {
+                "name": "catalog_page_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Partially update a specific tile container content block."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,294 @@
+{
+  "item": [
+    {
+      "id": "e7a91c2d-dc70-45ca-8915-8c982680d444",
+      "name": "VILT > Session Events",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ae8827cd-6aac-4fbf-913a-41a382461655",
+          "name": "vilt session events list",
+          "request": {
+            "name": "vilt session events list",
+            "description": {
+              "content": "Retrieve a paginated list of VILT session events.\n\nReturns a list of session events matching the provided filters.\nSupports filtering by course, lesson, and date/time.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vilt-session-events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ends_at__lte",
+                  "value": "<string>",
+                  "description": "Filter where a ViltSessionEvent is less than or equal to the ends at value. Datetime format"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "session__lesson__course__id",
+                  "value": "<string>",
+                  "description": "Filter ViltSessionEvents by exact match of a Course ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "session__lesson__id",
+                  "value": "<string>",
+                  "description": "Filter ViltSessionEvents by exact match of a Lesson ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "starts_at__gte",
+                  "value": "<string>",
+                  "description": "Filter where a ViltSessionEvent is greater than or equal to the starts at value. Datetime format"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e1dafcc4-7988-4edf-b79f-c414af4b1b98",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vilt-session-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ends_at__lte",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "session__lesson__course__id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "session__lesson__id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "starts_at__gte",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"event_location\": {\n        \"is_active\": false,\n        \"name\": \"string\",\n        \"info_url\": \"string\"\n      },\n      \"vilt_session\": {\n        \"display_name\": \"string\",\n        \"id\": \"string\",\n        \"lesson\": {\n          \"course\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"id\": \"string\",\n          \"title\": \"string\"\n        },\n        \"seats_total\": 2234,\n        \"instructor_name\": \"string\",\n        \"registration_count\": 7695\n      },\n      \"id\": \"string\",\n      \"starts_at\": \"1960-11-26T00:59:38.742Z\",\n      \"ends_at\": \"1969-05-22T02:07:54.873Z\",\n      \"location\": \"string\",\n      \"timezone\": \"string\"\n    },\n    {\n      \"event_location\": {\n        \"is_active\": false,\n        \"name\": \"string\",\n        \"info_url\": \"string\"\n      },\n      \"vilt_session\": {\n        \"display_name\": \"string\",\n        \"id\": \"string\",\n        \"lesson\": {\n          \"course\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"id\": \"string\",\n          \"title\": \"string\"\n        },\n        \"seats_total\": 4727,\n        \"instructor_name\": \"string\",\n        \"registration_count\": 9395\n      },\n      \"id\": \"string\",\n      \"starts_at\": \"2011-11-24T15:46:23.369Z\",\n      \"ends_at\": \"1964-10-22T09:23:14.408Z\",\n      \"location\": \"string\",\n      \"timezone\": \"string\"\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "abe1013c-02ab-4067-ac74-61385fadaba6",
+          "name": "vilt session events retrieve",
+          "request": {
+            "name": "vilt session events retrieve",
+            "description": {
+              "content": "Retrieve details for a specific VILT session event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vilt-session-events",
+                ":vilt_session_event_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vilt_session_event_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cee9da83-301a-49ce-bd79-c2947be217fe",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vilt-session-events",
+                    ":vilt_session_event_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vilt_session_event_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"event_location\": {\n    \"is_active\": true,\n    \"name\": \"string\",\n    \"info_url\": \"string\"\n  },\n  \"vilt_session\": {\n    \"display_name\": \"string\",\n    \"id\": \"string\",\n    \"lesson\": {\n      \"course\": {\n        \"id\": \"string\",\n        \"title\": \"string\"\n      },\n      \"id\": \"string\",\n      \"title\": \"string\"\n    },\n    \"seats_total\": 2454,\n    \"instructor_name\": \"string\",\n    \"registration_count\": 2981\n  },\n  \"id\": \"string\",\n  \"starts_at\": \"1962-05-07T12:36:28.786Z\",\n  \"ends_at\": \"2002-06-27T05:03:28.064Z\",\n  \"location\": \"string\",\n  \"timezone\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5625d7e7-b615-4155-a0ff-9ac3c261996f",
+    "name": "Skilljar Assets VILT > Session Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,254 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Domains > Catalog Pages (Builder) > Tile Containers > Tile Items API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domains > Catalog Pages (Builder) > Tile Containers > Tile Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "domains_catalog_pages_tile_container_content_blocks_items_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/catalog-pages/:catalog_page_id/tile-container-content-blocks/:tile_container_id/items",
+            "params": [
+              {
+                "name": "catalog_page_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "tile_container_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a paginated list of all catalog page items for the specified builder catalog page content block."
+        },
+        {
+          "info": {
+            "name": "domains_catalog_pages_tile_container_content_blocks_items_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/catalog-pages/:catalog_page_id/tile-container-content-blocks/:tile_container_id/items",
+            "params": [
+              {
+                "name": "catalog_page_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tile_container_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a new catalog page item within the specified builder catalog page content block.\n\nOnly one item can be added at a time."
+        },
+        {
+          "info": {
+            "name": "domains_catalog_pages_tile_container_content_blocks_items_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/catalog-pages/:catalog_page_id/tile-container-content-blocks/:tile_container_id/items/:id",
+            "params": [
+              {
+                "name": "catalog_page_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tile_container_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve information for a specific catalog page item within the builder catalog page content block."
+        },
+        {
+          "info": {
+            "name": "domains_catalog_pages_tile_container_content_blocks_items_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/catalog-pages/:catalog_page_id/tile-container-content-blocks/:tile_container_id/items/:id",
+            "params": [
+              {
+                "name": "catalog_page_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tile_container_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update the order of a specific catalog page item within the builder catalog page content block."
+        },
+        {
+          "info": {
+            "name": "domains_catalog_pages_tile_container_content_blocks_items_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/catalog-pages/:catalog_page_id/tile-container-content-blocks/:tile_container_id/items/:id",
+            "params": [
+              {
+                "name": "catalog_page_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tile_container_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update the order of a specific catalog page item within the builder catalog page content block."
+        },
+        {
+          "info": {
+            "name": "domains_catalog_pages_tile_container_content_blocks_items_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/catalog-pages/:catalog_page_id/tile-container-content-blocks/:tile_container_id/items/:id",
+            "params": [
+              {
+                "name": "catalog_page_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tile_container_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Manage items in a Catalog Tile Content Block on a Builder Catalog Page.\n\n- **List**: Retrieve all items for a given content on a builder catalog page\n- **Retrieve**: Get detailed information about a specific item in a content block\n- **Create**: Add a new item to the content block\n- **Update**: Modify the order of an existing item inside a content block\n- **Destroy**: Remove an item from a given content block"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

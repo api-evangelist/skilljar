@@ -1,0 +1,737 @@
+{
+  "item": [
+    {
+      "id": "cd26c707-f784-4971-94ab-5c3ddfbfe3ab",
+      "name": "Instructor Led Training > Multi-Session Events",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "859d701c-2d09-4774-9e28-5f6fd4d70d52",
+          "name": "ilt multi session events list",
+          "request": {
+            "name": "ilt multi session events list",
+            "description": {
+              "content": "List all ILT multi-session events.\n\nRetrieve a paginated list of all non-cancelled instructor-led training\nmulti-session events in your organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ilt-multi-session-events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "45921388-637c-4740-8943-3053064b8d72",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ilt-multi-session-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"display_name\": \"string\",\n      \"lesson\": \"string\",\n      \"id\": \"string\",\n      \"seats_total\": 5265\n    },\n    {\n      \"display_name\": \"string\",\n      \"lesson\": \"string\",\n      \"id\": \"string\",\n      \"seats_total\": 3340\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e5a37554-3e8e-4732-84d2-89de683d65c7",
+          "name": "ilt multi session events create",
+          "request": {
+            "name": "ilt multi session events create",
+            "description": {
+              "content": "Create an ILT multi-session event.\n\nCreate a new instructor-led training multi-session event associated with a lesson.\nSpecify the lesson and seat capacity for the event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ilt-multi-session-events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "display_name",
+                  "value": "<string>",
+                  "description": "(Required) Name to be displayed for the multi-session event"
+                },
+                {
+                  "disabled": false,
+                  "key": "lesson",
+                  "value": "<string>",
+                  "description": "(Required) Live training lesson id for the multi-session event"
+                },
+                {
+                  "disabled": false,
+                  "key": "seats_total",
+                  "value": "<integer>",
+                  "description": "How many total seats are available"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2549ce41-06b9-4d04-a891-67454dd37dba",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ilt-multi-session-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Name to be displayed for the multi-session event",
+                        "type": "text/plain"
+                      },
+                      "key": "display_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Live training lesson id for the multi-session event",
+                        "type": "text/plain"
+                      },
+                      "key": "lesson",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "How many total seats are available",
+                        "type": "text/plain"
+                      },
+                      "key": "seats_total",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"display_name\": \"string\",\n  \"lesson\": \"string\",\n  \"id\": \"string\",\n  \"seats_total\": 8044\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25f27063-d73f-41bf-945d-9337694aecf1",
+          "name": "ilt multi session events retrieve",
+          "request": {
+            "name": "ilt multi session events retrieve",
+            "description": {
+              "content": "Retrieve an ILT multi-session event.\n\nGet detailed information about a specific instructor-led training multi-session event by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ilt-multi-session-events",
+                ":multi_session_event_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "multi_session_event_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "036402ff-3eab-453a-b7b7-0b9fdeb3a80b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ilt-multi-session-events",
+                    ":multi_session_event_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "multi_session_event_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"display_name\": \"string\",\n  \"lesson\": \"string\",\n  \"id\": \"string\",\n  \"seats_total\": 8044\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca84938d-fcea-4c86-ba20-26fc78791090",
+          "name": "ilt multi session events update",
+          "request": {
+            "name": "ilt multi session events update",
+            "description": {
+              "content": "Update an ILT multi-session event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ilt-multi-session-events",
+                ":multi_session_event_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "multi_session_event_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "display_name",
+                  "value": "<string>",
+                  "description": "(Required) Name to be displayed for the multi-session event"
+                },
+                {
+                  "disabled": false,
+                  "key": "lesson",
+                  "value": "<string>",
+                  "description": "(Required) Live training lesson id for the multi-session event"
+                },
+                {
+                  "disabled": false,
+                  "key": "seats_total",
+                  "value": "<integer>",
+                  "description": "How many total seats are available"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "41e7f3d2-3300-4dbb-8a40-8851357a2697",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ilt-multi-session-events",
+                    ":multi_session_event_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "multi_session_event_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Name to be displayed for the multi-session event",
+                        "type": "text/plain"
+                      },
+                      "key": "display_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Live training lesson id for the multi-session event",
+                        "type": "text/plain"
+                      },
+                      "key": "lesson",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "How many total seats are available",
+                        "type": "text/plain"
+                      },
+                      "key": "seats_total",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"display_name\": \"string\",\n  \"lesson\": \"string\",\n  \"id\": \"string\",\n  \"seats_total\": 8044\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a1fa2d7-1b96-4bf5-983f-45b99b57a922",
+          "name": "ilt multi session events partial update",
+          "request": {
+            "name": "ilt multi session events partial update",
+            "description": {
+              "content": "Manage instructor-led training (ILT) multi-session events.\n\nMulti-session events are instructor-led training sessions that span multiple meetings or sessions.\nUse this API to create, view, and update ILT multi-session events for your organization.\nOnly non-cancelled events are included in queries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ilt-multi-session-events",
+                ":multi_session_event_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "multi_session_event_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "lesson",
+                  "value": "<string>",
+                  "description": "Live training lesson id for the multi-session event"
+                },
+                {
+                  "disabled": false,
+                  "key": "display_name",
+                  "value": "<string>",
+                  "description": "Name to be displayed for the multi-session event"
+                },
+                {
+                  "disabled": false,
+                  "key": "seats_total",
+                  "value": "<integer>",
+                  "description": "How many total seats are available"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1475ce68-fad7-4935-a705-27237d345d9f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ilt-multi-session-events",
+                    ":multi_session_event_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "multi_session_event_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Live training lesson id for the multi-session event",
+                        "type": "text/plain"
+                      },
+                      "key": "lesson",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name to be displayed for the multi-session event",
+                        "type": "text/plain"
+                      },
+                      "key": "display_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "How many total seats are available",
+                        "type": "text/plain"
+                      },
+                      "key": "seats_total",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"display_name\": \"string\",\n  \"lesson\": \"string\",\n  \"id\": \"string\",\n  \"seats_total\": 8044\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "603fa106-c7e2-4fa0-ad7b-f4533ee4b12d",
+    "name": "Skilljar Assets Instructor Led Training > Multi-Session Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

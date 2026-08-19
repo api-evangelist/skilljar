@@ -1,0 +1,159 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Users > Published Courses > Lessons API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users > Published Courses > Lessons",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "users_published_courses_lessons_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/users/:user_id/published-courses/:published_course_id/lessons",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "published_course_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List lessons with progress for a user in a published course.\n\nReturns a paginated list of lessons within a published course, including the user's progress for each lesson."
+        },
+        {
+          "info": {
+            "name": "users_published_courses_lessons_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/users/:user_id/published-courses/:published_course_id/lessons/:lesson_id",
+            "params": [
+              {
+                "name": "lesson_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_course_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve lesson progress for a user.\n\nReturns detailed progress information for a specific lesson within a published course for the user."
+        },
+        {
+          "info": {
+            "name": "users_published_courses_lessons_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/users/:user_id/published-courses/:published_course_id/lessons/:lesson_id",
+            "params": [
+              {
+                "name": "lesson_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_course_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update lesson progress for a user.\n\nPUT and PATCH are identical - both do partial updates.  To mark a lesson as complete, you only need to\nset the `completed_at` within the lesson progress."
+        },
+        {
+          "info": {
+            "name": "users_published_courses_lessons_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/users/:user_id/published-courses/:published_course_id/lessons/:lesson_id",
+            "params": [
+              {
+                "name": "lesson_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_course_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Partially update lesson progress for a user.\n\nPUT and PATCH are identical - both do partial updates.  To mark a lesson as complete, you only need to\nset the `completed_at` within the lesson progress."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

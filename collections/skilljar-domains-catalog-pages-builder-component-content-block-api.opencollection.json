@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Domains > Catalog Pages (Builder) > Component Content Block API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domains > Catalog Pages (Builder) > Component Content Block",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "domains_catalog_pages_component_content_blocks_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/catalog-pages/:catalog_page_id/component-content-blocks/:id",
+            "params": [
+              {
+                "name": "catalog_page_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve details of the specified content block on the specified builder catalog page"
+        },
+        {
+          "info": {
+            "name": "domains_catalog_pages_component_content_blocks_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/catalog-pages/:catalog_page_id/component-content-blocks/:id",
+            "params": [
+              {
+                "name": "catalog_page_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Updates content for a specified content block on a specified builder catalog page"
+        },
+        {
+          "info": {
+            "name": "domains_catalog_pages_component_content_blocks_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/catalog-pages/:catalog_page_id/component-content-blocks/:id",
+            "params": [
+              {
+                "name": "catalog_page_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Updates content for a specified content block on a specified builder catalog page"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

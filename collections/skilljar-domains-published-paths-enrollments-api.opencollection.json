@@ -1,0 +1,197 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Domains > Published Paths > Enrollments API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domains > Published Paths > Enrollments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "domains_published_paths_published_path_enrollments_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-paths/:published_path_id/published-path-enrollments",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "published_path_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List enrollments for a Published Path.\n\nReturns a paginated list of enrollments for the specified Published Path, including user and purchase details."
+        },
+        {
+          "info": {
+            "name": "domains_published_paths_published_path_enrollments_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-paths/:published_path_id/published-path-enrollments",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_path_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Enroll a user in a Published Path.\n\nThis operation is idempotent for the same user and enrollment time.\nOnly users with an existing domain membership can be enrolled."
+        },
+        {
+          "info": {
+            "name": "domains_published_paths_published_path_enrollments_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-paths/:published_path_id/published-path-enrollments/:published_path_enrollment_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_path_enrollment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_path_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve details for a Published Path enrollment.\n\nReturns enrollment information, including user details and purchase information if applicable."
+        },
+        {
+          "info": {
+            "name": "domains_published_paths_published_path_enrollments_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-paths/:published_path_id/published-path-enrollments/:published_path_enrollment_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_path_enrollment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_path_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Manage enrollments for a Published Path.\n\nEnrollments represent a user's access to a Published Path.\nThis API allows you to list, retrieve, create, and update enrollments for a specific Published Path.\n\nEnrollment states:\n- A user may have multiple enrollments for a path.\n- Access is granted if at least one enrollment is active and not expired."
+        },
+        {
+          "info": {
+            "name": "domains_published_paths_published_path_enrollments_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-paths/:published_path_id/published-path-enrollments/:published_path_enrollment_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_path_enrollment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_path_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Manage enrollments for a Published Path.\n\nEnrollments represent a user's access to a Published Path.\nThis API allows you to list, retrieve, create, and update enrollments for a specific Published Path.\n\nEnrollment states:\n- A user may have multiple enrollments for a path.\n- Access is granted if at least one enrollment is active and not expired."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

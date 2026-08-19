@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Quizzes > Question Banks API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quizzes > Question Banks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "quizzes_question_banks_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/quizzes/:quiz_id/question-banks",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "quiz_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List all Question Banks assigned to a specific Quiz.\n\nReturns a paginated list of Question Banks associated with the Quiz."
+        },
+        {
+          "info": {
+            "name": "quizzes_question_banks_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/quizzes/:quiz_id/question-banks/:question_bank_id",
+            "params": [
+              {
+                "name": "question_bank_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "quiz_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve details for a specific Question Bank.\n\nReturns all metadata for the Question Bank, including the number of questions and quiz associations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

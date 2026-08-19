@@ -1,0 +1,345 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Webhooks API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "webhooks_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/webhooks",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List all webhooks for your organization.\n\nReturns a paginated list of webhooks, including their configuration and status."
+        },
+        {
+          "info": {
+            "name": "webhooks_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/webhooks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a new webhook for your organization.\n\nRegister a webhook to receive HTTP POST notifications when specified events occur in your Skilljar organization.\nYou may specify a particular event type or leave it blank to receive all event types.\n\n- If \"event_type\" is null, all event types will be sent to the URL.\n- If \"event_type\" is set, only events matching that type will be sent.\n- If multiple webhooks are created with the same URL and qualify for an event, the event will be sent to the\nURL onl"
+        },
+        {
+          "info": {
+            "name": "webhooks_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/webhooks/:webhook_id",
+            "params": [
+              {
+                "name": "webhook_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve details for a specific webhook.\n\nReturns the configuration and status of the webhook, including its\ntarget URL, event type, and activation status."
+        },
+        {
+          "info": {
+            "name": "webhooks_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/webhooks/:webhook_id",
+            "params": [
+              {
+                "name": "webhook_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update an existing webhook.\n\nAllows you to modify the webhook's configuration, such as the target URL or event type."
+        },
+        {
+          "info": {
+            "name": "webhooks_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/webhooks/:webhook_id",
+            "params": [
+              {
+                "name": "webhook_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Partially update an existing webhook.\n\nAllows you to update one or more fields of the webhook without modifying the entire object."
+        },
+        {
+          "info": {
+            "name": "webhooks_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/webhooks/:webhook_id",
+            "params": [
+              {
+                "name": "webhook_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete a webhook.\n\nPermanently removes the webhook and stops sending event notifications to its target URL."
+        },
+        {
+          "info": {
+            "name": "Ping Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/webhooks/:webhook_id/ping",
+            "params": [
+              {
+                "name": "webhook_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Send a test HTTP POST event of type PING to a webhook.\n\nAllows you to verify that your webhook endpoint is reachable and correctly configured.\nA failed ping will not deactivate the webhook and no retries are attempted."
+        },
+        {
+          "info": {
+            "name": "Sample Course Completion Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/webhooks/sample-course-completion",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a sample course completion event.\n\nReturns a single-item list containing either the most recent course completion event for your organization,\nor a generated sample event if no completions exist.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list."
+        },
+        {
+          "info": {
+            "name": "Sample Course Enrollment Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/webhooks/sample-course-enrollment",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a sample course enrollment event.\n\nReturns a single-item list containing either the most recent course enrollment event for your organization,\nor a generated sample event if no enrollments exist.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list."
+        },
+        {
+          "info": {
+            "name": "Sample Dashboard Task Created Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/webhooks/sample-dashboard-task-created",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a sample dashboard task created event.\n\nReturns a single-item list containing either the most recent dashboard task created event for your organization,\nor a generated sample event if no tasks exist.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list."
+        },
+        {
+          "info": {
+            "name": "Sample Domain Enrollment Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/webhooks/sample-domain-enrollment",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a sample domain enrollment event.\n\nReturns a single-item list containing either the most recent domain enrollment event (if available and valid),\nor a generated sample event.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list."
+        },
+        {
+          "info": {
+            "name": "Sample Lesson Completion Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/webhooks/sample-lesson-completion",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a sample lesson completion event.\n\nReturns a single-item list containing either the most recent lesson completion event for your organization,\nor a generated sample event if no completions exist.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list."
+        },
+        {
+          "info": {
+            "name": "Sample Path Completion Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/webhooks/sample-path-completion",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a sample path completion event.\n\nReturns a single-item list containing either the most recent path completion event for your organization,\nor a generated sample event if no completions exist.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list."
+        },
+        {
+          "info": {
+            "name": "Sample Path Enrollment Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/webhooks/sample-path-enrollment",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a sample path enrollment event.\n\nReturns a single-item list containing either the most recent path enrollment event for your organization,\nor a generated sample event if no enrollments exist.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list."
+        },
+        {
+          "info": {
+            "name": "Sample Purchase Fulfillment Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/webhooks/sample-purchase-fulfillment",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a sample purchase fulfillment event.\n\nReturns a single-item list containing either the most recent purchase fulfillment event for your organization,\nor a generated sample event if no purchase fulfillments exist.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list."
+        },
+        {
+          "info": {
+            "name": "Sample Quiz Completion Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/webhooks/sample-quiz-completion",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a sample quiz completion event.\n\nReturns a single-item list containing either the most recent quiz completion event for your organization,\nor a generated sample event if no completions exist.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list."
+        },
+        {
+          "info": {
+            "name": "Sample VILT Event Registration Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/webhooks/sample-vilt-registration",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a sample VILT event registration event.\n\nReturns a single-item list containing either the most recent VILT event registration for your organization,\nor a generated sample event if no registrations exist.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

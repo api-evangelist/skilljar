@@ -1,0 +1,212 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Domains > Published Courses API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domains > Published Courses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "domains_published_courses_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-courses",
+            "params": [
+              {
+                "name": "course__id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by course id, e.g. `course__id=abcd1234`"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_searchable_content",
+                "value": "",
+                "type": "query",
+                "description": "If set to True, the response also includes the following fields ('lesson_list', 'tags', 'short_description', 'long_description_html', 'search_keywords')"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "URL encoded string, return the results and the order as if a catalog search"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List all courses published to this domain.\n\nReturns a paginated list of published courses for the domain.\nSupports filtering by course ID and searching by keyword."
+        },
+        {
+          "info": {
+            "name": "domains_published_courses_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-courses",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Publish a course to this domain.\n\nMakes a course available to learners on the specified domain.\nThe course must not already be published to this domain."
+        },
+        {
+          "info": {
+            "name": "domains_published_courses_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-courses/:published_course_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_course_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a published course for this domain.\n\nReturns detailed information about a published course, including metadata, publishing settings,\n  and catalog ordering."
+        },
+        {
+          "info": {
+            "name": "domains_published_courses_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-courses/:published_course_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_course_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update a published course in this domain.\n\nAllows partial updates to published course settings, such as visibility, registration, or slug."
+        },
+        {
+          "info": {
+            "name": "domains_published_courses_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-courses/:published_course_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_course_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Partially update a published course in this domain.\n\nAllows partial updates to published course settings, such as visibility, registration, or slug."
+        },
+        {
+          "info": {
+            "name": "domains_published_courses_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/published-courses/:published_course_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "published_course_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Unpublish a course from this domain.\n\nRemoves the course from the domain, making it inaccessible to learners.\nThis action is irreversible and also removes the course from all associated\n  content syndication configurations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1152,12 +1152,12 @@ tools:
   path: /v1/offers/{offer_id}
   source_operation: openapi/skilljar-openapi-original.yml#offers_retrieve
 - name: offers_update
-  description: "Update an Offer price if it is an \xE0 la carte Offer for a `PublishedCourse`."
+  description: Update an Offer price if it is an à la carte Offer for a `PublishedCourse`.
   method: PUT
   path: /v1/offers/{offer_id}
   source_operation: openapi/skilljar-openapi-original.yml#offers_update
 - name: offers_partial_update
-  description: "Update an Offer if it is an \xE0 la carte Offer for a `PublishedCourse`."
+  description: Update an Offer if it is an à la carte Offer for a `PublishedCourse`.
   method: PATCH
   path: /v1/offers/{offer_id}
   source_operation: openapi/skilljar-openapi-original.yml#offers_partial_update
@@ -1726,3 +1726,9 @@ tools:
   method: GET
   path: /v1/webhooks/sample-vilt-registration
   source_operation: openapi/skilljar-openapi-original.yml#webhooks_sample_vilt_registration_retrieve
+deployment:
+  mode: none
+  verified: derived
+  tools: 340
+  checked: '2026-08-12'
+  source: catalog MCP census

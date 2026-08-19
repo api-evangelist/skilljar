@@ -1,0 +1,197 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Domains > Plans > Enrollments API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domains > Plans > Enrollments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "domains_plan_plan_enrollments_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/plan/:plan_id/plan-enrollments",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List all enrollments for a specific Plan.\n\nReturns a paginated list of enrollments.\nEach enrollment includes user information, enrollment status, and purchase details if available.\nA user may have multiple enrollments for a Plan. Access to a Plan is granted if at least one enrollment\n  is active and not expired."
+        },
+        {
+          "info": {
+            "name": "domains_plan_plan_enrollments_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/plan/:plan_id/plan-enrollments",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Enroll a user in a Plan.\n\nThis operation is idempotent for the combination of user ID and enrollment date.\nIf an enrollment already exists for the specified user and date, a new enrollment will not be created.\nEach call with a new user or enrollment date will create a new enrollment.\n\nThe user must already have a domain membership to be enrolled."
+        },
+        {
+          "info": {
+            "name": "domains_plan_plan_enrollments_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/plan/:plan_id/plan-enrollments/:plan_enrollment_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "plan_enrollment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve details for a specific Plan enrollment.\n\nReturns enrollment information, including user details, enrollment status, and purchase information if\nthe enrollment was associated with a purchase or registration through the platform."
+        },
+        {
+          "info": {
+            "name": "domains_plan_plan_enrollments_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/plan/:plan_id/plan-enrollments/:plan_enrollment_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "plan_enrollment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update details for a Plan enrollment.\n\nBoth PUT and PATCH requests perform partial updates to the enrollment record."
+        },
+        {
+          "info": {
+            "name": "domains_plan_plan_enrollments_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/domains/:domain_name/plan/:plan_id/plan-enrollments/:plan_enrollment_id",
+            "params": [
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "plan_enrollment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update details for a Plan enrollment.\n\nBoth PUT and PATCH requests perform partial updates to the enrollment record."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

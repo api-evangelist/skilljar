@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Lesson Progress API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lesson Progress",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "lesson_progress_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/lesson-progress/:lesson_progress_id",
+            "params": [
+              {
+                "name": "lesson_progress_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve the progress details for a specific lesson progress object.\n\nReturns the current completion status, timestamps, and other progress information for\n  the student's lesson attempt."
+        },
+        {
+          "info": {
+            "name": "lesson_progress_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/lesson-progress/:lesson_progress_id",
+            "params": [
+              {
+                "name": "lesson_progress_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update the progress for a specific lesson progress object.\n\nSetting `finished_at` indicates the student as finished the content.  This will\nalso This will also mark the lesson complete unless the lesson requires validation,\nsuch as a review of proctoring. To un-complete the lesson, set `completed_at` to null.\n\nBoth PUT and PATCH requests perform partial updates."
+        },
+        {
+          "info": {
+            "name": "lesson_progress_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/lesson-progress/:lesson_progress_id",
+            "params": [
+              {
+                "name": "lesson_progress_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Partially update the progress for a specific lesson progress object.\n\nSetting `finished_at` indicates the student as finished the content.  This will\nalso This will also mark the lesson complete unless the lesson requires validation,\nsuch as a review of proctoring. To un-complete the lesson, set `completed_at` to null.\n\nBoth PUT and PATCH requests perform partial updates."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

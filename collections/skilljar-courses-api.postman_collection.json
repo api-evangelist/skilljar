@@ -1,0 +1,1162 @@
+{
+  "item": [
+    {
+      "id": "0ca41229-8b23-43b7-bc04-b15fc303f60f",
+      "name": "Courses",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f14e32fb-45a8-42b9-a8e3-34d723777888",
+          "name": "courses list",
+          "request": {
+            "name": "courses list",
+            "description": {
+              "content": "List all courses in your organization.\n\nReturns a paginated list of courses with details such as title, description, labels,\n  creation and modification dates, and course time settings. Supports filtering by label name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "courses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "label__name",
+                  "value": "<string>",
+                  "description": "Filter courses by exact match on label name"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f3aadef0-d103-427c-8bae-8a25803671d4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "courses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "label__name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"enforce_sequential_navigation\": true,\n      \"short_description\": \"string\",\n      \"title\": \"string\",\n      \"id\": \"string\",\n      \"long_description_html\": \"string\",\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"draft_origin_id\": \"string\",\n      \"promo_image_url\": \"string\",\n      \"display_course_and_lesson_time\": false,\n      \"manual_course_time\": \"\",\n      \"display_manual_course_time\": false,\n      \"course_and_lesson_time_format\": \"MINUTES_VERBOSE\",\n      \"course_time\": \"string\",\n      \"created_at\": \"2000-11-12T17:12:26.259Z\",\n      \"modified_at\": \"2019-12-15T23:18:32.561Z\",\n      \"average_rating\": -6.289060413912113\n    },\n    {\n      \"enforce_sequential_navigation\": true,\n      \"short_description\": \"string\",\n      \"title\": \"string\",\n      \"id\": \"string\",\n      \"long_description_html\": \"string\",\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"draft_origin_id\": \"string\",\n      \"promo_image_url\": \"string\",\n      \"display_course_and_lesson_time\": false,\n      \"manual_course_time\": \"\",\n      \"display_manual_course_time\": false,\n      \"course_and_lesson_time_format\": \"HOURS_MINUTES\",\n      \"course_time\": \"string\",\n      \"created_at\": \"2007-09-14T01:19:51.734Z\",\n      \"modified_at\": \"1987-11-29T17:34:40.989Z\",\n      \"average_rating\": 4.826987814376277\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ce3324d-f5eb-4697-bd99-3a692899fe93",
+          "name": "courses create",
+          "request": {
+            "name": "courses create",
+            "description": {
+              "content": "Create a new course.\n\nCreates a course with the provided details, including title, description, labels,\n  and course time settings. Returns the created course object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "courses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "enforce_sequential_navigation",
+                  "value": "<boolean>",
+                  "description": "(Required) Enforce sequential navigation"
+                },
+                {
+                  "disabled": false,
+                  "key": "short_description",
+                  "value": "<string>",
+                  "description": "(Required) The short description of the course"
+                },
+                {
+                  "disabled": false,
+                  "key": "title",
+                  "value": "<string>",
+                  "description": "(Required) The title of the course"
+                },
+                {
+                  "disabled": false,
+                  "key": "long_description_html",
+                  "value": "<string>",
+                  "description": "The long description as HTML content"
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>",
+                  "description": "A comma separated list of labels ex: [\"label1\", \"label2\"]"
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>",
+                  "description": "A comma separated list of labels ex: [\"label1\", \"label2\"]"
+                },
+                {
+                  "disabled": false,
+                  "key": "display_course_and_lesson_time",
+                  "value": "false",
+                  "description": "Displays course and lesson times on the course tile (course time only) and detail page (both course and lesson times)"
+                },
+                {
+                  "disabled": false,
+                  "key": "manual_course_time",
+                  "value": "",
+                  "description": "Custom text string for the course time."
+                },
+                {
+                  "disabled": false,
+                  "key": "display_manual_course_time",
+                  "value": "false",
+                  "description": "The manual course time will display on the detail, curriculum, and lesson pages, as well as the course tile. (If display course and lesson times is also enabled, this will override the summed course time. However, lesson times will still display in the selected format.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "course_and_lesson_time_format",
+                  "value": "<string>",
+                  "description": "The format to use for displaying course and lesson times. Possible values: \"HOURS_MINUTES_SECONDS\", \"HOURS_MINUTES\", \"HOURS_MINUTES_VERBOSE\", \"MINUTES_VERBOSE\". If display manual course time is enabled, this will not be used.\n\n* `HOURS_MINUTES_SECONDS` - HH:MM:SS (01:32:47)\n* `HOURS_MINUTES` - HH:MM (01:33)\n* `HOURS_MINUTES_VERBOSE` - X hr Y min (1 hr 33 min)\n* `MINUTES_VERBOSE` - Y min (93 min)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8c143c94-1253-4aba-8da8-0bee3fd02c25",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "courses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Enforce sequential navigation",
+                        "type": "text/plain"
+                      },
+                      "key": "enforce_sequential_navigation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The short description of the course",
+                        "type": "text/plain"
+                      },
+                      "key": "short_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The title of the course",
+                        "type": "text/plain"
+                      },
+                      "key": "title",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The long description as HTML content",
+                        "type": "text/plain"
+                      },
+                      "key": "long_description_html",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A comma separated list of labels ex: [\"label1\", \"label2\"]",
+                        "type": "text/plain"
+                      },
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A comma separated list of labels ex: [\"label1\", \"label2\"]",
+                        "type": "text/plain"
+                      },
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Displays course and lesson times on the course tile (course time only) and detail page (both course and lesson times)",
+                        "type": "text/plain"
+                      },
+                      "key": "display_course_and_lesson_time",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Custom text string for the course time.",
+                        "type": "text/plain"
+                      },
+                      "key": "manual_course_time",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The manual course time will display on the detail, curriculum, and lesson pages, as well as the course tile. (If display course and lesson times is also enabled, this will override the summed course time. However, lesson times will still display in the selected format.)",
+                        "type": "text/plain"
+                      },
+                      "key": "display_manual_course_time",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The format to use for displaying course and lesson times. Possible values: \"HOURS_MINUTES_SECONDS\", \"HOURS_MINUTES\", \"HOURS_MINUTES_VERBOSE\", \"MINUTES_VERBOSE\". If display manual course time is enabled, this will not be used.\n\n* `HOURS_MINUTES_SECONDS` - HH:MM:SS (01:32:47)\n* `HOURS_MINUTES` - HH:MM (01:33)\n* `HOURS_MINUTES_VERBOSE` - X hr Y min (1 hr 33 min)\n* `MINUTES_VERBOSE` - Y min (93 min)",
+                        "type": "text/plain"
+                      },
+                      "key": "course_and_lesson_time_format",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"enforce_sequential_navigation\": false,\n  \"short_description\": \"string\",\n  \"title\": \"string\",\n  \"id\": \"string\",\n  \"long_description_html\": \"string\",\n  \"labels\": [\n    \"string\",\n    \"string\"\n  ],\n  \"draft_origin_id\": \"string\",\n  \"promo_image_url\": \"string\",\n  \"display_course_and_lesson_time\": false,\n  \"manual_course_time\": \"\",\n  \"display_manual_course_time\": false,\n  \"course_and_lesson_time_format\": \"<string>\",\n  \"course_time\": \"string\",\n  \"created_at\": \"1971-06-22T02:53:01.895Z\",\n  \"modified_at\": \"1967-10-05T20:17:38.379Z\",\n  \"average_rating\": 2.6863461604056766\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3a6c94f-ecc7-449c-8016-e7eed6e2c7f1",
+          "name": "courses retrieve",
+          "request": {
+            "name": "courses retrieve",
+            "description": {
+              "content": "Retrieve a single course.\n\nReturns detailed information about a specific course, including title, description, labels,\n  creation and modification dates, and course time settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "courses",
+                ":course_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "course_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "325b87d2-d5e9-4718-8f71-27bc0984ab95",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "courses",
+                    ":course_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "course_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"enforce_sequential_navigation\": false,\n  \"short_description\": \"string\",\n  \"title\": \"string\",\n  \"id\": \"string\",\n  \"long_description_html\": \"string\",\n  \"labels\": [\n    \"string\",\n    \"string\"\n  ],\n  \"draft_origin_id\": \"string\",\n  \"promo_image_url\": \"string\",\n  \"display_course_and_lesson_time\": false,\n  \"manual_course_time\": \"\",\n  \"display_manual_course_time\": false,\n  \"course_and_lesson_time_format\": \"<string>\",\n  \"course_time\": \"string\",\n  \"created_at\": \"1971-06-22T02:53:01.895Z\",\n  \"modified_at\": \"1967-10-05T20:17:38.379Z\",\n  \"average_rating\": 2.6863461604056766\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af4fb6b3-3501-4d01-a88f-be3ec2306b2a",
+          "name": "courses update",
+          "request": {
+            "name": "courses update",
+            "description": {
+              "content": "Update an existing course.\n\nUpdates the specified course with the provided data.\nSupports partial updates; only the fields you provide will be updated. Returns the updated course object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "courses",
+                ":course_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "course_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "enforce_sequential_navigation",
+                  "value": "<boolean>",
+                  "description": "(Required) Enforce sequential navigation"
+                },
+                {
+                  "disabled": false,
+                  "key": "short_description",
+                  "value": "<string>",
+                  "description": "(Required) The short description of the course"
+                },
+                {
+                  "disabled": false,
+                  "key": "title",
+                  "value": "<string>",
+                  "description": "(Required) The title of the course"
+                },
+                {
+                  "disabled": false,
+                  "key": "long_description_html",
+                  "value": "<string>",
+                  "description": "The long description as HTML content"
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>",
+                  "description": "A comma separated list of labels ex: [\"label1\", \"label2\"]"
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>",
+                  "description": "A comma separated list of labels ex: [\"label1\", \"label2\"]"
+                },
+                {
+                  "disabled": false,
+                  "key": "display_course_and_lesson_time",
+                  "value": "false",
+                  "description": "Displays course and lesson times on the course tile (course time only) and detail page (both course and lesson times)"
+                },
+                {
+                  "disabled": false,
+                  "key": "manual_course_time",
+                  "value": "",
+                  "description": "Custom text string for the course time."
+                },
+                {
+                  "disabled": false,
+                  "key": "display_manual_course_time",
+                  "value": "false",
+                  "description": "The manual course time will display on the detail, curriculum, and lesson pages, as well as the course tile. (If display course and lesson times is also enabled, this will override the summed course time. However, lesson times will still display in the selected format.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "course_and_lesson_time_format",
+                  "value": "<string>",
+                  "description": "The format to use for displaying course and lesson times. Possible values: \"HOURS_MINUTES_SECONDS\", \"HOURS_MINUTES\", \"HOURS_MINUTES_VERBOSE\", \"MINUTES_VERBOSE\". If display manual course time is enabled, this will not be used.\n\n* `HOURS_MINUTES_SECONDS` - HH:MM:SS (01:32:47)\n* `HOURS_MINUTES` - HH:MM (01:33)\n* `HOURS_MINUTES_VERBOSE` - X hr Y min (1 hr 33 min)\n* `MINUTES_VERBOSE` - Y min (93 min)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3605c75c-72f0-4e7a-bebc-cf729e0c15cf",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "courses",
+                    ":course_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "course_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Enforce sequential navigation",
+                        "type": "text/plain"
+                      },
+                      "key": "enforce_sequential_navigation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The short description of the course",
+                        "type": "text/plain"
+                      },
+                      "key": "short_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The title of the course",
+                        "type": "text/plain"
+                      },
+                      "key": "title",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The long description as HTML content",
+                        "type": "text/plain"
+                      },
+                      "key": "long_description_html",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A comma separated list of labels ex: [\"label1\", \"label2\"]",
+                        "type": "text/plain"
+                      },
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A comma separated list of labels ex: [\"label1\", \"label2\"]",
+                        "type": "text/plain"
+                      },
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Displays course and lesson times on the course tile (course time only) and detail page (both course and lesson times)",
+                        "type": "text/plain"
+                      },
+                      "key": "display_course_and_lesson_time",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Custom text string for the course time.",
+                        "type": "text/plain"
+                      },
+                      "key": "manual_course_time",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The manual course time will display on the detail, curriculum, and lesson pages, as well as the course tile. (If display course and lesson times is also enabled, this will override the summed course time. However, lesson times will still display in the selected format.)",
+                        "type": "text/plain"
+                      },
+                      "key": "display_manual_course_time",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The format to use for displaying course and lesson times. Possible values: \"HOURS_MINUTES_SECONDS\", \"HOURS_MINUTES\", \"HOURS_MINUTES_VERBOSE\", \"MINUTES_VERBOSE\". If display manual course time is enabled, this will not be used.\n\n* `HOURS_MINUTES_SECONDS` - HH:MM:SS (01:32:47)\n* `HOURS_MINUTES` - HH:MM (01:33)\n* `HOURS_MINUTES_VERBOSE` - X hr Y min (1 hr 33 min)\n* `MINUTES_VERBOSE` - Y min (93 min)",
+                        "type": "text/plain"
+                      },
+                      "key": "course_and_lesson_time_format",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"enforce_sequential_navigation\": false,\n  \"short_description\": \"string\",\n  \"title\": \"string\",\n  \"id\": \"string\",\n  \"long_description_html\": \"string\",\n  \"labels\": [\n    \"string\",\n    \"string\"\n  ],\n  \"draft_origin_id\": \"string\",\n  \"promo_image_url\": \"string\",\n  \"display_course_and_lesson_time\": false,\n  \"manual_course_time\": \"\",\n  \"display_manual_course_time\": false,\n  \"course_and_lesson_time_format\": \"<string>\",\n  \"course_time\": \"string\",\n  \"created_at\": \"1971-06-22T02:53:01.895Z\",\n  \"modified_at\": \"1967-10-05T20:17:38.379Z\",\n  \"average_rating\": 2.6863461604056766\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "185560f8-1f7a-4a2c-a809-8e5a8b9c714f",
+          "name": "courses partial update",
+          "request": {
+            "name": "courses partial update",
+            "description": {
+              "content": "Partially update a course.\n\nUpdates one or more fields of an existing course.\nOnly the fields you provide will be updated; all others remain unchanged. Returns the updated course object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "courses",
+                ":course_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "course_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "enforce_sequential_navigation",
+                  "value": "<boolean>",
+                  "description": "Enforce sequential navigation"
+                },
+                {
+                  "disabled": false,
+                  "key": "long_description_html",
+                  "value": "<string>",
+                  "description": "The long description as HTML content"
+                },
+                {
+                  "disabled": false,
+                  "key": "short_description",
+                  "value": "<string>",
+                  "description": "The short description of the course"
+                },
+                {
+                  "disabled": false,
+                  "key": "title",
+                  "value": "<string>",
+                  "description": "The title of the course"
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>",
+                  "description": "A comma separated list of labels ex: [\"label1\", \"label2\"]"
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>",
+                  "description": "A comma separated list of labels ex: [\"label1\", \"label2\"]"
+                },
+                {
+                  "disabled": false,
+                  "key": "display_course_and_lesson_time",
+                  "value": "false",
+                  "description": "Displays course and lesson times on the course tile (course time only) and detail page (both course and lesson times)"
+                },
+                {
+                  "disabled": false,
+                  "key": "manual_course_time",
+                  "value": "",
+                  "description": "Custom text string for the course time."
+                },
+                {
+                  "disabled": false,
+                  "key": "display_manual_course_time",
+                  "value": "false",
+                  "description": "The manual course time will display on the detail, curriculum, and lesson pages, as well as the course tile. (If display course and lesson times is also enabled, this will override the summed course time. However, lesson times will still display in the selected format.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "course_and_lesson_time_format",
+                  "value": "<string>",
+                  "description": "The format to use for displaying course and lesson times. Possible values: \"HOURS_MINUTES_SECONDS\", \"HOURS_MINUTES\", \"HOURS_MINUTES_VERBOSE\", \"MINUTES_VERBOSE\". If display manual course time is enabled, this will not be used.\n\n* `HOURS_MINUTES_SECONDS` - HH:MM:SS (01:32:47)\n* `HOURS_MINUTES` - HH:MM (01:33)\n* `HOURS_MINUTES_VERBOSE` - X hr Y min (1 hr 33 min)\n* `MINUTES_VERBOSE` - Y min (93 min)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7f88081c-ffe5-47dd-abd2-21d112f9bd67",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "courses",
+                    ":course_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "course_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Enforce sequential navigation",
+                        "type": "text/plain"
+                      },
+                      "key": "enforce_sequential_navigation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The long description as HTML content",
+                        "type": "text/plain"
+                      },
+                      "key": "long_description_html",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The short description of the course",
+                        "type": "text/plain"
+                      },
+                      "key": "short_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The title of the course",
+                        "type": "text/plain"
+                      },
+                      "key": "title",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A comma separated list of labels ex: [\"label1\", \"label2\"]",
+                        "type": "text/plain"
+                      },
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A comma separated list of labels ex: [\"label1\", \"label2\"]",
+                        "type": "text/plain"
+                      },
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Displays course and lesson times on the course tile (course time only) and detail page (both course and lesson times)",
+                        "type": "text/plain"
+                      },
+                      "key": "display_course_and_lesson_time",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Custom text string for the course time.",
+                        "type": "text/plain"
+                      },
+                      "key": "manual_course_time",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The manual course time will display on the detail, curriculum, and lesson pages, as well as the course tile. (If display course and lesson times is also enabled, this will override the summed course time. However, lesson times will still display in the selected format.)",
+                        "type": "text/plain"
+                      },
+                      "key": "display_manual_course_time",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The format to use for displaying course and lesson times. Possible values: \"HOURS_MINUTES_SECONDS\", \"HOURS_MINUTES\", \"HOURS_MINUTES_VERBOSE\", \"MINUTES_VERBOSE\". If display manual course time is enabled, this will not be used.\n\n* `HOURS_MINUTES_SECONDS` - HH:MM:SS (01:32:47)\n* `HOURS_MINUTES` - HH:MM (01:33)\n* `HOURS_MINUTES_VERBOSE` - X hr Y min (1 hr 33 min)\n* `MINUTES_VERBOSE` - Y min (93 min)",
+                        "type": "text/plain"
+                      },
+                      "key": "course_and_lesson_time_format",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"enforce_sequential_navigation\": false,\n  \"short_description\": \"string\",\n  \"title\": \"string\",\n  \"id\": \"string\",\n  \"long_description_html\": \"string\",\n  \"labels\": [\n    \"string\",\n    \"string\"\n  ],\n  \"draft_origin_id\": \"string\",\n  \"promo_image_url\": \"string\",\n  \"display_course_and_lesson_time\": false,\n  \"manual_course_time\": \"\",\n  \"display_manual_course_time\": false,\n  \"course_and_lesson_time_format\": \"<string>\",\n  \"course_time\": \"string\",\n  \"created_at\": \"1971-06-22T02:53:01.895Z\",\n  \"modified_at\": \"1967-10-05T20:17:38.379Z\",\n  \"average_rating\": 2.6863461604056766\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "495b8391-0641-4de3-9ba4-74a57a0b1415",
+          "name": "courses destroy",
+          "request": {
+            "name": "courses destroy",
+            "description": {
+              "content": "Delete a course and its drafts.\n\nPermanently deletes the specified course and all associated draft versions.\nThis action cannot be undone. Returns a 204 No Content response if successful.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "courses",
+                ":course_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "course_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c337ca9d-291d-4d7a-b636-9e6064a68e8d",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "courses",
+                    ":course_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "course_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d500bbd9-2662-4e35-82fa-4824feef4a32",
+    "name": "Skilljar Assets Courses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

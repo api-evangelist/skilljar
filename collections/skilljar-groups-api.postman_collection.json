@@ -1,0 +1,997 @@
+{
+  "item": [
+    {
+      "id": "53b9a853-561b-4659-ac5c-c960a7f56eb8",
+      "name": "Groups",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a712c49e-bc8e-4bef-8586-1b7cab61cd4f",
+          "name": "groups list",
+          "request": {
+            "name": "groups list",
+            "description": {
+              "content": "List all groups in your organization.\n\nReturns a paginated list of groups. You can filter by exact group name using the `name` query parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter groups by exact match on group name"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b2f8cf21-9415-406b-bbdd-e0040ab24605",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"name\": \"string\",\n      \"id\": \"string\",\n      \"user_count\": 6368,\n      \"discount_percent\": 83,\n      \"group_category_id\": \"string\",\n      \"sign_up_field_rule\": {\n        \"options\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"domain_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"domain_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"enforce\": false,\n        \"require_match_all\": false\n      },\n      \"rule_email_domains\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"id\": \"string\",\n      \"user_count\": 644,\n      \"discount_percent\": 21,\n      \"group_category_id\": \"string\",\n      \"sign_up_field_rule\": {\n        \"options\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"domain_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"domain_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"enforce\": false,\n        \"require_match_all\": false\n      },\n      \"rule_email_domains\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d170bbca-8724-45b6-ad8f-b2ad82eda874",
+          "name": "groups create",
+          "request": {
+            "name": "groups create",
+            "description": {
+              "content": "Create a new group.\n\nGroups can be configured with optional sign-up field rules to automate user assignment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Unique name of the group"
+                },
+                {
+                  "disabled": false,
+                  "key": "discount_percent",
+                  "value": "<integer>",
+                  "description": "A percentage based discount that will apply to all purchasable objects/courses"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_category_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "[{\"id\":\"<string>\"},{\"id\":\"<string>\"}]",
+                  "description": "Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group."
+                },
+                {
+                  "disabled": false,
+                  "key": "enforce",
+                  "value": "false",
+                  "description": "Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group."
+                },
+                {
+                  "disabled": false,
+                  "key": "require_match_all",
+                  "value": "false",
+                  "description": "Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group."
+                },
+                {
+                  "disabled": false,
+                  "key": "rule_email_domains",
+                  "value": "<string>",
+                  "description": "Email domains for automatic group assignment. Users that register with a matching email domain will be added to this group."
+                },
+                {
+                  "disabled": false,
+                  "key": "rule_email_domains",
+                  "value": "<string>",
+                  "description": "Email domains for automatic group assignment. Users that register with a matching email domain will be added to this group."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "06468507-2161-450a-9683-12724d6c563a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Unique name of the group",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A percentage based discount that will apply to all purchasable objects/courses",
+                        "type": "text/plain"
+                      },
+                      "key": "discount_percent",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "group_category_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.",
+                        "type": "text/plain"
+                      },
+                      "key": "options",
+                      "value": "[{\"id\":\"<string>\"},{\"id\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.",
+                        "type": "text/plain"
+                      },
+                      "key": "enforce",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.",
+                        "type": "text/plain"
+                      },
+                      "key": "require_match_all",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email domains for automatic group assignment. Users that register with a matching email domain will be added to this group.",
+                        "type": "text/plain"
+                      },
+                      "key": "rule_email_domains",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email domains for automatic group assignment. Users that register with a matching email domain will be added to this group.",
+                        "type": "text/plain"
+                      },
+                      "key": "rule_email_domains",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"id\": \"string\",\n  \"user_count\": 8282,\n  \"discount_percent\": 82,\n  \"group_category_id\": \"string\",\n  \"sign_up_field_rule\": {\n    \"options\": [\n      {\n        \"id\": \"string\",\n        \"value\": \"string\",\n        \"domain_name\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"value\": \"string\",\n        \"domain_name\": \"string\"\n      }\n    ],\n    \"enforce\": false,\n    \"require_match_all\": false\n  },\n  \"rule_email_domains\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18486324-b2a8-45b0-b43e-4ac1b108deaa",
+          "name": "groups retrieve",
+          "request": {
+            "name": "groups retrieve",
+            "description": {
+              "content": "Retrieve details for a specific group.\n\nReturns group information including name, discount, user count, and sign-up field rules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "groups",
+                ":group_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "552f55cb-2227-41d7-9d1d-2c212732958e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"id\": \"string\",\n  \"user_count\": 8282,\n  \"discount_percent\": 82,\n  \"group_category_id\": \"string\",\n  \"sign_up_field_rule\": {\n    \"options\": [\n      {\n        \"id\": \"string\",\n        \"value\": \"string\",\n        \"domain_name\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"value\": \"string\",\n        \"domain_name\": \"string\"\n      }\n    ],\n    \"enforce\": false,\n    \"require_match_all\": false\n  },\n  \"rule_email_domains\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1533f21c-bdd1-4d59-a698-c610bec0cbf8",
+          "name": "groups update",
+          "request": {
+            "name": "groups update",
+            "description": {
+              "content": "Update group details.\n\nBoth PUT and PATCH requests perform partial updates. You can modify group name, discount,\n  or sign-up field rules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "groups",
+                ":group_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Unique name of the group"
+                },
+                {
+                  "disabled": false,
+                  "key": "discount_percent",
+                  "value": "<integer>",
+                  "description": "A percentage based discount that will apply to all purchasable objects/courses"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_category_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "[{\"id\":\"<string>\"},{\"id\":\"<string>\"}]",
+                  "description": "Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group."
+                },
+                {
+                  "disabled": false,
+                  "key": "enforce",
+                  "value": "false",
+                  "description": "Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group."
+                },
+                {
+                  "disabled": false,
+                  "key": "require_match_all",
+                  "value": "false",
+                  "description": "Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "79680b80-983c-4b6d-8fe3-886a98dd2700",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Unique name of the group",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A percentage based discount that will apply to all purchasable objects/courses",
+                        "type": "text/plain"
+                      },
+                      "key": "discount_percent",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "group_category_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.",
+                        "type": "text/plain"
+                      },
+                      "key": "options",
+                      "value": "[{\"id\":\"<string>\"},{\"id\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.",
+                        "type": "text/plain"
+                      },
+                      "key": "enforce",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.",
+                        "type": "text/plain"
+                      },
+                      "key": "require_match_all",
+                      "value": "false"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"id\": \"string\",\n  \"user_count\": 6751,\n  \"discount_percent\": 8,\n  \"group_category_id\": \"string\",\n  \"sign_up_field_rule\": {\n    \"options\": [\n      {\n        \"id\": \"string\",\n        \"value\": \"string\",\n        \"domain_name\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"value\": \"string\",\n        \"domain_name\": \"string\"\n      }\n    ],\n    \"enforce\": false,\n    \"require_match_all\": false\n  },\n  \"rule_email_domains\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37eabc71-173a-43ed-b04c-628146ee4ae2",
+          "name": "groups partial update",
+          "request": {
+            "name": "groups partial update",
+            "description": {
+              "content": "Update group details.\n\nBoth PUT and PATCH requests perform partial updates. You can modify group name, discount,\n  or sign-up field rules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "groups",
+                ":group_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Unique name of the group"
+                },
+                {
+                  "disabled": false,
+                  "key": "discount_percent",
+                  "value": "<integer>",
+                  "description": "A percentage based discount that will apply to all purchasable objects/courses"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_category_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "[{\"id\":\"<string>\"},{\"id\":\"<string>\"}]",
+                  "description": "Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group."
+                },
+                {
+                  "disabled": false,
+                  "key": "enforce",
+                  "value": "false",
+                  "description": "Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group."
+                },
+                {
+                  "disabled": false,
+                  "key": "require_match_all",
+                  "value": "false",
+                  "description": "Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f9027be0-805a-4b65-b1cb-aaf4d1bc2bf7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unique name of the group",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A percentage based discount that will apply to all purchasable objects/courses",
+                        "type": "text/plain"
+                      },
+                      "key": "discount_percent",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "group_category_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.",
+                        "type": "text/plain"
+                      },
+                      "key": "options",
+                      "value": "[{\"id\":\"<string>\"},{\"id\":\"<string>\"}]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.",
+                        "type": "text/plain"
+                      },
+                      "key": "enforce",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.",
+                        "type": "text/plain"
+                      },
+                      "key": "require_match_all",
+                      "value": "false"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"id\": \"string\",\n  \"user_count\": 1832,\n  \"discount_percent\": 30,\n  \"group_category_id\": \"string\",\n  \"sign_up_field_rule\": {\n    \"options\": [\n      {\n        \"id\": \"string\",\n        \"value\": \"string\",\n        \"domain_name\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"value\": \"string\",\n        \"domain_name\": \"string\"\n      }\n    ],\n    \"enforce\": false,\n    \"require_match_all\": false\n  },\n  \"rule_email_domains\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ae19d65-7e01-4d10-b359-21abad680238",
+          "name": "groups destroy",
+          "request": {
+            "name": "groups destroy",
+            "description": {
+              "content": "Delete a group.\n\nPermanently removes the group and all group-user associations. Users and domain users are not deleted.\nThis operation cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "groups",
+                ":group_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "917efb71-c6d6-4693-86a3-ff25bae2a416",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":group_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "de1f88ba-90fe-4810-a859-c29ec5333f1d",
+    "name": "Skilljar Assets Groups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

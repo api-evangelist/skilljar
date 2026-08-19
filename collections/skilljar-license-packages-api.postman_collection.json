@@ -1,0 +1,835 @@
+{
+  "item": [
+    {
+      "id": "c81afec0-9963-43c5-8af6-2b41d2e28bf9",
+      "name": "License Packages",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4efbb257-5bc6-44e4-9f55-1aa0823d6cb3",
+          "name": "license packages list",
+          "request": {
+            "name": "license packages list",
+            "description": {
+              "content": "List license packages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "license-packages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d01ebac0-d756-4a80-abc8-0e5e052f5d96",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "license-packages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"end_date\": \"1989-05-14T22:42:10.645Z\",\n      \"name\": \"string\",\n      \"start_date\": \"2009-08-05T07:03:16.219Z\",\n      \"id\": \"string\",\n      \"license_count\": 6045,\n      \"tracking_id\": \"string\",\n      \"domain_id\": \"string\",\n      \"license_seats_remaining\": 7551,\n      \"offer_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"max_unique_seats\": 1647302166\n    },\n    {\n      \"end_date\": \"1964-10-01T18:57:12.763Z\",\n      \"name\": \"string\",\n      \"start_date\": \"1957-11-23T12:02:51.548Z\",\n      \"id\": \"string\",\n      \"license_count\": 8441,\n      \"tracking_id\": \"string\",\n      \"domain_id\": \"string\",\n      \"license_seats_remaining\": 121,\n      \"offer_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"max_unique_seats\": 1680262309\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dea886f7-9ea3-4e07-84d7-a57aacdd800a",
+          "name": "license packages create",
+          "request": {
+            "name": "license packages create",
+            "description": {
+              "content": "Create a new license package.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "license-packages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "domain_id",
+                  "value": "<string>",
+                  "description": "(Required) Domain ID a license package will be hosted on."
+                },
+                {
+                  "disabled": false,
+                  "key": "license_count",
+                  "value": "<integer>",
+                  "description": "(Required) Total number of active licenses allotted to a license package."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of a license package."
+                },
+                {
+                  "disabled": false,
+                  "key": "tracking_id",
+                  "value": "",
+                  "description": "Arbitrary string used for tracking a license package in an external system."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<dateTime>",
+                  "description": "Start date of a license package. Defaults to the current date"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<dateTime>",
+                  "description": "End date of a license package (Optional)."
+                },
+                {
+                  "disabled": false,
+                  "key": "offers",
+                  "value": "<string>",
+                  "description": "List of offer IDs included in a license package."
+                },
+                {
+                  "disabled": false,
+                  "key": "offers",
+                  "value": "<string>",
+                  "description": "List of offer IDs included in a license package."
+                },
+                {
+                  "disabled": false,
+                  "key": "max_unique_seats",
+                  "value": "<integer>",
+                  "description": "Maximum number of unique seats that can be assigned to this license package (Optional)."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1b5cd82a-a0ee-4bbf-a971-df8d188fc655",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "license-packages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Domain ID a license package will be hosted on.",
+                        "type": "text/plain"
+                      },
+                      "key": "domain_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Total number of active licenses allotted to a license package.",
+                        "type": "text/plain"
+                      },
+                      "key": "license_count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Name of a license package.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Arbitrary string used for tracking a license package in an external system.",
+                        "type": "text/plain"
+                      },
+                      "key": "tracking_id",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Start date of a license package. Defaults to the current date",
+                        "type": "text/plain"
+                      },
+                      "key": "start_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "End date of a license package (Optional).",
+                        "type": "text/plain"
+                      },
+                      "key": "end_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of offer IDs included in a license package.",
+                        "type": "text/plain"
+                      },
+                      "key": "offers",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of offer IDs included in a license package.",
+                        "type": "text/plain"
+                      },
+                      "key": "offers",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Maximum number of unique seats that can be assigned to this license package (Optional).",
+                        "type": "text/plain"
+                      },
+                      "key": "max_unique_seats",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"domain_id\": \"string\",\n  \"license_count\": 6848,\n  \"name\": \"string\",\n  \"id\": \"string\",\n  \"tracking_id\": \"\",\n  \"start_date\": \"1982-12-02T04:47:55.836Z\",\n  \"end_date\": \"1979-05-14T02:55:55.190Z\",\n  \"max_unique_seats\": 6119\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fda167be-4528-4942-a8f7-c9575515f40b",
+          "name": "license packages retrieve",
+          "request": {
+            "name": "license packages retrieve",
+            "description": {
+              "content": "Retrieve details for a specific license package.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "license-packages",
+                ":license_package_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "license_package_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "da16f107-7849-4342-b958-2ce457f48c3e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "license-packages",
+                    ":license_package_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "license_package_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"end_date\": \"1994-06-11T13:07:08.861Z\",\n  \"name\": \"string\",\n  \"start_date\": \"1951-10-16T14:37:28.226Z\",\n  \"id\": \"string\",\n  \"license_count\": 8861,\n  \"tracking_id\": \"string\",\n  \"domain_id\": \"string\",\n  \"license_seats_remaining\": 6045,\n  \"offer_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"max_unique_seats\": 1358975836\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d07843a-b241-403a-a95e-d0e9db619249",
+          "name": "license packages partial update",
+          "request": {
+            "name": "license packages partial update",
+            "description": {
+              "content": "Update an existing license package.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "license-packages",
+                ":license_package_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "license_package_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "tracking_id",
+                  "value": "",
+                  "description": "Arbitrary string used for tracking a license package in an external system."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<dateTime>",
+                  "description": "Start date of a license package. Defaults to the current date"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<dateTime>",
+                  "description": "End date of a license package (Optional)."
+                },
+                {
+                  "disabled": false,
+                  "key": "offers",
+                  "value": "<string>",
+                  "description": "List of offer IDs included in a license package."
+                },
+                {
+                  "disabled": false,
+                  "key": "offers",
+                  "value": "<string>",
+                  "description": "List of offer IDs included in a license package."
+                },
+                {
+                  "disabled": false,
+                  "key": "license_count",
+                  "value": "<integer>",
+                  "description": "Total number of active licenses allotted to a license package."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Name of a license package."
+                },
+                {
+                  "disabled": false,
+                  "key": "max_unique_seats",
+                  "value": "<integer>",
+                  "description": "Maximum number of unique seats that can be assigned to this license package (Optional)."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3433179b-0bc5-4bb1-885c-d9cead785f96",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "license-packages",
+                    ":license_package_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "license_package_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Arbitrary string used for tracking a license package in an external system.",
+                        "type": "text/plain"
+                      },
+                      "key": "tracking_id",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Start date of a license package. Defaults to the current date",
+                        "type": "text/plain"
+                      },
+                      "key": "start_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "End date of a license package (Optional).",
+                        "type": "text/plain"
+                      },
+                      "key": "end_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of offer IDs included in a license package.",
+                        "type": "text/plain"
+                      },
+                      "key": "offers",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of offer IDs included in a license package.",
+                        "type": "text/plain"
+                      },
+                      "key": "offers",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Total number of active licenses allotted to a license package.",
+                        "type": "text/plain"
+                      },
+                      "key": "license_count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of a license package.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Maximum number of unique seats that can be assigned to this license package (Optional).",
+                        "type": "text/plain"
+                      },
+                      "key": "max_unique_seats",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"tracking_id\": \"\",\n  \"start_date\": \"1978-11-12T00:28:02.733Z\",\n  \"end_date\": \"1972-05-31T07:31:47.707Z\",\n  \"license_count\": 7280,\n  \"name\": \"string\",\n  \"max_unique_seats\": 54\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7efec501-90e6-43c3-9a1c-ac10d69dbeea",
+          "name": "license packages destroy",
+          "request": {
+            "name": "license packages destroy",
+            "description": {
+              "content": "Delete a license package.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "license-packages",
+                ":license_package_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "license_package_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4082cdbc-d246-431d-b450-516c3d7e58d9",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "license-packages",
+                    ":license_package_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "license_package_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b7daf727-bb04-4e3b-bc3b-96da11882e6b",
+    "name": "Skilljar Assets License Packages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

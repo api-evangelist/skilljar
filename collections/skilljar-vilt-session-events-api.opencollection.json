@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets VILT > Session Events API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "VILT > Session Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "vilt_session_events_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/vilt-session-events",
+            "params": [
+              {
+                "name": "ends_at__lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where a ViltSessionEvent is less than or equal to the ends at value. Datetime format"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "session__lesson__course__id",
+                "value": "",
+                "type": "query",
+                "description": "Filter ViltSessionEvents by exact match of a Course ID"
+              },
+              {
+                "name": "session__lesson__id",
+                "value": "",
+                "type": "query",
+                "description": "Filter ViltSessionEvents by exact match of a Lesson ID"
+              },
+              {
+                "name": "starts_at__gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter where a ViltSessionEvent is greater than or equal to the starts at value. Datetime format"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a paginated list of VILT session events.\n\nReturns a list of session events matching the provided filters.\nSupports filtering by course, lesson, and date/time."
+        },
+        {
+          "info": {
+            "name": "vilt_session_events_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/vilt-session-events/:vilt_session_event_id",
+            "params": [
+              {
+                "name": "vilt_session_event_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve details for a specific VILT session event."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

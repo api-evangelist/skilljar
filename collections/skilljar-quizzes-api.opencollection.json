@@ -1,0 +1,174 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Quizzes API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quizzes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "quizzes_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/quizzes",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter quizzes by quiz name. Case sensitive and exact match."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a paginated list of all quizzes for the current organization.\n\nReturns up to 1000 quizzes per page. Supports filtering by quiz name."
+        },
+        {
+          "info": {
+            "name": "quizzes_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/quizzes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a new quiz.\n\nRequired fields:\n- `name`: The name of the quiz.\n- `html`: The HTML description or instructions for the quiz.\n- `passing_percentage_correct`: The percentage of correct answers required to pass.\n- `show_results_on_failure`: Whether to show results when a learner fails.\n- `max_attempts`: Maximum number of attempts allowed.\n- `randomize_questions`: Whether to randomize the order of questions."
+        },
+        {
+          "info": {
+            "name": "quizzes_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/quizzes/:quiz_id",
+            "params": [
+              {
+                "name": "quiz_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve the details of a specific quiz by its ID."
+        },
+        {
+          "info": {
+            "name": "quizzes_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/quizzes/:quiz_id",
+            "params": [
+              {
+                "name": "quiz_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update an existing quiz.\n\nAllows modification of quiz settings and content."
+        },
+        {
+          "info": {
+            "name": "quizzes_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/quizzes/:quiz_id",
+            "params": [
+              {
+                "name": "quiz_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Manage quizzes for your organization.\n\nThis endpoint allows you to list, create, retrieve, update, and delete quizzes.\nQuizzes are used to assess learner knowledge and can be configured with various settings\n  such as passing percentage, maximum attempts, and question randomization."
+        },
+        {
+          "info": {
+            "name": "quizzes_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/quizzes/:quiz_id",
+            "params": [
+              {
+                "name": "quiz_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete a quiz.\n\nPermanently removes the quiz and all associated data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

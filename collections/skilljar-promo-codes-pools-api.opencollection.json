@@ -1,0 +1,180 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Promo Codes > Pools API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Promo Codes > Pools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "promo_code_pools_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/promo-code-pools",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by PromoCodePool name"
+              },
+              {
+                "name": "offer_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by the id of a Offer"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a paginated list of Promo Code Pools for your organization.\n\nSupports filtering by offer ID and pool name. Results are paginated (1000 per page)."
+        },
+        {
+          "info": {
+            "name": "promo_code_pools_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/promo-code-pools",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a new Promo Code Pool.\n\nConfigure the pool with a name, discount type, usage limits, and validity period."
+        },
+        {
+          "info": {
+            "name": "promo_code_pools_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/promo-code-pools/:promo_code_pool_id",
+            "params": [
+              {
+                "name": "promo_code_pool_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve details for a specific Promo Code Pool.\n\nReturns all configuration and status information for the pool."
+        },
+        {
+          "info": {
+            "name": "promo_code_pools_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/promo-code-pools/:promo_code_pool_id",
+            "params": [
+              {
+                "name": "promo_code_pool_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update one or more fields of a Promo Code Pool.\n\nBoth PUT and PATCH requests perform partial updates."
+        },
+        {
+          "info": {
+            "name": "promo_code_pools_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/promo-code-pools/:promo_code_pool_id",
+            "params": [
+              {
+                "name": "promo_code_pool_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update one or more fields of a Promo Code Pool.\n\nBoth PUT and PATCH requests perform partial updates."
+        },
+        {
+          "info": {
+            "name": "promo_code_pools_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/promo-code-pools/:promo_code_pool_id",
+            "params": [
+              {
+                "name": "promo_code_pool_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete a Promo Code Pool.\n\nDeleting a pool will also delete all associated promo codes.\nPurchases that used these codes will have their code reference removed.\n\nThis action cannot be undone."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

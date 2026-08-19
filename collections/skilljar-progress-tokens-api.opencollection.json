@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Progress Tokens API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Progress Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "progresstokens_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/progresstokens",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "APIs for managing progress tokens, which are used to securely update a learner's progress in a course or lesson. Progress tokens allow for tracking and updating completion status for specific learning activities. Use these endpoints to update progress based on a token, which may also update the corresponding lesson progress and course status for the user."
+        },
+        {
+          "info": {
+            "name": "progresstokens_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/progresstokens/:progress_token_id",
+            "params": [
+              {
+                "name": "progress_token_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "APIs for managing progress tokens, which are used to securely update a learner's progress in a course or lesson. Progress tokens allow for tracking and updating completion status for specific learning activities. Use these endpoints to update progress based on a token, which may also update the corresponding lesson progress and course status for the user."
+        },
+        {
+          "info": {
+            "name": "progresstokens_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/progresstokens/:progress_token_id",
+            "params": [
+              {
+                "name": "progress_token_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "APIs for managing progress tokens, which are used to securely update a learner's progress in a course or lesson. Progress tokens allow for tracking and updating completion status for specific learning activities. Use these endpoints to update progress based on a token, which may also update the corresponding lesson progress and course status for the user."
+        },
+        {
+          "info": {
+            "name": "progresstokens_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/progresstokens/:progress_token_id",
+            "params": [
+              {
+                "name": "progress_token_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "APIs for managing progress tokens, which are used to securely update a learner's progress in a course or lesson. Progress tokens allow for tracking and updating completion status for specific learning activities. Use these endpoints to update progress based on a token, which may also update the corresponding lesson progress and course status for the user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

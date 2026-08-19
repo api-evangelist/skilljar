@@ -1,0 +1,951 @@
+{
+  "item": [
+    {
+      "id": "918e520c-52a5-415a-b77f-a3fef4e8a61b",
+      "name": "Lessons > Rating Content Blocks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "89328514-1fb5-462c-abc4-dad5f2d5660b",
+          "name": "lessons rating content blocks create",
+          "request": {
+            "name": "lessons rating content blocks create",
+            "description": {
+              "content": "Create a rating content block on the specified lesson.\n\nAlso creates a RATING content item linking the block to the lesson.\nOnly one rating is allowed per course.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lessons",
+                ":lesson_id",
+                "rating-content-blocks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lesson_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "rating_question",
+                  "value": "<string>",
+                  "description": "The main rating question shown to learners"
+                },
+                {
+                  "disabled": false,
+                  "key": "additional_feedback_question",
+                  "value": "<string>",
+                  "description": "Optional follow-up question for additional feedback"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_additional_feedback",
+                  "value": "<boolean>",
+                  "description": "Whether to show the additional feedback question"
+                },
+                {
+                  "disabled": false,
+                  "key": "rating_scale",
+                  "value": "<integer>",
+                  "description": "Rating scale (5 or 10). Stored on Course, not on the block."
+                },
+                {
+                  "disabled": false,
+                  "key": "rating_scale_low_label",
+                  "value": "<string>",
+                  "description": "Label for the low end of the 10-point scale (ignored for 5-star)"
+                },
+                {
+                  "disabled": false,
+                  "key": "rating_scale_high_label",
+                  "value": "<string>",
+                  "description": "Label for the high end of the 10-point scale (ignored for 5-star)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9cf45018-5eee-4ffe-b6fc-34bdff6445cc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lessons",
+                    ":lesson_id",
+                    "rating-content-blocks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lesson_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The main rating question shown to learners",
+                        "type": "text/plain"
+                      },
+                      "key": "rating_question",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Optional follow-up question for additional feedback",
+                        "type": "text/plain"
+                      },
+                      "key": "additional_feedback_question",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to show the additional feedback question",
+                        "type": "text/plain"
+                      },
+                      "key": "include_additional_feedback",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Rating scale (5 or 10). Stored on Course, not on the block.",
+                        "type": "text/plain"
+                      },
+                      "key": "rating_scale",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Label for the low end of the 10-point scale (ignored for 5-star)",
+                        "type": "text/plain"
+                      },
+                      "key": "rating_scale_low_label",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Label for the high end of the 10-point scale (ignored for 5-star)",
+                        "type": "text/plain"
+                      },
+                      "key": "rating_scale_high_label",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"content_item_id\": \"string\",\n  \"rating_question\": \"string\",\n  \"additional_feedback_question\": \"string\",\n  \"include_additional_feedback\": true,\n  \"rating_scale\": 544,\n  \"rating_scale_low_label\": \"string\",\n  \"rating_scale_high_label\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b9f85bcb-c887-423c-b2d3-4adc0293e376",
+          "name": "lessons rating content blocks retrieve",
+          "request": {
+            "name": "lessons rating content blocks retrieve",
+            "description": {
+              "content": "Retrieve details of a rating content block on the specified lesson.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lessons",
+                ":lesson_id",
+                "rating-content-blocks",
+                ":rating_content_block_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lesson_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rating_content_block_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f87d4107-c3b1-415f-b27a-6fdd5cf4e4b4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lessons",
+                    ":lesson_id",
+                    "rating-content-blocks",
+                    ":rating_content_block_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lesson_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rating_content_block_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"content_item_id\": \"string\",\n  \"rating_question\": \"string\",\n  \"additional_feedback_question\": \"string\",\n  \"include_additional_feedback\": true,\n  \"rating_scale\": 544,\n  \"rating_scale_low_label\": \"string\",\n  \"rating_scale_high_label\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7583f5c4-6c68-477a-b9a4-ab7ea783d1af",
+          "name": "lessons rating content blocks update",
+          "request": {
+            "name": "lessons rating content blocks update",
+            "description": {
+              "content": "Update a rating content block on the specified lesson.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lessons",
+                ":lesson_id",
+                "rating-content-blocks",
+                ":rating_content_block_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lesson_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rating_content_block_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "rating_question",
+                  "value": "<string>",
+                  "description": "The main rating question shown to learners"
+                },
+                {
+                  "disabled": false,
+                  "key": "additional_feedback_question",
+                  "value": "<string>",
+                  "description": "Optional follow-up question for additional feedback"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_additional_feedback",
+                  "value": "<boolean>",
+                  "description": "Whether to show the additional feedback question"
+                },
+                {
+                  "disabled": false,
+                  "key": "rating_scale",
+                  "value": "<integer>",
+                  "description": "Rating scale (5 or 10). Stored on Course, not on the block."
+                },
+                {
+                  "disabled": false,
+                  "key": "rating_scale_low_label",
+                  "value": "<string>",
+                  "description": "Label for the low end of the 10-point scale (ignored for 5-star)"
+                },
+                {
+                  "disabled": false,
+                  "key": "rating_scale_high_label",
+                  "value": "<string>",
+                  "description": "Label for the high end of the 10-point scale (ignored for 5-star)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f4091331-b150-4a38-8d6c-3d038f76e3f8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lessons",
+                    ":lesson_id",
+                    "rating-content-blocks",
+                    ":rating_content_block_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lesson_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rating_content_block_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The main rating question shown to learners",
+                        "type": "text/plain"
+                      },
+                      "key": "rating_question",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Optional follow-up question for additional feedback",
+                        "type": "text/plain"
+                      },
+                      "key": "additional_feedback_question",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to show the additional feedback question",
+                        "type": "text/plain"
+                      },
+                      "key": "include_additional_feedback",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Rating scale (5 or 10). Stored on Course, not on the block.",
+                        "type": "text/plain"
+                      },
+                      "key": "rating_scale",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Label for the low end of the 10-point scale (ignored for 5-star)",
+                        "type": "text/plain"
+                      },
+                      "key": "rating_scale_low_label",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Label for the high end of the 10-point scale (ignored for 5-star)",
+                        "type": "text/plain"
+                      },
+                      "key": "rating_scale_high_label",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"content_item_id\": \"string\",\n  \"rating_question\": \"string\",\n  \"additional_feedback_question\": \"string\",\n  \"include_additional_feedback\": true,\n  \"rating_scale\": 544,\n  \"rating_scale_low_label\": \"string\",\n  \"rating_scale_high_label\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2cd86798-00db-4708-8718-8bf4440b0ab4",
+          "name": "lessons rating content blocks partial update",
+          "request": {
+            "name": "lessons rating content blocks partial update",
+            "description": {
+              "content": "Partially update a rating content block on the specified lesson.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lessons",
+                ":lesson_id",
+                "rating-content-blocks",
+                ":rating_content_block_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lesson_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rating_content_block_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "rating_question",
+                  "value": "<string>",
+                  "description": "The main rating question shown to learners"
+                },
+                {
+                  "disabled": false,
+                  "key": "additional_feedback_question",
+                  "value": "<string>",
+                  "description": "Optional follow-up question for additional feedback"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_additional_feedback",
+                  "value": "<boolean>",
+                  "description": "Whether to show the additional feedback question"
+                },
+                {
+                  "disabled": false,
+                  "key": "rating_scale",
+                  "value": "<integer>",
+                  "description": "Rating scale (5 or 10). Stored on Course, not on the block."
+                },
+                {
+                  "disabled": false,
+                  "key": "rating_scale_low_label",
+                  "value": "<string>",
+                  "description": "Label for the low end of the 10-point scale (ignored for 5-star)"
+                },
+                {
+                  "disabled": false,
+                  "key": "rating_scale_high_label",
+                  "value": "<string>",
+                  "description": "Label for the high end of the 10-point scale (ignored for 5-star)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c06e8e18-ed42-4ace-83a4-360ff09f3309",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lessons",
+                    ":lesson_id",
+                    "rating-content-blocks",
+                    ":rating_content_block_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lesson_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rating_content_block_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The main rating question shown to learners",
+                        "type": "text/plain"
+                      },
+                      "key": "rating_question",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Optional follow-up question for additional feedback",
+                        "type": "text/plain"
+                      },
+                      "key": "additional_feedback_question",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to show the additional feedback question",
+                        "type": "text/plain"
+                      },
+                      "key": "include_additional_feedback",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Rating scale (5 or 10). Stored on Course, not on the block.",
+                        "type": "text/plain"
+                      },
+                      "key": "rating_scale",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Label for the low end of the 10-point scale (ignored for 5-star)",
+                        "type": "text/plain"
+                      },
+                      "key": "rating_scale_low_label",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Label for the high end of the 10-point scale (ignored for 5-star)",
+                        "type": "text/plain"
+                      },
+                      "key": "rating_scale_high_label",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"content_item_id\": \"string\",\n  \"rating_question\": \"string\",\n  \"additional_feedback_question\": \"string\",\n  \"include_additional_feedback\": true,\n  \"rating_scale\": 544,\n  \"rating_scale_low_label\": \"string\",\n  \"rating_scale_high_label\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2eddc4ca-2b76-4422-95b4-531f726ad3b1",
+          "name": "lessons rating content blocks destroy",
+          "request": {
+            "name": "lessons rating content blocks destroy",
+            "description": {
+              "content": "Delete a rating content block and its associated content item.\n\nRemoves both the RatingContentBlock and the LessonContentItem that links it to the lesson.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lessons",
+                ":lesson_id",
+                "rating-content-blocks",
+                ":rating_content_block_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lesson_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rating_content_block_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "62140b9b-124c-4aac-a82f-9ed9cd0d801d",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lessons",
+                    ":lesson_id",
+                    "rating-content-blocks",
+                    ":rating_content_block_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lesson_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rating_content_block_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "22f71b20-a2bd-44c5-b5eb-096e2af80bf4",
+    "name": "Skilljar Assets Lessons > Rating Content Blocks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

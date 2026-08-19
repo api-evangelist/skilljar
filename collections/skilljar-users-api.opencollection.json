@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Users API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "users_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/users",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Filter users by email address"
+              },
+              {
+                "name": "first_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter users by first name - case sensitive"
+              },
+              {
+                "name": "is_inactive",
+                "value": "",
+                "type": "query",
+                "description": "Filter users by inactive status (true returns inactive users, false returns active users)"
+              },
+              {
+                "name": "last_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter users by last name - case sensitive"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List users registered on at least one domain.\n\nReturns a paginated list of users who have registered on any domain in your organization.\nSupports filtering by email, first name, and last name.\n\nThis endpoint uses cursor-based pagination by default — it performs consistently\nregardless of dataset size. Follow the `next` URL in each response to page forward.\nPass `?page=N` to use page-number pagination instead."
+        },
+        {
+          "info": {
+            "name": "users_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a user's registration and course overview.\n\nReturns detailed information about a specific user, including registration and completion counts,\nrecent activity, and profile details."
+        },
+        {
+          "info": {
+            "name": "users_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update user details.\n\nAllows updating the user's name and email address. Both PUT and PATCH perform partial updates."
+        },
+        {
+          "info": {
+            "name": "users_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Partially update user details.\n\nAllows updating the user's name and email address. Both PUT and PATCH perform partial updates."
+        },
+        {
+          "info": {
+            "name": "users_anonymize_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/users/:user_id/anonymize",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Permanently anonymize a user.\n\nObfuscates all personally identifiable information for the user, making it impossible to identify\nor restore the user. This action is irreversible and prevents future platform access."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

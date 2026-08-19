@@ -1,0 +1,422 @@
+{
+  "item": [
+    {
+      "id": "69eca664-6b16-4564-abd4-7be2072f7da9",
+      "name": "Promo Codes > Promo Code Pools > Offers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "861299cb-9451-4f0a-b6e1-963aa05e982a",
+          "name": "promo code pools offers list",
+          "request": {
+            "name": "promo code pools offers list",
+            "description": {
+              "content": "Retrieve a paginated list of Offers attached to a Promo Code Pool.\n\nReturns all offers currently associated with the specified promo code pool.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "promo-code-pools",
+                ":promo_code_pool_id",
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "promo_code_pool_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6c8f7d31-f60e-4492-8ef6-2e2c6c115664",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "promo-code-pools",
+                    ":promo_code_pool_id",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "promo_code_pool_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"offers\": [\n        {\n          \"id\": \"string\",\n          \"course_series_id\": \"string\",\n          \"published_path_id\": \"string\",\n          \"published_course_id\": \"string\",\n          \"plan_id\": \"string\",\n          \"domain_name\": \"string\",\n          \"offer_type\": \"plan\",\n          \"price_cents\": 2644,\n          \"currency_code\": \"KRW\",\n          \"price_credits\": 9935,\n          \"sku\": \"string\",\n          \"max_quantity\": 2777,\n          \"active\": true,\n          \"starts_at\": \"1971-11-08T20:16:02.222Z\",\n          \"ends_at\": \"1981-10-21T02:40:57.876Z\",\n          \"linked_to_plan\": false\n        },\n        {\n          \"id\": \"string\",\n          \"course_series_id\": \"string\",\n          \"published_path_id\": \"string\",\n          \"published_course_id\": \"string\",\n          \"plan_id\": \"string\",\n          \"domain_name\": \"string\",\n          \"offer_type\": \"published_course\",\n          \"price_cents\": 230,\n          \"currency_code\": \"RUB\",\n          \"price_credits\": 5533,\n          \"sku\": \"string\",\n          \"max_quantity\": 7609,\n          \"active\": true,\n          \"starts_at\": \"2013-05-25T04:20:47.810Z\",\n          \"ends_at\": \"1972-12-02T18:43:52.844Z\",\n          \"linked_to_plan\": false\n        }\n      ]\n    },\n    {\n      \"offers\": [\n        {\n          \"id\": \"string\",\n          \"course_series_id\": \"string\",\n          \"published_path_id\": \"string\",\n          \"published_course_id\": \"string\",\n          \"plan_id\": \"string\",\n          \"domain_name\": \"string\",\n          \"offer_type\": \"domain\",\n          \"price_cents\": 4192,\n          \"currency_code\": \"GBP\",\n          \"price_credits\": 9343,\n          \"sku\": \"string\",\n          \"max_quantity\": 636,\n          \"active\": false,\n          \"starts_at\": \"2017-06-10T17:28:34.689Z\",\n          \"ends_at\": \"1972-10-28T00:16:44.494Z\",\n          \"linked_to_plan\": true\n        },\n        {\n          \"id\": \"string\",\n          \"course_series_id\": \"string\",\n          \"published_path_id\": \"string\",\n          \"published_course_id\": \"string\",\n          \"plan_id\": \"string\",\n          \"domain_name\": \"string\",\n          \"offer_type\": \"domain\",\n          \"price_cents\": 2303,\n          \"currency_code\": \"AUD\",\n          \"price_credits\": 4533,\n          \"sku\": \"string\",\n          \"max_quantity\": 4286,\n          \"active\": false,\n          \"starts_at\": \"1984-09-07T20:10:24.027Z\",\n          \"ends_at\": \"1960-12-06T14:38:56.169Z\",\n          \"linked_to_plan\": false\n        }\n      ]\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2add16c-eb0d-42f2-8957-e9722294e2fe",
+          "name": "promo code pools offers create",
+          "request": {
+            "name": "promo code pools offers create",
+            "description": {
+              "content": "Attach one or more Offers to a Promo Code Pool.\n\nYou may attach up to 500 offers per request. Each offer must be identified by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "promo-code-pools",
+                ":promo_code_pool_id",
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "promo_code_pool_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "Offer ID you wish to attach to a PromoCodePool"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "db40a247-33ed-497a-875e-75d39ef839ff",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "promo-code-pools",
+                    ":promo_code_pool_id",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "promo_code_pool_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Offer ID you wish to attach to a PromoCodePool",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"offers\": [\n    {\n      \"id\": \"string\",\n      \"course_series_id\": \"string\",\n      \"published_path_id\": \"string\",\n      \"published_course_id\": \"string\",\n      \"plan_id\": \"string\",\n      \"domain_name\": \"string\",\n      \"offer_type\": \"domain\",\n      \"price_cents\": 2125,\n      \"currency_code\": \"CAD\",\n      \"price_credits\": 625,\n      \"sku\": \"string\",\n      \"max_quantity\": 8656,\n      \"active\": false,\n      \"starts_at\": \"2021-11-19T15:33:55.519Z\",\n      \"ends_at\": \"2004-11-17T02:54:39.866Z\",\n      \"linked_to_plan\": true\n    },\n    {\n      \"id\": \"string\",\n      \"course_series_id\": \"string\",\n      \"published_path_id\": \"string\",\n      \"published_course_id\": \"string\",\n      \"plan_id\": \"string\",\n      \"domain_name\": \"string\",\n      \"offer_type\": \"published_course\",\n      \"price_cents\": 6565,\n      \"currency_code\": \"GBP\",\n      \"price_credits\": 1808,\n      \"sku\": \"string\",\n      \"max_quantity\": 4236,\n      \"active\": true,\n      \"starts_at\": \"2000-03-24T06:59:09.612Z\",\n      \"ends_at\": \"2022-05-14T08:09:06.212Z\",\n      \"linked_to_plan\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ad3dae0-63d5-4b69-87b4-0245655d513e",
+          "name": "promo code pools offers destroy",
+          "request": {
+            "name": "promo code pools offers destroy",
+            "description": {
+              "content": "Remove an Offer from a Promo Code Pool.\n\nThis does not delete the offer or the promo code pool, only the association between them.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "promo-code-pools",
+                ":promo_code_pool_id",
+                "offers",
+                ":offer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "offer_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "promo_code_pool_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4199b461-dabe-4ae9-aeaa-abe3726b5c45",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "promo-code-pools",
+                    ":promo_code_pool_id",
+                    "offers",
+                    ":offer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "offer_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "promo_code_pool_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "861aae31-2f0b-4e3f-b1bc-224daf3600a9",
+    "name": "Skilljar Assets Promo Codes > Promo Code Pools > Offers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

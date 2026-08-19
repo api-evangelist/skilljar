@@ -1,0 +1,327 @@
+{
+  "item": [
+    {
+      "id": "65f4689f-b571-4782-b284-290831d3a72c",
+      "name": "Groups > Email Domain Rules",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1f925bdf-f7f4-4cdc-85cf-5a28db933003",
+          "name": "groups email domain rules list",
+          "request": {
+            "name": "groups email domain rules list",
+            "description": {
+              "content": "List email domain auto-enrollment rules for a group.\n\nReturns the current list of email domains configured for automatic group assignment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "groups",
+                ":group_id",
+                "email-domain-rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "103c5f3b-0e26-4a68-a856-91e38ad4f155",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "email-domain-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"email_domains\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b589bf5-548b-4282-8d03-a1d0cef58498",
+          "name": "groups email domain rules partial update",
+          "request": {
+            "name": "groups email domain rules partial update",
+            "description": {
+              "content": "Update email domain auto-enrollment rules for a group.\n\nAdd or remove email domains from the group's auto-enrollment rules. At least one of\n`add` or `remove` must be provided. Domains are normalized to lowercase.\nAdding an existing domain or removing a non-existent domain is idempotent.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "groups",
+                ":group_id",
+                "email-domain-rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "add",
+                  "value": "<string>",
+                  "description": "Email domains to add to the group's auto-enrollment rules."
+                },
+                {
+                  "disabled": false,
+                  "key": "add",
+                  "value": "<string>",
+                  "description": "Email domains to add to the group's auto-enrollment rules."
+                },
+                {
+                  "disabled": false,
+                  "key": "remove",
+                  "value": "<string>",
+                  "description": "Email domains to remove from the group's auto-enrollment rules."
+                },
+                {
+                  "disabled": false,
+                  "key": "remove",
+                  "value": "<string>",
+                  "description": "Email domains to remove from the group's auto-enrollment rules."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7056aaf1-5e0c-4b00-85e5-9f5d6e4fc29d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":group_id",
+                    "email-domain-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email domains to add to the group's auto-enrollment rules.",
+                        "type": "text/plain"
+                      },
+                      "key": "add",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email domains to add to the group's auto-enrollment rules.",
+                        "type": "text/plain"
+                      },
+                      "key": "add",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email domains to remove from the group's auto-enrollment rules.",
+                        "type": "text/plain"
+                      },
+                      "key": "remove",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email domains to remove from the group's auto-enrollment rules.",
+                        "type": "text/plain"
+                      },
+                      "key": "remove",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"add\": [\n    \"string\",\n    \"string\"\n  ],\n  \"remove\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "40a47aa0-ccfa-4bac-b505-203afc5e7a75",
+    "name": "Skilljar Assets Groups > Email Domain Rules API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

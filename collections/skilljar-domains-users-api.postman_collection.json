@@ -1,0 +1,1117 @@
+{
+  "item": [
+    {
+      "id": "84474a69-b351-4c1c-8947-e3b15090a448",
+      "name": "Domains > Users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "94b4a364-ede7-44b1-a0c5-45a7b1fafa20",
+          "name": "domains users list",
+          "request": {
+            "name": "domains users list",
+            "description": {
+              "content": "List users for a domain.\n\nReturns a paginated list of users associated with the domain.\n  Supports filtering by user details, access code, and signup field data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_code",
+                  "value": "<string>",
+                  "description": "Use a value of \"null\" to see domain users who accessed the domain without an access code. No other values are accepted for this query."
+                },
+                {
+                  "disabled": false,
+                  "key": "access_code__code",
+                  "value": "<string>",
+                  "description": "Filter domain users by access code used - case sensitive"
+                },
+                {
+                  "disabled": false,
+                  "key": "access_code__id",
+                  "value": "<string>",
+                  "description": "Filter domain users by id of access code used - not case sensitive"
+                },
+                {
+                  "disabled": false,
+                  "key": "access_code__pool__id",
+                  "value": "<string>",
+                  "description": "Filter domain users by id of access code pool used - not case sensitive"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>",
+                  "description": "Filter domain users by active (true or false)"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_signup_field_data",
+                  "value": "<boolean>",
+                  "description": "If set to true, the response also includes the following data for each user (\"signup_fields\")"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "signup_field_id",
+                  "value": "<string>",
+                  "description": "Filter domain users by a sign up field ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "signup_field_label",
+                  "value": "<string>",
+                  "description": "Filter domain users by a sign up field Label - case sensitive"
+                },
+                {
+                  "disabled": false,
+                  "key": "signup_field_value",
+                  "value": "<string>",
+                  "description": "Filter domain users by a sign up field Value - case sensitive"
+                },
+                {
+                  "disabled": false,
+                  "key": "user__email",
+                  "value": "<string>",
+                  "description": "Filter domain users by email address"
+                },
+                {
+                  "disabled": false,
+                  "key": "user__first_name",
+                  "value": "<string>",
+                  "description": "Filter domain users by first name - case sensitive"
+                },
+                {
+                  "disabled": false,
+                  "key": "user__last_name",
+                  "value": "<string>",
+                  "description": "Filter domain users by last name - case sensitive"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bd2b3030-8abc-41b6-8261-b181217c2b79",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_code__code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_code__id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_code__pool__id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include_signup_field_data",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "signup_field_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signup_field_label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signup_field_value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user__email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user__first_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user__last_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"user\": {\n        \"email\": \"BtROk@zRzxeOPivNhjIqycatJ.wflc\",\n        \"id\": \"string\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"full_name\": \"string\"\n      },\n      \"active\": true,\n      \"marketing_optin\": true,\n      \"enrolled_at\": \"1958-08-29T16:09:39.706Z\",\n      \"expires_at\": \"1998-09-29T10:50:20.783Z\",\n      \"access_code\": {\n        \"id\": \"string\",\n        \"code\": \"string\",\n        \"pool\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"user\": {\n        \"email\": \"4nzlnqy@iIWEGWUIzFbHTymRziOXTcgjb.vwnm\",\n        \"id\": \"string\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"full_name\": \"string\"\n      },\n      \"active\": false,\n      \"marketing_optin\": true,\n      \"enrolled_at\": \"2008-07-22T18:19:11.954Z\",\n      \"expires_at\": \"2024-07-20T12:34:49.010Z\",\n      \"access_code\": {\n        \"id\": \"string\",\n        \"code\": \"string\",\n        \"pool\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f55e74f4-523f-4331-a3cd-636fd2559098",
+          "name": "domains users create",
+          "request": {
+            "name": "domains users create",
+            "description": {
+              "content": "Add a user to a domain.\n\nIf the provided email address already exists, the user will be added to the domain\n  and their existing details will be returned.\n\nIf the email is new, a new user will be created and added to the domain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "(Required) User details"
+                },
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": "<string>",
+                  "description": "(Required) User details"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_name",
+                  "value": "<string>",
+                  "description": "(Required) User details"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>",
+                  "description": "Only active users have access to a private domain"
+                },
+                {
+                  "disabled": false,
+                  "key": "marketing_optin",
+                  "value": "<boolean>",
+                  "description": "Indicates user has accepted or rejected the marketing optin message.  Null indicates no marketing option message was shown to user"
+                },
+                {
+                  "disabled": false,
+                  "key": "expires_at",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601 formatted datetime string indicating when the access to the domain will expire - ignored on public domains"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5ff65617-8b11-4469-92f9-ebacb22e4d22",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) User details",
+                        "type": "text/plain"
+                      },
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) User details",
+                        "type": "text/plain"
+                      },
+                      "key": "first_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) User details",
+                        "type": "text/plain"
+                      },
+                      "key": "last_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Only active users have access to a private domain",
+                        "type": "text/plain"
+                      },
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates user has accepted or rejected the marketing optin message.  Null indicates no marketing option message was shown to user",
+                        "type": "text/plain"
+                      },
+                      "key": "marketing_optin",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "ISO 8601 formatted datetime string indicating when the access to the domain will expire - ignored on public domains",
+                        "type": "text/plain"
+                      },
+                      "key": "expires_at",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"user\": {\n    \"email\": \"g0eB5ebaAj@efbKgNrCKESlwLbqwz.thz\",\n    \"id\": \"string\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"full_name\": \"string\"\n  },\n  \"active\": false,\n  \"marketing_optin\": false,\n  \"enrolled_at\": \"2017-03-26T13:43:54.988Z\",\n  \"expires_at\": \"2014-01-16T09:29:25.858Z\",\n  \"access_code\": {\n    \"id\": \"string\",\n    \"code\": \"string\",\n    \"pool\": {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    }\n  },\n  \"signup_fields\": [\n    {\n      \"signup_field\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"value\": \"string\"\n    },\n    {\n      \"signup_field\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"value\": \"string\"\n    }\n  ],\n  \"login_token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4dbb8a6-465d-46b3-bac4-59b375d19e7d",
+          "name": "domains users retrieve",
+          "request": {
+            "name": "domains users retrieve",
+            "description": {
+              "content": "Retrieve details for a specific user within a domain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "users",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "99d99234-46c4-41c8-9b4e-d5bc476c81c1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"user\": {\n    \"email\": \"DxhY@OnrRCiPyqYviIgtFBmZ.qxqs\",\n    \"id\": \"string\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"full_name\": \"string\"\n  },\n  \"active\": true,\n  \"marketing_optin\": false,\n  \"enrolled_at\": \"1947-01-16T03:54:50.934Z\",\n  \"expires_at\": \"2003-10-24T05:55:37.866Z\",\n  \"access_code\": {\n    \"id\": \"string\",\n    \"code\": \"string\",\n    \"pool\": {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    }\n  },\n  \"signup_fields\": [\n    {\n      \"signup_field\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"value\": \"string\"\n    },\n    {\n      \"signup_field\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09d35266-2f9c-496e-b562-64f92d75f2d8",
+          "name": "domains users update",
+          "request": {
+            "name": "domains users update",
+            "description": {
+              "content": "Update a user's domain membership.\n\nOnly the `active` status, `expires_at` date, and `access_code`\n  (which can be removed by setting to null) may be updated. Both PUT and PATCH perform partial updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "users",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "expires_at",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "Information about the access code entered by the user, if they used one to join a private domain"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "400f8970-52f2-4a64-973d-d2aceb8a7493",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "expires_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Information about the access code entered by the user, if they used one to join a private domain",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"user\": {\n    \"email\": \"jp2uJkW00tb@jztmRGYjLqvlLlvxWKhEAswVhq.iz\",\n    \"id\": \"string\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"full_name\": \"string\"\n  },\n  \"active\": false,\n  \"marketing_optin\": false,\n  \"enrolled_at\": \"1992-05-29T16:48:25.567Z\",\n  \"expires_at\": \"2021-08-30T11:29:11.754Z\",\n  \"access_code\": {\n    \"id\": \"string\",\n    \"code\": \"string\",\n    \"pool\": {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    }\n  },\n  \"signup_fields\": [\n    {\n      \"signup_field\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"value\": \"string\"\n    },\n    {\n      \"signup_field\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"value\": \"string\"\n    }\n  ],\n  \"login_token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5365d3a4-7ad7-4095-af49-7f7233056e74",
+          "name": "domains users partial update",
+          "request": {
+            "name": "domains users partial update",
+            "description": {
+              "content": "Update a user's domain membership.\n\nOnly the `active` status, `expires_at` date, and `access_code`\n  (which can be removed by setting to null) may be updated. Both PUT and PATCH perform partial updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "users",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "expires_at",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "Information about the access code entered by the user, if they used one to join a private domain"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cb8f71b5-beef-4ec4-a67c-79626b831d07",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "expires_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Information about the access code entered by the user, if they used one to join a private domain",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"user\": {\n    \"email\": \"vo96CR9JqSTH1@jULbUCuLlORJnobyoznXkPrYLLUpyrql.ee\",\n    \"id\": \"string\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"full_name\": \"string\"\n  },\n  \"active\": true,\n  \"marketing_optin\": true,\n  \"enrolled_at\": \"1993-07-11T03:20:00.339Z\",\n  \"expires_at\": \"1973-06-28T00:20:33.020Z\",\n  \"access_code\": {\n    \"id\": \"string\",\n    \"code\": \"string\",\n    \"pool\": {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    }\n  },\n  \"signup_fields\": [\n    {\n      \"signup_field\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"value\": \"string\"\n    },\n    {\n      \"signup_field\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"value\": \"string\"\n    }\n  ],\n  \"login_token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "364eeb1e-44ee-4f43-b54e-eefaa7178d84",
+          "name": "bulk create domain users",
+          "request": {
+            "name": "bulk create domain users",
+            "description": {
+              "content": "Create multiple users in a domain with a single API call. All users are validated before processing. If any user fails validation, the entire request is rejected. The operation is queued for async processing and returns 202 Accepted immediately.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "users",
+                "bulk-create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "users",
+                  "value": "{\"email\":\"<email>\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"active\":true,\"marketing_optin\":\"<boolean>\",\"expires_at\":\"<dateTime>\"}",
+                  "description": "(Required) List of users to create. Maximum 1000 users per request."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1962b390-9099-4908-931f-bf6b465f3a5d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "users",
+                    "bulk-create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) List of users to create. Maximum 1000 users per request.",
+                        "type": "text/plain"
+                      },
+                      "key": "users",
+                      "value": "{\"email\":\"<email>\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"active\":true,\"marketing_optin\":\"<boolean>\",\"expires_at\":\"<dateTime>\"}"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"user\": {\n    \"email\": \"x-9Mjp6@RWwIXDCRkehtUIIpFkVxigL.jwze\",\n    \"id\": \"string\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"full_name\": \"string\"\n  },\n  \"active\": false,\n  \"marketing_optin\": true,\n  \"enrolled_at\": \"2000-08-17T14:59:27.884Z\",\n  \"expires_at\": \"1981-08-31T02:39:20.572Z\",\n  \"access_code\": {\n    \"id\": \"string\",\n    \"code\": \"string\",\n    \"pool\": {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    }\n  },\n  \"signup_fields\": [\n    {\n      \"signup_field\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"value\": \"string\"\n    },\n    {\n      \"signup_field\": {\n        \"id\": \"string\",\n        \"label\": \"string\"\n      },\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "59ed687f-727d-4853-bd50-216abc47c41f",
+    "name": "Skilljar Assets Domains > Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

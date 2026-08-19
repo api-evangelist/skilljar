@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Groups > Email Domain Rules API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Groups > Email Domain Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "groups_email_domain_rules_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/groups/:group_id/email-domain-rules",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List email domain auto-enrollment rules for a group.\n\nReturns the current list of email domains configured for automatic group assignment."
+        },
+        {
+          "info": {
+            "name": "groups_email_domain_rules_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/groups/:group_id/email-domain-rules",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update email domain auto-enrollment rules for a group.\n\nAdd or remove email domains from the group's auto-enrollment rules. At least one of\n`add` or `remove` must be provided. Domains are normalized to lowercase.\nAdding an existing domain or removing a non-existent domain is idempotent."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,947 @@
+{
+  "item": [
+    {
+      "id": "9e77acb5-1cf0-4b3c-a345-b1cd227d55a7",
+      "name": "Promo Codes > Pools",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "911e714c-f9d1-4c07-b011-846df1ebb1d1",
+          "name": "promo code pools list",
+          "request": {
+            "name": "promo code pools list",
+            "description": {
+              "content": "Retrieve a paginated list of Promo Code Pools for your organization.\n\nSupports filtering by offer ID and pool name. Results are paginated (1000 per page).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "promo-code-pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter results by PromoCodePool name"
+                },
+                {
+                  "disabled": false,
+                  "key": "offer_id",
+                  "value": "<string>",
+                  "description": "Filter results by the id of a Offer"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1d1cf84e-43ab-43ec-820d-b00321caedf8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "promo-code-pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offer_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"name\": \"string\",\n      \"starts_at\": \"1998-09-10T22:53:11.113Z\",\n      \"id\": \"string\",\n      \"active\": true,\n      \"price_cents\": 8885,\n      \"percent_off\": 4353,\n      \"expires_at\": \"1955-06-15T03:23:50.192Z\",\n      \"expire_content\": false\n    },\n    {\n      \"name\": \"string\",\n      \"starts_at\": \"1954-05-16T23:58:16.645Z\",\n      \"id\": \"string\",\n      \"active\": true,\n      \"price_cents\": 4290,\n      \"percent_off\": 4550,\n      \"expires_at\": \"2018-09-06T06:16:41.019Z\",\n      \"expire_content\": false\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7014005-9178-41ce-b84f-d20517f073a5",
+          "name": "promo code pools create",
+          "request": {
+            "name": "promo code pools create",
+            "description": {
+              "content": "Create a new Promo Code Pool.\n\nConfigure the pool with a name, discount type, usage limits, and validity period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "promo-code-pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "discount_type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "starts_at",
+                  "value": "<dateTime>",
+                  "description": "(Required) ISO 8601 formatted datetime string indicating the start of the promo code pool"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "key": "expires_at",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601 formatted datetime string indicating the expiration of the promo code pool"
+                },
+                {
+                  "disabled": false,
+                  "key": "expire_content",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "price_cents",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "percent_off",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "single_use_per_user",
+                  "value": "<boolean>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "eaab5a74-d505-460a-a0b4-c6343df5abc5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "promo-code-pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "discount_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ISO 8601 formatted datetime string indicating the start of the promo code pool",
+                        "type": "text/plain"
+                      },
+                      "key": "starts_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "ISO 8601 formatted datetime string indicating the expiration of the promo code pool",
+                        "type": "text/plain"
+                      },
+                      "key": "expires_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "expire_content",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "price_cents",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "percent_off",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "single_use_per_user",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"discount_type\": \"<string>\",\n  \"name\": \"string\",\n  \"starts_at\": \"2017-09-23T16:52:55.807Z\",\n  \"id\": \"string\",\n  \"active\": true,\n  \"expires_at\": \"2013-11-28T08:56:08.710Z\",\n  \"expire_content\": true,\n  \"price_cents\": 3591,\n  \"percent_off\": 2625,\n  \"single_use_per_user\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a8f9088-a9e1-483a-879c-99279c9c0b0c",
+          "name": "promo code pools retrieve",
+          "request": {
+            "name": "promo code pools retrieve",
+            "description": {
+              "content": "Retrieve details for a specific Promo Code Pool.\n\nReturns all configuration and status information for the pool.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "promo-code-pools",
+                ":promo_code_pool_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "promo_code_pool_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f49c028f-1ee6-458c-820f-778b0cebb9dc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "promo-code-pools",
+                    ":promo_code_pool_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "promo_code_pool_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"starts_at\": \"2020-09-24T17:39:51.613Z\",\n  \"id\": \"string\",\n  \"active\": true,\n  \"price_cents\": 7737,\n  \"percent_off\": 5865,\n  \"expires_at\": \"1955-10-03T15:53:02.249Z\",\n  \"expire_content\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ab1fad1-9211-4500-947f-69de94eae9af",
+          "name": "promo code pools update",
+          "request": {
+            "name": "promo code pools update",
+            "description": {
+              "content": "Update one or more fields of a Promo Code Pool.\n\nBoth PUT and PATCH requests perform partial updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "promo-code-pools",
+                ":promo_code_pool_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "promo_code_pool_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "starts_at",
+                  "value": "<dateTime>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "key": "expires_at",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601 formatted datetime string indicating the expiration of the promo code pool"
+                },
+                {
+                  "disabled": false,
+                  "key": "expire_content",
+                  "value": "<boolean>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "60dc4106-e504-4eb1-bb62-5f0e9a79db90",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "promo-code-pools",
+                    ":promo_code_pool_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "promo_code_pool_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "starts_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "ISO 8601 formatted datetime string indicating the expiration of the promo code pool",
+                        "type": "text/plain"
+                      },
+                      "key": "expires_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "expire_content",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"starts_at\": \"2006-04-01T23:16:14.947Z\",\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"active\": true,\n  \"expires_at\": \"1983-04-13T03:08:09.086Z\",\n  \"expire_content\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02604b86-c048-45c0-a22c-106dfd997fa8",
+          "name": "promo code pools partial update",
+          "request": {
+            "name": "promo code pools partial update",
+            "description": {
+              "content": "Update one or more fields of a Promo Code Pool.\n\nBoth PUT and PATCH requests perform partial updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "promo-code-pools",
+                ":promo_code_pool_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "promo_code_pool_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "key": "starts_at",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "expires_at",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601 formatted datetime string indicating the expiration of the promo code pool"
+                },
+                {
+                  "disabled": false,
+                  "key": "expire_content",
+                  "value": "<boolean>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5bc12bf2-f4a3-42de-9a33-6f7782c44744",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "promo-code-pools",
+                    ":promo_code_pool_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "promo_code_pool_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "starts_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "ISO 8601 formatted datetime string indicating the expiration of the promo code pool",
+                        "type": "text/plain"
+                      },
+                      "key": "expires_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "expire_content",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"starts_at\": \"2006-04-01T23:16:14.947Z\",\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"active\": true,\n  \"expires_at\": \"1983-04-13T03:08:09.086Z\",\n  \"expire_content\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca414573-c07e-4ee5-84d1-c0a80052989d",
+          "name": "promo code pools destroy",
+          "request": {
+            "name": "promo code pools destroy",
+            "description": {
+              "content": "Delete a Promo Code Pool.\n\nDeleting a pool will also delete all associated promo codes.\nPurchases that used these codes will have their code reference removed.\n\nThis action cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "promo-code-pools",
+                ":promo_code_pool_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "promo_code_pool_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c6794718-82dd-4e40-8463-9bd6814d8b14",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "promo-code-pools",
+                    ":promo_code_pool_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "promo_code_pool_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "90f8e540-d1c6-4bcd-9fa8-250174732eb4",
+    "name": "Skilljar Assets Promo Codes > Pools API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

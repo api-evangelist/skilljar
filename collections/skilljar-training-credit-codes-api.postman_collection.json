@@ -1,0 +1,810 @@
+{
+  "item": [
+    {
+      "id": "ddeb5f1f-a420-4d23-b278-bc02475a793d",
+      "name": "Training Credit Codes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4a6e84c6-8f3b-44bd-893a-d468dcbc70db",
+          "name": "training credit codes list",
+          "request": {
+            "name": "training credit codes list",
+            "description": {
+              "content": "Retrieve a paginated list of training credit codes.\n\nReturns a list of training credit codes for your organization.\nSupports filtering by tracking identifier and code value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "training-credit-codes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "tracking_identifier",
+                  "value": "<string>",
+                  "description": "Filter results by tracking_identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "training_credit_code",
+                  "value": "<string>",
+                  "description": "Filter results by training credit code name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b26ba88e-0b49-4341-b4f9-d0b445ddae6e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "training-credit-codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tracking_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "training_credit_code",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"id\": \"string\",\n      \"training_credit_code\": \"string\",\n      \"credits_used\": 8483,\n      \"credits_total\": 5508,\n      \"expiration_date\": \"1999-12-04T07:02:38.895Z\",\n      \"expire_content\": false,\n      \"tracking_identifier\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"training_credit_code\": \"string\",\n      \"credits_used\": 1898,\n      \"credits_total\": 268,\n      \"expiration_date\": \"1996-07-16T07:50:37.010Z\",\n      \"expire_content\": true,\n      \"tracking_identifier\": \"string\"\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4134c168-3efd-468d-b0de-d1de24f51347",
+          "name": "training credit codes create",
+          "request": {
+            "name": "training credit codes create",
+            "description": {
+              "content": "Create a new training credit code.\n\nCreates a training credit code that can be distributed and redeemed by learners.\nSpecify code details and optional metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "training-credit-codes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "credits_total",
+                  "value": "<integer>",
+                  "description": "(Required) Total number of credits stored on this code."
+                },
+                {
+                  "disabled": false,
+                  "key": "training_credit_code",
+                  "value": "<string>",
+                  "description": "(Required) String used by Learners to apply Training Credit balance on the course platform and purchase Training content."
+                },
+                {
+                  "disabled": false,
+                  "key": "expiration_date",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601 formatted datetime string indicating the expiration of the training credit code"
+                },
+                {
+                  "disabled": false,
+                  "key": "expire_content",
+                  "value": "<boolean>",
+                  "description": "If true, when this code is used, learners will lose access to content when the code expires."
+                },
+                {
+                  "disabled": false,
+                  "key": "tracking_identifier",
+                  "value": "<string>",
+                  "description": "Custom string for teams to identify codes in Financial/reporting tools. Is not used by Skilljar."
+                },
+                {
+                  "disabled": false,
+                  "key": "available_to_all_students",
+                  "value": "<boolean>",
+                  "description": "Set to \"true\" if all learners should be able to use this credit code."
+                },
+                {
+                  "disabled": false,
+                  "key": "student_groups",
+                  "value": "<string>",
+                  "description": "Required if the above option is \"false\". Use this format to include student_group ids: [\"2d4EXAMPLE0ea32j\", \"2d4EXAMPLE20esh5y\"]"
+                },
+                {
+                  "disabled": false,
+                  "key": "student_groups",
+                  "value": "<string>",
+                  "description": "Required if the above option is \"false\". Use this format to include student_group ids: [\"2d4EXAMPLE0ea32j\", \"2d4EXAMPLE20esh5y\"]"
+                },
+                {
+                  "disabled": false,
+                  "key": "available_for_all_offers",
+                  "value": "<boolean>",
+                  "description": "Set to \"true\" if this credit code should be available for all existing and future offers that have credit value."
+                },
+                {
+                  "disabled": false,
+                  "key": "offers",
+                  "value": "<string>",
+                  "description": "Required if the above option is \"false\". Use this format to include offer_ids: [\"2d4EXAMPLE0ea32j\", \"2d4EXAMPLE20esh5y\"]"
+                },
+                {
+                  "disabled": false,
+                  "key": "offers",
+                  "value": "<string>",
+                  "description": "Required if the above option is \"false\". Use this format to include offer_ids: [\"2d4EXAMPLE0ea32j\", \"2d4EXAMPLE20esh5y\"]"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "01a34dcb-661d-4607-83ec-3d20b9148447",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "training-credit-codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Total number of credits stored on this code.",
+                        "type": "text/plain"
+                      },
+                      "key": "credits_total",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) String used by Learners to apply Training Credit balance on the course platform and purchase Training content.",
+                        "type": "text/plain"
+                      },
+                      "key": "training_credit_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "ISO 8601 formatted datetime string indicating the expiration of the training credit code",
+                        "type": "text/plain"
+                      },
+                      "key": "expiration_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If true, when this code is used, learners will lose access to content when the code expires.",
+                        "type": "text/plain"
+                      },
+                      "key": "expire_content",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Custom string for teams to identify codes in Financial/reporting tools. Is not used by Skilljar.",
+                        "type": "text/plain"
+                      },
+                      "key": "tracking_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to \"true\" if all learners should be able to use this credit code.",
+                        "type": "text/plain"
+                      },
+                      "key": "available_to_all_students",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required if the above option is \"false\". Use this format to include student_group ids: [\"2d4EXAMPLE0ea32j\", \"2d4EXAMPLE20esh5y\"]",
+                        "type": "text/plain"
+                      },
+                      "key": "student_groups",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required if the above option is \"false\". Use this format to include student_group ids: [\"2d4EXAMPLE0ea32j\", \"2d4EXAMPLE20esh5y\"]",
+                        "type": "text/plain"
+                      },
+                      "key": "student_groups",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to \"true\" if this credit code should be available for all existing and future offers that have credit value.",
+                        "type": "text/plain"
+                      },
+                      "key": "available_for_all_offers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required if the above option is \"false\". Use this format to include offer_ids: [\"2d4EXAMPLE0ea32j\", \"2d4EXAMPLE20esh5y\"]",
+                        "type": "text/plain"
+                      },
+                      "key": "offers",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required if the above option is \"false\". Use this format to include offer_ids: [\"2d4EXAMPLE0ea32j\", \"2d4EXAMPLE20esh5y\"]",
+                        "type": "text/plain"
+                      },
+                      "key": "offers",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"credits_total\": 4949,\n  \"training_credit_code\": \"string\",\n  \"id\": \"string\",\n  \"credits_used\": 5980,\n  \"expiration_date\": \"1996-12-01T09:17:25.504Z\",\n  \"expire_content\": false,\n  \"tracking_identifier\": \"string\",\n  \"available_to_all_students\": false,\n  \"available_for_all_offers\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07bcc612-6e0d-445a-b1de-250f35500914",
+          "name": "training credit codes retrieve",
+          "request": {
+            "name": "training credit codes retrieve",
+            "description": {
+              "content": "Retrieve details for a specific training credit code.\n\nReturns detailed information about a single training credit code,\nincluding its status, value, and associated metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "training-credit-codes",
+                ":training_credit_code_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "training_credit_code_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "19c48001-031a-41d3-b187-67ed5f1e4518",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "training-credit-codes",
+                    ":training_credit_code_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "training_credit_code_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"training_credit_code\": \"string\",\n  \"credits_used\": 3139,\n  \"credits_total\": 9242,\n  \"expiration_date\": \"1986-07-31T23:15:58.720Z\",\n  \"expire_content\": false,\n  \"tracking_identifier\": \"string\",\n  \"available_to_all_students\": false,\n  \"student_groups\": [\n    \"string\",\n    \"string\"\n  ],\n  \"available_for_all_offers\": false,\n  \"offers\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac6ddc68-bb51-436a-b3b8-b2e5dd7e73a3",
+          "name": "training credit codes partial update",
+          "request": {
+            "name": "training credit codes partial update",
+            "description": {
+              "content": "Update an existing training credit code.\n\nAllows updating fields such as status or metadata for an existing training credit code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "training-credit-codes",
+                ":training_credit_code_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "training_credit_code_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "credits_total",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "expiration_date",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601 formatted datetime string indicating the expiration of the training credit code"
+                },
+                {
+                  "disabled": false,
+                  "key": "expire_content",
+                  "value": "<boolean>",
+                  "description": "If true, when this code is used, learners will lose access to content when the code expires."
+                },
+                {
+                  "disabled": false,
+                  "key": "tracking_identifier",
+                  "value": "<string>",
+                  "description": "Custom string for teams to identify codes in Financial/reporting tools. Is not used by Skilljar."
+                },
+                {
+                  "disabled": false,
+                  "key": "available_to_all_students",
+                  "value": "<boolean>",
+                  "description": "Set to \"true\" if all learners should be able to use this credit code."
+                },
+                {
+                  "disabled": false,
+                  "key": "add",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Required if the above option is \"false\". Use this format to add or remove student_group ids - Add resolves first, then Remove: { \"add\": [\"2d4EXAMPLE0ea32j\", \"2d4EXAMPLE20esh5y\"], \"remove\": [\"9k4EXAMPLE20h5ysK\"] }"
+                },
+                {
+                  "disabled": false,
+                  "key": "remove",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Required if the above option is \"false\". Use this format to add or remove student_group ids - Add resolves first, then Remove: { \"add\": [\"2d4EXAMPLE0ea32j\", \"2d4EXAMPLE20esh5y\"], \"remove\": [\"9k4EXAMPLE20h5ysK\"] }"
+                },
+                {
+                  "disabled": false,
+                  "key": "available_for_all_offers",
+                  "value": "<boolean>",
+                  "description": "Set to \"true\" if this credit code should be available for all existing and future offers that have credit value."
+                },
+                {
+                  "disabled": false,
+                  "key": "add",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Required if the above option is \"false\". Use this format to add or remove offer_ids - Add resolves first, then Remove: { \"add\": [\"2d4EXAMPLE0ea32j\", \"2d4EXAMPLE20esh5y\"], \"remove\": [\"9k4EXAMPLE20h5ysK\"] }"
+                },
+                {
+                  "disabled": false,
+                  "key": "remove",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "description": "Required if the above option is \"false\". Use this format to add or remove offer_ids - Add resolves first, then Remove: { \"add\": [\"2d4EXAMPLE0ea32j\", \"2d4EXAMPLE20esh5y\"], \"remove\": [\"9k4EXAMPLE20h5ysK\"] }"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cfd11b97-b49f-4159-a34d-12fc227a32a0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "training-credit-codes",
+                    ":training_credit_code_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "training_credit_code_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "credits_total",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "ISO 8601 formatted datetime string indicating the expiration of the training credit code",
+                        "type": "text/plain"
+                      },
+                      "key": "expiration_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If true, when this code is used, learners will lose access to content when the code expires.",
+                        "type": "text/plain"
+                      },
+                      "key": "expire_content",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Custom string for teams to identify codes in Financial/reporting tools. Is not used by Skilljar.",
+                        "type": "text/plain"
+                      },
+                      "key": "tracking_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to \"true\" if all learners should be able to use this credit code.",
+                        "type": "text/plain"
+                      },
+                      "key": "available_to_all_students",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required if the above option is \"false\". Use this format to add or remove student_group ids - Add resolves first, then Remove: { \"add\": [\"2d4EXAMPLE0ea32j\", \"2d4EXAMPLE20esh5y\"], \"remove\": [\"9k4EXAMPLE20h5ysK\"] }",
+                        "type": "text/plain"
+                      },
+                      "key": "add",
+                      "value": "[\"<string>\",\"<string>\"]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required if the above option is \"false\". Use this format to add or remove student_group ids - Add resolves first, then Remove: { \"add\": [\"2d4EXAMPLE0ea32j\", \"2d4EXAMPLE20esh5y\"], \"remove\": [\"9k4EXAMPLE20h5ysK\"] }",
+                        "type": "text/plain"
+                      },
+                      "key": "remove",
+                      "value": "[\"<string>\",\"<string>\"]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to \"true\" if this credit code should be available for all existing and future offers that have credit value.",
+                        "type": "text/plain"
+                      },
+                      "key": "available_for_all_offers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required if the above option is \"false\". Use this format to add or remove offer_ids - Add resolves first, then Remove: { \"add\": [\"2d4EXAMPLE0ea32j\", \"2d4EXAMPLE20esh5y\"], \"remove\": [\"9k4EXAMPLE20h5ysK\"] }",
+                        "type": "text/plain"
+                      },
+                      "key": "add",
+                      "value": "[\"<string>\",\"<string>\"]"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required if the above option is \"false\". Use this format to add or remove offer_ids - Add resolves first, then Remove: { \"add\": [\"2d4EXAMPLE0ea32j\", \"2d4EXAMPLE20esh5y\"], \"remove\": [\"9k4EXAMPLE20h5ysK\"] }",
+                        "type": "text/plain"
+                      },
+                      "key": "remove",
+                      "value": "[\"<string>\",\"<string>\"]"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"training_credit_code\": \"string\",\n  \"credits_used\": 3470,\n  \"credits_total\": 170325583,\n  \"expiration_date\": \"2021-07-01T17:45:55.260Z\",\n  \"expire_content\": true,\n  \"tracking_identifier\": \"string\",\n  \"available_to_all_students\": false,\n  \"student_groups\": {\n    \"add\": [\n      \"string\",\n      \"string\"\n    ],\n    \"remove\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"available_for_all_offers\": true,\n  \"offers\": {\n    \"add\": [\n      \"string\",\n      \"string\"\n    ],\n    \"remove\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "903351ef-3a9a-468d-9b73-287423d5d282",
+    "name": "Skilljar Assets Training Credit Codes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

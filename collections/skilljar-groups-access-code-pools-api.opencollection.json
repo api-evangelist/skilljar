@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Groups > Access Code Pools API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Groups > Access Code Pools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "groups_access_code_pools_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/groups/:group_id/access-code-pools",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List all access code pools assigned to a group.\n\nReturns a paginated list of access code pools associated with the specified group."
+        },
+        {
+          "info": {
+            "name": "groups_access_code_pools_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/groups/:group_id/access-code-pools",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Assign an access code pool to a group.\n\nSpecify the access code pool to add by its ID."
+        },
+        {
+          "info": {
+            "name": "groups_access_code_pools_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/groups/:group_id/access-code-pools/:access_code_pool_id",
+            "params": [
+              {
+                "name": "access_code_pool_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve details about an access code pool assigned to a group.\n\nReturns information about the access code pool and its association with the group."
+        },
+        {
+          "info": {
+            "name": "groups_access_code_pools_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/groups/:group_id/access-code-pools/:access_code_pool_id",
+            "params": [
+              {
+                "name": "access_code_pool_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Remove an access code pool from a group.\n\nThis action only removes the association; the access code pool itself is not deleted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

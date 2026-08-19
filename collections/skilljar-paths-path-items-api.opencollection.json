@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Paths > Path Items API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Paths > Path Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "paths_path_items_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/paths/:path_id/path-items",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "path_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a list of Path Items for a specific Path.\n\nReturns all items in the order they appear within the Path, including details about each item."
+        },
+        {
+          "info": {
+            "name": "paths_path_items_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/paths/:path_id/path-items/:path_item_id",
+            "params": [
+              {
+                "name": "path_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path_item_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve details for a specific Path Item.\n\nReturns metadata and configuration for the requested Path Item,\nincluding its type and associated course or resource."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

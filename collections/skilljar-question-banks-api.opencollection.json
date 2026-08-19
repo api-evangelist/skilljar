@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Question Banks API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Question Banks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "question_banks_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/question-banks",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a paginated list of all question banks for the current organization.\n\nReturns up to 1000 question banks per page."
+        },
+        {
+          "info": {
+            "name": "question_banks_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/question-banks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a new question bank.\n\nRequired fields:\n- `name`: The name of the question bank."
+        },
+        {
+          "info": {
+            "name": "question_banks_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/question-banks/:question_bank_id",
+            "params": [
+              {
+                "name": "question_bank_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve the details of a specific question bank by its ID."
+        },
+        {
+          "info": {
+            "name": "question_banks_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/question-banks/:question_bank_id",
+            "params": [
+              {
+                "name": "question_bank_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update an existing question bank.\n\nAllows modification of the question bank's name and associated questions."
+        },
+        {
+          "info": {
+            "name": "question_banks_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/question-banks/:question_bank_id",
+            "params": [
+              {
+                "name": "question_bank_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Manage question banks for your organization.\n\nQuestion banks are collections of questions that can be reused across multiple quizzes.\nThis endpoint allows you to list, create, retrieve, update, and delete question banks."
+        },
+        {
+          "info": {
+            "name": "question_banks_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/question-banks/:question_bank_id",
+            "params": [
+              {
+                "name": "question_bank_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete a question bank.\n\nPermanently removes the question bank and all associated questions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Skilljar Assets Instructor Led Training > Multi-Session Events API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Instructor Led Training > Multi-Session Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ilt_multi_session_events_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/ilt-multi-session-events",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List all ILT multi-session events.\n\nRetrieve a paginated list of all non-cancelled instructor-led training\nmulti-session events in your organization."
+        },
+        {
+          "info": {
+            "name": "ilt_multi_session_events_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/ilt-multi-session-events",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create an ILT multi-session event.\n\nCreate a new instructor-led training multi-session event associated with a lesson.\nSpecify the lesson and seat capacity for the event."
+        },
+        {
+          "info": {
+            "name": "ilt_multi_session_events_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/ilt-multi-session-events/:multi_session_event_id",
+            "params": [
+              {
+                "name": "multi_session_event_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve an ILT multi-session event.\n\nGet detailed information about a specific instructor-led training multi-session event by its ID."
+        },
+        {
+          "info": {
+            "name": "ilt_multi_session_events_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/ilt-multi-session-events/:multi_session_event_id",
+            "params": [
+              {
+                "name": "multi_session_event_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update an ILT multi-session event."
+        },
+        {
+          "info": {
+            "name": "ilt_multi_session_events_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/ilt-multi-session-events/:multi_session_event_id",
+            "params": [
+              {
+                "name": "multi_session_event_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Manage instructor-led training (ILT) multi-session events.\n\nMulti-session events are instructor-led training sessions that span multiple meetings or sessions.\nUse this API to create, view, and update ILT multi-session events for your organization.\nOnly non-cancelled events are included in queries."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

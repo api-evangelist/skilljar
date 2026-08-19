@@ -1,0 +1,1104 @@
+{
+  "item": [
+    {
+      "id": "11e5ea9b-ac1a-4343-b624-d58c8a828f62",
+      "name": "Domains > Published Paths",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3af971d0-d6e8-4b36-b34c-02f09b341338",
+          "name": "domains published paths list",
+          "request": {
+            "name": "domains published paths list",
+            "description": {
+              "content": "List all Published Paths for the specified domain.\n\nReturns a paginated list of Published Paths available on the domain. Supports filtering and search.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "published-paths"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_searchable_content",
+                  "value": "<boolean>",
+                  "description": "If set to True, the response also includes the following fields ('path_item_list', 'title', 'short_description', 'long_description_html', 'search_keywords' 'tags', 'hidden')"
+                },
+                {
+                  "disabled": false,
+                  "key": "label__name",
+                  "value": "<string>",
+                  "description": "Filters published paths by exact match on label name"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "URL encoded string, return the results and the order as if a catalog search. Note - This does not search within the path_item_list."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ae5793f0-c08d-479c-b5e5-c4ce982438e8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "published-paths"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_searchable_content",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "label__name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"path\": {\n        \"title\": \"string\",\n        \"id\": \"string\",\n        \"promo_image_url\": \"string\",\n        \"short_description\": \"string\",\n        \"long_description_html\": \"string\",\n        \"header_html\": \"string\",\n        \"course_name_singular\": \"string\",\n        \"course_name_plural\": \"string\",\n        \"path_item_count\": 1693\n      },\n      \"slug\": \"c5lm5qxgx-uyp02r-m9ywjmapv-2yarsz1\",\n      \"id\": \"string\",\n      \"path_url\": \"string\",\n      \"hidden\": false,\n      \"strict_enforce_group_visibility\": false,\n      \"offer\": {\n        \"price\": {\n          \"amount\": \"0.00\",\n          \"currency_code\": \"USD\"\n        },\n        \"registration_open\": true,\n        \"id\": \"string\",\n        \"registration_url\": \"string\"\n      },\n      \"unique_progress_per_enrollment\": false,\n      \"created_at\": \"2004-07-16T22:15:24.025Z\",\n      \"modified_at\": \"1956-02-16T15:55:27.269Z\"\n    },\n    {\n      \"path\": {\n        \"title\": \"string\",\n        \"id\": \"string\",\n        \"promo_image_url\": \"string\",\n        \"short_description\": \"string\",\n        \"long_description_html\": \"string\",\n        \"header_html\": \"string\",\n        \"course_name_singular\": \"string\",\n        \"course_name_plural\": \"string\",\n        \"path_item_count\": 9637\n      },\n      \"slug\": \"s90-o58okpe25-q9oxk77-yt-36pjemrhy-huw7p-ltr07n0rp71-65e0p-vw5i1k\",\n      \"id\": \"string\",\n      \"path_url\": \"string\",\n      \"hidden\": true,\n      \"strict_enforce_group_visibility\": true,\n      \"offer\": {\n        \"price\": {\n          \"amount\": \"0.00\",\n          \"currency_code\": \"USD\"\n        },\n        \"registration_open\": true,\n        \"id\": \"string\",\n        \"registration_url\": \"string\"\n      },\n      \"unique_progress_per_enrollment\": false,\n      \"created_at\": \"1968-12-12T22:29:33.456Z\",\n      \"modified_at\": \"2024-12-20T13:27:21.942Z\"\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa9ecd1b-b567-42f8-abd4-c162e0c2ccff",
+          "name": "domains published paths create",
+          "request": {
+            "name": "domains published paths create",
+            "description": {
+              "content": "Create a new Published Path and its associated Path object.\n\nThe created Published Path will have a default Offer attached.\nRequired and optional fields for the Path object are documented in the schema.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "published-paths"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "title",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "short_description",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "long_description_html",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "header_html",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "course_name_singular",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "course_name_plural",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "slug",
+                  "value": "<string>",
+                  "description": "(Required) After your Learning Path has been published, we don't recommend changing the URL"
+                },
+                {
+                  "disabled": false,
+                  "key": "hidden",
+                  "value": "<boolean>",
+                  "description": "Hidden paths are only visible on the catalog page to associated groups"
+                },
+                {
+                  "disabled": false,
+                  "key": "strict_enforce_group_visibility",
+                  "value": "<boolean>",
+                  "description": "Block access to this path for student it's not visible to"
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_progress_per_enrollment",
+                  "value": "<boolean>",
+                  "description": "When enabled, each new enrollment creates a fresh progress record."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2e0233a2-5179-42ca-9294-5dbe34ce78c7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "published-paths"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "title",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "short_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "long_description_html",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "header_html",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "course_name_singular",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "course_name_plural",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) After your Learning Path has been published, we don't recommend changing the URL",
+                        "type": "text/plain"
+                      },
+                      "key": "slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Hidden paths are only visible on the catalog page to associated groups",
+                        "type": "text/plain"
+                      },
+                      "key": "hidden",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Block access to this path for student it's not visible to",
+                        "type": "text/plain"
+                      },
+                      "key": "strict_enforce_group_visibility",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "When enabled, each new enrollment creates a fresh progress record.",
+                        "type": "text/plain"
+                      },
+                      "key": "unique_progress_per_enrollment",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": {\n    \"title\": \"string\",\n    \"id\": \"string\",\n    \"promo_image_url\": \"string\",\n    \"short_description\": \"string\",\n    \"long_description_html\": \"string\",\n    \"header_html\": \"string\",\n    \"course_name_singular\": \"string\",\n    \"course_name_plural\": \"string\",\n    \"path_item_count\": 6631\n  },\n  \"slug\": \"0mtjvdh1-gq1fifce1xc-x-2x4lhl19-w\",\n  \"id\": \"string\",\n  \"path_url\": \"string\",\n  \"hidden\": true,\n  \"strict_enforce_group_visibility\": true,\n  \"offer\": {\n    \"price\": {\n      \"amount\": \"0.00\",\n      \"currency_code\": \"USD\"\n    },\n    \"registration_open\": false,\n    \"id\": \"string\",\n    \"registration_url\": \"string\"\n  },\n  \"unique_progress_per_enrollment\": false,\n  \"created_at\": \"1967-03-12T06:16:17.618Z\",\n  \"modified_at\": \"1976-04-04T23:21:06.639Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "139610f1-6a06-44be-aafb-57d21f2132e2",
+          "name": "domains published paths retrieve",
+          "request": {
+            "name": "domains published paths retrieve",
+            "description": {
+              "content": "Retrieve details for a specific Published Path.\n\nReturns all metadata and configuration for the Published Path, including associated offers and path details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "published-paths",
+                ":published_path_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_path_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9cbeaac3-1ce4-440c-9a23-9033e987c7f9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "published-paths",
+                    ":published_path_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_path_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": {\n    \"title\": \"string\",\n    \"id\": \"string\",\n    \"promo_image_url\": \"string\",\n    \"short_description\": \"string\",\n    \"long_description_html\": \"string\",\n    \"header_html\": \"string\",\n    \"course_name_singular\": \"string\",\n    \"course_name_plural\": \"string\",\n    \"path_item_count\": 6631\n  },\n  \"slug\": \"0mtjvdh1-gq1fifce1xc-x-2x4lhl19-w\",\n  \"id\": \"string\",\n  \"path_url\": \"string\",\n  \"hidden\": true,\n  \"strict_enforce_group_visibility\": true,\n  \"offer\": {\n    \"price\": {\n      \"amount\": \"0.00\",\n      \"currency_code\": \"USD\"\n    },\n    \"registration_open\": false,\n    \"id\": \"string\",\n    \"registration_url\": \"string\"\n  },\n  \"unique_progress_per_enrollment\": false,\n  \"created_at\": \"1967-03-12T06:16:17.618Z\",\n  \"modified_at\": \"1976-04-04T23:21:06.639Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bda7a37b-ae74-41da-ac6e-d5757a0de6c8",
+          "name": "domains published paths update",
+          "request": {
+            "name": "domains published paths update",
+            "description": {
+              "content": "Update a Published Path.\n\nAllows partial updates to Published Path fields, such as the slug. Both PUT and PATCH perform partial updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "published-paths",
+                ":published_path_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_path_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "slug",
+                  "value": "<string>",
+                  "description": "(Required) After your Learning Path has been published, we don't recommend changing the URL"
+                },
+                {
+                  "disabled": false,
+                  "key": "hidden",
+                  "value": "<boolean>",
+                  "description": "Hidden paths are only visible on the catalog page to associated groups"
+                },
+                {
+                  "disabled": false,
+                  "key": "strict_enforce_group_visibility",
+                  "value": "<boolean>",
+                  "description": "Block access to this path for student it's not visible to"
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_progress_per_enrollment",
+                  "value": "<boolean>",
+                  "description": "When enabled, each new enrollment creates a fresh progress record."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "06b59cbe-20cb-4de8-8d7a-cb43470b956f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "published-paths",
+                    ":published_path_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_path_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) After your Learning Path has been published, we don't recommend changing the URL",
+                        "type": "text/plain"
+                      },
+                      "key": "slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Hidden paths are only visible on the catalog page to associated groups",
+                        "type": "text/plain"
+                      },
+                      "key": "hidden",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Block access to this path for student it's not visible to",
+                        "type": "text/plain"
+                      },
+                      "key": "strict_enforce_group_visibility",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "When enabled, each new enrollment creates a fresh progress record.",
+                        "type": "text/plain"
+                      },
+                      "key": "unique_progress_per_enrollment",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"slug\": \"szhiop-6d19qdr7-pagz9-r8y6r\",\n  \"id\": \"string\",\n  \"path\": {\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"promo_image_url\": \"string\",\n    \"short_description\": \"string\",\n    \"long_description_html\": \"string\",\n    \"header_html\": \"string\",\n    \"course_name_singular\": \"string\",\n    \"course_name_plural\": \"string\",\n    \"path_item_count\": 1395\n  },\n  \"path_url\": \"string\",\n  \"hidden\": true,\n  \"strict_enforce_group_visibility\": false,\n  \"offer\": {\n    \"price\": {\n      \"amount\": \"0.00\",\n      \"currency_code\": \"USD\"\n    },\n    \"registration_open\": true,\n    \"id\": \"string\",\n    \"registration_url\": \"string\"\n  },\n  \"unique_progress_per_enrollment\": true,\n  \"created_at\": \"1951-01-17T21:15:45.861Z\",\n  \"modified_at\": \"1950-03-01T03:54:10.275Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27ad2e56-08a4-4c08-abcc-6b0575628f70",
+          "name": "domains published paths partial update",
+          "request": {
+            "name": "domains published paths partial update",
+            "description": {
+              "content": "Partially update a Published Path.\n\nAllows updating one or more fields of the Published Path, such as the slug.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "published-paths",
+                ":published_path_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_path_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "slug",
+                  "value": "<string>",
+                  "description": "After your Learning Path has been published, we don't recommend changing the URL"
+                },
+                {
+                  "disabled": false,
+                  "key": "hidden",
+                  "value": "<boolean>",
+                  "description": "Hidden paths are only visible on the catalog page to associated groups"
+                },
+                {
+                  "disabled": false,
+                  "key": "strict_enforce_group_visibility",
+                  "value": "<boolean>",
+                  "description": "Block access to this path for student it's not visible to"
+                },
+                {
+                  "disabled": false,
+                  "key": "unique_progress_per_enrollment",
+                  "value": "<boolean>",
+                  "description": "When enabled, each new enrollment creates a fresh progress record."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "52218541-9f31-4c1e-88cc-26aa3ae3d4d5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "published-paths",
+                    ":published_path_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_path_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "After your Learning Path has been published, we don't recommend changing the URL",
+                        "type": "text/plain"
+                      },
+                      "key": "slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Hidden paths are only visible on the catalog page to associated groups",
+                        "type": "text/plain"
+                      },
+                      "key": "hidden",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Block access to this path for student it's not visible to",
+                        "type": "text/plain"
+                      },
+                      "key": "strict_enforce_group_visibility",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "When enabled, each new enrollment creates a fresh progress record.",
+                        "type": "text/plain"
+                      },
+                      "key": "unique_progress_per_enrollment",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"slug\": \"szhiop-6d19qdr7-pagz9-r8y6r\",\n  \"id\": \"string\",\n  \"path\": {\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"promo_image_url\": \"string\",\n    \"short_description\": \"string\",\n    \"long_description_html\": \"string\",\n    \"header_html\": \"string\",\n    \"course_name_singular\": \"string\",\n    \"course_name_plural\": \"string\",\n    \"path_item_count\": 1395\n  },\n  \"path_url\": \"string\",\n  \"hidden\": true,\n  \"strict_enforce_group_visibility\": false,\n  \"offer\": {\n    \"price\": {\n      \"amount\": \"0.00\",\n      \"currency_code\": \"USD\"\n    },\n    \"registration_open\": true,\n    \"id\": \"string\",\n    \"registration_url\": \"string\"\n  },\n  \"unique_progress_per_enrollment\": true,\n  \"created_at\": \"1951-01-17T21:15:45.861Z\",\n  \"modified_at\": \"1950-03-01T03:54:10.275Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b054c9ce-12e8-443a-b9cb-ce203b43d76b",
+          "name": "domains published paths destroy",
+          "request": {
+            "name": "domains published paths destroy",
+            "description": {
+              "content": "Delete a Published Path.\n\nRemoves the Published Path and its associated course series from the domain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "domains",
+                ":domain_name",
+                "published-paths",
+                ":published_path_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "published_path_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bf89c211-0b54-4845-9fad-23a5610b1a19",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "domains",
+                    ":domain_name",
+                    "published-paths",
+                    ":published_path_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "published_path_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "67454f56-9556-4f71-82f9-4b282c8af664",
+    "name": "Skilljar Assets Domains > Published Paths API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}

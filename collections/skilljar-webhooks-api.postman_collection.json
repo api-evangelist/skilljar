@@ -1,0 +1,1988 @@
+{
+  "item": [
+    {
+      "id": "7c86561a-e873-4c75-a39c-3d83257e60d3",
+      "name": "Webhooks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3862e35d-53ef-4d5e-9e59-8c3f7da910db",
+          "name": "webhooks list",
+          "request": {
+            "name": "webhooks list",
+            "description": {
+              "content": "List all webhooks for your organization.\n\nReturns a paginated list of webhooks, including their configuration and status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "93613038-e1e0-443d-83fc-3775eb2fe8d2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"target_url\": \"http://whOW.rgpzpqIs296V9QJIeRmDddF1R\",\n      \"id\": \"string\",\n      \"active\": true,\n      \"deactivate_reason\": \"ORG_DISABLED\",\n      \"event_type\": \"DASHBOARD_TASK_CREATED\",\n      \"basic_auth_username\": \"\",\n      \"basic_auth_password\": \"\",\n      \"additional_headers\": {}\n    },\n    {\n      \"target_url\": \"http://QWIWvidUsGflLCxsINWZhObHnuWyHJyik.lsgGx8S1bWYTfwDk3WvnMfxpYw4cyQihnxmDaM\",\n      \"id\": \"string\",\n      \"active\": true,\n      \"deactivate_reason\": \"TOO_MANY_REDIRECTS\",\n      \"event_type\": \"COURSE_ENROLLMENT\",\n      \"basic_auth_username\": \"\",\n      \"basic_auth_password\": \"\",\n      \"additional_headers\": {}\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3511f8a4-c341-47c2-af1d-48bbb0532df4",
+          "name": "webhooks create",
+          "request": {
+            "name": "webhooks create",
+            "description": {
+              "content": "Create a new webhook for your organization.\n\nRegister a webhook to receive HTTP POST notifications when specified events occur in your Skilljar organization.\nYou may specify a particular event type or leave it blank to receive all event types.\n\n- If \"event_type\" is null, all event types will be sent to the URL.\n- If \"event_type\" is set, only events matching that type will be sent.\n- If multiple webhooks are created with the same URL and qualify for an event, the event will be sent to the\nURL only once.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "target_url",
+                  "value": "<uri>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "key": "event_type",
+                  "value": "<string>",
+                  "description": "'COURSE_COMPLETION', 'COURSE_ENROLLMENT', 'DOMAIN_ENROLLMENT', 'LESSON_COMPLETION', 'PATH_COMPLETION', 'PATH_ENROLLMENT', 'PURCHASE_FULFILLMENT', 'QUIZ_COMPLETION', 'VILT_EVENT_REGISTRATION', 'DASHBOARD_TASK_CREATED', or null. If null, all events, regardless of type, will be sent to the webhook URL.\n\n* `COURSE_COMPLETION` - Course Completion\n* `COURSE_ENROLLMENT` - Course Enrollment\n* `DOMAIN_ENROLLMENT` - Domain Enrollment\n* `LESSON_COMPLETION` - Lesson Completion\n* `PATH_COMPLETION` - Path Completion\n* `PATH_ENROLLMENT` - Path Enrollment\n* `PURCHASE_FULFILLMENT` - Purchase Fulfillment\n* `QUIZ_COMPLETION` - Quiz Completion\n* `VILT_EVENT_REGISTRATION` - VILT Event Registration\n* `DASHBOARD_TASK_CREATED` - Dashboard Task Created"
+                },
+                {
+                  "disabled": false,
+                  "key": "basic_auth_username",
+                  "value": "",
+                  "description": "When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the username."
+                },
+                {
+                  "disabled": false,
+                  "key": "basic_auth_password",
+                  "value": "",
+                  "description": "When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the password."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3e8ab0d5-6837-4d24-971a-a3c8b86dd202",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "target_url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "'COURSE_COMPLETION', 'COURSE_ENROLLMENT', 'DOMAIN_ENROLLMENT', 'LESSON_COMPLETION', 'PATH_COMPLETION', 'PATH_ENROLLMENT', 'PURCHASE_FULFILLMENT', 'QUIZ_COMPLETION', 'VILT_EVENT_REGISTRATION', 'DASHBOARD_TASK_CREATED', or null. If null, all events, regardless of type, will be sent to the webhook URL.\n\n* `COURSE_COMPLETION` - Course Completion\n* `COURSE_ENROLLMENT` - Course Enrollment\n* `DOMAIN_ENROLLMENT` - Domain Enrollment\n* `LESSON_COMPLETION` - Lesson Completion\n* `PATH_COMPLETION` - Path Completion\n* `PATH_ENROLLMENT` - Path Enrollment\n* `PURCHASE_FULFILLMENT` - Purchase Fulfillment\n* `QUIZ_COMPLETION` - Quiz Completion\n* `VILT_EVENT_REGISTRATION` - VILT Event Registration\n* `DASHBOARD_TASK_CREATED` - Dashboard Task Created",
+                        "type": "text/plain"
+                      },
+                      "key": "event_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the username.",
+                        "type": "text/plain"
+                      },
+                      "key": "basic_auth_username",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the password.",
+                        "type": "text/plain"
+                      },
+                      "key": "basic_auth_password",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"target_url\": \"http://tXBNoJgsZqNSvKCiIAq.mfj.7EM+dwHZlP,u.RqXnRrIotsas7ukYQWytkh1OdoLhQUoRUHaCcIK6\",\n  \"id\": \"string\",\n  \"active\": true,\n  \"deactivate_reason\": \"RETRY_COUNT\",\n  \"event_type\": \"<string>\",\n  \"basic_auth_username\": \"\",\n  \"basic_auth_password\": \"\",\n  \"additional_headers\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ce82433-4a64-4afe-a65f-0bf9b79b89cc",
+          "name": "webhooks retrieve",
+          "request": {
+            "name": "webhooks retrieve",
+            "description": {
+              "content": "Retrieve details for a specific webhook.\n\nReturns the configuration and status of the webhook, including its\ntarget URL, event type, and activation status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                ":webhook_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhook_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "842a0068-1d85-42a5-b8e5-52cac63fede0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    ":webhook_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"target_url\": \"http://tXBNoJgsZqNSvKCiIAq.mfj.7EM+dwHZlP,u.RqXnRrIotsas7ukYQWytkh1OdoLhQUoRUHaCcIK6\",\n  \"id\": \"string\",\n  \"active\": true,\n  \"deactivate_reason\": \"RETRY_COUNT\",\n  \"event_type\": \"<string>\",\n  \"basic_auth_username\": \"\",\n  \"basic_auth_password\": \"\",\n  \"additional_headers\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "452c29cb-fdaa-4a33-9e4e-7576d3cfb3bc",
+          "name": "webhooks update",
+          "request": {
+            "name": "webhooks update",
+            "description": {
+              "content": "Update an existing webhook.\n\nAllows you to modify the webhook's configuration, such as the target URL or event type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                ":webhook_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhook_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "target_url",
+                  "value": "<uri>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "key": "event_type",
+                  "value": "<string>",
+                  "description": "'COURSE_COMPLETION', 'COURSE_ENROLLMENT', 'DOMAIN_ENROLLMENT', 'LESSON_COMPLETION', 'PATH_COMPLETION', 'PATH_ENROLLMENT', 'PURCHASE_FULFILLMENT', 'QUIZ_COMPLETION', 'VILT_EVENT_REGISTRATION', 'DASHBOARD_TASK_CREATED', or null. If null, all events, regardless of type, will be sent to the webhook URL.\n\n* `COURSE_COMPLETION` - Course Completion\n* `COURSE_ENROLLMENT` - Course Enrollment\n* `DOMAIN_ENROLLMENT` - Domain Enrollment\n* `LESSON_COMPLETION` - Lesson Completion\n* `PATH_COMPLETION` - Path Completion\n* `PATH_ENROLLMENT` - Path Enrollment\n* `PURCHASE_FULFILLMENT` - Purchase Fulfillment\n* `QUIZ_COMPLETION` - Quiz Completion\n* `VILT_EVENT_REGISTRATION` - VILT Event Registration\n* `DASHBOARD_TASK_CREATED` - Dashboard Task Created"
+                },
+                {
+                  "disabled": false,
+                  "key": "basic_auth_username",
+                  "value": "",
+                  "description": "When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the username."
+                },
+                {
+                  "disabled": false,
+                  "key": "basic_auth_password",
+                  "value": "",
+                  "description": "When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the password."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "39f7eebb-5a61-46aa-87f6-cfe13ab8a4a8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    ":webhook_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "target_url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "'COURSE_COMPLETION', 'COURSE_ENROLLMENT', 'DOMAIN_ENROLLMENT', 'LESSON_COMPLETION', 'PATH_COMPLETION', 'PATH_ENROLLMENT', 'PURCHASE_FULFILLMENT', 'QUIZ_COMPLETION', 'VILT_EVENT_REGISTRATION', 'DASHBOARD_TASK_CREATED', or null. If null, all events, regardless of type, will be sent to the webhook URL.\n\n* `COURSE_COMPLETION` - Course Completion\n* `COURSE_ENROLLMENT` - Course Enrollment\n* `DOMAIN_ENROLLMENT` - Domain Enrollment\n* `LESSON_COMPLETION` - Lesson Completion\n* `PATH_COMPLETION` - Path Completion\n* `PATH_ENROLLMENT` - Path Enrollment\n* `PURCHASE_FULFILLMENT` - Purchase Fulfillment\n* `QUIZ_COMPLETION` - Quiz Completion\n* `VILT_EVENT_REGISTRATION` - VILT Event Registration\n* `DASHBOARD_TASK_CREATED` - Dashboard Task Created",
+                        "type": "text/plain"
+                      },
+                      "key": "event_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the username.",
+                        "type": "text/plain"
+                      },
+                      "key": "basic_auth_username",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the password.",
+                        "type": "text/plain"
+                      },
+                      "key": "basic_auth_password",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"target_url\": \"http://tXBNoJgsZqNSvKCiIAq.mfj.7EM+dwHZlP,u.RqXnRrIotsas7ukYQWytkh1OdoLhQUoRUHaCcIK6\",\n  \"id\": \"string\",\n  \"active\": true,\n  \"deactivate_reason\": \"RETRY_COUNT\",\n  \"event_type\": \"<string>\",\n  \"basic_auth_username\": \"\",\n  \"basic_auth_password\": \"\",\n  \"additional_headers\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6bb3cdeb-06b3-4186-a106-206d4cadad5d",
+          "name": "webhooks partial update",
+          "request": {
+            "name": "webhooks partial update",
+            "description": {
+              "content": "Partially update an existing webhook.\n\nAllows you to update one or more fields of the webhook without modifying the entire object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                ":webhook_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhook_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "target_url",
+                  "value": "<uri>"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "key": "event_type",
+                  "value": "<string>",
+                  "description": "'COURSE_COMPLETION', 'COURSE_ENROLLMENT', 'DOMAIN_ENROLLMENT', 'LESSON_COMPLETION', 'PATH_COMPLETION', 'PATH_ENROLLMENT', 'PURCHASE_FULFILLMENT', 'QUIZ_COMPLETION', 'VILT_EVENT_REGISTRATION', 'DASHBOARD_TASK_CREATED', or null. If null, all events, regardless of type, will be sent to the webhook URL.\n\n* `COURSE_COMPLETION` - Course Completion\n* `COURSE_ENROLLMENT` - Course Enrollment\n* `DOMAIN_ENROLLMENT` - Domain Enrollment\n* `LESSON_COMPLETION` - Lesson Completion\n* `PATH_COMPLETION` - Path Completion\n* `PATH_ENROLLMENT` - Path Enrollment\n* `PURCHASE_FULFILLMENT` - Purchase Fulfillment\n* `QUIZ_COMPLETION` - Quiz Completion\n* `VILT_EVENT_REGISTRATION` - VILT Event Registration\n* `DASHBOARD_TASK_CREATED` - Dashboard Task Created"
+                },
+                {
+                  "disabled": false,
+                  "key": "basic_auth_username",
+                  "value": "",
+                  "description": "When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the username."
+                },
+                {
+                  "disabled": false,
+                  "key": "basic_auth_password",
+                  "value": "",
+                  "description": "When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the password."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "82531d13-3b55-4c90-a1d4-9a5366041f22",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    ":webhook_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "target_url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "active",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "'COURSE_COMPLETION', 'COURSE_ENROLLMENT', 'DOMAIN_ENROLLMENT', 'LESSON_COMPLETION', 'PATH_COMPLETION', 'PATH_ENROLLMENT', 'PURCHASE_FULFILLMENT', 'QUIZ_COMPLETION', 'VILT_EVENT_REGISTRATION', 'DASHBOARD_TASK_CREATED', or null. If null, all events, regardless of type, will be sent to the webhook URL.\n\n* `COURSE_COMPLETION` - Course Completion\n* `COURSE_ENROLLMENT` - Course Enrollment\n* `DOMAIN_ENROLLMENT` - Domain Enrollment\n* `LESSON_COMPLETION` - Lesson Completion\n* `PATH_COMPLETION` - Path Completion\n* `PATH_ENROLLMENT` - Path Enrollment\n* `PURCHASE_FULFILLMENT` - Purchase Fulfillment\n* `QUIZ_COMPLETION` - Quiz Completion\n* `VILT_EVENT_REGISTRATION` - VILT Event Registration\n* `DASHBOARD_TASK_CREATED` - Dashboard Task Created",
+                        "type": "text/plain"
+                      },
+                      "key": "event_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the username.",
+                        "type": "text/plain"
+                      },
+                      "key": "basic_auth_username",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the password.",
+                        "type": "text/plain"
+                      },
+                      "key": "basic_auth_password",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"target_url\": \"http://tXBNoJgsZqNSvKCiIAq.mfj.7EM+dwHZlP,u.RqXnRrIotsas7ukYQWytkh1OdoLhQUoRUHaCcIK6\",\n  \"id\": \"string\",\n  \"active\": true,\n  \"deactivate_reason\": \"RETRY_COUNT\",\n  \"event_type\": \"<string>\",\n  \"basic_auth_username\": \"\",\n  \"basic_auth_password\": \"\",\n  \"additional_headers\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b03be3b-f7dd-4edd-93a7-00de48c1837a",
+          "name": "webhooks destroy",
+          "request": {
+            "name": "webhooks destroy",
+            "description": {
+              "content": "Delete a webhook.\n\nPermanently removes the webhook and stops sending event notifications to its target URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                ":webhook_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhook_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fe8ec088-af8e-4083-8e42-c291efe3cee7",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    ":webhook_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2e1253a-ea0f-41f0-a98c-80dbddf10ee0",
+          "name": "Ping Webhook",
+          "request": {
+            "name": "Ping Webhook",
+            "description": {
+              "content": "Send a test HTTP POST event of type PING to a webhook.\n\nAllows you to verify that your webhook endpoint is reachable and correctly configured.\nA failed ping will not deactivate the webhook and no retries are attempted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                ":webhook_id",
+                "ping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhook_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0185fce6-f79d-42e4-a838-2faf897f9fcd",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    ":webhook_id",
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"succeeded\": false,\n  \"http_status_code\": 7992,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00697bfa-e899-4438-9e4c-3fa2a5af2322",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    ":webhook_id",
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f0ad8b3-15a0-49f6-929e-d4892569eb07",
+          "name": "Sample Course Completion Event",
+          "request": {
+            "name": "Sample Course Completion Event",
+            "description": {
+              "content": "Retrieve a sample course completion event.\n\nReturns a single-item list containing either the most recent course completion event for your organization,\nor a generated sample event if no completions exist.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "sample-course-completion"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f15bfde2-4c58-40f1-bc8a-d228f90ee945",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "sample-course-completion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2fb5dd6c-d48e-4150-bb95-5ee6149e27e2",
+          "name": "Sample Course Enrollment Event",
+          "request": {
+            "name": "Sample Course Enrollment Event",
+            "description": {
+              "content": "Retrieve a sample course enrollment event.\n\nReturns a single-item list containing either the most recent course enrollment event for your organization,\nor a generated sample event if no enrollments exist.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "sample-course-enrollment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a68bbe64-bb40-41ec-a8e4-8f3980a783c5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "sample-course-enrollment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff652f55-48e9-4dfa-bdce-b3855be4ba3c",
+          "name": "Sample Dashboard Task Created Event",
+          "request": {
+            "name": "Sample Dashboard Task Created Event",
+            "description": {
+              "content": "Retrieve a sample dashboard task created event.\n\nReturns a single-item list containing either the most recent dashboard task created event for your organization,\nor a generated sample event if no tasks exist.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "sample-dashboard-task-created"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "05406e6e-7c98-46aa-9578-b9554e961830",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "sample-dashboard-task-created"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1d7bb4c-600a-453f-b330-6c3a127c1aa1",
+          "name": "Sample Domain Enrollment Event",
+          "request": {
+            "name": "Sample Domain Enrollment Event",
+            "description": {
+              "content": "Retrieve a sample domain enrollment event.\n\nReturns a single-item list containing either the most recent domain enrollment event (if available and valid),\nor a generated sample event.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "sample-domain-enrollment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "62f8c973-6d16-4799-884e-e132a028ffcd",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "sample-domain-enrollment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e3d8af4a-5297-4d4d-a742-96d7a3f347a7",
+          "name": "Sample Lesson Completion Event",
+          "request": {
+            "name": "Sample Lesson Completion Event",
+            "description": {
+              "content": "Retrieve a sample lesson completion event.\n\nReturns a single-item list containing either the most recent lesson completion event for your organization,\nor a generated sample event if no completions exist.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "sample-lesson-completion"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "def94b9a-c469-43f6-9166-3715337c8da6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "sample-lesson-completion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c90e5ddc-7c22-42c4-9f65-48a312882290",
+          "name": "Sample Path Completion Event",
+          "request": {
+            "name": "Sample Path Completion Event",
+            "description": {
+              "content": "Retrieve a sample path completion event.\n\nReturns a single-item list containing either the most recent path completion event for your organization,\nor a generated sample event if no completions exist.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "sample-path-completion"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "beed831f-05e0-4e99-b109-4675673fd7b4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "sample-path-completion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67ccd2c8-5f1d-4dc5-953b-3bbba0e5b841",
+          "name": "Sample Path Enrollment Event",
+          "request": {
+            "name": "Sample Path Enrollment Event",
+            "description": {
+              "content": "Retrieve a sample path enrollment event.\n\nReturns a single-item list containing either the most recent path enrollment event for your organization,\nor a generated sample event if no enrollments exist.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "sample-path-enrollment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "38f3ea01-34f2-4687-a09a-e016f3063cc2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "sample-path-enrollment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55abab8a-7181-4c24-920c-7a1ce88af91b",
+          "name": "Sample Purchase Fulfillment Event",
+          "request": {
+            "name": "Sample Purchase Fulfillment Event",
+            "description": {
+              "content": "Retrieve a sample purchase fulfillment event.\n\nReturns a single-item list containing either the most recent purchase fulfillment event for your organization,\nor a generated sample event if no purchase fulfillments exist.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "sample-purchase-fulfillment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "70815c15-8382-4f05-b942-de74e5f2e8d4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "sample-purchase-fulfillment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "afe939d6-e704-4511-af1b-30def665968b",
+          "name": "Sample Quiz Completion Event",
+          "request": {
+            "name": "Sample Quiz Completion Event",
+            "description": {
+              "content": "Retrieve a sample quiz completion event.\n\nReturns a single-item list containing either the most recent quiz completion event for your organization,\nor a generated sample event if no completions exist.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "sample-quiz-completion"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "773758f9-65f6-483e-986b-2abdfc04e4a1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "sample-quiz-completion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5372438-ec69-40a7-8c3e-a4e9edf50b97",
+          "name": "Sample VILT Event Registration Event",
+          "request": {
+            "name": "Sample VILT Event Registration Event",
+            "description": {
+              "content": "Retrieve a sample VILT event registration event.\n\nReturns a single-item list containing either the most recent VILT event registration for your organization,\nor a generated sample event if no registrations exist.\n\nThis API is used internally to generate sample data; the body of an actual webhook notification will be a\nsingle JSON event that is NOT contained within a list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "sample-vilt-registration"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8a888b54-b0f7-4de9-9060-363c796093dd",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "sample-vilt-registration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cf94e68a-7f1c-4c71-a10c-851346f2bfb7",
+    "name": "Skilljar Assets Webhooks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.\n\nThis interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.\n\n## Getting Started\n\nNew to the Skilljar API? Check out these essential resources:\n\n- **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call\n- **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication\n- **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events\n",
+      "type": "text/plain"
+    }
+  }
+}
