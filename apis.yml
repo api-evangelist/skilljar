@@ -43,6 +43,16 @@ tags:
 - Training
 - Online Courses
 - Certification
+- Webhook
+- Enrollment
+tags_raw:
+- Company
+- Education
+- Learning Management System
+- Customer Education
+- Training
+- Online Courses
+- Certification
 - Webhooks
 - Enrollment
 maintainers:
@@ -188,7 +198,8 @@ apis:
     catalog page > page items (classic).
   humanURL: https://api.skilljar.com/
   baseURL: https://api.skilljar.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - Domains > Catalog Page > Page Items (Classic)
   properties:
   - type: OpenAPI
@@ -227,7 +238,8 @@ apis:
     for domains > catalog pages (builder) > component content block.
   humanURL: https://api.skilljar.com/
   baseURL: https://api.skilljar.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - Domains > Catalog Pages (Builder) > Component Content Block
   properties:
   - type: OpenAPI
@@ -247,7 +259,8 @@ apis:
     > catalog pages (builder) > content blocks.
   humanURL: https://api.skilljar.com/
   baseURL: https://api.skilljar.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - Domains > Catalog Pages (Builder) > Content Blocks
   properties:
   - type: OpenAPI
@@ -267,7 +280,8 @@ apis:
     domains > catalog pages (builder) > html content blocks.
   humanURL: https://api.skilljar.com/
   baseURL: https://api.skilljar.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - Domains > Catalog Pages (Builder) > HTML Content Blocks
   properties:
   - type: OpenAPI
@@ -287,7 +301,8 @@ apis:
     > catalog pages (builder) > tile containers.
   humanURL: https://api.skilljar.com/
   baseURL: https://api.skilljar.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - Domains > Catalog Pages (Builder) > Tile Containers
   properties:
   - type: OpenAPI
@@ -307,7 +322,8 @@ apis:
     for domains > catalog pages (builder) > tile containers > tile items.
   humanURL: https://api.skilljar.com/
   baseURL: https://api.skilljar.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - Domains > Catalog Pages (Builder) > Tile Containers > Tile Items
   properties:
   - type: OpenAPI
@@ -367,7 +383,8 @@ apis:
     series > published courses.
   humanURL: https://api.skilljar.com/
   baseURL: https://api.skilljar.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - Domains > Course Series > Published Courses
   properties:
   - type: OpenAPI
@@ -502,7 +519,8 @@ apis:
     > published courses > reenrollment rule.
   humanURL: https://api.skilljar.com/
   baseURL: https://api.skilljar.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - Domains > Published Courses > Reenrollment Rule
   properties:
   - type: OpenAPI
@@ -522,7 +540,8 @@ apis:
     domains > published courses > student group prerequisites.
   humanURL: https://api.skilljar.com/
   baseURL: https://api.skilljar.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - Domains > Published Courses > Student Group Prerequisites
   properties:
   - type: OpenAPI
@@ -562,7 +581,8 @@ apis:
     > published courses > visibility overrides.
   humanURL: https://api.skilljar.com/
   baseURL: https://api.skilljar.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - Domains > Published Courses > Visibility Overrides
   properties:
   - type: OpenAPI
@@ -641,7 +661,8 @@ apis:
     paths > path items.
   humanURL: https://api.skilljar.com/
   baseURL: https://api.skilljar.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - Domains > Published Paths > Path Items
   properties:
   - type: OpenAPI
@@ -681,7 +702,8 @@ apis:
     > published paths > visibility overrides.
   humanURL: https://api.skilljar.com/
   baseURL: https://api.skilljar.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - Domains > Published Paths > Visibility Overrides
   properties:
   - type: OpenAPI
@@ -813,6 +835,8 @@ apis:
   humanURL: https://api.skilljar.com/
   baseURL: https://api.skilljar.com/v1/
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -1167,7 +1191,8 @@ apis:
     code pools > offers.
   humanURL: https://api.skilljar.com/
   baseURL: https://api.skilljar.com/v1/
-  tags:
+  tags: []
+  tags_raw:
   - Promo Codes > Promo Code Pools > Offers
   properties:
   - type: OpenAPI
@@ -1314,6 +1339,8 @@ apis:
   humanURL: https://api.skilljar.com/
   baseURL: https://api.skilljar.com/v1/
   tags:
+  - Tags
+  tags_raw:
   - tags
   properties:
   - type: OpenAPI
@@ -1350,6 +1377,8 @@ apis:
   humanURL: https://api.skilljar.com/
   baseURL: https://api.skilljar.com/v1/
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -1517,6 +1546,8 @@ apis:
   humanURL: https://api.skilljar.com/
   baseURL: https://api.skilljar.com/v1/
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
