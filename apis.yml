@@ -11,6 +11,18 @@ description: >-
   (VILT) training, and real-time webhooks. The published OpenAPI 3.0.3 definition
   covers 160 paths and 340 operations across 420 schemas, with an HTTP Basic
   API-key v1 surface and a newer v2 OAuth 2.0 surface (PKCE, ~89 scopes).
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
@@ -1561,6 +1573,9 @@ apis:
   - type: OAuthScopes
     url: scopes/skilljar-scopes.yml
 common:
+- type: CapabilityMap
+  url: capabilities/skilljar-capability-edges.yml
+  name: Skilljar Business Capability Map
 - type: Overlay
   url: overlays/skilljar-openapi-overlay.yaml
 - type: Website
