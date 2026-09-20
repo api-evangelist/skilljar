@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 18
+edge_count: 21
 edges:
 - tag: Question Banks
   spec_file: skilljar-question-banks-api-openapi.yml
@@ -168,6 +168,17 @@ edges:
   reason: Creates and maintains learner user records within a training domain of this LMS — learner identity
     and record administration. Mapped to Student Enrolment & Records Management at L1; the surface spans
     registration and identifier/lifecycle records so no single L2 is asserted.
+- tag: Lesson Progress
+  spec_file: skilljar-lesson-progress-api-openapi.yml
+  capability_id: BC-300.40
+  capability_id_l1: BC-300
+  capability_name: Learning & Development Management
+  confidence: 0.7
+  evidence: 'GET /v1/lesson-progress/{lesson_progress_id}  lesson_progress_retrieve; schemas: LessonProgress,
+    SuccessStatusEnum'
+  reason: Tracks and updates learner completion/success status per lesson — training progress and completion
+    tracking, the core of Learning & Development Management in an LMS.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: Promo Codes > Promo Code Pools > Offers
   spec_file: skilljar-promo-codes-promo-code-pools-offers-api-openapi.yml
   capability_id: BC-440.30
@@ -188,3 +199,26 @@ edges:
   reason: Operations read and update a learner's course enrolment, progress and certificate state — learner
     enrolment and academic-record keeping in an LMS. Spans enrolment, record and credential sub-capabilities,
     so no L2 is asserted.
+- tag: Users > Published Courses > Lessons
+  spec_file: skilljar-users-published-courses-lessons-api-openapi.yml
+  capability_id: BC-300.40
+  capability_id_l1: BC-300
+  capability_name: Learning & Development Management
+  confidence: 0.7
+  evidence: GET /v1/users/{user_id}/published-courses/{published_course_id}/lessons; schemas UserLessonProgress,
+    UserLessonProgressLessonProgress
+  reason: Per-learner lesson completion and progress tracking is training delivery administration, mapping
+    to Learning & Development Management.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: VILT > Session Registrations
+  spec_file: skilljar-vilt-session-registrations-api-openapi.yml
+  capability_id: BC-300.40
+  capability_id_l1: BC-300
+  capability_name: Learning & Development Management
+  confidence: 0.7
+  evidence: POST /v1/vilt-session-registrations vilt_session_registrations_create; schemas ViltSessionRegistrationDetail,
+    ReadOnlyViltSession, StudentLessonProgressCourseItem
+  reason: Full CRUD over learner registrations to instructor-led training sessions, including student
+    lesson progress — training enrolment and delivery administration. Moderate confidence as the audience
+    is external customers, not only employees.
+  recovered_from: sweep-20260828T235257Z-edges.json
