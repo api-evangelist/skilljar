@@ -1,0 +1,190 @@
+slug: skilljar
+provider: Skilljar
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Education
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 18
+edges:
+- tag: Question Banks
+  spec_file: skilljar-question-banks-api-openapi.yml
+  capability_id: BC-4740.10
+  capability_id_l1: BC-4740
+  capability_name: Assessment Design & Item Banking
+  confidence: 0.9
+  evidence: 'POST /v1/question-banks  question_banks_create; schemas: QuestionBank, PaginatedQuestionBankList'
+  reason: Lifecycle management of assessment question banks on a learning platform — directly assessment
+    design and item banking.
+- tag: Question Banks > Questions
+  spec_file: skilljar-question-banks-questions-api-openapi.yml
+  capability_id: BC-4740.10
+  capability_id_l1: BC-4740
+  capability_name: Assessment Design & Item Banking
+  confidence: 0.88
+  evidence: 'GET /v1/question-banks/{question_bank_id}/questions; schemas: QuestionSummary, Answer'
+  reason: Manages the individual items (questions and answers) held inside assessment item banks.
+- tag: Quiz Questions
+  spec_file: skilljar-quiz-questions-api-openapi.yml
+  capability_id: BC-4740.10
+  capability_id_l1: BC-4740
+  capability_name: Assessment Design & Item Banking
+  confidence: 0.85
+  evidence: 'POST /v1/quiz-questions  quiz_questions_create; schemas: Question, Answer, AnswerRequest'
+  reason: Authoring of quiz questions and answers — design of assessment instruments/items.
+- tag: Quizzes
+  spec_file: skilljar-quizzes-api-openapi.yml
+  capability_id: BC-4740.10
+  capability_id_l1: BC-4740
+  capability_name: Assessment Design & Item Banking
+  confidence: 0.85
+  evidence: 'POST /v1/quizzes  quizzes_create; schemas: Quiz, PaginatedQuizList'
+  reason: CRUD over quizzes (assessment instruments) delivered within courses on this LMS.
+- tag: Quizzes > Questions
+  spec_file: skilljar-quizzes-questions-api-openapi.yml
+  capability_id: BC-4740.10
+  capability_id_l1: BC-4740
+  capability_name: Assessment Design & Item Banking
+  confidence: 0.85
+  evidence: 'GET /v1/quizzes/{quiz_id}/questions; schemas: QuestionSummary, Answer'
+  reason: Listing and removal of the questions composing a quiz — assessment instrument design/item management.
+- tag: Quizzes > Question Banks
+  spec_file: skilljar-quizzes-question-banks-api-openapi.yml
+  capability_id: BC-4740.10
+  capability_id_l1: BC-4740
+  capability_name: Assessment Design & Item Banking
+  confidence: 0.82
+  evidence: 'GET /v1/quizzes/{quiz_id}/question-banks; schemas: QuestionBankAssignment'
+  reason: Assignment of item banks to a quiz — composition of assessment instruments from calibrated item
+    banks.
+- tag: Promo Codes > Codes
+  spec_file: skilljar-promo-codes-codes-api-openapi.yml
+  capability_id: BC-440.30
+  capability_id_l1: BC-440
+  capability_name: Discount & Promotion Management
+  confidence: 0.8
+  evidence: 'POST /v1/promo-codes  promo_codes_create; schemas: PromoCode, PromoCodeUpdateRequest'
+  reason: CRUD over promotional codes used to discount course purchases in this commerce-enabled LMS —
+    discount and promotion management.
+- tag: Promo Codes > Pools
+  spec_file: skilljar-promo-codes-pools-api-openapi.yml
+  capability_id: BC-440.30
+  capability_id_l1: BC-440
+  capability_name: Discount & Promotion Management
+  confidence: 0.8
+  evidence: 'POST /v1/promo-code-pools  promo_code_pools_create; schemas: DiscountTypeEnum, PromoCodePoolCreate'
+  reason: Manages pools of promo codes with an explicit DiscountTypeEnum, i.e. configuration of discount/promotional
+    offers.
+- tag: Courses
+  spec_file: skilljar-courses-api-openapi.yml
+  capability_id: BC-4700.20
+  capability_id_l1: BC-4700
+  capability_name: Course & Module Design
+  confidence: 0.75
+  evidence: POST /v1/courses  courses_create; PATCH /v1/courses/{course_id}  courses_partial_update; schemas
+    Course, CourseRequest, CourseAndLessonTimeFormatEnum
+  reason: Full CRUD over course definitions in a learning-management platform used to 'build, publish,
+    and measure training academies, courses, learning paths' — this is authoring and maintenance of units
+    of learning. Some ambiguity between course design and catalogue publication (published courses are
+    a separate tag), hence 0.75.
+- tag: Domains > Published Courses > Enrollments
+  spec_file: skilljar-domains-published-courses-enrollments-api-openapi.yml
+  capability_id: BC-4720.10
+  capability_id_l1: BC-4720
+  capability_name: Enrolment & Registration
+  confidence: 0.75
+  evidence: POST /v1/domains/{domain_name}/published-courses/{published_course_id}/enrollments  domains_published_courses_enrollments_create;
+    schemas CreateEnrollment, PaginatedEnrollmentList, ReadOnlyUser
+  reason: Creating, listing and updating a learner's enrollment in a published course is course registration
+    of learners, the core of enrolment and registration.
+- tag: Domains > Published Paths > Path Items
+  spec_file: skilljar-domains-published-paths-path-items-api-openapi.yml
+  capability_id: BC-4700
+  capability_id_l1: BC-4700
+  capability_name: Curriculum & Programme Management
+  confidence: 0.75
+  evidence: POST /v1/domains/{domain_name}/published-paths/{published_path_id}/path-items; schemas PathItemPublishedCourseSummary,
+    PublishedPathPathItem
+  reason: Operations compose a published learning path out of course items — i.e. defining/publishing
+    the structure of a learning programme in this LMS. Sits in Curriculum & Programme Management; ambiguous
+    between programme architecture and catalogue publication, so L1 only.
+- tag: Courses > Lessons
+  spec_file: skilljar-courses-lessons-api-openapi.yml
+  capability_id: BC-4700.20
+  capability_id_l1: BC-4700
+  capability_name: Course & Module Design
+  confidence: 0.72
+  evidence: POST /v1/lessons  lessons_create; PUT /v1/lessons/{lesson_id}  lessons_update; schemas Lesson,
+    LessonRequest, LessonUpdate
+  reason: CRUD over lessons — the individual units of learning composing courses in this LMS — which is
+    specification/authoring of modules and units. Alternative reading as content production (BC-4790.10)
+    is possible since lessons carry content, so confidence is moderate.
+- tag: Domains > Published Courses
+  spec_file: skilljar-domains-published-courses-api-openapi.yml
+  capability_id: BC-4700.40
+  capability_id_l1: BC-4700
+  capability_name: Programme Catalogue Management
+  confidence: 0.72
+  evidence: POST /v1/domains/{domain_name}/published-courses  domains_published_courses_create; schemas
+    CourseDetail, PublishedCourse, Offer, PublishedCourseDetail
+  reason: The operations publish, update and unpublish courses within a training domain, i.e. maintaining
+    the catalogue of courses available to learners. Course authoring itself sits elsewhere; this surface
+    is about publication into a domain catalogue.
+- tag: Domains > Published Paths > Enrollments
+  spec_file: skilljar-domains-published-paths-enrollments-api-openapi.yml
+  capability_id: BC-4720.10
+  capability_id_l1: BC-4720
+  capability_name: Enrolment & Registration
+  confidence: 0.72
+  evidence: POST /v1/domains/{domain_name}/published-paths/{published_path_id}/published-path-enrollments;
+    schemas CreatePublishedPathEnrollment, PublishedPathEnrollment
+  reason: Enrolling learners into a published learning path and maintaining those enrollment records is
+    learner registration into a programme of study.
+- tag: Domains > Catalog Pages
+  spec_file: skilljar-domains-catalog-pages-api-openapi.yml
+  capability_id: BC-4700.40
+  capability_id_l1: BC-4700
+  capability_name: Programme Catalogue Management
+  confidence: 0.7
+  evidence: POST /v1/domains/{domain_name}/catalog-pages domains_catalog_pages_create; schemas CatalogPage,
+    TileSortMethodEnum, SearchBehaviorEnum
+  reason: Creates and maintains the catalog pages of a training academy through which courses are published
+    to learners — authoring and publication of the course catalogue. Some ambiguity as the object is also
+    a web page.
+- tag: Domains > Users
+  spec_file: skilljar-domains-users-api-openapi.yml
+  capability_id: BC-4720
+  capability_id_l1: BC-4720
+  capability_name: Student Enrolment & Records Management
+  confidence: 0.7
+  evidence: POST /v1/domains/{domain_name}/users, bulk_create_domain_users; schemas DomainUserDetail,
+    UserSignupFieldValue, AccessCodePool
+  reason: Creates and maintains learner user records within a training domain of this LMS — learner identity
+    and record administration. Mapped to Student Enrolment & Records Management at L1; the surface spans
+    registration and identifier/lifecycle records so no single L2 is asserted.
+- tag: Promo Codes > Promo Code Pools > Offers
+  spec_file: skilljar-promo-codes-promo-code-pools-offers-api-openapi.yml
+  capability_id: BC-440.30
+  capability_id_l1: BC-440
+  capability_name: Discount & Promotion Management
+  confidence: 0.7
+  evidence: 'POST /v1/promo-code-pools/{promo_code_pool_id}/offers  promo_code_pools_offers_create; schemas:
+    OfferTypeEnum, CurrencyCodeEnum, PromoCodePoolOffer'
+  reason: Defines the offers attached to promo code pools (offer type, currency), which is promotional
+    offer/discount configuration rather than pricing strategy or price lists.
+- tag: Users > Published Courses
+  spec_file: skilljar-users-published-courses-api-openapi.yml
+  capability_id: BC-4720
+  capability_id_l1: BC-4720
+  capability_name: Student Enrolment & Records Management
+  confidence: 0.7
+  evidence: GET /v1/users/{user_id}/published-courses; schemas UserEnrollment, CourseProgress, Certificate
+  reason: Operations read and update a learner's course enrolment, progress and certificate state — learner
+    enrolment and academic-record keeping in an LMS. Spans enrolment, record and credential sub-capabilities,
+    so no L2 is asserted.
