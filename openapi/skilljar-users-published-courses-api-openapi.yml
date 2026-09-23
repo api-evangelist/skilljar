@@ -1,26 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Skilljar Assets Users > Published Courses API
+  title: Skilljar Users > Published Courses API
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: Users > Published Courses
 paths:
@@ -54,6 +36,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/UserPublishedCourseProgress'
           description: ''
+      summary: Users published courses list
+      x-summary-source: derived
   /v1/users/{user_id}/published-courses/{published_course_id}:
     get:
       operationId: users_published_courses_retrieve
@@ -86,6 +70,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserPublishedCourseProgress'
           description: ''
+      summary: Users published courses retrieve
+      x-summary-source: derived
     put:
       operationId: users_published_courses_update
       description: 'Update course progress for a user.
@@ -131,6 +117,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserPublishedCourseProgress'
           description: ''
+      summary: Users published courses update
+      x-summary-source: derived
     patch:
       operationId: users_published_courses_partial_update
       description: 'Partially update course progress for a user.
@@ -175,64 +163,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserPublishedCourseProgress'
           description: ''
+      summary: Users published courses partial update
+      x-summary-source: derived
 components:
   schemas:
-    CourseProgress:
-      type: object
-      properties:
-        course_progress_id:
-          type: string
-          readOnly: true
-          description: ID of the CourseProgress
-        completed_lesson_count:
-          type: integer
-          readOnly: true
-          description: Number of lessons the user has completed
-        completed_required_lesson_count:
-          type: integer
-          readOnly: true
-          description: Number of required lessons the user has completed (non-optional lessons that count towards course completion)
-        completed_at:
-          type: string
-          format: date-time
-          nullable: true
-          description: Datetime at which the user completed the course.  If null, the user hasn't completed
-        latest_activity:
-          type: string
-          format: date-time
-          readOnly: true
-          description: Datetime at which the user most recently viewed the course.
-        score:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          nullable: true
-          description: Course score achieved by student
-        max_score:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          nullable: true
-          description: Maximum score possible in course
-        credits_earned:
-          type: string
-          description: Credits earned by completing the course
-          maxLength: 20
-        credit_unit_plural:
-          type: string
-          description: Type of credit earned
-          maxLength: 40
-        success_status:
-          nullable: true
-          description: 'Success status of course progress: ''PASSED'', ''FAILED'' or null
-
-
-            * `PASSED` - Passed
-
-            * `FAILED` - Failed'
-          oneOf:
-          - $ref: '#/components/schemas/SuccessStatusEnum'
-          - $ref: '#/components/schemas/NullEnum'
     CourseSummary:
       type: object
       properties:
@@ -252,6 +186,45 @@ components:
           type: integer
           readOnly: true
           description: Number of required lessons in the course (non-optional lessons that count towards course completion)
+    UserPublishedCourseProgressRequest:
+      type: object
+      properties:
+        published_course_id:
+          type: string
+          minLength: 1
+          description: ID of the PublishedCourse
+        course_progress:
+          $ref: '#/components/schemas/CourseProgressRequest'
+      required:
+      - course_progress
+    UserEnrollment:
+      type: object
+      properties:
+        course_progress_id:
+          type: string
+          description: ID of the CourseProgress
+        active:
+          type: boolean
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        enrollment_id:
+          type: string
+          description: ID of the Enrollment
+      required:
+      - course_progress_id
+      - enrollment_id
+    PatchedUserPublishedCourseProgressRequest:
+      type: object
+      properties:
+        published_course_id:
+          type: string
+          minLength: 1
+          description: ID of the PublishedCourse
+        course_progress:
+          $ref: '#/components/schemas/CourseProgressRequest'
     Certificate:
       type: object
       properties:
@@ -270,29 +243,119 @@ components:
           readOnly: true
           description: When the certificate was issued
         expires_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
           readOnly: true
-          nullable: true
           description: When the certificate expires.  May be null
-    UserEnrollment:
+    SuccessStatusEnum:
+      enum:
+      - PASSED
+      - FAILED
+      type: string
+      description: '* `PASSED` - Passed
+
+        * `FAILED` - Failed'
+    CourseProgress:
       type: object
       properties:
         course_progress_id:
           type: string
+          readOnly: true
           description: ID of the CourseProgress
-        active:
-          type: boolean
-        expires_at:
+        completed_lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of lessons the user has completed
+        completed_required_lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of required lessons the user has completed (non-optional lessons that count towards course completion)
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Datetime at which the user completed the course.  If null, the user hasn't completed
+        latest_activity:
           type: string
           format: date-time
-          nullable: true
-        enrollment_id:
+          readOnly: true
+          description: Datetime at which the user most recently viewed the course.
+        score:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+          description: Course score achieved by student
+        max_score:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+          description: Maximum score possible in course
+        credits_earned:
           type: string
-          description: ID of the Enrollment
-      required:
-      - course_progress_id
-      - enrollment_id
+          description: Credits earned by completing the course
+          maxLength: 20
+        credit_unit_plural:
+          type: string
+          description: Type of credit earned
+          maxLength: 40
+        success_status:
+          description: 'Success status of course progress: ''PASSED'', ''FAILED'' or null
+
+
+            * `PASSED` - Passed
+
+            * `FAILED` - Failed'
+          oneOf:
+          - $ref: '#/components/schemas/SuccessStatusEnum'
+          - $ref: '#/components/schemas/NullEnum'
+    CourseProgressRequest:
+      type: object
+      properties:
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Datetime at which the user completed the course.  If null, the user hasn't completed
+        score:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+          description: Course score achieved by student
+        max_score:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+          description: Maximum score possible in course
+        credits_earned:
+          type: string
+          description: Credits earned by completing the course
+          maxLength: 20
+        credit_unit_plural:
+          type: string
+          description: Type of credit earned
+          maxLength: 40
+        success_status:
+          description: 'Success status of course progress: ''PASSED'', ''FAILED'' or null
+
+
+            * `PASSED` - Passed
+
+            * `FAILED` - Failed'
+          oneOf:
+          - $ref: '#/components/schemas/SuccessStatusEnum'
+          - $ref: '#/components/schemas/NullEnum'
     UserPublishedCourseProgress:
       type: object
       properties:
@@ -329,76 +392,9 @@ components:
           readOnly: true
       required:
       - course_progress
-    PatchedUserPublishedCourseProgressRequest:
-      type: object
-      properties:
-        published_course_id:
-          type: string
-          minLength: 1
-          description: ID of the PublishedCourse
-        course_progress:
-          $ref: '#/components/schemas/CourseProgressRequest'
-    SuccessStatusEnum:
-      enum:
-      - PASSED
-      - FAILED
-      type: string
-      description: '* `PASSED` - Passed
-
-        * `FAILED` - Failed'
     NullEnum:
       enum:
       - null
-    UserPublishedCourseProgressRequest:
-      type: object
-      properties:
-        published_course_id:
-          type: string
-          minLength: 1
-          description: ID of the PublishedCourse
-        course_progress:
-          $ref: '#/components/schemas/CourseProgressRequest'
-      required:
-      - course_progress
-    CourseProgressRequest:
-      type: object
-      properties:
-        completed_at:
-          type: string
-          format: date-time
-          nullable: true
-          description: Datetime at which the user completed the course.  If null, the user hasn't completed
-        score:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          nullable: true
-          description: Course score achieved by student
-        max_score:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          nullable: true
-          description: Maximum score possible in course
-        credits_earned:
-          type: string
-          description: Credits earned by completing the course
-          maxLength: 20
-        credit_unit_plural:
-          type: string
-          description: Type of credit earned
-          maxLength: 40
-        success_status:
-          nullable: true
-          description: 'Success status of course progress: ''PASSED'', ''FAILED'' or null
-
-
-            * `PASSED` - Passed
-
-            * `FAILED` - Failed'
-          oneOf:
-          - $ref: '#/components/schemas/SuccessStatusEnum'
-          - $ref: '#/components/schemas/NullEnum'
   securitySchemes:
     OrganizationApiKey:
       type: http

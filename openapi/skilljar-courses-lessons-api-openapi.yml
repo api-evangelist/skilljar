@@ -1,26 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Skilljar Assets Courses > Lessons API
+  title: Skilljar Courses > Lessons API
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: Courses > Lessons
 paths:
@@ -60,6 +42,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedLessonList'
           description: ''
+      summary: Lessons list
+      x-summary-source: derived
     post:
       operationId: lessons_create
       description: 'Create a new lesson within a course.
@@ -92,6 +76,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Lesson'
           description: ''
+      summary: Lessons create
+      x-summary-source: derived
   /v1/lessons/{lesson_id}:
     get:
       operationId: lessons_retrieve
@@ -118,6 +104,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Lesson'
           description: ''
+      summary: Lessons retrieve
+      x-summary-source: derived
     put:
       operationId: lessons_update
       description: 'Update an existing lesson.
@@ -154,6 +142,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/LessonUpdate'
           description: ''
+      summary: Lessons update
+      x-summary-source: derived
     patch:
       operationId: lessons_partial_update
       description: 'Partially update an existing lesson.
@@ -190,6 +180,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/LessonUpdate'
           description: ''
+      summary: Lessons partial update
+      x-summary-source: derived
     delete:
       operationId: lessons_destroy
       description: 'Delete a lesson from a course.
@@ -211,8 +203,95 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Lessons destroy
+      x-summary-source: derived
 components:
   schemas:
+    PaginatedLessonList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Lesson'
+    LessonRequest:
+      type: object
+      description: Lesson Serializer
+      properties:
+        content_asset_id:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+          description: Known as content_asset_id within the documentation
+        content_html:
+          type: string
+        content_quiz_id:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+          description: Known as content_quiz_id within the documentation
+        content_web_package_id:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+          description: Known as content_web_package_id within the documentation
+        course_id:
+          type: string
+          minLength: 1
+          description: Known as course_id within the documentation
+        description_html:
+          type: string
+        display_fullscreen:
+          type: boolean
+        optional:
+          type: boolean
+        order:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        search_keywords:
+          type: string
+          maxLength: 5000
+        time_seconds:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        title:
+          type: string
+          minLength: 1
+          maxLength: 500
+        tooltip_html:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type8b7Enum'
+      required:
+      - course_id
+      - order
+      - title
+      - type
     Lesson:
       type: object
       description: Lesson Serializer
@@ -222,18 +301,21 @@ components:
           readOnly: true
           description: Known as lesson_id within the documentation
         content_asset_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Known as content_asset_id within the documentation
         content_html:
           type: string
         content_quiz_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Known as content_quiz_id within the documentation
         content_web_package_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Known as content_web_package_id within the documentation
         course_id:
           type: string
@@ -252,10 +334,11 @@ components:
           type: string
           maxLength: 5000
         time_seconds:
-          type: integer
+          type:
+          - integer
+          - 'null'
           maximum: 2147483647
           minimum: 0
-          nullable: true
         title:
           type: string
           maxLength: 500
@@ -291,133 +374,6 @@ components:
         * `MODULAR` - MODULAR
 
         * `SECTION` - SECTION'
-    LessonRequest:
-      type: object
-      description: Lesson Serializer
-      properties:
-        content_asset_id:
-          type: string
-          nullable: true
-          minLength: 1
-          description: Known as content_asset_id within the documentation
-        content_html:
-          type: string
-        content_quiz_id:
-          type: string
-          nullable: true
-          minLength: 1
-          description: Known as content_quiz_id within the documentation
-        content_web_package_id:
-          type: string
-          nullable: true
-          minLength: 1
-          description: Known as content_web_package_id within the documentation
-        course_id:
-          type: string
-          minLength: 1
-          description: Known as course_id within the documentation
-        description_html:
-          type: string
-        display_fullscreen:
-          type: boolean
-        optional:
-          type: boolean
-        order:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-        search_keywords:
-          type: string
-          maxLength: 5000
-        time_seconds:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          nullable: true
-        title:
-          type: string
-          minLength: 1
-          maxLength: 500
-        tooltip_html:
-          type: string
-        type:
-          $ref: '#/components/schemas/Type8b7Enum'
-      required:
-      - course_id
-      - order
-      - title
-      - type
-    LessonUpdateRequest:
-      type: object
-      description: Lesson Update Serializer
-      properties:
-        content_asset_id:
-          type: string
-          nullable: true
-          minLength: 1
-          description: Known as content_asset_id within the documentation
-        content_html:
-          type: string
-        content_quiz_id:
-          type: string
-          nullable: true
-          minLength: 1
-          description: Known as content_quiz_id within the documentation
-        content_web_package_id:
-          type: string
-          nullable: true
-          minLength: 1
-          description: Known as content_web_package_id within the documentation
-        course_id:
-          type: string
-          minLength: 1
-          description: Known as course_id within the documentation
-        description_html:
-          type: string
-        display_fullscreen:
-          type: boolean
-        optional:
-          type: boolean
-        order:
-          type: integer
-        search_keywords:
-          type: string
-          maxLength: 5000
-        time_seconds:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          nullable: true
-        title:
-          type: string
-          minLength: 1
-        tooltip_html:
-          type: string
-        type:
-          $ref: '#/components/schemas/Type8b7Enum'
-    PaginatedLessonList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Lesson'
     LessonUpdate:
       type: object
       description: Lesson Update Serializer
@@ -427,18 +383,21 @@ components:
           readOnly: true
           description: Known as lesson_id within the documentation
         content_asset_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Known as content_asset_id within the documentation
         content_html:
           type: string
         content_quiz_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Known as content_quiz_id within the documentation
         content_web_package_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Known as content_web_package_id within the documentation
         course_id:
           type: string
@@ -455,10 +414,11 @@ components:
           type: string
           maxLength: 5000
         time_seconds:
-          type: integer
+          type:
+          - integer
+          - 'null'
           maximum: 2147483647
           minimum: 0
-          nullable: true
         title:
           type: string
         tooltip_html:
@@ -470,20 +430,23 @@ components:
       description: Lesson Update Serializer
       properties:
         content_asset_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           minLength: 1
           description: Known as content_asset_id within the documentation
         content_html:
           type: string
         content_quiz_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           minLength: 1
           description: Known as content_quiz_id within the documentation
         content_web_package_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           minLength: 1
           description: Known as content_web_package_id within the documentation
         course_id:
@@ -502,10 +465,63 @@ components:
           type: string
           maxLength: 5000
         time_seconds:
-          type: integer
+          type:
+          - integer
+          - 'null'
           maximum: 2147483647
           minimum: 0
-          nullable: true
+        title:
+          type: string
+          minLength: 1
+        tooltip_html:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type8b7Enum'
+    LessonUpdateRequest:
+      type: object
+      description: Lesson Update Serializer
+      properties:
+        content_asset_id:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+          description: Known as content_asset_id within the documentation
+        content_html:
+          type: string
+        content_quiz_id:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+          description: Known as content_quiz_id within the documentation
+        content_web_package_id:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+          description: Known as content_web_package_id within the documentation
+        course_id:
+          type: string
+          minLength: 1
+          description: Known as course_id within the documentation
+        description_html:
+          type: string
+        display_fullscreen:
+          type: boolean
+        optional:
+          type: boolean
+        order:
+          type: integer
+        search_keywords:
+          type: string
+          maxLength: 5000
+        time_seconds:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
         title:
           type: string
           minLength: 1

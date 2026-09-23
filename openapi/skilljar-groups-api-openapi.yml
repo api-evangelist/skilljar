@@ -1,26 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Skilljar Assets Groups API
+  title: Skilljar Groups API
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: Groups
 paths:
@@ -61,6 +43,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedGroupList'
           description: ''
+      summary: Groups list
+      x-summary-source: derived
     post:
       operationId: groups_create
       description: 'Create a new group.
@@ -91,6 +75,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Group'
           description: ''
+      summary: Groups create
+      x-summary-source: derived
   /v1/groups/{group_id}:
     get:
       operationId: groups_retrieve
@@ -117,9 +103,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/Group'
           description: ''
+      summary: Groups retrieve
+      x-summary-source: derived
     put:
       operationId: groups_update
-      description: "Update group details.\n\nBoth PUT and PATCH requests perform partial updates. You can modify group name, discount,\n  or sign-up field rules."
+      description: 'Update group details.
+
+
+        Both PUT and PATCH requests perform partial updates. You can modify group name, discount,
+
+        or sign-up field rules.'
       parameters:
       - in: path
         name: group_id
@@ -151,9 +144,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/GroupUpdate'
           description: ''
+      summary: Groups update
+      x-summary-source: derived
     patch:
       operationId: groups_partial_update
-      description: "Update group details.\n\nBoth PUT and PATCH requests perform partial updates. You can modify group name, discount,\n  or sign-up field rules."
+      description: 'Update group details.
+
+
+        Both PUT and PATCH requests perform partial updates. You can modify group name, discount,
+
+        or sign-up field rules.'
       parameters:
       - in: path
         name: group_id
@@ -184,6 +184,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/GroupUpdate'
           description: ''
+      summary: Groups partial update
+      x-summary-source: derived
     delete:
       operationId: groups_destroy
       description: 'Delete a group.
@@ -207,16 +209,34 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Groups destroy
+      x-summary-source: derived
 components:
   schemas:
-    SignupFieldOptionLinkRequest:
+    PatchedGroupUpdateRequest:
       type: object
       properties:
-        id:
+        name:
           type: string
           minLength: 1
-      required:
-      - id
+          description: Unique name of the group
+          maxLength: 100
+        discount_percent:
+          type:
+          - integer
+          - 'null'
+          maximum: 100
+          minimum: 0
+          description: A percentage based discount that will apply to all purchasable objects/courses
+        group_category_id:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        sign_up_field_rule:
+          allOf:
+          - $ref: '#/components/schemas/SignUpFieldRuleRequest'
+          description: Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.
     PaginatedGroupList:
       type: object
       required:
@@ -227,20 +247,22 @@ components:
           type: integer
           example: 123
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uri
           example: http://api.example.org/accounts/?page=4
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uri
           example: http://api.example.org/accounts/?page=2
         results:
           type: array
           items:
             $ref: '#/components/schemas/Group'
-    GroupUpdate:
+    Group:
       type: object
       properties:
         id:
@@ -256,14 +278,16 @@ components:
           readOnly: true
           description: Number of users currently in the group
         discount_percent:
-          type: integer
+          type:
+          - integer
+          - 'null'
           maximum: 100
           minimum: 0
-          nullable: true
           description: A percentage based discount that will apply to all purchasable objects/courses
         group_category_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         sign_up_field_rule:
           allOf:
           - $ref: '#/components/schemas/SignUpFieldRule'
@@ -272,75 +296,6 @@ components:
           type: array
           items:
             type: string
-          readOnly: true
-          description: Email domains for automatic group assignment. Read-only on update — use the email-domain-rules sub-resource to modify.
-      required:
-      - name
-    PatchedGroupUpdateRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: Unique name of the group
-          maxLength: 100
-        discount_percent:
-          type: integer
-          maximum: 100
-          minimum: 0
-          nullable: true
-          description: A percentage based discount that will apply to all purchasable objects/courses
-        group_category_id:
-          type: string
-          nullable: true
-          minLength: 1
-        sign_up_field_rule:
-          allOf:
-          - $ref: '#/components/schemas/SignUpFieldRuleRequest'
-          description: Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.
-    SignupFieldOptionLink:
-      type: object
-      properties:
-        id:
-          type: string
-        value:
-          type: string
-          description: 'Given the *incoming* primitive data, return the value for this field
-
-            that should be validated and transformed to a native value.'
-          readOnly: true
-        domain_name:
-          type: string
-          readOnly: true
-      required:
-      - id
-    GroupRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: Unique name of the group
-          maxLength: 100
-        discount_percent:
-          type: integer
-          maximum: 100
-          minimum: 0
-          nullable: true
-          description: A percentage based discount that will apply to all purchasable objects/courses
-        group_category_id:
-          type: string
-          nullable: true
-          minLength: 1
-        sign_up_field_rule:
-          allOf:
-          - $ref: '#/components/schemas/SignUpFieldRuleRequest'
-          description: Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.
-        rule_email_domains:
-          type: array
-          items:
-            type: string
-            minLength: 1
           description: Email domains for automatic group assignment. Users that register with a matching email domain will be added to this group.
       required:
       - name
@@ -361,65 +316,30 @@ components:
             $ref: '#/components/schemas/SignupFieldOptionLink'
       required:
       - options
-    Group:
+    SignupFieldOptionLink:
       type: object
       properties:
         id:
           type: string
-          readOnly: true
-          description: Known as group_id within the documentation
-        name:
+        value:
           type: string
-          description: Unique name of the group
-          maxLength: 100
-        user_count:
-          type: integer
+          description: 'Given the *incoming* primitive data, return the value for this field
+
+            that should be validated and transformed to a native value.'
           readOnly: true
-          description: Number of users currently in the group
-        discount_percent:
-          type: integer
-          maximum: 100
-          minimum: 0
-          nullable: true
-          description: A percentage based discount that will apply to all purchasable objects/courses
-        group_category_id:
+        domain_name:
           type: string
-          nullable: true
-        sign_up_field_rule:
-          allOf:
-          - $ref: '#/components/schemas/SignUpFieldRule'
-          description: Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.
-        rule_email_domains:
-          type: array
-          items:
-            type: string
-          description: Email domains for automatic group assignment. Users that register with a matching email domain will be added to this group.
+          readOnly: true
       required:
-      - name
-    GroupUpdateRequest:
+      - id
+    SignupFieldOptionLinkRequest:
       type: object
       properties:
-        name:
+        id:
           type: string
           minLength: 1
-          description: Unique name of the group
-          maxLength: 100
-        discount_percent:
-          type: integer
-          maximum: 100
-          minimum: 0
-          nullable: true
-          description: A percentage based discount that will apply to all purchasable objects/courses
-        group_category_id:
-          type: string
-          nullable: true
-          minLength: 1
-        sign_up_field_rule:
-          allOf:
-          - $ref: '#/components/schemas/SignUpFieldRuleRequest'
-          description: Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.
       required:
-      - name
+      - id
     SignUpFieldRuleRequest:
       type: object
       properties:
@@ -437,6 +357,102 @@ components:
             $ref: '#/components/schemas/SignupFieldOptionLinkRequest'
       required:
       - options
+    GroupUpdate:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as group_id within the documentation
+        name:
+          type: string
+          description: Unique name of the group
+          maxLength: 100
+        user_count:
+          type: integer
+          readOnly: true
+          description: Number of users currently in the group
+        discount_percent:
+          type:
+          - integer
+          - 'null'
+          maximum: 100
+          minimum: 0
+          description: A percentage based discount that will apply to all purchasable objects/courses
+        group_category_id:
+          type:
+          - string
+          - 'null'
+        sign_up_field_rule:
+          allOf:
+          - $ref: '#/components/schemas/SignUpFieldRule'
+          description: Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.
+        rule_email_domains:
+          type: array
+          items:
+            type: string
+          readOnly: true
+          description: Email domains for automatic group assignment. Read-only on update — use the email-domain-rules sub-resource to modify.
+      required:
+      - name
+    GroupRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Unique name of the group
+          maxLength: 100
+        discount_percent:
+          type:
+          - integer
+          - 'null'
+          maximum: 100
+          minimum: 0
+          description: A percentage based discount that will apply to all purchasable objects/courses
+        group_category_id:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        sign_up_field_rule:
+          allOf:
+          - $ref: '#/components/schemas/SignUpFieldRuleRequest'
+          description: Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.
+        rule_email_domains:
+          type: array
+          items:
+            type: string
+            minLength: 1
+          description: Email domains for automatic group assignment. Users that register with a matching email domain will be added to this group.
+      required:
+      - name
+    GroupUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Unique name of the group
+          maxLength: 100
+        discount_percent:
+          type:
+          - integer
+          - 'null'
+          maximum: 100
+          minimum: 0
+          description: A percentage based discount that will apply to all purchasable objects/courses
+        group_category_id:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        sign_up_field_rule:
+          allOf:
+          - $ref: '#/components/schemas/SignUpFieldRuleRequest'
+          description: Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.
+      required:
+      - name
   securitySchemes:
     OrganizationApiKey:
       type: http

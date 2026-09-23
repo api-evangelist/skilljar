@@ -1,26 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Skilljar Assets Courses > Labels API
+  title: Skilljar Courses > Labels API
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: Courses > Labels
 paths:
@@ -56,6 +38,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedNestedLabelAssociationList'
           description: ''
+      summary: Courses labels list
+      x-summary-source: derived
     post:
       operationId: courses_labels_create
       description: 'Associate a label with a course.
@@ -93,6 +77,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/NestedLabelAssociation'
           description: ''
+      summary: Courses labels create
+      x-summary-source: derived
   /v1/courses/{course_id}/labels/{label_id}:
     get:
       operationId: courses_labels_retrieve
@@ -125,6 +111,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/NestedLabelAssociation'
           description: ''
+      summary: Courses labels retrieve
+      x-summary-source: derived
     delete:
       operationId: courses_labels_destroy
       description: 'Remove a label association from a course.
@@ -152,6 +140,8 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Courses labels destroy
+      x-summary-source: derived
 components:
   schemas:
     NestedLabelAssociationRequest:
@@ -160,26 +150,6 @@ components:
       properties:
         label:
           $ref: '#/components/schemas/NestedLabelAssociationLabelRequest'
-      required:
-      - label
-    NestedLabelAssociationLabel:
-      type: object
-      description: Serializer for Label within a LabelAssociation.
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-          readOnly: true
-          description: Name of the label
-      required:
-      - id
-    NestedLabelAssociation:
-      type: object
-      description: Serializer for LabelAssociation tying an object to a Label.
-      properties:
-        label:
-          $ref: '#/components/schemas/NestedLabelAssociationLabel'
       required:
       - label
     PaginatedNestedLabelAssociationList:
@@ -192,19 +162,33 @@ components:
           type: integer
           example: 123
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uri
           example: http://api.example.org/accounts/?page=4
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uri
           example: http://api.example.org/accounts/?page=2
         results:
           type: array
           items:
             $ref: '#/components/schemas/NestedLabelAssociation'
+    NestedLabelAssociationLabel:
+      type: object
+      description: Serializer for Label within a LabelAssociation.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          readOnly: true
+          description: Name of the label
+      required:
+      - id
     NestedLabelAssociationLabelRequest:
       type: object
       description: Serializer for Label within a LabelAssociation.
@@ -214,6 +198,14 @@ components:
           minLength: 1
       required:
       - id
+    NestedLabelAssociation:
+      type: object
+      description: Serializer for LabelAssociation tying an object to a Label.
+      properties:
+        label:
+          $ref: '#/components/schemas/NestedLabelAssociationLabel'
+      required:
+      - label
   securitySchemes:
     OrganizationApiKey:
       type: http

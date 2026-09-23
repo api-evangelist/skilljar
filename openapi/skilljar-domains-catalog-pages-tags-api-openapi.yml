@@ -1,26 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Skilljar Assets Domains > Catalog Pages > Tags API
+  title: Skilljar Domains > Catalog Pages > Tags API
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: Domains > Catalog Pages > Tags
 paths:
@@ -65,6 +47,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedCatalogPageTagList'
           description: ''
+      summary: Domains catalog pages tags list
+      x-summary-source: derived
     post:
       operationId: domains_catalog_pages_tags_create
       description: Add a Tag to a Catalog Page.
@@ -105,6 +89,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CatalogPageTag'
           description: ''
+      summary: Domains catalog pages tags create
+      x-summary-source: derived
   /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/tags/{tag_id}:
     get:
       operationId: domains_catalog_pages_tags_retrieve
@@ -140,6 +126,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CatalogPageTag'
           description: ''
+      summary: Domains catalog pages tags retrieve
+      x-summary-source: derived
     delete:
       operationId: domains_catalog_pages_tags_destroy
       description: Removes a Tag from a Catalog Page and returns a `204` response.
@@ -170,6 +158,8 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Domains catalog pages tags destroy
+      x-summary-source: derived
 components:
   schemas:
     CatalogPageTagRequest:
@@ -178,6 +168,14 @@ components:
       properties:
         tag:
           $ref: '#/components/schemas/NestedTagRequest'
+      required:
+      - tag
+    CatalogPageTag:
+      type: object
+      description: Serializer for CatalogPageTags.
+      properties:
+        tag:
+          $ref: '#/components/schemas/NestedTag'
       required:
       - tag
     NestedTagRequest:
@@ -190,6 +188,31 @@ components:
           description: Known as tag_id within the documentation
       required:
       - id
+    PaginatedCatalogPageTagList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogPageTag'
     NestedTag:
       type: object
       description: Serializer for nested Tag models in PublishedCourseTag, PublishedPathTag, etc.
@@ -205,37 +228,6 @@ components:
           readOnly: true
       required:
       - id
-    PaginatedCatalogPageTagList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/CatalogPageTag'
-    CatalogPageTag:
-      type: object
-      description: Serializer for CatalogPageTags.
-      properties:
-        tag:
-          $ref: '#/components/schemas/NestedTag'
-      required:
-      - tag
   securitySchemes:
     OrganizationApiKey:
       type: http

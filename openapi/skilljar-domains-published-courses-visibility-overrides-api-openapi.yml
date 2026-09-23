@@ -1,26 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Skilljar Assets Domains > Published Courses > Visibility Overrides API
+  title: Skilljar Domains > Published Courses > Visibility Overrides…
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: Domains > Published Courses > Visibility Overrides
 paths:
@@ -65,6 +47,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedPublishedCourseGroupVisibilityList'
           description: ''
+      summary: Domains published courses visibility overrides list
+      x-summary-source: derived
     post:
       operationId: domains_published_courses_visibility_overrides_create
       description: Create StudentGroup visibility override for a PublishedCourse
@@ -105,6 +89,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PublishedCourseGroupVisibility'
           description: ''
+      summary: Domains published courses visibility overrides create
+      x-summary-source: derived
   /v1/domains/{domain_name}/published-courses/{published_course_id}/visibility-overrides/{student_group_id}:
     get:
       operationId: domains_published_courses_visibility_overrides_retrieve
@@ -140,6 +126,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PublishedCourseGroupVisibility'
           description: ''
+      summary: Domains published courses visibility overrides retrieve
+      x-summary-source: derived
     delete:
       operationId: domains_published_courses_visibility_overrides_destroy
       description: Deletes a StudentGroup visibility override for a PublishedCourse and returns a `204` response.
@@ -170,53 +158,10 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Domains published courses visibility overrides destroy
+      x-summary-source: derived
 components:
   schemas:
-    PublishedCourseGroupVisibilityRequest:
-      type: object
-      description: Serializer for PublishedCourseGroupVisibility overrides
-      properties:
-        student_group:
-          $ref: '#/components/schemas/StudentGroupSummaryRequest'
-        is_visible:
-          type: boolean
-      required:
-      - is_visible
-      - student_group
-    PaginatedPublishedCourseGroupVisibilityList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublishedCourseGroupVisibility'
-    PublishedCourseGroupVisibility:
-      type: object
-      description: Serializer for PublishedCourseGroupVisibility overrides
-      properties:
-        student_group:
-          $ref: '#/components/schemas/StudentGroupSummary'
-        is_visible:
-          type: boolean
-      required:
-      - is_visible
-      - student_group
     StudentGroupSummary:
       type: object
       description: Serializer for student groups for use GroupVisibility serializers
@@ -228,6 +173,53 @@ components:
           readOnly: true
       required:
       - id
+    PaginatedPublishedCourseGroupVisibilityList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublishedCourseGroupVisibility'
+    PublishedCourseGroupVisibilityRequest:
+      type: object
+      description: Serializer for PublishedCourseGroupVisibility overrides
+      properties:
+        student_group:
+          $ref: '#/components/schemas/StudentGroupSummaryRequest'
+        is_visible:
+          type: boolean
+      required:
+      - is_visible
+      - student_group
+    PublishedCourseGroupVisibility:
+      type: object
+      description: Serializer for PublishedCourseGroupVisibility overrides
+      properties:
+        student_group:
+          $ref: '#/components/schemas/StudentGroupSummary'
+        is_visible:
+          type: boolean
+      required:
+      - is_visible
+      - student_group
     StudentGroupSummaryRequest:
       type: object
       description: Serializer for student groups for use GroupVisibility serializers

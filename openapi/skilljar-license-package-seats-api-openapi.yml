@@ -1,26 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Skilljar Assets License Package Seats API
+  title: Skilljar License Package Seats API
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: License Package Seats
 paths:
@@ -62,6 +44,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedLicensePackageSeatList'
           description: ''
+      summary: License packages students list
+      x-summary-source: derived
     post:
       operationId: license_packages_students_create
       description: '***Note:*** This endpoint is only available if License Packages are enabled for your Organization.
@@ -99,6 +83,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/LicensePackageSeatCreate'
           description: ''
+      summary: License packages students create
+      x-summary-source: derived
   /v1/license-packages/{license_package_id}/students/{student_id}:
     put:
       operationId: license_packages_students_update
@@ -142,6 +128,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/LicensePackageSeatUpdate'
           description: ''
+      summary: License packages students update
+      x-summary-source: derived
     patch:
       operationId: license_packages_students_partial_update
       description: '***Note:*** This endpoint is only available if License Packages are enabled for your Organization.
@@ -184,25 +172,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/LicensePackageSeatUpdate'
           description: ''
+      summary: License packages students partial update
+      x-summary-source: derived
 components:
   schemas:
-    LicensePackageSeatUpdateRequest:
+    LicensePackageSeatUpdate:
       type: object
       description: Update serializer for LicensePackageSeat
-      properties:
-        active:
-          type: boolean
-    LicensePackageSeatCreateRequest:
-      type: object
-      description: Create serializer for LicensePackageSeat
-      properties:
-        student:
-          $ref: '#/components/schemas/LicensePackageStudentCreateRequest'
-      required:
-      - student
-    LicensePackageSeat:
-      type: object
-      description: Serializer for LicensePackageSeat
       properties:
         id:
           type: string
@@ -217,6 +193,17 @@ components:
           readOnly: true
         active:
           type: boolean
+    LicensePackageStudentCreateRequest:
+      type: object
+      description: Create serializer for LicensePackageSeat
+      properties:
+        id:
+          type: string
+          minLength: 1
+        email:
+          type: string
+          format: email
+          minLength: 1
     LicensePackageStudent:
       type: object
       description: Serializer for the student of a LicensePackageSeat
@@ -234,6 +221,52 @@ components:
           type: string
           format: email
           readOnly: true
+    LicensePackageSeatUpdateRequest:
+      type: object
+      description: Update serializer for LicensePackageSeat
+      properties:
+        active:
+          type: boolean
+    LicensePackageSeat:
+      type: object
+      description: Serializer for LicensePackageSeat
+      properties:
+        id:
+          type: string
+          readOnly: true
+        student:
+          allOf:
+          - $ref: '#/components/schemas/LicensePackageStudent'
+          readOnly: true
+        enrolled_at:
+          type: string
+          format: date-time
+          readOnly: true
+        active:
+          type: boolean
+    LicensePackageStudentCreate:
+      type: object
+      description: Create serializer for LicensePackageSeat
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+        email:
+          type: string
+          format: email
+    LicensePackageSeatCreateRequest:
+      type: object
+      description: Create serializer for LicensePackageSeat
+      properties:
+        student:
+          $ref: '#/components/schemas/LicensePackageStudentCreateRequest'
+      required:
+      - student
     LicensePackageSeatCreate:
       type: object
       description: Create serializer for LicensePackageSeat
@@ -258,38 +291,6 @@ components:
       properties:
         active:
           type: boolean
-    LicensePackageStudentCreate:
-      type: object
-      description: Create serializer for LicensePackageSeat
-      properties:
-        id:
-          type: string
-        first_name:
-          type: string
-          readOnly: true
-        last_name:
-          type: string
-          readOnly: true
-        email:
-          type: string
-          format: email
-    LicensePackageSeatUpdate:
-      type: object
-      description: Update serializer for LicensePackageSeat
-      properties:
-        id:
-          type: string
-          readOnly: true
-        student:
-          allOf:
-          - $ref: '#/components/schemas/LicensePackageStudent'
-          readOnly: true
-        enrolled_at:
-          type: string
-          format: date-time
-          readOnly: true
-        active:
-          type: boolean
     PaginatedLicensePackageSeatList:
       type: object
       required:
@@ -300,30 +301,21 @@ components:
           type: integer
           example: 123
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uri
           example: http://api.example.org/accounts/?page=4
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uri
           example: http://api.example.org/accounts/?page=2
         results:
           type: array
           items:
             $ref: '#/components/schemas/LicensePackageSeat'
-    LicensePackageStudentCreateRequest:
-      type: object
-      description: Create serializer for LicensePackageSeat
-      properties:
-        id:
-          type: string
-          minLength: 1
-        email:
-          type: string
-          format: email
-          minLength: 1
   securitySchemes:
     OrganizationApiKey:
       type: http

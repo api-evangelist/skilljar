@@ -1,26 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Skilljar Assets Domains > Catalog Pages (Builder) > Tile Containers > Tile Items API
+  title: Skilljar Domains > Catalog Pages (Builder) > Tile…
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: Domains > Catalog Pages (Builder) > Tile Containers > Tile Items
 paths:
@@ -65,6 +47,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedTileContainerItemList'
           description: ''
+      summary: Domains catalog pages tile container content blocks items list
+      x-summary-source: derived
     post:
       operationId: domains_catalog_pages_tile_container_content_blocks_items_create
       description: 'Create a new catalog page item within the specified builder catalog page content block.
@@ -113,6 +97,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TileContainerItem'
           description: ''
+      summary: Domains catalog pages tile container content blocks items create
+      x-summary-source: derived
   /v1/domains/{domain_name}/catalog-pages/{catalog_page_id}/tile-container-content-blocks/{tile_container_id}/items/{id}:
     get:
       operationId: domains_catalog_pages_tile_container_content_blocks_items_retrieve
@@ -154,6 +140,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TileContainerItem'
           description: ''
+      summary: Domains catalog pages tile container content blocks items retrieve
+      x-summary-source: derived
     put:
       operationId: domains_catalog_pages_tile_container_content_blocks_items_update
       description: Update the order of a specific catalog page item within the builder catalog page content block.
@@ -205,6 +193,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TileContainerItemOrderUpdate'
           description: ''
+      summary: Domains catalog pages tile container content blocks items update
+      x-summary-source: derived
     patch:
       operationId: domains_catalog_pages_tile_container_content_blocks_items_partial_update
       description: Update the order of a specific catalog page item within the builder catalog page content block.
@@ -256,6 +246,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TileContainerItemOrderUpdate'
           description: ''
+      summary: Domains catalog pages tile container content blocks items partial update
+      x-summary-source: derived
     delete:
       operationId: domains_catalog_pages_tile_container_content_blocks_items_destroy
       description: 'Manage items in a Catalog Tile Content Block on a Builder Catalog Page.
@@ -303,22 +295,10 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Domains catalog pages tile container content blocks items destroy
+      x-summary-source: derived
 components:
   schemas:
-    ItemTypeEnum:
-      enum:
-      - CATALOG_PAGE
-      - PUBLISHED_COURSE
-      - PLAN
-      - PUBLISHED_PATH
-      type: string
-      description: '* `CATALOG_PAGE` - Catalog Page
-
-        * `PUBLISHED_COURSE` - Published Course
-
-        * `PLAN` - Plan
-
-        * `PUBLISHED_PATH` - Published Path'
     TileContainerItem:
       type: object
       description: Serializer for TileContainerItem
@@ -341,62 +321,20 @@ components:
           type: string
         item_plan_id:
           type: string
-    TileContainerItemOrderUpdateRequest:
-      type: object
-      description: Serializer for updating the order of existing TileContainerItem
-      properties:
-        order:
-          type: integer
-          minimum: 1
-    PatchedTileContainerItemOrderUpdateRequest:
-      type: object
-      description: Serializer for updating the order of existing TileContainerItem
-      properties:
-        order:
-          type: integer
-          minimum: 1
-    TileContainerItemRequest:
-      type: object
-      description: Serializer for TileContainerItem
-      properties:
-        order:
-          type: integer
-          minimum: 1
-        item_catalog_page_id:
-          type: string
-          minLength: 1
-        item_published_path_id:
-          type: string
-          minLength: 1
-        item_published_course_id:
-          type: string
-          minLength: 1
-        item_plan_id:
-          type: string
-          minLength: 1
-    PaginatedTileContainerItemList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/TileContainerItem'
+    ItemTypeEnum:
+      enum:
+      - CATALOG_PAGE
+      - PUBLISHED_COURSE
+      - PLAN
+      - PUBLISHED_PATH
+      type: string
+      description: '* `CATALOG_PAGE` - Catalog Page
+
+        * `PUBLISHED_COURSE` - Published Course
+
+        * `PLAN` - Plan
+
+        * `PUBLISHED_PATH` - Published Path'
     TileContainerItemOrderUpdate:
       type: object
       description: Serializer for updating the order of existing TileContainerItem
@@ -423,6 +361,64 @@ components:
         item_plan_id:
           type: string
           readOnly: true
+    TileContainerItemRequest:
+      type: object
+      description: Serializer for TileContainerItem
+      properties:
+        order:
+          type: integer
+          minimum: 1
+        item_catalog_page_id:
+          type: string
+          minLength: 1
+        item_published_path_id:
+          type: string
+          minLength: 1
+        item_published_course_id:
+          type: string
+          minLength: 1
+        item_plan_id:
+          type: string
+          minLength: 1
+    PatchedTileContainerItemOrderUpdateRequest:
+      type: object
+      description: Serializer for updating the order of existing TileContainerItem
+      properties:
+        order:
+          type: integer
+          minimum: 1
+    TileContainerItemOrderUpdateRequest:
+      type: object
+      description: Serializer for updating the order of existing TileContainerItem
+      properties:
+        order:
+          type: integer
+          minimum: 1
+    PaginatedTileContainerItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/TileContainerItem'
   securitySchemes:
     OrganizationApiKey:
       type: http

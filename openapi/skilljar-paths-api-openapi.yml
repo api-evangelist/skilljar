@@ -1,26 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Skilljar Assets Paths API
+  title: Skilljar Paths API
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: Paths
 paths:
@@ -52,6 +34,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedPathList'
           description: ''
+      summary: Paths list
+      x-summary-source: derived
   /v1/paths/{path_id}:
     get:
       operationId: paths_retrieve
@@ -78,6 +62,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Path'
           description: ''
+      summary: Paths retrieve
+      x-summary-source: derived
     put:
       operationId: paths_update
       description: 'Update an existing Path.
@@ -114,6 +100,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Path'
           description: ''
+      summary: Paths update
+      x-summary-source: derived
     patch:
       operationId: paths_partial_update
       description: 'Partially update an existing Path.
@@ -150,6 +138,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Path'
           description: ''
+      summary: Paths partial update
+      x-summary-source: derived
     delete:
       operationId: paths_destroy
       description: 'Delete a Path.
@@ -171,9 +161,11 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Paths destroy
+      x-summary-source: derived
 components:
   schemas:
-    PatchedPathRequest:
+    PathRequest:
       type: object
       properties:
         title:
@@ -199,7 +191,7 @@ components:
           minLength: 1
           description: 'Text to replace the word ''courses'' on the catalog tile for this learning path. For example: ''3 courses'''
           maxLength: 50
-    PathRequest:
+    PatchedPathRequest:
       type: object
       properties:
         title:
@@ -268,13 +260,15 @@ components:
           type: integer
           example: 123
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uri
           example: http://api.example.org/accounts/?page=4
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uri
           example: http://api.example.org/accounts/?page=2
         results:

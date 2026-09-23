@@ -1,26 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Skilljar Assets Webhooks API
+  title: Skilljar Webhooks API
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: Webhooks
 paths:
@@ -50,6 +32,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedWebHookList'
           description: ''
+      summary: Webhooks list
+      x-summary-source: derived
     post:
       operationId: webhooks_create
       description: 'Create a new webhook for your organization.
@@ -91,6 +75,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/WebHook'
           description: ''
+      summary: Webhooks create
+      x-summary-source: derived
   /v1/webhooks/{webhook_id}:
     get:
       operationId: webhooks_retrieve
@@ -119,6 +105,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/WebHook'
           description: ''
+      summary: Webhooks retrieve
+      x-summary-source: derived
     put:
       operationId: webhooks_update
       description: 'Update an existing webhook.
@@ -156,6 +144,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/WebHook'
           description: ''
+      summary: Webhooks update
+      x-summary-source: derived
     patch:
       operationId: webhooks_partial_update
       description: 'Partially update an existing webhook.
@@ -192,6 +182,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/WebHook'
           description: ''
+      summary: Webhooks partial update
+      x-summary-source: derived
     delete:
       operationId: webhooks_destroy
       description: 'Delete a webhook.
@@ -213,6 +205,8 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Webhooks destroy
+      x-summary-source: derived
   /v1/webhooks/{webhook_id}/ping:
     post:
       operationId: webhooks_ping_create
@@ -587,138 +581,6 @@ components:
         * `TOO_MANY_REDIRECTS` - TOO_MANY_REDIRECTS
 
         * `ORG_DISABLED` - ORG_DISABLED'
-    PatchedWebHookRequest:
-      type: object
-      properties:
-        target_url:
-          type: string
-          format: uri
-          minLength: 1
-          maxLength: 1024
-        active:
-          type: boolean
-          default: true
-        event_type:
-          nullable: true
-          description: '''COURSE_COMPLETION'', ''COURSE_ENROLLMENT'', ''DOMAIN_ENROLLMENT'', ''LESSON_COMPLETION'', ''PATH_COMPLETION'', ''PATH_ENROLLMENT'', ''PURCHASE_FULFILLMENT'', ''QUIZ_COMPLETION'', ''VILT_EVENT_REGISTRATION'', ''DASHBOARD_TASK_CREATED'', or null. If null, all events, regardless of type, will be sent to the webhook URL.
-
-
-            * `COURSE_COMPLETION` - Course Completion
-
-            * `COURSE_ENROLLMENT` - Course Enrollment
-
-            * `DOMAIN_ENROLLMENT` - Domain Enrollment
-
-            * `LESSON_COMPLETION` - Lesson Completion
-
-            * `PATH_COMPLETION` - Path Completion
-
-            * `PATH_ENROLLMENT` - Path Enrollment
-
-            * `PURCHASE_FULFILLMENT` - Purchase Fulfillment
-
-            * `QUIZ_COMPLETION` - Quiz Completion
-
-            * `VILT_EVENT_REGISTRATION` - VILT Event Registration
-
-            * `DASHBOARD_TASK_CREATED` - Dashboard Task Created'
-          oneOf:
-          - $ref: '#/components/schemas/EventTypeEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        basic_auth_username:
-          type: string
-          default: ''
-          description: When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the username.
-        basic_auth_password:
-          type: string
-          default: ''
-          description: When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the password.
-        additional_headers:
-          description: Dictionary of string values to include as additional HTTP headers in the webhook request. Key pairs included in this JSON dictionary will be added as individual HTTP headers to all webhook POST requests. Use double quotes for keys and values
-    PaginatedWebHookList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/WebHook'
-    NullEnum:
-      enum:
-      - null
-    WebHook:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        target_url:
-          type: string
-          format: uri
-          maxLength: 1024
-        active:
-          type: boolean
-          default: true
-        deactivate_reason:
-          readOnly: true
-          nullable: true
-          oneOf:
-          - $ref: '#/components/schemas/DeactivateReasonEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        event_type:
-          nullable: true
-          description: '''COURSE_COMPLETION'', ''COURSE_ENROLLMENT'', ''DOMAIN_ENROLLMENT'', ''LESSON_COMPLETION'', ''PATH_COMPLETION'', ''PATH_ENROLLMENT'', ''PURCHASE_FULFILLMENT'', ''QUIZ_COMPLETION'', ''VILT_EVENT_REGISTRATION'', ''DASHBOARD_TASK_CREATED'', or null. If null, all events, regardless of type, will be sent to the webhook URL.
-
-
-            * `COURSE_COMPLETION` - Course Completion
-
-            * `COURSE_ENROLLMENT` - Course Enrollment
-
-            * `DOMAIN_ENROLLMENT` - Domain Enrollment
-
-            * `LESSON_COMPLETION` - Lesson Completion
-
-            * `PATH_COMPLETION` - Path Completion
-
-            * `PATH_ENROLLMENT` - Path Enrollment
-
-            * `PURCHASE_FULFILLMENT` - Purchase Fulfillment
-
-            * `QUIZ_COMPLETION` - Quiz Completion
-
-            * `VILT_EVENT_REGISTRATION` - VILT Event Registration
-
-            * `DASHBOARD_TASK_CREATED` - Dashboard Task Created'
-          oneOf:
-          - $ref: '#/components/schemas/EventTypeEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        basic_auth_username:
-          type: string
-          default: ''
-          description: When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the username.
-        basic_auth_password:
-          type: string
-          default: ''
-          description: When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the password.
-        additional_headers:
-          description: Dictionary of string values to include as additional HTTP headers in the webhook request. Key pairs included in this JSON dictionary will be added as individual HTTP headers to all webhook POST requests. Use double quotes for keys and values
-      required:
-      - target_url
     EventTypeEnum:
       enum:
       - COURSE_COMPLETION
@@ -751,7 +613,32 @@ components:
         * `VILT_EVENT_REGISTRATION` - VILT Event Registration
 
         * `DASHBOARD_TASK_CREATED` - Dashboard Task Created'
-    WebHookRequest:
+    PaginatedWebHookList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebHook'
+    PatchedWebHookRequest:
       type: object
       properties:
         target_url:
@@ -763,7 +650,60 @@ components:
           type: boolean
           default: true
         event_type:
-          nullable: true
+          description: '''COURSE_COMPLETION'', ''COURSE_ENROLLMENT'', ''DOMAIN_ENROLLMENT'', ''LESSON_COMPLETION'', ''PATH_COMPLETION'', ''PATH_ENROLLMENT'', ''PURCHASE_FULFILLMENT'', ''QUIZ_COMPLETION'', ''VILT_EVENT_REGISTRATION'', ''DASHBOARD_TASK_CREATED'', or null. If null, all events, regardless of type, will be sent to the webhook URL.
+
+
+            * `COURSE_COMPLETION` - Course Completion
+
+            * `COURSE_ENROLLMENT` - Course Enrollment
+
+            * `DOMAIN_ENROLLMENT` - Domain Enrollment
+
+            * `LESSON_COMPLETION` - Lesson Completion
+
+            * `PATH_COMPLETION` - Path Completion
+
+            * `PATH_ENROLLMENT` - Path Enrollment
+
+            * `PURCHASE_FULFILLMENT` - Purchase Fulfillment
+
+            * `QUIZ_COMPLETION` - Quiz Completion
+
+            * `VILT_EVENT_REGISTRATION` - VILT Event Registration
+
+            * `DASHBOARD_TASK_CREATED` - Dashboard Task Created'
+          oneOf:
+          - $ref: '#/components/schemas/EventTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        basic_auth_username:
+          type: string
+          default: ''
+          description: When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the username.
+        basic_auth_password:
+          type: string
+          default: ''
+          description: When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the password.
+        additional_headers:
+          description: Dictionary of string values to include as additional HTTP headers in the webhook request. Key pairs included in this JSON dictionary will be added as individual HTTP headers to all webhook POST requests. Use double quotes for keys and values
+    WebHook:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        target_url:
+          type: string
+          format: uri
+          maxLength: 1024
+        active:
+          type: boolean
+          default: true
+        deactivate_reason:
+          readOnly: true
+          oneOf:
+          - $ref: '#/components/schemas/DeactivateReasonEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        event_type:
           description: '''COURSE_COMPLETION'', ''COURSE_ENROLLMENT'', ''DOMAIN_ENROLLMENT'', ''LESSON_COMPLETION'', ''PATH_COMPLETION'', ''PATH_ENROLLMENT'', ''PURCHASE_FULFILLMENT'', ''QUIZ_COMPLETION'', ''VILT_EVENT_REGISTRATION'', ''DASHBOARD_TASK_CREATED'', or null. If null, all events, regardless of type, will be sent to the webhook URL.
 
 
@@ -801,6 +741,58 @@ components:
           description: Dictionary of string values to include as additional HTTP headers in the webhook request. Key pairs included in this JSON dictionary will be added as individual HTTP headers to all webhook POST requests. Use double quotes for keys and values
       required:
       - target_url
+    WebHookRequest:
+      type: object
+      properties:
+        target_url:
+          type: string
+          format: uri
+          minLength: 1
+          maxLength: 1024
+        active:
+          type: boolean
+          default: true
+        event_type:
+          description: '''COURSE_COMPLETION'', ''COURSE_ENROLLMENT'', ''DOMAIN_ENROLLMENT'', ''LESSON_COMPLETION'', ''PATH_COMPLETION'', ''PATH_ENROLLMENT'', ''PURCHASE_FULFILLMENT'', ''QUIZ_COMPLETION'', ''VILT_EVENT_REGISTRATION'', ''DASHBOARD_TASK_CREATED'', or null. If null, all events, regardless of type, will be sent to the webhook URL.
+
+
+            * `COURSE_COMPLETION` - Course Completion
+
+            * `COURSE_ENROLLMENT` - Course Enrollment
+
+            * `DOMAIN_ENROLLMENT` - Domain Enrollment
+
+            * `LESSON_COMPLETION` - Lesson Completion
+
+            * `PATH_COMPLETION` - Path Completion
+
+            * `PATH_ENROLLMENT` - Path Enrollment
+
+            * `PURCHASE_FULFILLMENT` - Purchase Fulfillment
+
+            * `QUIZ_COMPLETION` - Quiz Completion
+
+            * `VILT_EVENT_REGISTRATION` - VILT Event Registration
+
+            * `DASHBOARD_TASK_CREATED` - Dashboard Task Created'
+          oneOf:
+          - $ref: '#/components/schemas/EventTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        basic_auth_username:
+          type: string
+          default: ''
+          description: When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the username.
+        basic_auth_password:
+          type: string
+          default: ''
+          description: When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the password.
+        additional_headers:
+          description: Dictionary of string values to include as additional HTTP headers in the webhook request. Key pairs included in this JSON dictionary will be added as individual HTTP headers to all webhook POST requests. Use double quotes for keys and values
+      required:
+      - target_url
+    NullEnum:
+      enum:
+      - null
   securitySchemes:
     OrganizationApiKey:
       type: http

@@ -1,33 +1,20 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Skilljar Assets Domains > Users API
+  title: Skilljar Domains > Users API
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: Domains > Users
 paths:
   /v1/domains/{domain_name}/users:
     get:
       operationId: domains_users_list
-      description: "List users for a domain.\n\nReturns a paginated list of users associated with the domain.\n  Supports filtering by user details, access code, and signup field data."
+      description: 'List users for a domain.
+
+
+        Returns a paginated list of users associated with the domain.
+
+        Supports filtering by user details, access code, and signup field data.'
       parameters:
       - in: query
         name: access_code
@@ -119,9 +106,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedDomainUserListItemList'
           description: ''
+      summary: Domains users list
+      x-summary-source: derived
     post:
       operationId: domains_users_create
-      description: "Add a user to a domain.\n\nIf the provided email address already exists, the user will be added to the domain\n  and their existing details will be returned.\n\nIf the email is new, a new user will be created and added to the domain."
+      description: 'Add a user to a domain.
+
+
+        If the provided email address already exists, the user will be added to the domain
+
+        and their existing details will be returned.
+
+
+        If the email is new, a new user will be created and added to the domain.'
       parameters:
       - in: path
         name: domain_name
@@ -153,6 +150,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/DomainUserCreate'
           description: ''
+      summary: Domains users create
+      x-summary-source: derived
   /v1/domains/{domain_name}/users/{user_id}:
     get:
       operationId: domains_users_retrieve
@@ -182,9 +181,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/DomainUserDetail'
           description: ''
+      summary: Domains users retrieve
+      x-summary-source: derived
     put:
       operationId: domains_users_update
-      description: "Update a user's domain membership.\n\nOnly the `active` status, `expires_at` date, and `access_code`\n  (which can be removed by setting to null) may be updated. Both PUT and PATCH perform partial updates."
+      description: 'Update a user''s domain membership.
+
+
+        Only the `active` status, `expires_at` date, and `access_code`
+
+        (which can be removed by setting to null) may be updated. Both PUT and PATCH perform partial updates.'
       parameters:
       - in: path
         name: domain_name
@@ -221,9 +227,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/DomainUserUpdate'
           description: ''
+      summary: Domains users update
+      x-summary-source: derived
     patch:
       operationId: domains_users_partial_update
-      description: "Update a user's domain membership.\n\nOnly the `active` status, `expires_at` date, and `access_code`\n  (which can be removed by setting to null) may be updated. Both PUT and PATCH perform partial updates."
+      description: 'Update a user''s domain membership.
+
+
+        Only the `active` status, `expires_at` date, and `access_code`
+
+        (which can be removed by setting to null) may be updated. Both PUT and PATCH perform partial updates.'
       parameters:
       - in: path
         name: domain_name
@@ -260,6 +273,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/DomainUserUpdate'
           description: ''
+      summary: Domains users partial update
+      x-summary-source: derived
   /v1/domains/{domain_name}/users/bulk-create:
     post:
       operationId: bulk_create_domain_users
@@ -295,20 +310,54 @@ paths:
               schema:
                 $ref: '#/components/schemas/DomainUserDetail'
           description: ''
+      summary: Bulk create domain users
+      x-summary-source: derived
 components:
   schemas:
-    AccessCodePool:
+    AccessCodeRequest:
       type: object
       properties:
         id:
           type: string
-        name:
-          type: string
-          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard
-          maxLength: 255
+          minLength: 1
       required:
       - id
-      - name
+    SignupFieldSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+          readOnly: true
+      required:
+      - id
+    PatchedDomainUserUpdateRequest:
+      type: object
+      properties:
+        active:
+          type: boolean
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        access_code:
+          allOf:
+          - $ref: '#/components/schemas/AccessCodeRequest'
+          description: Information about the access code entered by the user, if they used one to join a private domain
+    BulkDomainUserCreateRequest:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkUserRequest'
+          description: List of users to create. Maximum 1000 users per request.
+          maxItems: 1000
+          minItems: 1
+      required:
+      - users
     BulkUserRequest:
       type: object
       properties:
@@ -330,45 +379,18 @@ components:
           default: true
           description: Only active users have access to a private domain
         marketing_optin:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           description: Indicates user has accepted or rejected the marketing optin message
         expires_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: ISO 8601 formatted datetime string indicating when the access to the domain will expire
       required:
       - email
-    AccessCodeRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          minLength: 1
-      required:
-      - id
-    DomainUserCreateRequest:
-      type: object
-      properties:
-        user:
-          allOf:
-          - $ref: '#/components/schemas/UserRequest'
-          description: User details
-        active:
-          type: boolean
-          description: Only active users have access to a private domain
-        marketing_optin:
-          type: boolean
-          nullable: true
-          description: Indicates user has accepted or rejected the marketing optin message.  Null indicates no marketing option message was shown to user
-        expires_at:
-          type: string
-          format: date-time
-          nullable: true
-          description: ISO 8601 formatted datetime string indicating when the access to the domain will expire - ignored on public domains
-      required:
-      - user
     UserRequest:
       type: object
       description: 'Version of the user serializer configured to lookup a user given the user''s email.  If a user with this email does
@@ -391,32 +413,6 @@ components:
           maxLength: 50
       required:
       - email
-    BulkDomainUserCreateRequest:
-      type: object
-      properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/BulkUserRequest'
-          description: List of users to create. Maximum 1000 users per request.
-          maxItems: 1000
-          minItems: 1
-      required:
-      - users
-    DomainUserUpdateRequest:
-      type: object
-      properties:
-        active:
-          type: boolean
-        expires_at:
-          type: string
-          format: date-time
-          nullable: true
-        access_code:
-          allOf:
-          - $ref: '#/components/schemas/AccessCodeRequest'
-          nullable: true
-          description: Information about the access code entered by the user, if they used one to join a private domain
     DomainUserUpdate:
       type: object
       properties:
@@ -428,22 +424,23 @@ components:
         active:
           type: boolean
         marketing_optin:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           readOnly: true
-          nullable: true
         enrolled_at:
           type: string
           format: date-time
           readOnly: true
           description: ISO 8601 formatted datetime string indicating when the user was first added to the domain
         expires_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         access_code:
           allOf:
           - $ref: '#/components/schemas/AccessCode'
-          nullable: true
           description: Information about the access code entered by the user, if they used one to join a private domain
         signup_fields:
           type: array
@@ -454,6 +451,68 @@ components:
           type: string
           readOnly: true
           description: Single-use login token, included in response if the domain is configured to used token-based SSO
+    PaginatedDomainUserListItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DomainUserListItem'
+    DomainUserDetail:
+      type: object
+      properties:
+        user:
+          allOf:
+          - $ref: '#/components/schemas/User'
+          readOnly: true
+          description: User details
+        active:
+          type: boolean
+          description: Only active users have access to a private domain
+        marketing_optin:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates user has accepted or rejected the marketing optin message.  Null indicates no marketing option message was shown to user
+        enrolled_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: ISO 8601 formatted datetime string indicating when the user was first added to the domain
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the access to the domain will expire - ignored on public domains
+        access_code:
+          allOf:
+          - $ref: '#/components/schemas/AccessCode'
+          readOnly: true
+          description: Information about the access code entered by the user, if they used one to join a private domain
+        signup_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSignupFieldValue'
+          readOnly: true
     AccessCode:
       type: object
       properties:
@@ -470,6 +529,28 @@ components:
           description: Pool of access codes to which this code belongs
       required:
       - id
+    AccessCodePool:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard
+          maxLength: 255
+      required:
+      - id
+      - name
+    UserSignupFieldValue:
+      type: object
+      properties:
+        signup_field:
+          $ref: '#/components/schemas/SignupFieldSummary'
+        value:
+          type: string
+      required:
+      - signup_field
+      - value
     DomainUserListItem:
       type: object
       properties:
@@ -482,8 +563,9 @@ components:
           type: boolean
           description: Only active users have access to a private domain
         marketing_optin:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           description: Indicates user has accepted or rejected the marketing optin message.  Null indicates no marketing option message was shown to user
         enrolled_at:
           type: string
@@ -491,65 +573,16 @@ components:
           readOnly: true
           description: ISO 8601 formatted datetime string indicating when the user was first added to the domain
         expires_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: ISO 8601 formatted datetime string indicating when the access to the domain will expire - ignored on public domains
         access_code:
           allOf:
           - $ref: '#/components/schemas/AccessCode'
           readOnly: true
           description: Information about the access code entered by the user, if they used one to join a private domain
-    DomainUserCreate:
-      type: object
-      properties:
-        user:
-          allOf:
-          - $ref: '#/components/schemas/User'
-          description: User details
-        active:
-          type: boolean
-          description: Only active users have access to a private domain
-        marketing_optin:
-          type: boolean
-          nullable: true
-          description: Indicates user has accepted or rejected the marketing optin message.  Null indicates no marketing option message was shown to user
-        enrolled_at:
-          type: string
-          format: date-time
-          readOnly: true
-          description: ISO 8601 formatted datetime string indicating when the user was first added to the domain
-        expires_at:
-          type: string
-          format: date-time
-          nullable: true
-          description: ISO 8601 formatted datetime string indicating when the access to the domain will expire - ignored on public domains
-        access_code:
-          allOf:
-          - $ref: '#/components/schemas/AccessCode'
-          readOnly: true
-          description: Information about the access code entered by the user, if they used one to join a private domain
-        signup_fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserSignupFieldValue'
-          readOnly: true
-        login_token:
-          type: string
-          readOnly: true
-          description: Single-use login token, included in response if the domain is configured to used token-based SSO
-      required:
-      - user
-    SignupFieldSummary:
-      type: object
-      properties:
-        id:
-          type: string
-        label:
-          type: string
-          readOnly: true
-      required:
-      - id
     User:
       type: object
       description: 'Version of the user serializer configured to lookup a user given the user''s email.  If a user with this email does
@@ -579,67 +612,43 @@ components:
           readOnly: true
       required:
       - email
-    PatchedDomainUserUpdateRequest:
-      type: object
-      properties:
-        active:
-          type: boolean
-        expires_at:
-          type: string
-          format: date-time
-          nullable: true
-        access_code:
-          allOf:
-          - $ref: '#/components/schemas/AccessCodeRequest'
-          nullable: true
-          description: Information about the access code entered by the user, if they used one to join a private domain
-    UserSignupFieldValue:
-      type: object
-      properties:
-        signup_field:
-          $ref: '#/components/schemas/SignupFieldSummary'
-        value:
-          type: string
-      required:
-      - signup_field
-      - value
-    PaginatedDomainUserListItemList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/DomainUserListItem'
-    DomainUserDetail:
+    DomainUserCreateRequest:
       type: object
       properties:
         user:
           allOf:
-          - $ref: '#/components/schemas/User'
-          readOnly: true
+          - $ref: '#/components/schemas/UserRequest'
           description: User details
         active:
           type: boolean
           description: Only active users have access to a private domain
         marketing_optin:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates user has accepted or rejected the marketing optin message.  Null indicates no marketing option message was shown to user
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the access to the domain will expire - ignored on public domains
+      required:
+      - user
+    DomainUserCreate:
+      type: object
+      properties:
+        user:
+          allOf:
+          - $ref: '#/components/schemas/User'
+          description: User details
+        active:
           type: boolean
-          nullable: true
+          description: Only active users have access to a private domain
+        marketing_optin:
+          type:
+          - boolean
+          - 'null'
           description: Indicates user has accepted or rejected the marketing optin message.  Null indicates no marketing option message was shown to user
         enrolled_at:
           type: string
@@ -647,9 +656,10 @@ components:
           readOnly: true
           description: ISO 8601 formatted datetime string indicating when the user was first added to the domain
         expires_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: ISO 8601 formatted datetime string indicating when the access to the domain will expire - ignored on public domains
         access_code:
           allOf:
@@ -661,6 +671,26 @@ components:
           items:
             $ref: '#/components/schemas/UserSignupFieldValue'
           readOnly: true
+        login_token:
+          type: string
+          readOnly: true
+          description: Single-use login token, included in response if the domain is configured to used token-based SSO
+      required:
+      - user
+    DomainUserUpdateRequest:
+      type: object
+      properties:
+        active:
+          type: boolean
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        access_code:
+          allOf:
+          - $ref: '#/components/schemas/AccessCodeRequest'
+          description: Information about the access code entered by the user, if they used one to join a private domain
   securitySchemes:
     OrganizationApiKey:
       type: http

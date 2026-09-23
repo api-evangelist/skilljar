@@ -1,26 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Skilljar Assets API
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: Assets
 paths:
@@ -58,6 +40,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedAssetList'
           description: ''
+      summary: Assets list
+      x-summary-source: derived
     post:
       operationId: assets_create
       description: 'Upload a new asset to your organization.
@@ -91,6 +75,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Asset'
           description: ''
+      summary: Assets create
+      x-summary-source: derived
   /v1/assets/{asset_id}:
     get:
       operationId: assets_retrieve
@@ -119,6 +105,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Asset'
           description: ''
+      summary: Assets retrieve
+      x-summary-source: derived
     delete:
       operationId: assets_destroy
       description: 'Permanently delete an asset from your organization.
@@ -144,8 +132,30 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Assets destroy
+      x-summary-source: derived
 components:
   schemas:
+    AssetTypeEnum:
+      enum:
+      - AUDIO_BOTR
+      - HTML
+      - PDF
+      - VIDEO_BOTR
+      - FILE
+      - TEMPLATE
+      type: string
+      description: '* `AUDIO_BOTR` - Audio - JWPlatform
+
+        * `HTML` - HTML Snippet
+
+        * `PDF` - PDF File
+
+        * `VIDEO_BOTR` - Video - JWPlatform
+
+        * `FILE` - Generic File
+
+        * `TEMPLATE` - Template from the database'
     PaginatedAssetList:
       type: object
       required:
@@ -156,19 +166,63 @@ components:
           type: integer
           example: 123
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uri
           example: http://api.example.org/accounts/?page=4
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uri
           example: http://api.example.org/accounts/?page=2
         results:
           type: array
           items:
             $ref: '#/components/schemas/Asset'
+    AssetMetadataRequest:
+      type: object
+      description: 'This defines the `asset` section of create & update requests.
+
+
+        Used in `AssetSerializer`'
+      properties:
+        name:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: In the Dashboard, this is called “Asset Name” or “Display Name”.
+        embed_link_url:
+          type: string
+          writeOnly: true
+          minLength: 1
+        aspect_ratio:
+          allOf:
+          - $ref: '#/components/schemas/AspectRatioEnum'
+          writeOnly: true
+        sync_completion:
+          type: boolean
+          writeOnly: true
+          default: false
+    AssetRequest:
+      type: object
+      description: 'Used when creating, updating or reading a single Asset object.
+
+
+        Inherits from AssetSummarySerializer.
+
+        Adds in the `download_url` field as well as the write fields.'
+      properties:
+        content_url:
+          type: string
+          format: uri
+          writeOnly: true
+          minLength: 1
+        asset:
+          allOf:
+          - $ref: '#/components/schemas/AssetMetadataRequest'
+          writeOnly: true
     Asset:
       type: object
       description: 'Used when creating, updating or reading a single Asset object.
@@ -210,30 +264,6 @@ components:
         sync_completion:
           type: boolean
           readOnly: true
-    AssetMetadataRequest:
-      type: object
-      description: 'This defines the `asset` section of create & update requests.
-
-
-        Used in `AssetSerializer`'
-      properties:
-        name:
-          type: string
-          writeOnly: true
-          minLength: 1
-          description: In the Dashboard, this is called “Asset Name” or “Display Name”.
-        embed_link_url:
-          type: string
-          writeOnly: true
-          minLength: 1
-        aspect_ratio:
-          allOf:
-          - $ref: '#/components/schemas/AspectRatioEnum'
-          writeOnly: true
-        sync_completion:
-          type: boolean
-          writeOnly: true
-          default: false
     AspectRatioEnum:
       enum:
       - '16:9'
@@ -242,44 +272,6 @@ components:
       description: '* `16:9` - 16:9
 
         * `4:3` - 4:3'
-    AssetRequest:
-      type: object
-      description: 'Used when creating, updating or reading a single Asset object.
-
-
-        Inherits from AssetSummarySerializer.
-
-        Adds in the `download_url` field as well as the write fields.'
-      properties:
-        content_url:
-          type: string
-          format: uri
-          writeOnly: true
-          minLength: 1
-        asset:
-          allOf:
-          - $ref: '#/components/schemas/AssetMetadataRequest'
-          writeOnly: true
-    AssetTypeEnum:
-      enum:
-      - AUDIO_BOTR
-      - HTML
-      - PDF
-      - VIDEO_BOTR
-      - FILE
-      - TEMPLATE
-      type: string
-      description: '* `AUDIO_BOTR` - Audio - JWPlatform
-
-        * `HTML` - HTML Snippet
-
-        * `PDF` - PDF File
-
-        * `VIDEO_BOTR` - Video - JWPlatform
-
-        * `FILE` - Generic File
-
-        * `TEMPLATE` - Template from the database'
   securitySchemes:
     OrganizationApiKey:
       type: http

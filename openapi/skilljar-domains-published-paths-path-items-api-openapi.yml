@@ -1,26 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Skilljar Assets Domains > Published Paths > Path Items API
+  title: Skilljar Domains > Published Paths > Path Items API
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: Domains > Published Paths > Path Items
 paths:
@@ -62,6 +44,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedPublishedPathPathItemList'
           description: ''
+      summary: Domains published paths path items list
+      x-summary-source: derived
     post:
       operationId: domains_published_paths_path_items_create
       description: 'Create a new Path Item in a Published Path.
@@ -105,6 +89,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PublishedPathPathItem'
           description: ''
+      summary: Domains published paths path items create
+      x-summary-source: derived
   /v1/domains/{domain_name}/published-paths/{published_path_id}/path-items/{path_item_id}:
     get:
       operationId: domains_published_paths_path_items_retrieve
@@ -143,6 +129,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PublishedPathPathItem'
           description: ''
+      summary: Domains published paths path items retrieve
+      x-summary-source: derived
     put:
       operationId: domains_published_paths_path_items_update
       description: 'Update a Path Item.
@@ -191,6 +179,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PublishedPathPathItemUpdate'
           description: ''
+      summary: Domains published paths path items update
+      x-summary-source: derived
     patch:
       operationId: domains_published_paths_path_items_partial_update
       description: 'Partially update a Path Item.
@@ -239,6 +229,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PublishedPathPathItemUpdate'
           description: ''
+      summary: Domains published paths path items partial update
+      x-summary-source: derived
     delete:
       operationId: domains_published_paths_path_items_destroy
       description: 'Delete a Path Item.
@@ -272,13 +264,47 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Domains published paths path items destroy
+      x-summary-source: derived
 components:
   schemas:
+    PathItemPublishedCourseSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        course_id:
+          type: string
+          readOnly: true
+        slug:
+          type: string
+          readOnly: true
+          pattern: ^[-a-zA-Z0-9_]+$
+      required:
+      - id
     PublishedPathPathItemUpdateRequest:
       type: object
       properties:
         order:
           type: integer
+    PatchedPublishedPathPathItemUpdateRequest:
+      type: object
+      properties:
+        order:
+          type: integer
+    PublishedPathPathItem:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        order:
+          type: integer
+        published_course:
+          $ref: '#/components/schemas/PathItemPublishedCourseSummary'
+      required:
+      - order
+      - published_course
     PublishedPathPathItemRequest:
       type: object
       properties:
@@ -289,29 +315,6 @@ components:
       required:
       - order
       - published_course
-    PaginatedPublishedPathPathItemList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublishedPathPathItem'
     PublishedPathPathItemUpdate:
       type: object
       properties:
@@ -332,38 +335,31 @@ components:
           minLength: 1
       required:
       - id
-    PathItemPublishedCourseSummary:
+    PaginatedPublishedPathPathItemList:
       type: object
-      properties:
-        id:
-          type: string
-        course_id:
-          type: string
-          readOnly: true
-        slug:
-          type: string
-          readOnly: true
-          pattern: ^[-a-zA-Z0-9_]+$
       required:
-      - id
-    PublishedPathPathItem:
-      type: object
+      - count
+      - results
       properties:
-        id:
-          type: string
-          readOnly: true
-        order:
+        count:
           type: integer
-        published_course:
-          $ref: '#/components/schemas/PathItemPublishedCourseSummary'
-      required:
-      - order
-      - published_course
-    PatchedPublishedPathPathItemUpdateRequest:
-      type: object
-      properties:
-        order:
-          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublishedPathPathItem'
   securitySchemes:
     OrganizationApiKey:
       type: http

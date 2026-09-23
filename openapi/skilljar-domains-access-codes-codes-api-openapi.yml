@@ -1,26 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Skilljar Assets Domains > Access Codes > Codes API
+  title: Skilljar Domains > Access Codes > Codes API
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: Domains > Access Codes > Codes
 paths:
@@ -68,6 +50,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedDomainAccessCodeListItemList'
           description: ''
+      summary: Domains access code pools access codes list
+      x-summary-source: derived
     post:
       operationId: domains_access_code_pools_access_codes_create
       description: 'Create an access code.
@@ -110,6 +94,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/DomainAccessCodeDetail'
           description: ''
+      summary: Domains access code pools access codes create
+      x-summary-source: derived
   /v1/domains/{domain_name}/access-code-pools/{access_code_pool_id}/access-codes/{access_code_id}:
     get:
       operationId: domains_access_code_pools_access_codes_retrieve
@@ -148,6 +134,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/DomainAccessCodeDetail'
           description: ''
+      summary: Domains access code pools access codes retrieve
+      x-summary-source: derived
     put:
       operationId: domains_access_code_pools_access_codes_update
       description: 'Update an access code.
@@ -196,6 +184,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/DomainAccessCodeDetail'
           description: ''
+      summary: Domains access code pools access codes update
+      x-summary-source: derived
     patch:
       operationId: domains_access_code_pools_access_codes_partial_update
       description: 'Update an access code.
@@ -244,6 +234,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/DomainAccessCodeDetail'
           description: ''
+      summary: Domains access code pools access codes partial update
+      x-summary-source: derived
     delete:
       operationId: domains_access_code_pools_access_codes_destroy
       description: 'Delete an access code.
@@ -277,39 +269,10 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Domains access code pools access codes destroy
+      x-summary-source: derived
 components:
   schemas:
-    DomainAccessCodeDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        code:
-          type: string
-          maxLength: 40
-        active:
-          type: boolean
-          default: true
-        max_uses:
-          type: integer
-          minimum: 0
-        use_count:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          readOnly: true
-        duration:
-          type: integer
-          minimum: 1
-          nullable: true
-        duration_unit:
-          $ref: '#/components/schemas/DurationUnitEnum'
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/DomainAccessCodeUser'
-          readOnly: true
     PaginatedDomainAccessCodeListItemList:
       type: object
       required:
@@ -320,13 +283,15 @@ components:
           type: integer
           example: 123
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uri
           example: http://api.example.org/accounts/?page=4
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uri
           example: http://api.example.org/accounts/?page=2
         results:
@@ -354,22 +319,15 @@ components:
           minimum: 0
           readOnly: true
         duration:
-          type: integer
+          type:
+          - integer
+          - 'null'
           minimum: 1
-          nullable: true
         duration_unit:
           $ref: '#/components/schemas/DurationUnitEnum'
       required:
       - code
-    DurationUnitEnum:
-      enum:
-      - MONTHS
-      - DAYS
-      type: string
-      description: '* `MONTHS` - Months
-
-        * `DAYS` - Days'
-    PatchedDomainAccessCodeDetailRequest:
+    DomainAccessCodeDetailRequest:
       type: object
       properties:
         code:
@@ -383,9 +341,10 @@ components:
           type: integer
           minimum: 0
         duration:
-          type: integer
+          type:
+          - integer
+          - 'null'
           minimum: 1
-          nullable: true
         duration_unit:
           $ref: '#/components/schemas/DurationUnitEnum'
     DomainAccessCodeUser:
@@ -406,7 +365,47 @@ components:
           readOnly: true
       required:
       - id
-    DomainAccessCodeDetailRequest:
+    DurationUnitEnum:
+      enum:
+      - MONTHS
+      - DAYS
+      type: string
+      description: '* `MONTHS` - Months
+
+        * `DAYS` - Days'
+    DomainAccessCodeDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        code:
+          type: string
+          maxLength: 40
+        active:
+          type: boolean
+          default: true
+        max_uses:
+          type: integer
+          minimum: 0
+        use_count:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          readOnly: true
+        duration:
+          type:
+          - integer
+          - 'null'
+          minimum: 1
+        duration_unit:
+          $ref: '#/components/schemas/DurationUnitEnum'
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/DomainAccessCodeUser'
+          readOnly: true
+    PatchedDomainAccessCodeDetailRequest:
       type: object
       properties:
         code:
@@ -420,9 +419,10 @@ components:
           type: integer
           minimum: 0
         duration:
-          type: integer
+          type:
+          - integer
+          - 'null'
           minimum: 1
-          nullable: true
         duration_unit:
           $ref: '#/components/schemas/DurationUnitEnum'
   securitySchemes:

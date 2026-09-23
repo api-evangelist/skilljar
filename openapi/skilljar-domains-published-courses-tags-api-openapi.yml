@@ -1,26 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Skilljar Assets Domains > Published Courses > Tags API
+  title: Skilljar Domains > Published Courses > Tags API
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: Domains > Published Courses > Tags
 paths:
@@ -65,6 +47,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedPublishedCourseTagList'
           description: ''
+      summary: Domains published courses tags list
+      x-summary-source: derived
     post:
       operationId: domains_published_courses_tags_create
       description: Add a Tag to a Published Course.
@@ -105,6 +89,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PublishedCourseTag'
           description: ''
+      summary: Domains published courses tags create
+      x-summary-source: derived
   /v1/domains/{domain_name}/published-courses/{published_course_id}/tags/{tag_id}:
     get:
       operationId: domains_published_courses_tags_retrieve
@@ -140,6 +126,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PublishedCourseTag'
           description: ''
+      summary: Domains published courses tags retrieve
+      x-summary-source: derived
     delete:
       operationId: domains_published_courses_tags_destroy
       description: Removes a Tag from a Published Course and returns a `204` response.
@@ -170,14 +158,16 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Domains published courses tags destroy
+      x-summary-source: derived
 components:
   schemas:
-    PublishedCourseTagRequest:
+    PublishedCourseTag:
       type: object
       description: Serializer for PublishedCourseTags.
       properties:
         tag:
-          $ref: '#/components/schemas/NestedTagRequest'
+          $ref: '#/components/schemas/NestedTag'
       required:
       - tag
     NestedTagRequest:
@@ -190,6 +180,14 @@ components:
           description: Known as tag_id within the documentation
       required:
       - id
+    PublishedCourseTagRequest:
+      type: object
+      description: Serializer for PublishedCourseTags.
+      properties:
+        tag:
+          $ref: '#/components/schemas/NestedTagRequest'
+      required:
+      - tag
     PaginatedPublishedCourseTagList:
       type: object
       required:
@@ -200,13 +198,15 @@ components:
           type: integer
           example: 123
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uri
           example: http://api.example.org/accounts/?page=4
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uri
           example: http://api.example.org/accounts/?page=2
         results:
@@ -228,14 +228,6 @@ components:
           readOnly: true
       required:
       - id
-    PublishedCourseTag:
-      type: object
-      description: Serializer for PublishedCourseTags.
-      properties:
-        tag:
-          $ref: '#/components/schemas/NestedTag'
-      required:
-      - tag
   securitySchemes:
     OrganizationApiKey:
       type: http

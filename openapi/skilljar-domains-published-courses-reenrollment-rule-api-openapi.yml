@@ -1,26 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Skilljar Assets Domains > Published Courses > Reenrollment Rule API
+  title: Skilljar Domains > Published Courses > Reenrollment Rule API
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: Domains > Published Courses > Reenrollment Rule
 paths:
@@ -53,6 +35,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PublishedCourseReenrollmentRule'
           description: ''
+      summary: Domains published courses reenrollment rule retrieve
+      x-summary-source: derived
     post:
       operationId: domains_published_courses_reenrollment_rule_create
       description: Create the reenrollment rule for a `PublishedCourse` instance.
@@ -93,6 +77,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PublishedCourseReenrollmentRule'
           description: ''
+      summary: Domains published courses reenrollment rule create
+      x-summary-source: derived
     put:
       operationId: domains_published_courses_reenrollment_rule_update
       description: 'Update the reenrollment rule for a `PublishedCourse`.
@@ -135,6 +121,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdatePublishedCourseReenrollmentRule'
           description: ''
+      summary: Domains published courses reenrollment rule update
+      x-summary-source: derived
     patch:
       operationId: domains_published_courses_reenrollment_rule_partial_update
       description: 'Update the reenrollment rule for a `PublishedCourse`.
@@ -177,6 +165,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdatePublishedCourseReenrollmentRule'
           description: ''
+      summary: Domains published courses reenrollment rule partial update
+      x-summary-source: derived
     delete:
       operationId: domains_published_courses_reenrollment_rule_destroy
       description: Delete the reenrollment rule for a published course. Returns a `204 No Content` response on success.
@@ -201,61 +191,10 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Domains published courses reenrollment rule destroy
+      x-summary-source: derived
 components:
   schemas:
-    PublishedCourseReenrollmentRuleRequest:
-      type: object
-      description: Serializer for Reenrollment Rule
-      properties:
-        starts_at:
-          type: string
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating when the reenrollment rule starts at. Must be in the future and at the top of the hour.
-        cycle_duration:
-          type: integer
-          minimum: 1
-        cycle_duration_unit:
-          allOf:
-          - $ref: '#/components/schemas/CycleDurationUnitEnum'
-          description: 'Available choices: MONTHS, DAYS
-
-
-            * `MONTHS` - Months
-
-            * `DAYS` - Days'
-      required:
-      - cycle_duration
-      - starts_at
-    PublishedCourseReenrollmentRule:
-      type: object
-      description: Serializer for Reenrollment Rule
-      properties:
-        id:
-          type: string
-          readOnly: true
-        starts_at:
-          type: string
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating when the reenrollment rule starts at. Must be in the future and at the top of the hour.
-        next_run_at:
-          type: string
-          format: date-time
-          readOnly: true
-        cycle_duration:
-          type: integer
-          minimum: 1
-        cycle_duration_unit:
-          allOf:
-          - $ref: '#/components/schemas/CycleDurationUnitEnum'
-          description: 'Available choices: MONTHS, DAYS
-
-
-            * `MONTHS` - Months
-
-            * `DAYS` - Days'
-      required:
-      - cycle_duration
-      - starts_at
     UpdatePublishedCourseReenrollmentRule:
       type: object
       description: Serializer for updating Reenrollment Rule
@@ -303,6 +242,14 @@ components:
             * `MONTHS` - Months
 
             * `DAYS` - Days'
+    CycleDurationUnitEnum:
+      enum:
+      - MONTHS
+      - DAYS
+      type: string
+      description: '* `MONTHS` - Months
+
+        * `DAYS` - Days'
     PatchedUpdatePublishedCourseReenrollmentRuleRequest:
       type: object
       description: Serializer for updating Reenrollment Rule
@@ -323,14 +270,59 @@ components:
             * `MONTHS` - Months
 
             * `DAYS` - Days'
-    CycleDurationUnitEnum:
-      enum:
-      - MONTHS
-      - DAYS
-      type: string
-      description: '* `MONTHS` - Months
+    PublishedCourseReenrollmentRule:
+      type: object
+      description: Serializer for Reenrollment Rule
+      properties:
+        id:
+          type: string
+          readOnly: true
+        starts_at:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the reenrollment rule starts at. Must be in the future and at the top of the hour.
+        next_run_at:
+          type: string
+          format: date-time
+          readOnly: true
+        cycle_duration:
+          type: integer
+          minimum: 1
+        cycle_duration_unit:
+          allOf:
+          - $ref: '#/components/schemas/CycleDurationUnitEnum'
+          description: 'Available choices: MONTHS, DAYS
 
-        * `DAYS` - Days'
+
+            * `MONTHS` - Months
+
+            * `DAYS` - Days'
+      required:
+      - cycle_duration
+      - starts_at
+    PublishedCourseReenrollmentRuleRequest:
+      type: object
+      description: Serializer for Reenrollment Rule
+      properties:
+        starts_at:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the reenrollment rule starts at. Must be in the future and at the top of the hour.
+        cycle_duration:
+          type: integer
+          minimum: 1
+        cycle_duration_unit:
+          allOf:
+          - $ref: '#/components/schemas/CycleDurationUnitEnum'
+          description: 'Available choices: MONTHS, DAYS
+
+
+            * `MONTHS` - Months
+
+            * `DAYS` - Days'
+      required:
+      - cycle_duration
+      - starts_at
   securitySchemes:
     OrganizationApiKey:
       type: http

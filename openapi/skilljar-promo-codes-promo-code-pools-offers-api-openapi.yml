@@ -1,26 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Skilljar Assets Promo Codes > Promo Code Pools > Offers API
+  title: Skilljar Promo Codes > Promo Code Pools > Offers API
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: Promo Codes > Promo Code Pools > Offers
 paths:
@@ -62,6 +44,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedPromoCodePoolOfferList'
           description: ''
+      summary: Promo code pools offers list
+      x-summary-source: derived
     post:
       operationId: promo_code_pools_offers_create
       description: 'Attach one or more Offers to a Promo Code Pool.
@@ -98,6 +82,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PromoCodePoolOffer'
           description: ''
+      summary: Promo code pools offers create
+      x-summary-source: derived
   /v1/promo-code-pools/{promo_code_pool_id}/offers/{offer_id}:
     delete:
       operationId: promo_code_pools_offers_destroy
@@ -126,118 +112,10 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Promo code pools offers destroy
+      x-summary-source: derived
 components:
   schemas:
-    PromoCodePoolOffer:
-      type: object
-      properties:
-        offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferItem'
-          readOnly: true
-    PromoCodePoolOfferRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          writeOnly: true
-          minLength: 1
-          description: Offer ID you wish to attach to a PromoCodePool
-    OfferItem:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as offer_id within the documentation
-        course_series_id:
-          type: string
-          readOnly: true
-        published_path_id:
-          type: string
-          readOnly: true
-        published_course_id:
-          type: string
-          readOnly: true
-        plan_id:
-          type: string
-          readOnly: true
-        domain_name:
-          type: string
-          readOnly: true
-          nullable: true
-        offer_type:
-          allOf:
-          - $ref: '#/components/schemas/OfferTypeEnum'
-          readOnly: true
-        price_cents:
-          type: integer
-          minimum: 0
-          description: The price of the offer in cents
-        currency_code:
-          allOf:
-          - $ref: '#/components/schemas/CurrencyCodeEnum'
-          description: 'Available currency codes: AUD, BRL, CAD, CNY, EUR, GBP, JPY, KRW, MXN, NZD, RUB, SEK, SGD, USD, ZAR
-
-
-            * `AUD` - AUD
-
-            * `BRL` - BRL
-
-            * `CAD` - CAD
-
-            * `CNY` - CNY
-
-            * `EUR` - EUR
-
-            * `GBP` - GBP
-
-            * `JPY` - JPY
-
-            * `KRW` - KRW
-
-            * `MXN` - MXN
-
-            * `NZD` - NZD
-
-            * `RUB` - RUB
-
-            * `SEK` - SEK
-
-            * `SGD` - SGD
-
-            * `USD` - USD
-
-            * `ZAR` - ZAR'
-        price_credits:
-          type: integer
-          minimum: 0
-          nullable: true
-          description: Number of credits, if enabled for your organization
-        sku:
-          type: string
-          readOnly: true
-        max_quantity:
-          type: integer
-          readOnly: true
-        active:
-          type: boolean
-          readOnly: true
-        starts_at:
-          type: string
-          format: date-time
-          readOnly: true
-          description: ISO 8601 formatted datetime string indicating when the offer starts at
-        ends_at:
-          type: string
-          format: date-time
-          readOnly: true
-          description: ISO 8601 formatted datetime string indicating when the offer ends at
-        linked_to_plan:
-          type: boolean
-          description: Returns True if the offer is included in a Plan offer.
-          readOnly: true
     CurrencyCodeEnum:
       enum:
       - AUD
@@ -285,6 +163,39 @@ components:
         * `USD` - USD
 
         * `ZAR` - ZAR'
+    PaginatedPromoCodePoolOfferList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromoCodePoolOffer'
+    PromoCodePoolOffer:
+      type: object
+      properties:
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferItem'
+          readOnly: true
     OfferTypeEnum:
       enum:
       - published_path
@@ -299,29 +210,110 @@ components:
         * `published_course` - Published Course
 
         * `plan` - Plan'
-    PaginatedPromoCodePoolOfferList:
+    PromoCodePoolOfferRequest:
       type: object
-      required:
-      - count
-      - results
       properties:
-        count:
+        id:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: Offer ID you wish to attach to a PromoCodePool
+    OfferItem:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as offer_id within the documentation
+        course_series_id:
+          type: string
+          readOnly: true
+        published_path_id:
+          type: string
+          readOnly: true
+        published_course_id:
+          type: string
+          readOnly: true
+        plan_id:
+          type: string
+          readOnly: true
+        domain_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        offer_type:
+          allOf:
+          - $ref: '#/components/schemas/OfferTypeEnum'
+          readOnly: true
+        price_cents:
           type: integer
-          example: 123
-        next:
+          minimum: 0
+          description: The price of the offer in cents
+        currency_code:
+          allOf:
+          - $ref: '#/components/schemas/CurrencyCodeEnum'
+          description: 'Available currency codes: AUD, BRL, CAD, CNY, EUR, GBP, JPY, KRW, MXN, NZD, RUB, SEK, SGD, USD, ZAR
+
+
+            * `AUD` - AUD
+
+            * `BRL` - BRL
+
+            * `CAD` - CAD
+
+            * `CNY` - CNY
+
+            * `EUR` - EUR
+
+            * `GBP` - GBP
+
+            * `JPY` - JPY
+
+            * `KRW` - KRW
+
+            * `MXN` - MXN
+
+            * `NZD` - NZD
+
+            * `RUB` - RUB
+
+            * `SEK` - SEK
+
+            * `SGD` - SGD
+
+            * `USD` - USD
+
+            * `ZAR` - ZAR'
+        price_credits:
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+          description: Number of credits, if enabled for your organization
+        sku:
           type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
+          readOnly: true
+        max_quantity:
+          type: integer
+          readOnly: true
+        active:
+          type: boolean
+          readOnly: true
+        starts_at:
           type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PromoCodePoolOffer'
+          format: date-time
+          readOnly: true
+          description: ISO 8601 formatted datetime string indicating when the offer starts at
+        ends_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: ISO 8601 formatted datetime string indicating when the offer ends at
+        linked_to_plan:
+          type: boolean
+          description: Returns True if the offer is included in a Plan offer.
+          readOnly: true
   securitySchemes:
     OrganizationApiKey:
       type: http

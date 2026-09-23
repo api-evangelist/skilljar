@@ -1,33 +1,24 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Skilljar Assets Domains > Plans > Enrollments API
+  title: Skilljar Domains > Plans > Enrollments API
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: Domains > Plans > Enrollments
 paths:
   /v1/domains/{domain_name}/plan/{plan_id}/plan-enrollments:
     get:
       operationId: domains_plan_plan_enrollments_list
-      description: "List all enrollments for a specific Plan.\n\nReturns a paginated list of enrollments.\nEach enrollment includes user information, enrollment status, and purchase details if available.\nA user may have multiple enrollments for a Plan. Access to a Plan is granted if at least one enrollment\n  is active and not expired."
+      description: 'List all enrollments for a specific Plan.
+
+
+        Returns a paginated list of enrollments.
+
+        Each enrollment includes user information, enrollment status, and purchase details if available.
+
+        A user may have multiple enrollments for a Plan. Access to a Plan is granted if at least one enrollment
+
+        is active and not expired.'
       parameters:
       - in: path
         name: domain_name
@@ -65,6 +56,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedPlanEnrollmentList'
           description: ''
+      summary: Domains plan plan enrollments list
+      x-summary-source: derived
     post:
       operationId: domains_plan_plan_enrollments_create
       description: 'Enroll a user in a Plan.
@@ -115,6 +108,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreatePlanEnrollment'
           description: ''
+      summary: Domains plan plan enrollments create
+      x-summary-source: derived
   /v1/domains/{domain_name}/plan/{plan_id}/plan-enrollments/{plan_enrollment_id}:
     get:
       operationId: domains_plan_plan_enrollments_retrieve
@@ -155,6 +150,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PlanEnrollment'
           description: ''
+      summary: Domains plan plan enrollments retrieve
+      x-summary-source: derived
     put:
       operationId: domains_plan_plan_enrollments_update
       description: 'Update details for a Plan enrollment.
@@ -203,6 +200,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdatePlanEnrollment'
           description: ''
+      summary: Domains plan plan enrollments update
+      x-summary-source: derived
     patch:
       operationId: domains_plan_plan_enrollments_partial_update
       description: 'Update details for a Plan enrollment.
@@ -251,8 +250,171 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdatePlanEnrollment'
           description: ''
+      summary: Domains plan plan enrollments partial update
+      x-summary-source: derived
 components:
   schemas:
+    PurchaseOfferPrice:
+      type: object
+      properties:
+        amount:
+          type: string
+          default: '0.00'
+        currency_code:
+          type: string
+          default: USD
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+          default: '0.00'
+        currency_code:
+          type: string
+          default: USD
+    UpdatePlanEnrollment:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        user:
+          allOf:
+          - $ref: '#/components/schemas/ReadOnlyUser'
+          readOnly: true
+        enrolled_at:
+          type: string
+          format: date-time
+          readOnly: true
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        active:
+          type: boolean
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentPurchase'
+          readOnly: true
+    CreatePlanEnrollmentRequest:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/ReadOnlyUserRequest'
+        enrolled_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        active:
+          type:
+          - boolean
+          - 'null'
+          default: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentPurchaseRequest'
+      required:
+      - user
+    PaymentProcessorEnum:
+      enum:
+      - NONE
+      - STRIPE
+      - STRIPE_BTC
+      - PAYPAL
+      - PAYFLOW
+      - CYBERSRC
+      - MES
+      - EXTERNAL
+      type: string
+      description: '* `NONE` - None
+
+        * `STRIPE` - Stripe
+
+        * `STRIPE_BTC` - Stripe Bitcoin
+
+        * `PAYPAL` - PayPal
+
+        * `PAYFLOW` - Payflow
+
+        * `CYBERSRC` - Cybersource
+
+        * `MES` - Merchant e-Solutions
+
+        * `EXTERNAL` - External'
+    EnrollmentPurchaseRequest:
+      type: object
+      properties:
+        purchase_price:
+          $ref: '#/components/schemas/PriceRequest'
+        purchase_state:
+          $ref: '#/components/schemas/PurchaseStateEnum'
+        purchased_at:
+          type: string
+          format: date-time
+        tax_price_cents:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+    ReadOnlyUserRequest:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Known as user_id within the documentation
+      required:
+      - id
+    PaginatedPlanEnrollmentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlanEnrollment'
+    UpdatePlanEnrollmentRequest:
+      type: object
+      properties:
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        active:
+          type: boolean
+    PatchedUpdatePlanEnrollmentRequest:
+      type: object
+      properties:
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        active:
+          type: boolean
     CreatePlanEnrollment:
       type: object
       properties:
@@ -268,77 +430,15 @@ components:
           type: string
           format: date-time
         active:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           default: true
         purchase:
           allOf:
           - $ref: '#/components/schemas/EnrollmentPurchase'
-          nullable: true
       required:
       - user
-    PurchaseOfferPrice:
-      type: object
-      properties:
-        amount:
-          type: string
-          default: '0.00'
-        currency_code:
-          type: string
-          default: USD
-    UpdatePlanEnrollmentRequest:
-      type: object
-      properties:
-        expires_at:
-          type: string
-          format: date-time
-          nullable: true
-        active:
-          type: boolean
-    CreatePlanEnrollmentRequest:
-      type: object
-      properties:
-        user:
-          $ref: '#/components/schemas/ReadOnlyUserRequest'
-        enrolled_at:
-          type: string
-          format: date-time
-        expires_at:
-          type: string
-          format: date-time
-        active:
-          type: boolean
-          nullable: true
-          default: true
-        purchase:
-          allOf:
-          - $ref: '#/components/schemas/EnrollmentPurchaseRequest'
-          nullable: true
-      required:
-      - user
-    PurchaseStateEnum:
-      enum:
-      - CREATED
-      - SUCCESS
-      - FAILED
-      - REFUNDED
-      - CANCELLED
-      - FLAGGED
-      - PENDING
-      type: string
-      description: '* `CREATED` - CREATED
-
-        * `SUCCESS` - SUCCESS
-
-        * `FAILED` - FAILED
-
-        * `REFUNDED` - REFUNDED
-
-        * `CANCELLED` - CANCELLED
-
-        * `FLAGGED` - FLAGGED
-
-        * `PENDING` - PENDING'
     PlanEnrollment:
       type: object
       properties:
@@ -354,27 +454,16 @@ components:
           type: string
           format: date-time
         active:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           default: true
         purchase:
           allOf:
           - $ref: '#/components/schemas/EnrollmentPurchase'
           readOnly: true
-          nullable: true
       required:
       - user
-    PriceRequest:
-      type: object
-      properties:
-        amount:
-          type: string
-          minLength: 1
-          default: '0.00'
-        currency_code:
-          type: string
-          minLength: 1
-          default: USD
     ReadOnlyUser:
       type: object
       description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
@@ -398,15 +487,29 @@ components:
           description: Last name
       required:
       - id
-    PatchedUpdatePlanEnrollmentRequest:
-      type: object
-      properties:
-        expires_at:
-          type: string
-          format: date-time
-          nullable: true
-        active:
-          type: boolean
+    PurchaseStateEnum:
+      enum:
+      - CREATED
+      - SUCCESS
+      - FAILED
+      - REFUNDED
+      - CANCELLED
+      - FLAGGED
+      - PENDING
+      type: string
+      description: '* `CREATED` - CREATED
+
+        * `SUCCESS` - SUCCESS
+
+        * `FAILED` - FAILED
+
+        * `REFUNDED` - REFUNDED
+
+        * `CANCELLED` - CANCELLED
+
+        * `FLAGGED` - FLAGGED
+
+        * `PENDING` - PENDING'
     EnrollmentPurchase:
       type: object
       properties:
@@ -436,118 +539,22 @@ components:
           type: string
           format: date-time
         tax_price_cents:
-          type: integer
+          type:
+          - integer
+          - 'null'
           maximum: 2147483647
           minimum: 0
-          nullable: true
-    PaymentProcessorEnum:
-      enum:
-      - NONE
-      - STRIPE
-      - STRIPE_BTC
-      - PAYPAL
-      - PAYFLOW
-      - CYBERSRC
-      - MES
-      - EXTERNAL
-      type: string
-      description: '* `NONE` - None
-
-        * `STRIPE` - Stripe
-
-        * `STRIPE_BTC` - Stripe Bitcoin
-
-        * `PAYPAL` - PayPal
-
-        * `PAYFLOW` - Payflow
-
-        * `CYBERSRC` - Cybersource
-
-        * `MES` - Merchant e-Solutions
-
-        * `EXTERNAL` - External'
-    PaginatedPlanEnrollmentList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlanEnrollment'
-    ReadOnlyUserRequest:
-      type: object
-      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
-      properties:
-        id:
-          type: string
-          minLength: 1
-          description: Known as user_id within the documentation
-      required:
-      - id
-    UpdatePlanEnrollment:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        user:
-          allOf:
-          - $ref: '#/components/schemas/ReadOnlyUser'
-          readOnly: true
-        enrolled_at:
-          type: string
-          format: date-time
-          readOnly: true
-        expires_at:
-          type: string
-          format: date-time
-          nullable: true
-        active:
-          type: boolean
-        purchase:
-          allOf:
-          - $ref: '#/components/schemas/EnrollmentPurchase'
-          readOnly: true
-          nullable: true
-    Price:
+    PriceRequest:
       type: object
       properties:
         amount:
           type: string
+          minLength: 1
           default: '0.00'
         currency_code:
           type: string
+          minLength: 1
           default: USD
-    EnrollmentPurchaseRequest:
-      type: object
-      properties:
-        purchase_price:
-          $ref: '#/components/schemas/PriceRequest'
-        purchase_state:
-          $ref: '#/components/schemas/PurchaseStateEnum'
-        purchased_at:
-          type: string
-          format: date-time
-        tax_price_cents:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          nullable: true
   securitySchemes:
     OrganizationApiKey:
       type: http

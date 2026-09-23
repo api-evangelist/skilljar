@@ -1,26 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Skilljar Assets Domains > Published Courses > Student Group Prerequisites API
+  title: Skilljar Domains > Published Courses > Student Group…
   version: 1.0.0
-  description: 'The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
-
-
-    This interactive documentation is automatically generated from our codebase and stays current with the latest features and endpoints.
-
-
-    ## Getting Started
-
-
-    New to the Skilljar API? Check out these essential resources:
-
-
-    - **[API Getting Started Guide](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Getting_started_with_the_Skilljar_API)** - Authentication, basic concepts, and your first API call
-
-    - **[Token-based SSO](https://support.gainsight.com/Skilljar/Develop_and_Customize/Single_Sign_on_(SSO)/Configuring_Token-Based_Single_Sign-On_(SSO))** - Seamlessly integrate user authentication
-
-    - **[Webhooks](https://support.gainsight.com/Skilljar/Develop_and_Customize/API/Using_Webhooks_API)** - Real-time notifications for platform events
-
-    '
+  description: The Skilljar API provides comprehensive access to our customer education platform, enabling you to programmatically manage courses, users, enrollments, and more.
 tags:
 - name: Domains > Published Courses > Student Group Prerequisites
 paths:
@@ -65,6 +47,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedPublishedCourseStudentGroupPrerequisiteList'
           description: ''
+      summary: Domains published courses student group prerequisites list
+      x-summary-source: derived
     post:
       operationId: domains_published_courses_student_group_prerequisites_create
       description: Adds a StudentGroup prerequisite for a PublishedCourse and returns a `201` response.
@@ -105,6 +89,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PublishedCourseStudentGroupPrerequisite'
           description: ''
+      summary: Domains published courses student group prerequisites create
+      x-summary-source: derived
   /v1/domains/{domain_name}/published-courses/{published_course_id}/student-group-prerequisites/{student_group_id}:
     get:
       operationId: domains_published_courses_student_group_prerequisites_retrieve
@@ -140,6 +126,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PublishedCourseStudentGroupPrerequisite'
           description: ''
+      summary: Domains published courses student group prerequisites retrieve
+      x-summary-source: derived
     delete:
       operationId: domains_published_courses_student_group_prerequisites_destroy
       description: Removes a StudentGroup prerequisite for a PublishedCourse and returns a `204` response.
@@ -170,16 +158,10 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Domains published courses student group prerequisites destroy
+      x-summary-source: derived
 components:
   schemas:
-    PublishedCourseStudentGroupPrerequisite:
-      type: object
-      description: Serializer for PublishedCourseStudentGroupPrerequisite
-      properties:
-        student_group:
-          $ref: '#/components/schemas/StudentGroupSummary'
-      required:
-      - student_group
     StudentGroupSummary:
       type: object
       description: Serializer for student groups for use GroupVisibility serializers
@@ -191,15 +173,22 @@ components:
           readOnly: true
       required:
       - id
-    StudentGroupSummaryRequest:
+    PublishedCourseStudentGroupPrerequisiteRequest:
       type: object
-      description: Serializer for student groups for use GroupVisibility serializers
+      description: Serializer for PublishedCourseStudentGroupPrerequisite
       properties:
-        id:
-          type: string
-          minLength: 1
+        student_group:
+          $ref: '#/components/schemas/StudentGroupSummaryRequest'
       required:
-      - id
+      - student_group
+    PublishedCourseStudentGroupPrerequisite:
+      type: object
+      description: Serializer for PublishedCourseStudentGroupPrerequisite
+      properties:
+        student_group:
+          $ref: '#/components/schemas/StudentGroupSummary'
+      required:
+      - student_group
     PaginatedPublishedCourseStudentGroupPrerequisiteList:
       type: object
       required:
@@ -210,27 +199,30 @@ components:
           type: integer
           example: 123
         next:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uri
           example: http://api.example.org/accounts/?page=4
         previous:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: uri
           example: http://api.example.org/accounts/?page=2
         results:
           type: array
           items:
             $ref: '#/components/schemas/PublishedCourseStudentGroupPrerequisite'
-    PublishedCourseStudentGroupPrerequisiteRequest:
+    StudentGroupSummaryRequest:
       type: object
-      description: Serializer for PublishedCourseStudentGroupPrerequisite
+      description: Serializer for student groups for use GroupVisibility serializers
       properties:
-        student_group:
-          $ref: '#/components/schemas/StudentGroupSummaryRequest'
+        id:
+          type: string
+          minLength: 1
       required:
-      - student_group
+      - id
   securitySchemes:
     OrganizationApiKey:
       type: http
