@@ -148,73 +148,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    LicensePackageCreate:
-      type: object
-      description: Serializer for the creation of license packages for our public API.
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: ID of the license package.
-        tracking_id:
-          type: string
-          default: ''
-          description: Arbitrary string used for tracking a license package in an external system.
-          maxLength: 256
-        start_date:
-          type: string
-          format: date-time
-          description: Start date of a license package. Defaults to the current date
-        end_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: End date of a license package (Optional).
-        domain_id:
-          type: string
-          description: Domain ID a license package will be hosted on.
-        license_count:
-          type: integer
-          description: Total number of active licenses allotted to a license package.
-        name:
-          type: string
-          description: Name of a license package.
-          maxLength: 500
-        max_unique_seats:
-          type:
-          - integer
-          - 'null'
-          description: Maximum number of unique seats that can be assigned to this license package (Optional).
-      required:
-      - domain_id
-      - license_count
-      - name
-    PaginatedLicensePackageDetailList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/LicensePackageDetail'
     LicensePackageUpdate:
       type: object
       description: Serializer for the update of a license package for our public API.
@@ -335,6 +268,73 @@ components:
       - domain_id
       - license_count
       - name
+    LicensePackageCreate:
+      type: object
+      description: Serializer for the creation of license packages for our public API.
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: ID of the license package.
+        tracking_id:
+          type: string
+          default: ''
+          description: Arbitrary string used for tracking a license package in an external system.
+          maxLength: 256
+        start_date:
+          type: string
+          format: date-time
+          description: Start date of a license package. Defaults to the current date
+        end_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: End date of a license package (Optional).
+        domain_id:
+          type: string
+          description: Domain ID a license package will be hosted on.
+        license_count:
+          type: integer
+          description: Total number of active licenses allotted to a license package.
+        name:
+          type: string
+          description: Name of a license package.
+          maxLength: 500
+        max_unique_seats:
+          type:
+          - integer
+          - 'null'
+          description: Maximum number of unique seats that can be assigned to this license package (Optional).
+      required:
+      - domain_id
+      - license_count
+      - name
+    PaginatedLicensePackageDetailList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicensePackageDetail'
     LicensePackageDetail:
       type: object
       description: Serializer to retrieve details of a license agreement.

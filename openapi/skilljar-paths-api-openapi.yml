@@ -165,32 +165,31 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PathRequest:
+    PaginatedPathList:
       type: object
+      required:
+      - count
+      - results
       properties:
-        title:
-          type: string
-          minLength: 1
-          maxLength: 500
-        short_description:
-          type: string
-          maxLength: 300
-        long_description_html:
-          type: string
-          maxLength: 100000
-        header_html:
-          type: string
-          maxLength: 100000
-        course_name_singular:
-          type: string
-          minLength: 1
-          description: 'Text to replace the word ''course'' on the catalog tile for this learning path. For example: ''1 course'''
-          maxLength: 50
-        course_name_plural:
-          type: string
-          minLength: 1
-          description: 'Text to replace the word ''courses'' on the catalog tile for this learning path. For example: ''3 courses'''
-          maxLength: 50
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Path'
     PatchedPathRequest:
       type: object
       properties:
@@ -250,31 +249,32 @@ components:
         path_item_count:
           type: integer
           readOnly: true
-    PaginatedPathList:
+    PathRequest:
       type: object
-      required:
-      - count
-      - results
       properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Path'
+        title:
+          type: string
+          minLength: 1
+          maxLength: 500
+        short_description:
+          type: string
+          maxLength: 300
+        long_description_html:
+          type: string
+          maxLength: 100000
+        header_html:
+          type: string
+          maxLength: 100000
+        course_name_singular:
+          type: string
+          minLength: 1
+          description: 'Text to replace the word ''course'' on the catalog tile for this learning path. For example: ''1 course'''
+          maxLength: 50
+        course_name_plural:
+          type: string
+          minLength: 1
+          description: 'Text to replace the word ''courses'' on the catalog tile for this learning path. For example: ''3 courses'''
+          maxLength: 50
   securitySchemes:
     OrganizationApiKey:
       type: http

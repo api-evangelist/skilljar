@@ -298,6 +298,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DomainAccessCodeListItem'
+    PatchedDomainAccessCodeDetailRequest:
+      type: object
+      properties:
+        code:
+          type: string
+          minLength: 1
+          maxLength: 40
+        active:
+          type: boolean
+          default: true
+        max_uses:
+          type: integer
+          minimum: 0
+        duration:
+          type:
+          - integer
+          - 'null'
+          minimum: 1
+        duration_unit:
+          $ref: '#/components/schemas/DurationUnitEnum'
     DomainAccessCodeListItem:
       type: object
       properties:
@@ -327,52 +347,6 @@ components:
           $ref: '#/components/schemas/DurationUnitEnum'
       required:
       - code
-    DomainAccessCodeDetailRequest:
-      type: object
-      properties:
-        code:
-          type: string
-          minLength: 1
-          maxLength: 40
-        active:
-          type: boolean
-          default: true
-        max_uses:
-          type: integer
-          minimum: 0
-        duration:
-          type:
-          - integer
-          - 'null'
-          minimum: 1
-        duration_unit:
-          $ref: '#/components/schemas/DurationUnitEnum'
-    DomainAccessCodeUser:
-      type: object
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-          format: email
-          title: Email address
-          readOnly: true
-        first_name:
-          type: string
-          readOnly: true
-        last_name:
-          type: string
-          readOnly: true
-      required:
-      - id
-    DurationUnitEnum:
-      enum:
-      - MONTHS
-      - DAYS
-      type: string
-      description: '* `MONTHS` - Months
-
-        * `DAYS` - Days'
     DomainAccessCodeDetail:
       type: object
       properties:
@@ -405,7 +379,7 @@ components:
           items:
             $ref: '#/components/schemas/DomainAccessCodeUser'
           readOnly: true
-    PatchedDomainAccessCodeDetailRequest:
+    DomainAccessCodeDetailRequest:
       type: object
       properties:
         code:
@@ -425,6 +399,32 @@ components:
           minimum: 1
         duration_unit:
           $ref: '#/components/schemas/DurationUnitEnum'
+    DurationUnitEnum:
+      enum:
+      - MONTHS
+      - DAYS
+      type: string
+      description: '* `MONTHS` - Months
+
+        * `DAYS` - Days'
+    DomainAccessCodeUser:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+          title: Email address
+          readOnly: true
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+      required:
+      - id
   securitySchemes:
     OrganizationApiKey:
       type: http

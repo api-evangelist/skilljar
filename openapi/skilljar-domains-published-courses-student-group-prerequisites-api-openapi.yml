@@ -162,6 +162,23 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    StudentGroupSummaryRequest:
+      type: object
+      description: Serializer for student groups for use GroupVisibility serializers
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
+    PublishedCourseStudentGroupPrerequisite:
+      type: object
+      description: Serializer for PublishedCourseStudentGroupPrerequisite
+      properties:
+        student_group:
+          $ref: '#/components/schemas/StudentGroupSummary'
+      required:
+      - student_group
     StudentGroupSummary:
       type: object
       description: Serializer for student groups for use GroupVisibility serializers
@@ -179,14 +196,6 @@ components:
       properties:
         student_group:
           $ref: '#/components/schemas/StudentGroupSummaryRequest'
-      required:
-      - student_group
-    PublishedCourseStudentGroupPrerequisite:
-      type: object
-      description: Serializer for PublishedCourseStudentGroupPrerequisite
-      properties:
-        student_group:
-          $ref: '#/components/schemas/StudentGroupSummary'
       required:
       - student_group
     PaginatedPublishedCourseStudentGroupPrerequisiteList:
@@ -214,15 +223,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PublishedCourseStudentGroupPrerequisite'
-    StudentGroupSummaryRequest:
-      type: object
-      description: Serializer for student groups for use GroupVisibility serializers
-      properties:
-        id:
-          type: string
-          minLength: 1
-      required:
-      - id
   securitySchemes:
     OrganizationApiKey:
       type: http

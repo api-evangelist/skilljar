@@ -202,15 +202,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PatchedLabelRequest:
-      type: object
-      description: Serializer for Label model.
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: Name of the label.  This is a required field and must be unique within the organization.
-          maxLength: 255
     PaginatedLabelList:
       type: object
       required:
@@ -261,6 +252,15 @@ components:
           maxLength: 255
       required:
       - name
+    PatchedLabelRequest:
+      type: object
+      description: Serializer for Label model.
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Name of the label.  This is a required field and must be unique within the organization.
+          maxLength: 255
   securitySchemes:
     OrganizationApiKey:
       type: http

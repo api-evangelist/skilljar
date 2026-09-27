@@ -117,32 +117,6 @@ components:
       required:
       - event_location
       - vilt_session
-    LessonCourseListItem:
-      type: object
-      description: Lesson information within the user lesson progress endpoint.
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as lesson_id within the documentation
-        title:
-          type: string
-          readOnly: true
-        course:
-          $ref: '#/components/schemas/CourseListItem'
-      required:
-      - course
-    CourseListItem:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as course_id within the documentation
-        title:
-          type: string
-          readOnly: true
-          description: Course title
     ViltSession:
       type: object
       properties:
@@ -170,6 +144,17 @@ components:
       - id
       - lesson
       - seats_total
+    CourseListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as course_id within the documentation
+        title:
+          type: string
+          readOnly: true
+          description: Course title
     ViltLocation:
       type: object
       properties:
@@ -210,6 +195,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ViltSessionEvent'
+    LessonCourseListItem:
+      type: object
+      description: Lesson information within the user lesson progress endpoint.
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as lesson_id within the documentation
+        title:
+          type: string
+          readOnly: true
+        course:
+          $ref: '#/components/schemas/CourseListItem'
+      required:
+      - course
   securitySchemes:
     OrganizationApiKey:
       type: http

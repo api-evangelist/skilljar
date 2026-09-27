@@ -254,6 +254,27 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    CreatePlanEnrollmentRequest:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/ReadOnlyUserRequest'
+        enrolled_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        active:
+          type:
+          - boolean
+          - 'null'
+          default: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentPurchaseRequest'
+      required:
+      - user
     PurchaseOfferPrice:
       type: object
       properties:
@@ -263,6 +284,32 @@ components:
         currency_code:
           type: string
           default: USD
+    PaymentProcessorEnum:
+      enum:
+      - NONE
+      - STRIPE
+      - STRIPE_BTC
+      - PAYPAL
+      - PAYFLOW
+      - CYBERSRC
+      - MES
+      - EXTERNAL
+      type: string
+      description: '* `NONE` - None
+
+        * `STRIPE` - Stripe
+
+        * `STRIPE_BTC` - Stripe Bitcoin
+
+        * `PAYPAL` - PayPal
+
+        * `PAYFLOW` - Payflow
+
+        * `CYBERSRC` - Cybersource
+
+        * `MES` - Merchant e-Solutions
+
+        * `EXTERNAL` - External'
     Price:
       type: object
       properties:
@@ -297,60 +344,85 @@ components:
           allOf:
           - $ref: '#/components/schemas/EnrollmentPurchase'
           readOnly: true
-    CreatePlanEnrollmentRequest:
+    PurchaseStateEnum:
+      enum:
+      - CREATED
+      - SUCCESS
+      - FAILED
+      - REFUNDED
+      - CANCELLED
+      - FLAGGED
+      - PENDING
+      type: string
+      description: '* `CREATED` - CREATED
+
+        * `SUCCESS` - SUCCESS
+
+        * `FAILED` - FAILED
+
+        * `REFUNDED` - REFUNDED
+
+        * `CANCELLED` - CANCELLED
+
+        * `FLAGGED` - FLAGGED
+
+        * `PENDING` - PENDING'
+    PatchedUpdatePlanEnrollmentRequest:
       type: object
       properties:
-        user:
-          $ref: '#/components/schemas/ReadOnlyUserRequest'
-        enrolled_at:
-          type: string
-          format: date-time
         expires_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
         active:
-          type:
-          - boolean
-          - 'null'
-          default: true
-        purchase:
-          allOf:
-          - $ref: '#/components/schemas/EnrollmentPurchaseRequest'
-      required:
-      - user
-    PaymentProcessorEnum:
-      enum:
-      - NONE
-      - STRIPE
-      - STRIPE_BTC
-      - PAYPAL
-      - PAYFLOW
-      - CYBERSRC
-      - MES
-      - EXTERNAL
-      type: string
-      description: '* `NONE` - None
-
-        * `STRIPE` - Stripe
-
-        * `STRIPE_BTC` - Stripe Bitcoin
-
-        * `PAYPAL` - PayPal
-
-        * `PAYFLOW` - Payflow
-
-        * `CYBERSRC` - Cybersource
-
-        * `MES` - Merchant e-Solutions
-
-        * `EXTERNAL` - External'
-    EnrollmentPurchaseRequest:
+          type: boolean
+    UpdatePlanEnrollmentRequest:
       type: object
       properties:
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        active:
+          type: boolean
+    PriceRequest:
+      type: object
+      properties:
+        amount:
+          type: string
+          minLength: 1
+          default: '0.00'
+        currency_code:
+          type: string
+          minLength: 1
+          default: USD
+    EnrollmentPurchase:
+      type: object
+      properties:
+        order_id:
+          type: string
+          readOnly: true
+        offer_price:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseOfferPrice'
+          readOnly: true
         purchase_price:
-          $ref: '#/components/schemas/PriceRequest'
+          $ref: '#/components/schemas/Price'
+        quantity:
+          type: integer
+          readOnly: true
         purchase_state:
           $ref: '#/components/schemas/PurchaseStateEnum'
+        payment_processor:
+          allOf:
+          - $ref: '#/components/schemas/PaymentProcessorEnum'
+          readOnly: true
+          default: NONE
+        purchase_id:
+          type: string
+          readOnly: true
         purchased_at:
           type: string
           format: date-time
@@ -360,16 +432,6 @@ components:
           - 'null'
           maximum: 2147483647
           minimum: 0
-    ReadOnlyUserRequest:
-      type: object
-      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
-      properties:
-        id:
-          type: string
-          minLength: 1
-          description: Known as user_id within the documentation
-      required:
-      - id
     PaginatedPlanEnrollmentList:
       type: object
       required:
@@ -395,26 +457,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PlanEnrollment'
-    UpdatePlanEnrollmentRequest:
-      type: object
-      properties:
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        active:
-          type: boolean
-    PatchedUpdatePlanEnrollmentRequest:
-      type: object
-      properties:
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        active:
-          type: boolean
     CreatePlanEnrollment:
       type: object
       properties:
@@ -464,6 +506,32 @@ components:
           readOnly: true
       required:
       - user
+    EnrollmentPurchaseRequest:
+      type: object
+      properties:
+        purchase_price:
+          $ref: '#/components/schemas/PriceRequest'
+        purchase_state:
+          $ref: '#/components/schemas/PurchaseStateEnum'
+        purchased_at:
+          type: string
+          format: date-time
+        tax_price_cents:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+    ReadOnlyUserRequest:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Known as user_id within the documentation
+      required:
+      - id
     ReadOnlyUser:
       type: object
       description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
@@ -487,74 +555,6 @@ components:
           description: Last name
       required:
       - id
-    PurchaseStateEnum:
-      enum:
-      - CREATED
-      - SUCCESS
-      - FAILED
-      - REFUNDED
-      - CANCELLED
-      - FLAGGED
-      - PENDING
-      type: string
-      description: '* `CREATED` - CREATED
-
-        * `SUCCESS` - SUCCESS
-
-        * `FAILED` - FAILED
-
-        * `REFUNDED` - REFUNDED
-
-        * `CANCELLED` - CANCELLED
-
-        * `FLAGGED` - FLAGGED
-
-        * `PENDING` - PENDING'
-    EnrollmentPurchase:
-      type: object
-      properties:
-        order_id:
-          type: string
-          readOnly: true
-        offer_price:
-          allOf:
-          - $ref: '#/components/schemas/PurchaseOfferPrice'
-          readOnly: true
-        purchase_price:
-          $ref: '#/components/schemas/Price'
-        quantity:
-          type: integer
-          readOnly: true
-        purchase_state:
-          $ref: '#/components/schemas/PurchaseStateEnum'
-        payment_processor:
-          allOf:
-          - $ref: '#/components/schemas/PaymentProcessorEnum'
-          readOnly: true
-          default: NONE
-        purchase_id:
-          type: string
-          readOnly: true
-        purchased_at:
-          type: string
-          format: date-time
-        tax_price_cents:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-    PriceRequest:
-      type: object
-      properties:
-        amount:
-          type: string
-          minLength: 1
-          default: '0.00'
-        currency_code:
-          type: string
-          minLength: 1
-          default: USD
   securitySchemes:
     OrganizationApiKey:
       type: http

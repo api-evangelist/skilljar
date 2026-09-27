@@ -123,35 +123,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PublishedCoursePrerequisiteRequest:
-      type: object
-      description: Serializer for prerequisites of a published course.
-      properties:
-        published_course:
-          allOf:
-          - $ref: '#/components/schemas/PublishedCourseIdOnlyRequest'
-          description: Json containing he prerequisite published course ID
-      required:
-      - published_course
-    PublishedCourseIdOnly:
-      type: object
-      description: Serializer for published course ID only.
-      properties:
-        id:
-          type: string
-          description: The published course ID
-      required:
-      - id
-    PublishedCoursePrerequisite:
-      type: object
-      description: Serializer for prerequisites of a published course.
-      properties:
-        published_course:
-          allOf:
-          - $ref: '#/components/schemas/PublishedCourseIdOnly'
-          description: Json containing he prerequisite published course ID
-      required:
-      - published_course
     PaginatedPublishedCoursePrerequisiteList:
       type: object
       required:
@@ -177,6 +148,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PublishedCoursePrerequisite'
+    PublishedCoursePrerequisite:
+      type: object
+      description: Serializer for prerequisites of a published course.
+      properties:
+        published_course:
+          allOf:
+          - $ref: '#/components/schemas/PublishedCourseIdOnly'
+          description: Json containing he prerequisite published course ID
+      required:
+      - published_course
+    PublishedCoursePrerequisiteRequest:
+      type: object
+      description: Serializer for prerequisites of a published course.
+      properties:
+        published_course:
+          allOf:
+          - $ref: '#/components/schemas/PublishedCourseIdOnlyRequest'
+          description: Json containing he prerequisite published course ID
+      required:
+      - published_course
     PublishedCourseIdOnlyRequest:
       type: object
       description: Serializer for published course ID only.
@@ -184,6 +175,15 @@ components:
         id:
           type: string
           minLength: 1
+          description: The published course ID
+      required:
+      - id
+    PublishedCourseIdOnly:
+      type: object
+      description: Serializer for published course ID only.
+      properties:
+        id:
+          type: string
           description: The published course ID
       required:
       - id

@@ -136,124 +136,6 @@ components:
       description: '* `PASSED` - Passed
 
         * `FAILED` - Failed'
-    PatchedLessonProgressRequest:
-      type: object
-      properties:
-        finished_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating when the user finished the lesson content. Setting this field will also mark the lesson complete unless the lesson requires validation, such as a review of proctoring.
-        completed_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating when the user completed the lesson.  If null, the user has not completed the lesson.
-        success_status:
-          description: '''PASSED'', ''FAILED'' or null
-
-
-            * `PASSED` - Passed
-
-            * `FAILED` - Failed'
-          oneOf:
-          - $ref: '#/components/schemas/SuccessStatusEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        score:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-          description: Score received
-        max_score:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-          description: Max possible score
-        custom_data:
-          type:
-          - string
-          - 'null'
-        validation_status:
-          description: '''PASSED'', ''FAILED'' or null
-
-
-            * `PASSED` - Passed
-
-            * `FAILED` - Failed'
-          oneOf:
-          - $ref: '#/components/schemas/ValidationStatusEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        validation_data:
-          description: JSON formatted. Ignored if the lesson does not require validation.
-    SuccessStatusEnum:
-      enum:
-      - PASSED
-      - FAILED
-      type: string
-      description: '* `PASSED` - Passed
-
-        * `FAILED` - Failed'
-    LessonProgressRequest:
-      type: object
-      properties:
-        finished_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating when the user finished the lesson content. Setting this field will also mark the lesson complete unless the lesson requires validation, such as a review of proctoring.
-        completed_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating when the user completed the lesson.  If null, the user has not completed the lesson.
-        success_status:
-          description: '''PASSED'', ''FAILED'' or null
-
-
-            * `PASSED` - Passed
-
-            * `FAILED` - Failed'
-          oneOf:
-          - $ref: '#/components/schemas/SuccessStatusEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        score:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-          description: Score received
-        max_score:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-          description: Max possible score
-        custom_data:
-          type:
-          - string
-          - 'null'
-        validation_status:
-          description: '''PASSED'', ''FAILED'' or null
-
-
-            * `PASSED` - Passed
-
-            * `FAILED` - Failed'
-          oneOf:
-          - $ref: '#/components/schemas/ValidationStatusEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        validation_data:
-          description: JSON formatted. Ignored if the lesson does not require validation.
     LessonProgress:
       type: object
       properties:
@@ -322,6 +204,124 @@ components:
           type: string
           readOnly: true
           description: Known as lesson_progress_id within the documentation
+    PatchedLessonProgressRequest:
+      type: object
+      properties:
+        finished_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the user finished the lesson content. Setting this field will also mark the lesson complete unless the lesson requires validation, such as a review of proctoring.
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the user completed the lesson.  If null, the user has not completed the lesson.
+        success_status:
+          description: '''PASSED'', ''FAILED'' or null
+
+
+            * `PASSED` - Passed
+
+            * `FAILED` - Failed'
+          oneOf:
+          - $ref: '#/components/schemas/SuccessStatusEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        score:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+          description: Score received
+        max_score:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+          description: Max possible score
+        custom_data:
+          type:
+          - string
+          - 'null'
+        validation_status:
+          description: '''PASSED'', ''FAILED'' or null
+
+
+            * `PASSED` - Passed
+
+            * `FAILED` - Failed'
+          oneOf:
+          - $ref: '#/components/schemas/ValidationStatusEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        validation_data:
+          description: JSON formatted. Ignored if the lesson does not require validation.
+    LessonProgressRequest:
+      type: object
+      properties:
+        finished_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the user finished the lesson content. Setting this field will also mark the lesson complete unless the lesson requires validation, such as a review of proctoring.
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the user completed the lesson.  If null, the user has not completed the lesson.
+        success_status:
+          description: '''PASSED'', ''FAILED'' or null
+
+
+            * `PASSED` - Passed
+
+            * `FAILED` - Failed'
+          oneOf:
+          - $ref: '#/components/schemas/SuccessStatusEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        score:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+          description: Score received
+        max_score:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+          description: Max possible score
+        custom_data:
+          type:
+          - string
+          - 'null'
+        validation_status:
+          description: '''PASSED'', ''FAILED'' or null
+
+
+            * `PASSED` - Passed
+
+            * `FAILED` - Failed'
+          oneOf:
+          - $ref: '#/components/schemas/ValidationStatusEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        validation_data:
+          description: JSON formatted. Ignored if the lesson does not require validation.
+    SuccessStatusEnum:
+      enum:
+      - PASSED
+      - FAILED
+      type: string
+      description: '* `PASSED` - Passed
+
+        * `FAILED` - Failed'
     NullEnum:
       enum:
       - null

@@ -128,6 +128,31 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ProgressTokenRequest:
+      type: object
+      properties:
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the user completed the task
+        success_status:
+          $ref: '#/components/schemas/SuccessStatusEnum'
+        score:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+          description: Score received
+        max_score:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+          description: Max possible score
     ProgressToken:
       type: object
       properties:
@@ -157,39 +182,6 @@ components:
           maximum: 2147483647
           minimum: 0
           description: Max possible score
-    PatchedProgressTokenRequest:
-      type: object
-      properties:
-        completed_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating when the user completed the task
-        success_status:
-          $ref: '#/components/schemas/SuccessStatusEnum'
-        score:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-          description: Score received
-        max_score:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-          description: Max possible score
-    SuccessStatusEnum:
-      enum:
-      - PASSED
-      - FAILED
-      type: string
-      description: '* `PASSED` - Passed
-
-        * `FAILED` - Failed'
     PaginatedProgressTokenList:
       type: object
       required:
@@ -215,7 +207,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProgressToken'
-    ProgressTokenRequest:
+    SuccessStatusEnum:
+      enum:
+      - PASSED
+      - FAILED
+      type: string
+      description: '* `PASSED` - Passed
+
+        * `FAILED` - Failed'
+    PatchedProgressTokenRequest:
       type: object
       properties:
         completed_at:

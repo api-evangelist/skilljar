@@ -256,13 +256,6 @@ components:
         order:
           type: integer
           minimum: 1
-    ClassicCatalogPageItemOrderUpdateRequest:
-      type: object
-      description: Serializer for updating the order of existing CatalogPageItem
-      properties:
-        order:
-          type: integer
-          minimum: 1
     PaginatedClassicCatalogPageItemList:
       type: object
       required:
@@ -288,6 +281,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ClassicCatalogPageItem'
+    ClassicCatalogPageItemRequest:
+      type: object
+      description: Serializer for Legacy CatalogPageItem
+      properties:
+        order:
+          type: integer
+          minimum: 1
+        item_catalog_page_id:
+          type: string
+          minLength: 1
+        item_published_path_id:
+          type: string
+          minLength: 1
+        item_published_course_id:
+          type: string
+          minLength: 1
+        item_plan_id:
+          type: string
+          minLength: 1
     Type62bEnum:
       enum:
       - CATALOG_PAGE
@@ -305,6 +317,35 @@ components:
         * `PLAN` - PLAN
 
         * `PUBLISHED_PATH` - PUBLISHED_PATH'
+    ClassicCatalogPageItemOrderUpdateRequest:
+      type: object
+      description: Serializer for updating the order of existing CatalogPageItem
+      properties:
+        order:
+          type: integer
+          minimum: 1
+    ClassicCatalogPageItem:
+      type: object
+      description: Serializer for Legacy CatalogPageItem
+      properties:
+        id:
+          type: string
+          readOnly: true
+        order:
+          type: integer
+          minimum: 1
+        type:
+          allOf:
+          - $ref: '#/components/schemas/Type62bEnum'
+          readOnly: true
+        item_catalog_page_id:
+          type: string
+        item_published_path_id:
+          type: string
+        item_published_course_id:
+          type: string
+        item_plan_id:
+          type: string
     ClassicCatalogPageItemOrderUpdate:
       type: object
       description: Serializer for updating the order of existing CatalogPageItem
@@ -331,47 +372,6 @@ components:
         item_plan_id:
           type: string
           readOnly: true
-    ClassicCatalogPageItemRequest:
-      type: object
-      description: Serializer for Legacy CatalogPageItem
-      properties:
-        order:
-          type: integer
-          minimum: 1
-        item_catalog_page_id:
-          type: string
-          minLength: 1
-        item_published_path_id:
-          type: string
-          minLength: 1
-        item_published_course_id:
-          type: string
-          minLength: 1
-        item_plan_id:
-          type: string
-          minLength: 1
-    ClassicCatalogPageItem:
-      type: object
-      description: Serializer for Legacy CatalogPageItem
-      properties:
-        id:
-          type: string
-          readOnly: true
-        order:
-          type: integer
-          minimum: 1
-        type:
-          allOf:
-          - $ref: '#/components/schemas/Type62bEnum'
-          readOnly: true
-        item_catalog_page_id:
-          type: string
-        item_published_path_id:
-          type: string
-        item_published_course_id:
-          type: string
-        item_plan_id:
-          type: string
   securitySchemes:
     OrganizationApiKey:
       type: http

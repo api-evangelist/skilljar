@@ -150,62 +150,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GroupUserRequest:
-      type: object
-      properties:
-        user:
-          allOf:
-          - $ref: '#/components/schemas/ReadOnlyUserRequest'
-          description: User details
-      required:
-      - user
-    ReadOnlyUser:
-      type: object
-      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
-      properties:
-        id:
-          type: string
-          description: Known as user_id within the documentation
-        email:
-          type: string
-          format: email
-          readOnly: true
-          title: Email address
-          description: Email address
-        first_name:
-          type: string
-          readOnly: true
-          description: First name
-        last_name:
-          type: string
-          readOnly: true
-          description: Last name
-      required:
-      - id
-    ReadOnlyUserRequest:
-      type: object
-      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
-      properties:
-        id:
-          type: string
-          minLength: 1
-          description: Known as user_id within the documentation
-      required:
-      - id
-    GroupUser:
-      type: object
-      properties:
-        user:
-          allOf:
-          - $ref: '#/components/schemas/ReadOnlyUser'
-          description: User details
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-          description: ISO 8601 datetime indicating when the User was added to the Group
-      required:
-      - user
     PaginatedGroupUserList:
       type: object
       required:
@@ -231,6 +175,62 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GroupUser'
+    GroupUser:
+      type: object
+      properties:
+        user:
+          allOf:
+          - $ref: '#/components/schemas/ReadOnlyUser'
+          description: User details
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: ISO 8601 datetime indicating when the User was added to the Group
+      required:
+      - user
+    GroupUserRequest:
+      type: object
+      properties:
+        user:
+          allOf:
+          - $ref: '#/components/schemas/ReadOnlyUserRequest'
+          description: User details
+      required:
+      - user
+    ReadOnlyUserRequest:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Known as user_id within the documentation
+      required:
+      - id
+    ReadOnlyUser:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+          description: Email address
+        first_name:
+          type: string
+          readOnly: true
+          description: First name
+        last_name:
+          type: string
+          readOnly: true
+          description: Last name
+      required:
+      - id
   securitySchemes:
     OrganizationApiKey:
       type: http

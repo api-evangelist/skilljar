@@ -150,6 +150,44 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    GroupAccessCodePoolLink:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          readOnly: true
+          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
+      required:
+      - id
+    GroupAccessCodePoolLinkRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
+    GroupAccessCodePoolRequest:
+      type: object
+      properties:
+        access_code_pool:
+          $ref: '#/components/schemas/GroupAccessCodePoolLinkRequest'
+      required:
+      - access_code_pool
+    GroupAccessCodePool:
+      type: object
+      properties:
+        access_code_pool:
+          $ref: '#/components/schemas/GroupAccessCodePoolLink'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: ISO 8601 datetime indicating when the student group / access code link was created
+      required:
+      - access_code_pool
     PaginatedGroupAccessCodePoolList:
       type: object
       required:
@@ -175,44 +213,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GroupAccessCodePool'
-    GroupAccessCodePool:
-      type: object
-      properties:
-        access_code_pool:
-          $ref: '#/components/schemas/GroupAccessCodePoolLink'
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-          description: ISO 8601 datetime indicating when the student group / access code link was created
-      required:
-      - access_code_pool
-    GroupAccessCodePoolLinkRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          minLength: 1
-      required:
-      - id
-    GroupAccessCodePoolLink:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-          readOnly: true
-          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
-      required:
-      - id
-    GroupAccessCodePoolRequest:
-      type: object
-      properties:
-        access_code_pool:
-          $ref: '#/components/schemas/GroupAccessCodePoolLinkRequest'
-      required:
-      - access_code_pool
   securitySchemes:
     OrganizationApiKey:
       type: http

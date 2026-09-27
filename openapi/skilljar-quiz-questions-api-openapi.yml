@@ -187,17 +187,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    AnswerRequest:
-      type: object
-      properties:
-        answer_text:
-          type: string
-          minLength: 1
-          maxLength: 1000
-        correct:
-          type: boolean
-      required:
-      - answer_text
     Answer:
       type: object
       properties:
@@ -214,87 +203,6 @@ components:
           readOnly: true
       required:
       - answer_text
-    PatchedQuestionUpdateRequest:
-      type: object
-      description: Serializer for updating Question model within a Quiz or Question Bank.
-      properties:
-        quiz:
-          type: string
-          description: The quiz that this question belongs to. It is required to set either this or <code>quiz_question_bank</code>.
-        quiz_question_bank:
-          type: string
-          description: The question bank that this question belongs to. It is required to set either this or <code>quiz</code>.
-        html:
-          type: string
-          minLength: 1
-          description: The HTML content of the question.
-        type:
-          allOf:
-          - $ref: '#/components/schemas/Type5d1Enum'
-          description: 'The type of question to create. Can be: MULTIPLE_CHOICE, MULTIPLE_ANSWER, FILL_IN_THE_BLANK, FREEFORM.
-
-
-            * `MULTIPLE_CHOICE` - MULTIPLE_CHOICE
-
-            * `MULTIPLE_ANSWER` - MULTIPLE_ANSWER
-
-            * `FILL_IN_THE_BLANK` - FILL_IN_THE_BLANK
-
-            * `FREEFORM` - FREEFORM'
-        requires_manual_grading:
-          type: boolean
-          description: If true for any question on the quiz, student responses for the corresponding quiz must be manually graded by a dashboard user.
-        case_sensitive:
-          type: boolean
-          description: If true, student responses must match the case of the answer to be correct. This only impacts FILL_IN_THE_BLANK questions.
-        correct_answer_feedback_html:
-          type: string
-          description: The feedback to display if the student answers the question correctly.
-        incorrect_answer_feedback_html:
-          type: string
-          description: The feedback to display if the student answers the question incorrectly.
-    QuestionUpdateRequest:
-      type: object
-      description: Serializer for updating Question model within a Quiz or Question Bank.
-      properties:
-        quiz:
-          type: string
-          description: The quiz that this question belongs to. It is required to set either this or <code>quiz_question_bank</code>.
-        quiz_question_bank:
-          type: string
-          description: The question bank that this question belongs to. It is required to set either this or <code>quiz</code>.
-        html:
-          type: string
-          minLength: 1
-          description: The HTML content of the question.
-        type:
-          allOf:
-          - $ref: '#/components/schemas/Type5d1Enum'
-          description: 'The type of question to create. Can be: MULTIPLE_CHOICE, MULTIPLE_ANSWER, FILL_IN_THE_BLANK, FREEFORM.
-
-
-            * `MULTIPLE_CHOICE` - MULTIPLE_CHOICE
-
-            * `MULTIPLE_ANSWER` - MULTIPLE_ANSWER
-
-            * `FILL_IN_THE_BLANK` - FILL_IN_THE_BLANK
-
-            * `FREEFORM` - FREEFORM'
-        requires_manual_grading:
-          type: boolean
-          description: If true for any question on the quiz, student responses for the corresponding quiz must be manually graded by a dashboard user.
-        case_sensitive:
-          type: boolean
-          description: If true, student responses must match the case of the answer to be correct. This only impacts FILL_IN_THE_BLANK questions.
-        correct_answer_feedback_html:
-          type: string
-          description: The feedback to display if the student answers the question correctly.
-        incorrect_answer_feedback_html:
-          type: string
-          description: The feedback to display if the student answers the question incorrectly.
-      required:
-      - html
-      - type
     Question:
       type: object
       properties:
@@ -344,20 +252,45 @@ components:
       required:
       - html
       - type
-    Type5d1Enum:
-      enum:
-      - MULTIPLE_CHOICE
-      - MULTIPLE_ANSWER
-      - FILL_IN_THE_BLANK
-      - FREEFORM
-      type: string
-      description: '* `MULTIPLE_CHOICE` - MULTIPLE_CHOICE
+    PatchedQuestionUpdateRequest:
+      type: object
+      description: Serializer for updating Question model within a Quiz or Question Bank.
+      properties:
+        quiz:
+          type: string
+          description: The quiz that this question belongs to. It is required to set either this or <code>quiz_question_bank</code>.
+        quiz_question_bank:
+          type: string
+          description: The question bank that this question belongs to. It is required to set either this or <code>quiz</code>.
+        html:
+          type: string
+          minLength: 1
+          description: The HTML content of the question.
+        type:
+          allOf:
+          - $ref: '#/components/schemas/Type5d1Enum'
+          description: 'The type of question to create. Can be: MULTIPLE_CHOICE, MULTIPLE_ANSWER, FILL_IN_THE_BLANK, FREEFORM.
 
-        * `MULTIPLE_ANSWER` - MULTIPLE_ANSWER
 
-        * `FILL_IN_THE_BLANK` - FILL_IN_THE_BLANK
+            * `MULTIPLE_CHOICE` - MULTIPLE_CHOICE
 
-        * `FREEFORM` - FREEFORM'
+            * `MULTIPLE_ANSWER` - MULTIPLE_ANSWER
+
+            * `FILL_IN_THE_BLANK` - FILL_IN_THE_BLANK
+
+            * `FREEFORM` - FREEFORM'
+        requires_manual_grading:
+          type: boolean
+          description: If true for any question on the quiz, student responses for the corresponding quiz must be manually graded by a dashboard user.
+        case_sensitive:
+          type: boolean
+          description: If true, student responses must match the case of the answer to be correct. This only impacts FILL_IN_THE_BLANK questions.
+        correct_answer_feedback_html:
+          type: string
+          description: The feedback to display if the student answers the question correctly.
+        incorrect_answer_feedback_html:
+          type: string
+          description: The feedback to display if the student answers the question incorrectly.
     QuestionRequest:
       type: object
       properties:
@@ -402,6 +335,73 @@ components:
             $ref: '#/components/schemas/AnswerRequest'
           default: []
           description: "The answers for the question. This is required for MULTIPLE_CHOICE, MULTIPLE_ANSWER, and FILL_IN_THE_BLANK question types.<br><br>Example:<pre><code>[\n\t{\"answer_text\": \"Correct answer\", \"correct\": true},\n\t{\"answer_text\": \"Incorrect answer\", \"correct\": false},\n\t{\"answer_text\": \"Second incorrect answer\", \"correct\": false}\n]</pre></code>"
+      required:
+      - html
+      - type
+    AnswerRequest:
+      type: object
+      properties:
+        answer_text:
+          type: string
+          minLength: 1
+          maxLength: 1000
+        correct:
+          type: boolean
+      required:
+      - answer_text
+    Type5d1Enum:
+      enum:
+      - MULTIPLE_CHOICE
+      - MULTIPLE_ANSWER
+      - FILL_IN_THE_BLANK
+      - FREEFORM
+      type: string
+      description: '* `MULTIPLE_CHOICE` - MULTIPLE_CHOICE
+
+        * `MULTIPLE_ANSWER` - MULTIPLE_ANSWER
+
+        * `FILL_IN_THE_BLANK` - FILL_IN_THE_BLANK
+
+        * `FREEFORM` - FREEFORM'
+    QuestionUpdateRequest:
+      type: object
+      description: Serializer for updating Question model within a Quiz or Question Bank.
+      properties:
+        quiz:
+          type: string
+          description: The quiz that this question belongs to. It is required to set either this or <code>quiz_question_bank</code>.
+        quiz_question_bank:
+          type: string
+          description: The question bank that this question belongs to. It is required to set either this or <code>quiz</code>.
+        html:
+          type: string
+          minLength: 1
+          description: The HTML content of the question.
+        type:
+          allOf:
+          - $ref: '#/components/schemas/Type5d1Enum'
+          description: 'The type of question to create. Can be: MULTIPLE_CHOICE, MULTIPLE_ANSWER, FILL_IN_THE_BLANK, FREEFORM.
+
+
+            * `MULTIPLE_CHOICE` - MULTIPLE_CHOICE
+
+            * `MULTIPLE_ANSWER` - MULTIPLE_ANSWER
+
+            * `FILL_IN_THE_BLANK` - FILL_IN_THE_BLANK
+
+            * `FREEFORM` - FREEFORM'
+        requires_manual_grading:
+          type: boolean
+          description: If true for any question on the quiz, student responses for the corresponding quiz must be manually graded by a dashboard user.
+        case_sensitive:
+          type: boolean
+          description: If true, student responses must match the case of the answer to be correct. This only impacts FILL_IN_THE_BLANK questions.
+        correct_answer_feedback_html:
+          type: string
+          description: The feedback to display if the student answers the question correctly.
+        incorrect_answer_feedback_html:
+          type: string
+          description: The feedback to display if the student answers the question incorrectly.
       required:
       - html
       - type

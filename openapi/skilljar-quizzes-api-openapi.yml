@@ -220,17 +220,29 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    QuizRequest:
+    AlignmentEnum:
+      enum:
+      - left
+      - center
+      - right
+      type: string
+      description: '* `left` - Left
+
+        * `center` - Center
+
+        * `right` - Right'
+    Quiz:
       type: object
       properties:
+        id:
+          type: string
+          readOnly: true
         name:
           type: string
-          minLength: 1
           description: The name of the quiz.
           maxLength: 500
         html:
           type: string
-          minLength: 1
           description: The HTML content of the quiz.
         passing_percentage_correct:
           type: integer
@@ -282,17 +294,6 @@ components:
             * `right` - Right'
       required:
       - name
-    AlignmentEnum:
-      enum:
-      - left
-      - center
-      - right
-      type: string
-      description: '* `left` - Left
-
-        * `center` - Center
-
-        * `right` - Right'
     PatchedQuizRequest:
       type: object
       properties:
@@ -353,18 +354,17 @@ components:
             * `center` - Center
 
             * `right` - Right'
-    Quiz:
+    QuizRequest:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
         name:
           type: string
+          minLength: 1
           description: The name of the quiz.
           maxLength: 500
         html:
           type: string
+          minLength: 1
           description: The HTML content of the quiz.
         passing_percentage_correct:
           type: integer

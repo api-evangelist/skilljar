@@ -146,188 +146,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OfferItemRequest:
-      type: object
-      properties:
-        price_cents:
-          type: integer
-          minimum: 0
-          description: The price of the offer in cents
-        currency_code:
-          allOf:
-          - $ref: '#/components/schemas/CurrencyCodeEnum'
-          description: 'Available currency codes: AUD, BRL, CAD, CNY, EUR, GBP, JPY, KRW, MXN, NZD, RUB, SEK, SGD, USD, ZAR
-
-
-            * `AUD` - AUD
-
-            * `BRL` - BRL
-
-            * `CAD` - CAD
-
-            * `CNY` - CNY
-
-            * `EUR` - EUR
-
-            * `GBP` - GBP
-
-            * `JPY` - JPY
-
-            * `KRW` - KRW
-
-            * `MXN` - MXN
-
-            * `NZD` - NZD
-
-            * `RUB` - RUB
-
-            * `SEK` - SEK
-
-            * `SGD` - SGD
-
-            * `USD` - USD
-
-            * `ZAR` - ZAR'
-        price_credits:
-          type:
-          - integer
-          - 'null'
-          minimum: 0
-          description: Number of credits, if enabled for your organization
-    CurrencyCodeEnum:
-      enum:
-      - AUD
-      - BRL
-      - CAD
-      - CNY
-      - EUR
-      - GBP
-      - JPY
-      - KRW
-      - MXN
-      - NZD
-      - RUB
-      - SEK
-      - SGD
-      - USD
-      - ZAR
-      type: string
-      description: '* `AUD` - AUD
-
-        * `BRL` - BRL
-
-        * `CAD` - CAD
-
-        * `CNY` - CNY
-
-        * `EUR` - EUR
-
-        * `GBP` - GBP
-
-        * `JPY` - JPY
-
-        * `KRW` - KRW
-
-        * `MXN` - MXN
-
-        * `NZD` - NZD
-
-        * `RUB` - RUB
-
-        * `SEK` - SEK
-
-        * `SGD` - SGD
-
-        * `USD` - USD
-
-        * `ZAR` - ZAR'
-    PaginatedOfferItemList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferItem'
-    OfferTypeEnum:
-      enum:
-      - published_path
-      - domain
-      - published_course
-      - plan
-      type: string
-      description: '* `published_path` - Course Bundle
-
-        * `domain` - Domain
-
-        * `published_course` - Published Course
-
-        * `plan` - Plan'
-    PatchedOfferItemRequest:
-      type: object
-      properties:
-        price_cents:
-          type: integer
-          minimum: 0
-          description: The price of the offer in cents
-        currency_code:
-          allOf:
-          - $ref: '#/components/schemas/CurrencyCodeEnum'
-          description: 'Available currency codes: AUD, BRL, CAD, CNY, EUR, GBP, JPY, KRW, MXN, NZD, RUB, SEK, SGD, USD, ZAR
-
-
-            * `AUD` - AUD
-
-            * `BRL` - BRL
-
-            * `CAD` - CAD
-
-            * `CNY` - CNY
-
-            * `EUR` - EUR
-
-            * `GBP` - GBP
-
-            * `JPY` - JPY
-
-            * `KRW` - KRW
-
-            * `MXN` - MXN
-
-            * `NZD` - NZD
-
-            * `RUB` - RUB
-
-            * `SEK` - SEK
-
-            * `SGD` - SGD
-
-            * `USD` - USD
-
-            * `ZAR` - ZAR'
-        price_credits:
-          type:
-          - integer
-          - 'null'
-          minimum: 0
-          description: Number of credits, if enabled for your organization
     OfferItem:
       type: object
       properties:
@@ -424,6 +242,188 @@ components:
           type: boolean
           description: Returns True if the offer is included in a Plan offer.
           readOnly: true
+    PatchedOfferItemRequest:
+      type: object
+      properties:
+        price_cents:
+          type: integer
+          minimum: 0
+          description: The price of the offer in cents
+        currency_code:
+          allOf:
+          - $ref: '#/components/schemas/CurrencyCodeEnum'
+          description: 'Available currency codes: AUD, BRL, CAD, CNY, EUR, GBP, JPY, KRW, MXN, NZD, RUB, SEK, SGD, USD, ZAR
+
+
+            * `AUD` - AUD
+
+            * `BRL` - BRL
+
+            * `CAD` - CAD
+
+            * `CNY` - CNY
+
+            * `EUR` - EUR
+
+            * `GBP` - GBP
+
+            * `JPY` - JPY
+
+            * `KRW` - KRW
+
+            * `MXN` - MXN
+
+            * `NZD` - NZD
+
+            * `RUB` - RUB
+
+            * `SEK` - SEK
+
+            * `SGD` - SGD
+
+            * `USD` - USD
+
+            * `ZAR` - ZAR'
+        price_credits:
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+          description: Number of credits, if enabled for your organization
+    OfferTypeEnum:
+      enum:
+      - published_path
+      - domain
+      - published_course
+      - plan
+      type: string
+      description: '* `published_path` - Course Bundle
+
+        * `domain` - Domain
+
+        * `published_course` - Published Course
+
+        * `plan` - Plan'
+    CurrencyCodeEnum:
+      enum:
+      - AUD
+      - BRL
+      - CAD
+      - CNY
+      - EUR
+      - GBP
+      - JPY
+      - KRW
+      - MXN
+      - NZD
+      - RUB
+      - SEK
+      - SGD
+      - USD
+      - ZAR
+      type: string
+      description: '* `AUD` - AUD
+
+        * `BRL` - BRL
+
+        * `CAD` - CAD
+
+        * `CNY` - CNY
+
+        * `EUR` - EUR
+
+        * `GBP` - GBP
+
+        * `JPY` - JPY
+
+        * `KRW` - KRW
+
+        * `MXN` - MXN
+
+        * `NZD` - NZD
+
+        * `RUB` - RUB
+
+        * `SEK` - SEK
+
+        * `SGD` - SGD
+
+        * `USD` - USD
+
+        * `ZAR` - ZAR'
+    OfferItemRequest:
+      type: object
+      properties:
+        price_cents:
+          type: integer
+          minimum: 0
+          description: The price of the offer in cents
+        currency_code:
+          allOf:
+          - $ref: '#/components/schemas/CurrencyCodeEnum'
+          description: 'Available currency codes: AUD, BRL, CAD, CNY, EUR, GBP, JPY, KRW, MXN, NZD, RUB, SEK, SGD, USD, ZAR
+
+
+            * `AUD` - AUD
+
+            * `BRL` - BRL
+
+            * `CAD` - CAD
+
+            * `CNY` - CNY
+
+            * `EUR` - EUR
+
+            * `GBP` - GBP
+
+            * `JPY` - JPY
+
+            * `KRW` - KRW
+
+            * `MXN` - MXN
+
+            * `NZD` - NZD
+
+            * `RUB` - RUB
+
+            * `SEK` - SEK
+
+            * `SGD` - SGD
+
+            * `USD` - USD
+
+            * `ZAR` - ZAR'
+        price_credits:
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+          description: Number of credits, if enabled for your organization
+    PaginatedOfferItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferItem'
   securitySchemes:
     OrganizationApiKey:
       type: http

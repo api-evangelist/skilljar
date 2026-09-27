@@ -162,14 +162,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PublishedCourseTag:
-      type: object
-      description: Serializer for PublishedCourseTags.
-      properties:
-        tag:
-          $ref: '#/components/schemas/NestedTag'
-      required:
-      - tag
     NestedTagRequest:
       type: object
       description: Serializer for nested Tag models in PublishedCourseTag, PublishedPathTag, etc.
@@ -180,14 +172,21 @@ components:
           description: Known as tag_id within the documentation
       required:
       - id
-    PublishedCourseTagRequest:
+    NestedTag:
       type: object
-      description: Serializer for PublishedCourseTags.
+      description: Serializer for nested Tag models in PublishedCourseTag, PublishedPathTag, etc.
       properties:
-        tag:
-          $ref: '#/components/schemas/NestedTagRequest'
+        id:
+          type: string
+          description: Known as tag_id within the documentation
+        name:
+          type: string
+          readOnly: true
+        slug:
+          type: string
+          readOnly: true
       required:
-      - tag
+      - id
     PaginatedPublishedCourseTagList:
       type: object
       required:
@@ -213,21 +212,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PublishedCourseTag'
-    NestedTag:
+    PublishedCourseTag:
       type: object
-      description: Serializer for nested Tag models in PublishedCourseTag, PublishedPathTag, etc.
+      description: Serializer for PublishedCourseTags.
       properties:
-        id:
-          type: string
-          description: Known as tag_id within the documentation
-        name:
-          type: string
-          readOnly: true
-        slug:
-          type: string
-          readOnly: true
+        tag:
+          $ref: '#/components/schemas/NestedTag'
       required:
-      - id
+      - tag
+    PublishedCourseTagRequest:
+      type: object
+      description: Serializer for PublishedCourseTags.
+      properties:
+        tag:
+          $ref: '#/components/schemas/NestedTagRequest'
+      required:
+      - tag
   securitySchemes:
     OrganizationApiKey:
       type: http

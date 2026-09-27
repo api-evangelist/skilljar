@@ -48,6 +48,25 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    CourseSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as course_id within the documentation
+        title:
+          type: string
+          readOnly: true
+          description: Course title
+        lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of lessons in the course
+        required_lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of required lessons in the course (non-optional lessons that count towards course completion)
     PaginatedPublishedCourseList:
       type: object
       required:
@@ -73,25 +92,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PublishedCourse'
-    CourseSummary:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as course_id within the documentation
-        title:
-          type: string
-          readOnly: true
-          description: Course title
-        lesson_count:
-          type: integer
-          readOnly: true
-          description: Number of lessons in the course
-        required_lesson_count:
-          type: integer
-          readOnly: true
-          description: Number of required lessons in the course (non-optional lessons that count towards course completion)
     Price:
       type: object
       properties:
@@ -101,6 +101,23 @@ components:
         currency_code:
           type: string
           default: USD
+    Offer:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        registration_open:
+          type: boolean
+        registration_url:
+          type: string
+          readOnly: true
+          description: URL used for course registration
+        price:
+          $ref: '#/components/schemas/Price'
+      required:
+      - price
+      - registration_open
     PublishedCourse:
       type: object
       properties:
@@ -159,23 +176,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/Offer'
           readOnly: true
-    Offer:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        registration_open:
-          type: boolean
-        registration_url:
-          type: string
-          readOnly: true
-          description: URL used for course registration
-        price:
-          $ref: '#/components/schemas/Price'
-      required:
-      - price
-      - registration_open
   securitySchemes:
     OrganizationApiKey:
       type: http

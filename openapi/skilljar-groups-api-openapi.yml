@@ -213,55 +213,47 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PatchedGroupUpdateRequest:
+    SignUpFieldRuleRequest:
       type: object
       properties:
-        name:
-          type: string
-          minLength: 1
-          description: Unique name of the group
-          maxLength: 100
-        discount_percent:
-          type:
-          - integer
-          - 'null'
-          maximum: 100
-          minimum: 0
-          description: A percentage based discount that will apply to all purchasable objects/courses
-        group_category_id:
-          type:
-          - string
-          - 'null'
-          minLength: 1
-        sign_up_field_rule:
-          allOf:
-          - $ref: '#/components/schemas/SignUpFieldRuleRequest'
-          description: Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.
-    PaginatedGroupList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
+        enforce:
+          type: boolean
+          default: false
+          description: When true, users will be removed from this group if membership rules are not satisfied.
+        require_match_all:
+          type: boolean
+          default: false
+          description: When true, users must match all sign up field options. When this option is false, any sign up field match will grant group membership.
+        options:
           type: array
           items:
-            $ref: '#/components/schemas/Group'
+            $ref: '#/components/schemas/SignupFieldOptionLinkRequest'
+      required:
+      - options
+    SignupFieldOptionLinkRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
+    SignupFieldOptionLink:
+      type: object
+      properties:
+        id:
+          type: string
+        value:
+          type: string
+          description: 'Given the *incoming* primitive data, return the value for this field
+
+            that should be validated and transformed to a native value.'
+          readOnly: true
+        domain_name:
+          type: string
+          readOnly: true
+      required:
+      - id
     Group:
       type: object
       properties:
@@ -316,85 +308,31 @@ components:
             $ref: '#/components/schemas/SignupFieldOptionLink'
       required:
       - options
-    SignupFieldOptionLink:
+    PaginatedGroupList:
       type: object
-      properties:
-        id:
-          type: string
-        value:
-          type: string
-          description: 'Given the *incoming* primitive data, return the value for this field
-
-            that should be validated and transformed to a native value.'
-          readOnly: true
-        domain_name:
-          type: string
-          readOnly: true
       required:
-      - id
-    SignupFieldOptionLinkRequest:
-      type: object
+      - count
+      - results
       properties:
-        id:
-          type: string
-          minLength: 1
-      required:
-      - id
-    SignUpFieldRuleRequest:
-      type: object
-      properties:
-        enforce:
-          type: boolean
-          default: false
-          description: When true, users will be removed from this group if membership rules are not satisfied.
-        require_match_all:
-          type: boolean
-          default: false
-          description: When true, users must match all sign up field options. When this option is false, any sign up field match will grant group membership.
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/SignupFieldOptionLinkRequest'
-      required:
-      - options
-    GroupUpdate:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as group_id within the documentation
-        name:
-          type: string
-          description: Unique name of the group
-          maxLength: 100
-        user_count:
+        count:
           type: integer
-          readOnly: true
-          description: Number of users currently in the group
-        discount_percent:
-          type:
-          - integer
-          - 'null'
-          maximum: 100
-          minimum: 0
-          description: A percentage based discount that will apply to all purchasable objects/courses
-        group_category_id:
+          example: 123
+        next:
           type:
           - string
           - 'null'
-        sign_up_field_rule:
-          allOf:
-          - $ref: '#/components/schemas/SignUpFieldRule'
-          description: Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.
-        rule_email_domains:
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
           type: array
           items:
-            type: string
-          readOnly: true
-          description: Email domains for automatic group assignment. Read-only on update — use the email-domain-rules sub-resource to modify.
-      required:
-      - name
+            $ref: '#/components/schemas/Group'
     GroupRequest:
       type: object
       properties:
@@ -453,6 +391,68 @@ components:
           description: Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.
       required:
       - name
+    GroupUpdate:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as group_id within the documentation
+        name:
+          type: string
+          description: Unique name of the group
+          maxLength: 100
+        user_count:
+          type: integer
+          readOnly: true
+          description: Number of users currently in the group
+        discount_percent:
+          type:
+          - integer
+          - 'null'
+          maximum: 100
+          minimum: 0
+          description: A percentage based discount that will apply to all purchasable objects/courses
+        group_category_id:
+          type:
+          - string
+          - 'null'
+        sign_up_field_rule:
+          allOf:
+          - $ref: '#/components/schemas/SignUpFieldRule'
+          description: Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.
+        rule_email_domains:
+          type: array
+          items:
+            type: string
+          readOnly: true
+          description: Email domains for automatic group assignment. Read-only on update — use the email-domain-rules sub-resource to modify.
+      required:
+      - name
+    PatchedGroupUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Unique name of the group
+          maxLength: 100
+        discount_percent:
+          type:
+          - integer
+          - 'null'
+          maximum: 100
+          minimum: 0
+          description: A percentage based discount that will apply to all purchasable objects/courses
+        group_category_id:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        sign_up_field_rule:
+          allOf:
+          - $ref: '#/components/schemas/SignUpFieldRuleRequest'
+          description: Signup field rule configuration.  Users with matching signup values will be automatic assigned to this group.
   securitySchemes:
     OrganizationApiKey:
       type: http

@@ -156,6 +156,53 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    AddRemoveIdLists:
+      type: object
+      properties:
+        add:
+          type: array
+          items:
+            type: string
+        remove:
+          type: array
+          items:
+            type: string
+    PatchedTrainingCreditCodesUpdateRequest:
+      type: object
+      description: this serializer is used for PATCH requests
+      properties:
+        credits_total:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        expiration_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating the expiration of the training credit code
+        expire_content:
+          type: boolean
+          description: If true, when this code is used, learners will lose access to content when the code expires.
+        tracking_identifier:
+          type: string
+          minLength: 1
+          description: Custom string for teams to identify codes in Financial/reporting tools. Is not used by Skilljar.
+          maxLength: 256
+        available_to_all_students:
+          type: boolean
+          description: Set to "true" if all learners should be able to use this credit code.
+        student_groups:
+          allOf:
+          - $ref: '#/components/schemas/AddRemoveIdListsRequest'
+          description: 'Required if the above option is "false". Use this format to add or remove student_group ids - Add resolves first, then Remove: { "add": ["2d4EXAMPLE0ea32j", "2d4EXAMPLE20esh5y"], "remove": ["9k4EXAMPLE20h5ysK"] }'
+        available_for_all_offers:
+          type: boolean
+          description: Set to "true" if this credit code should be available for all existing and future offers that have credit value.
+        offers:
+          allOf:
+          - $ref: '#/components/schemas/AddRemoveIdListsRequest'
+          description: 'Required if the above option is "false". Use this format to add or remove offer_ids - Add resolves first, then Remove: { "add": ["2d4EXAMPLE0ea32j", "2d4EXAMPLE20esh5y"], "remove": ["9k4EXAMPLE20h5ysK"] }'
     PaginatedTrainingCreditCodesListList:
       type: object
       required:
@@ -181,115 +228,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TrainingCreditCodesList'
-    TrainingCreditCodesUpdate:
-      type: object
-      description: this serializer is used for PATCH requests
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: some help text
-        training_credit_code:
-          type: string
-          readOnly: true
-          description: String used by Learners to apply Training Credit balance on the course platform and purchase Training content.
-        credits_used:
-          type: integer
-          readOnly: true
-        credits_total:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-        expiration_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating the expiration of the training credit code
-        expire_content:
-          type: boolean
-          description: If true, when this code is used, learners will lose access to content when the code expires.
-        tracking_identifier:
-          type: string
-          description: Custom string for teams to identify codes in Financial/reporting tools. Is not used by Skilljar.
-          maxLength: 256
-        available_to_all_students:
-          type: boolean
-          description: Set to "true" if all learners should be able to use this credit code.
-        student_groups:
-          allOf:
-          - $ref: '#/components/schemas/AddRemoveIdLists'
-          description: 'Required if the above option is "false". Use this format to add or remove student_group ids - Add resolves first, then Remove: { "add": ["2d4EXAMPLE0ea32j", "2d4EXAMPLE20esh5y"], "remove": ["9k4EXAMPLE20h5ysK"] }'
-        available_for_all_offers:
-          type: boolean
-          description: Set to "true" if this credit code should be available for all existing and future offers that have credit value.
-        offers:
-          allOf:
-          - $ref: '#/components/schemas/AddRemoveIdLists'
-          description: 'Required if the above option is "false". Use this format to add or remove offer_ids - Add resolves first, then Remove: { "add": ["2d4EXAMPLE0ea32j", "2d4EXAMPLE20esh5y"], "remove": ["9k4EXAMPLE20h5ysK"] }'
-    TrainingCreditCodesCreate:
-      type: object
-      description: this serializer is used for POST request
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: some help text
-        training_credit_code:
-          type: string
-          description: String used by Learners to apply Training Credit balance on the course platform and purchase Training content.
-        credits_used:
-          type: integer
-          readOnly: true
-        credits_total:
-          type: integer
-          description: Total number of credits stored on this code.
-        expiration_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating the expiration of the training credit code
-        expire_content:
-          type: boolean
-          description: If true, when this code is used, learners will lose access to content when the code expires.
-        tracking_identifier:
-          type: string
-          description: Custom string for teams to identify codes in Financial/reporting tools. Is not used by Skilljar.
-          maxLength: 256
-        available_to_all_students:
-          type: boolean
-          description: Set to "true" if all learners should be able to use this credit code.
-        available_for_all_offers:
-          type: boolean
-          description: Set to "true" if this credit code should be available for all existing and future offers that have credit value.
-      required:
-      - credits_total
-      - training_credit_code
-    AddRemoveIdListsRequest:
-      type: object
-      properties:
-        add:
-          type: array
-          items:
-            type: string
-            minLength: 1
-        remove:
-          type: array
-          items:
-            type: string
-            minLength: 1
-    AddRemoveIdLists:
-      type: object
-      properties:
-        add:
-          type: array
-          items:
-            type: string
-        remove:
-          type: array
-          items:
-            type: string
     TrainingCreditCodesRetrieve:
       type: object
       description: this serializer is used for GET requests with a required Path Parameter
@@ -337,37 +275,6 @@ components:
           items:
             type: string
           readOnly: true
-    TrainingCreditCodesList:
-      type: object
-      description: this serializer is used for GET requests with optional Query Parameters
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: some help text
-        training_credit_code:
-          type: string
-          readOnly: true
-          description: String used by Learners to apply Training Credit balance on the course platform and purchase Training content.
-        credits_used:
-          type: integer
-          readOnly: true
-        credits_total:
-          type: integer
-          readOnly: true
-        expiration_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-        expire_content:
-          type: boolean
-          readOnly: true
-        tracking_identifier:
-          type: string
-          readOnly: true
-          description: Custom string for teams to identify codes in Financial/reporting tools. Is not used by Skilljar.
     TrainingCreditCodesCreateRequest:
       type: object
       description: this serializer is used for POST request
@@ -416,10 +323,91 @@ components:
       required:
       - credits_total
       - training_credit_code
-    PatchedTrainingCreditCodesUpdateRequest:
+    TrainingCreditCodesCreate:
+      type: object
+      description: this serializer is used for POST request
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: some help text
+        training_credit_code:
+          type: string
+          description: String used by Learners to apply Training Credit balance on the course platform and purchase Training content.
+        credits_used:
+          type: integer
+          readOnly: true
+        credits_total:
+          type: integer
+          description: Total number of credits stored on this code.
+        expiration_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating the expiration of the training credit code
+        expire_content:
+          type: boolean
+          description: If true, when this code is used, learners will lose access to content when the code expires.
+        tracking_identifier:
+          type: string
+          description: Custom string for teams to identify codes in Financial/reporting tools. Is not used by Skilljar.
+          maxLength: 256
+        available_to_all_students:
+          type: boolean
+          description: Set to "true" if all learners should be able to use this credit code.
+        available_for_all_offers:
+          type: boolean
+          description: Set to "true" if this credit code should be available for all existing and future offers that have credit value.
+      required:
+      - credits_total
+      - training_credit_code
+    TrainingCreditCodesList:
+      type: object
+      description: this serializer is used for GET requests with optional Query Parameters
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: some help text
+        training_credit_code:
+          type: string
+          readOnly: true
+          description: String used by Learners to apply Training Credit balance on the course platform and purchase Training content.
+        credits_used:
+          type: integer
+          readOnly: true
+        credits_total:
+          type: integer
+          readOnly: true
+        expiration_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        expire_content:
+          type: boolean
+          readOnly: true
+        tracking_identifier:
+          type: string
+          readOnly: true
+          description: Custom string for teams to identify codes in Financial/reporting tools. Is not used by Skilljar.
+    TrainingCreditCodesUpdate:
       type: object
       description: this serializer is used for PATCH requests
       properties:
+        id:
+          type: string
+          readOnly: true
+          description: some help text
+        training_credit_code:
+          type: string
+          readOnly: true
+          description: String used by Learners to apply Training Credit balance on the course platform and purchase Training content.
+        credits_used:
+          type: integer
+          readOnly: true
         credits_total:
           type: integer
           maximum: 2147483647
@@ -435,7 +423,6 @@ components:
           description: If true, when this code is used, learners will lose access to content when the code expires.
         tracking_identifier:
           type: string
-          minLength: 1
           description: Custom string for teams to identify codes in Financial/reporting tools. Is not used by Skilljar.
           maxLength: 256
         available_to_all_students:
@@ -443,15 +430,28 @@ components:
           description: Set to "true" if all learners should be able to use this credit code.
         student_groups:
           allOf:
-          - $ref: '#/components/schemas/AddRemoveIdListsRequest'
+          - $ref: '#/components/schemas/AddRemoveIdLists'
           description: 'Required if the above option is "false". Use this format to add or remove student_group ids - Add resolves first, then Remove: { "add": ["2d4EXAMPLE0ea32j", "2d4EXAMPLE20esh5y"], "remove": ["9k4EXAMPLE20h5ysK"] }'
         available_for_all_offers:
           type: boolean
           description: Set to "true" if this credit code should be available for all existing and future offers that have credit value.
         offers:
           allOf:
-          - $ref: '#/components/schemas/AddRemoveIdListsRequest'
+          - $ref: '#/components/schemas/AddRemoveIdLists'
           description: 'Required if the above option is "false". Use this format to add or remove offer_ids - Add resolves first, then Remove: { "add": ["2d4EXAMPLE0ea32j", "2d4EXAMPLE20esh5y"], "remove": ["9k4EXAMPLE20h5ysK"] }'
+    AddRemoveIdListsRequest:
+      type: object
+      properties:
+        add:
+          type: array
+          items:
+            type: string
+            minLength: 1
+        remove:
+          type: array
+          items:
+            type: string
+            minLength: 1
   securitySchemes:
     OrganizationApiKey:
       type: http

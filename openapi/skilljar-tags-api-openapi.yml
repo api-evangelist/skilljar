@@ -192,25 +192,6 @@ components:
           minLength: 1
           description: Name of the tag.  This is a required field and must be unique within the organization.
           maxLength: 255
-    Tag:
-      type: object
-      description: Serializer for Tag model.
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as tag_id within the documentation
-        name:
-          type: string
-          description: Name of the tag.  This is a required field and must be unique within the organization.
-          maxLength: 255
-        slug:
-          type: string
-          readOnly: true
-          description: The slug can only contain lowercase letters, numbers and dashes.
-          maxLength: 255
-      required:
-      - name
     TagRequest:
       type: object
       description: Serializer for Tag model.
@@ -247,6 +228,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
+    Tag:
+      type: object
+      description: Serializer for Tag model.
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as tag_id within the documentation
+        name:
+          type: string
+          description: Name of the tag.  This is a required field and must be unique within the organization.
+          maxLength: 255
+        slug:
+          type: string
+          readOnly: true
+          description: The slug can only contain lowercase letters, numbers and dashes.
+          maxLength: 255
+      required:
+      - name
   securitySchemes:
     OrganizationApiKey:
       type: http

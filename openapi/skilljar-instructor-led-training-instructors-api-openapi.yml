@@ -238,6 +238,16 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    IltInstructorRequest:
+      type: object
+      description: Serializer for ILT instructors
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 1
+      required:
+      - email
     PatchedIltInstructorRequest:
       type: object
       description: Serializer for ILT instructors
@@ -246,6 +256,25 @@ components:
           type: string
           format: email
           minLength: 1
+    IltInstructor:
+      type: object
+      description: Serializer for ILT instructors
+      properties:
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+          description: Return name of this instructor
+          readOnly: true
+        providers:
+          type: array
+          items:
+            type: string
+          description: Return providers supported by this instructor
+          readOnly: true
+      required:
+      - email
     PaginatedIltInstructorList:
       type: object
       required:
@@ -271,35 +300,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/IltInstructor'
-    IltInstructorRequest:
-      type: object
-      description: Serializer for ILT instructors
-      properties:
-        email:
-          type: string
-          format: email
-          minLength: 1
-      required:
-      - email
-    IltInstructor:
-      type: object
-      description: Serializer for ILT instructors
-      properties:
-        email:
-          type: string
-          format: email
-        name:
-          type: string
-          description: Return name of this instructor
-          readOnly: true
-        providers:
-          type: array
-          items:
-            type: string
-          description: Return providers supported by this instructor
-          readOnly: true
-      required:
-      - email
   securitySchemes:
     OrganizationApiKey:
       type: http

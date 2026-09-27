@@ -73,6 +73,40 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ManagerAccessDetails:
+      type: object
+      description: Serializer for a user's third-party manager access details.
+      properties:
+        group_id:
+          type:
+          - string
+          - 'null'
+        can_create_users:
+          type:
+          - boolean
+          - 'null'
+        course_access_level:
+          type: string
+        course_ids:
+          type: array
+          items:
+            type: string
+        path_access_level:
+          type: string
+        path_ids:
+          type: array
+          items:
+            type: string
+        license_ids:
+          type: array
+          items:
+            type: string
+      required:
+      - course_access_level
+      - course_ids
+      - license_ids
+      - path_access_level
+      - path_ids
     ManagerAccessUpdateRequestRequest:
       type: object
       description: Serializer for updating a user's third-party manager access settings.
@@ -108,56 +142,6 @@ components:
       - course_access_level
       - group_name
       - path_access_level
-    InvalidIds:
-      type: object
-      description: Serializer for returning invalid IDs from the update request.
-      properties:
-        course_ids:
-          type: array
-          items:
-            type: string
-        path_ids:
-          type: array
-          items:
-            type: string
-        license_ids:
-          type: array
-          items:
-            type: string
-    ManagerAccessDetails:
-      type: object
-      description: Serializer for a user's third-party manager access details.
-      properties:
-        group_id:
-          type:
-          - string
-          - 'null'
-        can_create_users:
-          type:
-          - boolean
-          - 'null'
-        course_access_level:
-          type: string
-        course_ids:
-          type: array
-          items:
-            type: string
-        path_access_level:
-          type: string
-        path_ids:
-          type: array
-          items:
-            type: string
-        license_ids:
-          type: array
-          items:
-            type: string
-      required:
-      - course_access_level
-      - course_ids
-      - license_ids
-      - path_access_level
-      - path_ids
     ManagerAccess:
       type: object
       description: Serializer for returning a user's third-party manager access settings.
@@ -174,6 +158,22 @@ components:
           readOnly: true
       required:
       - user
+    InvalidIds:
+      type: object
+      description: Serializer for returning invalid IDs from the update request.
+      properties:
+        course_ids:
+          type: array
+          items:
+            type: string
+        path_ids:
+          type: array
+          items:
+            type: string
+        license_ids:
+          type: array
+          items:
+            type: string
     ReadOnlyUser:
       type: object
       description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.

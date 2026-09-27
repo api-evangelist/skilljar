@@ -250,36 +250,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PageContentBlockItem:
-      type: object
-      description: Serializer for PageContentBlockItem
-      properties:
-        id:
-          type: string
-          readOnly: true
-        order:
-          type: integer
-          minimum: 1
-        type:
-          $ref: '#/components/schemas/PageContentBlockItemTypeEnum'
-        html_content_block_id:
-          type: string
-          readOnly: true
-        tile_container_content_block_id:
-          type: string
-          readOnly: true
-        component_content_block_id:
-          type: string
-          readOnly: true
-      required:
-      - type
-    PatchedPageContentBlockItemOrderUpdateRequest:
-      type: object
-      description: Serializer for updating the order of existing PageContentBlockItem.
-      properties:
-        order:
-          type: integer
-          minimum: 1
     PaginatedPageContentBlockItemList:
       type: object
       required:
@@ -305,6 +275,64 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PageContentBlockItem'
+    PatchedPageContentBlockItemOrderUpdateRequest:
+      type: object
+      description: Serializer for updating the order of existing PageContentBlockItem.
+      properties:
+        order:
+          type: integer
+          minimum: 1
+    PageContentBlockItemRequest:
+      type: object
+      description: Serializer for PageContentBlockItem
+      properties:
+        order:
+          type: integer
+          minimum: 1
+        type:
+          $ref: '#/components/schemas/PageContentBlockItemTypeEnum'
+      required:
+      - type
+    PageContentBlockItem:
+      type: object
+      description: Serializer for PageContentBlockItem
+      properties:
+        id:
+          type: string
+          readOnly: true
+        order:
+          type: integer
+          minimum: 1
+        type:
+          $ref: '#/components/schemas/PageContentBlockItemTypeEnum'
+        html_content_block_id:
+          type: string
+          readOnly: true
+        tile_container_content_block_id:
+          type: string
+          readOnly: true
+        component_content_block_id:
+          type: string
+          readOnly: true
+      required:
+      - type
+    PageContentBlockItemTypeEnum:
+      enum:
+      - HTML
+      - HERO
+      - ANNOUNCEMENT_BAR
+      - TILE_SECTION
+      - IN_PROGRESS_COURSES
+      type: string
+      description: '* `HTML` - HTML
+
+        * `HERO` - HERO
+
+        * `ANNOUNCEMENT_BAR` - ANNOUNCEMENT_BAR
+
+        * `TILE_SECTION` - TILE_SECTION
+
+        * `IN_PROGRESS_COURSES` - IN_PROGRESS_COURSES'
     PageContentBlockItemOrderUpdateRequest:
       type: object
       description: Serializer for updating the order of existing PageContentBlockItem.
@@ -334,34 +362,6 @@ components:
         component_content_block_id:
           type: string
           readOnly: true
-    PageContentBlockItemRequest:
-      type: object
-      description: Serializer for PageContentBlockItem
-      properties:
-        order:
-          type: integer
-          minimum: 1
-        type:
-          $ref: '#/components/schemas/PageContentBlockItemTypeEnum'
-      required:
-      - type
-    PageContentBlockItemTypeEnum:
-      enum:
-      - HTML
-      - HERO
-      - ANNOUNCEMENT_BAR
-      - TILE_SECTION
-      - IN_PROGRESS_COURSES
-      type: string
-      description: '* `HTML` - HTML
-
-        * `HERO` - HERO
-
-        * `ANNOUNCEMENT_BAR` - ANNOUNCEMENT_BAR
-
-        * `TILE_SECTION` - TILE_SECTION
-
-        * `IN_PROGRESS_COURSES` - IN_PROGRESS_COURSES'
   securitySchemes:
     OrganizationApiKey:
       type: http

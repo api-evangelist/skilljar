@@ -268,6 +268,53 @@ components:
         currency_code:
           type: string
           default: USD
+    PaymentProcessorEnum:
+      enum:
+      - NONE
+      - STRIPE
+      - STRIPE_BTC
+      - PAYPAL
+      - PAYFLOW
+      - CYBERSRC
+      - MES
+      - EXTERNAL
+      type: string
+      description: '* `NONE` - None
+
+        * `STRIPE` - Stripe
+
+        * `STRIPE_BTC` - Stripe Bitcoin
+
+        * `PAYPAL` - PayPal
+
+        * `PAYFLOW` - Payflow
+
+        * `CYBERSRC` - Cybersource
+
+        * `MES` - Merchant e-Solutions
+
+        * `EXTERNAL` - External'
+    CreatePublishedPathEnrollmentRequest:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/ReadOnlyUserRequest'
+        enrolled_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        active:
+          type:
+          - boolean
+          - 'null'
+          default: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentPurchaseRequest'
+      required:
+      - user
     Price:
       type: object
       properties:
@@ -277,16 +324,6 @@ components:
         currency_code:
           type: string
           default: USD
-    PatchedUpdatePublishedPathEnrollmentRequest:
-      type: object
-      properties:
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        active:
-          type: boolean
     UpdatePublishedPathEnrollment:
       type: object
       properties:
@@ -312,31 +349,29 @@ components:
           allOf:
           - $ref: '#/components/schemas/EnrollmentPurchase'
           readOnly: true
-    PublishedPathEnrollment:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        user:
-          $ref: '#/components/schemas/ReadOnlyUser'
-        enrolled_at:
-          type: string
-          format: date-time
-        expires_at:
-          type: string
-          format: date-time
-        active:
-          type:
-          - boolean
-          - 'null'
-          default: true
-        purchase:
-          allOf:
-          - $ref: '#/components/schemas/EnrollmentPurchase'
-          readOnly: true
-      required:
-      - user
+    PurchaseStateEnum:
+      enum:
+      - CREATED
+      - SUCCESS
+      - FAILED
+      - REFUNDED
+      - CANCELLED
+      - FLAGGED
+      - PENDING
+      type: string
+      description: '* `CREATED` - CREATED
+
+        * `SUCCESS` - SUCCESS
+
+        * `FAILED` - FAILED
+
+        * `REFUNDED` - REFUNDED
+
+        * `CANCELLED` - CANCELLED
+
+        * `FLAGGED` - FLAGGED
+
+        * `PENDING` - PENDING'
     CreatePublishedPathEnrollment:
       type: object
       properties:
@@ -361,88 +396,17 @@ components:
           - $ref: '#/components/schemas/EnrollmentPurchase'
       required:
       - user
-    PaginatedPublishedPathEnrollmentList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublishedPathEnrollment'
-    CreatePublishedPathEnrollmentRequest:
+    PriceRequest:
       type: object
       properties:
-        user:
-          $ref: '#/components/schemas/ReadOnlyUserRequest'
-        enrolled_at:
-          type: string
-          format: date-time
-        expires_at:
-          type: string
-          format: date-time
-        active:
-          type:
-          - boolean
-          - 'null'
-          default: true
-        purchase:
-          allOf:
-          - $ref: '#/components/schemas/EnrollmentPurchaseRequest'
-      required:
-      - user
-    EnrollmentPurchaseRequest:
-      type: object
-      properties:
-        purchase_price:
-          $ref: '#/components/schemas/PriceRequest'
-        purchase_state:
-          $ref: '#/components/schemas/PurchaseStateEnum'
-        purchased_at:
-          type: string
-          format: date-time
-        tax_price_cents:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-    ReadOnlyUserRequest:
-      type: object
-      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
-      properties:
-        id:
+        amount:
           type: string
           minLength: 1
-          description: Known as user_id within the documentation
-      required:
-      - id
-    UpdatePublishedPathEnrollmentRequest:
-      type: object
-      properties:
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        active:
-          type: boolean
+          default: '0.00'
+        currency_code:
+          type: string
+          minLength: 1
+          default: USD
     EnrollmentPurchase:
       type: object
       properties:
@@ -477,6 +441,77 @@ components:
           - 'null'
           maximum: 2147483647
           minimum: 0
+    PatchedUpdatePublishedPathEnrollmentRequest:
+      type: object
+      properties:
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        active:
+          type: boolean
+    UpdatePublishedPathEnrollmentRequest:
+      type: object
+      properties:
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        active:
+          type: boolean
+    EnrollmentPurchaseRequest:
+      type: object
+      properties:
+        purchase_price:
+          $ref: '#/components/schemas/PriceRequest'
+        purchase_state:
+          $ref: '#/components/schemas/PurchaseStateEnum'
+        purchased_at:
+          type: string
+          format: date-time
+        tax_price_cents:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+    PublishedPathEnrollment:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/ReadOnlyUser'
+        enrolled_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        active:
+          type:
+          - boolean
+          - 'null'
+          default: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentPurchase'
+          readOnly: true
+      required:
+      - user
+    ReadOnlyUserRequest:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Known as user_id within the documentation
+      required:
+      - id
     ReadOnlyUser:
       type: object
       description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
@@ -500,66 +535,31 @@ components:
           description: Last name
       required:
       - id
-    PurchaseStateEnum:
-      enum:
-      - CREATED
-      - SUCCESS
-      - FAILED
-      - REFUNDED
-      - CANCELLED
-      - FLAGGED
-      - PENDING
-      type: string
-      description: '* `CREATED` - CREATED
-
-        * `SUCCESS` - SUCCESS
-
-        * `FAILED` - FAILED
-
-        * `REFUNDED` - REFUNDED
-
-        * `CANCELLED` - CANCELLED
-
-        * `FLAGGED` - FLAGGED
-
-        * `PENDING` - PENDING'
-    PaymentProcessorEnum:
-      enum:
-      - NONE
-      - STRIPE
-      - STRIPE_BTC
-      - PAYPAL
-      - PAYFLOW
-      - CYBERSRC
-      - MES
-      - EXTERNAL
-      type: string
-      description: '* `NONE` - None
-
-        * `STRIPE` - Stripe
-
-        * `STRIPE_BTC` - Stripe Bitcoin
-
-        * `PAYPAL` - PayPal
-
-        * `PAYFLOW` - Payflow
-
-        * `CYBERSRC` - Cybersource
-
-        * `MES` - Merchant e-Solutions
-
-        * `EXTERNAL` - External'
-    PriceRequest:
+    PaginatedPublishedPathEnrollmentList:
       type: object
+      required:
+      - count
+      - results
       properties:
-        amount:
-          type: string
-          minLength: 1
-          default: '0.00'
-        currency_code:
-          type: string
-          minLength: 1
-          default: USD
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublishedPathEnrollment'
   securitySchemes:
     OrganizationApiKey:
       type: http

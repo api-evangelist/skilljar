@@ -42,17 +42,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GroupMembershipGroup:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-          maxLength: 100
-      required:
-      - id
-      - name
     PaginatedGroupMembershipList:
       type: object
       required:
@@ -78,6 +67,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GroupMembership'
+    GroupMembershipGroup:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          maxLength: 100
+      required:
+      - id
+      - name
     GroupMembership:
       type: object
       properties:

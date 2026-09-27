@@ -134,6 +134,14 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    DomainUserInviteRequest:
+      type: object
+      properties:
+        send_email:
+          type: boolean
+          writeOnly: true
+          default: true
+          description: Whether or not to send the user an email inviting them to the domain. Defaults to True
     PaginatedDomainUserInviteList:
       type: object
       required:
@@ -159,14 +167,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DomainUserInvite'
-    DomainUserInviteRequest:
-      type: object
-      properties:
-        send_email:
-          type: boolean
-          writeOnly: true
-          default: true
-          description: Whether or not to send the user an email inviting them to the domain. Defaults to True
     DomainUserInvite:
       type: object
       properties:

@@ -187,53 +187,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SignupFieldSummary:
-      type: object
-      properties:
-        id:
-          type: string
-        label:
-          type: string
-          readOnly: true
-      required:
-      - id
-    BulkUserSignupInfoRequest:
-      type: object
-      properties:
-        signup_fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/BulkUserSignupFieldValueRequest'
-          writeOnly: true
-      required:
-      - signup_fields
-    SignupFieldSummaryRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          minLength: 1
-      required:
-      - id
-    UserSignupFieldValueRequest:
-      type: object
-      properties:
-        signup_field:
-          $ref: '#/components/schemas/SignupFieldSummaryRequest'
-        value:
-          type: string
-          minLength: 1
-      required:
-      - signup_field
-      - value
-    BulkUserSignupInfo:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/BulkUserSignupFieldValue'
-          readOnly: true
     UserSignupFieldValue:
       type: object
       properties:
@@ -243,18 +196,6 @@ components:
           type: string
       required:
       - signup_field
-      - value
-    BulkUserSignupFieldValue:
-      type: object
-      description: Saves a single signup field without reconciliation. Must only be used via BulkUserSignupInfoSerializer.
-      properties:
-        signup_field:
-          allOf:
-          - $ref: '#/components/schemas/SignupFieldSummary'
-          readOnly: true
-        value:
-          type: string
-      required:
       - value
     PaginatedUserSignupFieldValueList:
       type: object
@@ -281,6 +222,65 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserSignupFieldValue'
+    BulkUserSignupInfo:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkUserSignupFieldValue'
+          readOnly: true
+    UserSignupFieldValueRequest:
+      type: object
+      properties:
+        signup_field:
+          $ref: '#/components/schemas/SignupFieldSummaryRequest'
+        value:
+          type: string
+          minLength: 1
+      required:
+      - signup_field
+      - value
+    BulkUserSignupInfoRequest:
+      type: object
+      properties:
+        signup_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkUserSignupFieldValueRequest'
+          writeOnly: true
+      required:
+      - signup_fields
+    SignupFieldSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+          readOnly: true
+      required:
+      - id
+    SignupFieldSummaryRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
+    BulkUserSignupFieldValue:
+      type: object
+      description: Saves a single signup field without reconciliation. Must only be used via BulkUserSignupInfoSerializer.
+      properties:
+        signup_field:
+          allOf:
+          - $ref: '#/components/schemas/SignupFieldSummary'
+          readOnly: true
+        value:
+          type: string
+      required:
+      - value
     BulkUserSignupFieldValueRequest:
       type: object
       description: Saves a single signup field without reconciliation. Must only be used via BulkUserSignupInfoSerializer.

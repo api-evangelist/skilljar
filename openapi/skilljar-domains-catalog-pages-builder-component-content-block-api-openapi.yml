@@ -140,6 +140,25 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ComponentEnum:
+      enum:
+      - in_progress_content
+      - federated_search
+      type: string
+      description: '* `in_progress_content` - In Progress Content
+
+        * `federated_search` - Federated Search'
+    AlignmentEnum:
+      enum:
+      - left
+      - center
+      - right
+      type: string
+      description: '* `left` - Left
+
+        * `center` - Center
+
+        * `right` - Right'
     PatchedComponentContentBlockRequest:
       type: object
       description: Serializer flattening selected settings fields onto the root representation.
@@ -159,25 +178,6 @@ components:
           default: 4
         alignment:
           $ref: '#/components/schemas/AlignmentEnum'
-    AlignmentEnum:
-      enum:
-      - left
-      - center
-      - right
-      type: string
-      description: '* `left` - Left
-
-        * `center` - Center
-
-        * `right` - Right'
-    ComponentEnum:
-      enum:
-      - in_progress_content
-      - federated_search
-      type: string
-      description: '* `in_progress_content` - In Progress Content
-
-        * `federated_search` - Federated Search'
     ComponentContentBlockRequest:
       type: object
       description: Serializer flattening selected settings fields onto the root representation.

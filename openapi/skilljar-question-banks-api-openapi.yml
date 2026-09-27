@@ -203,32 +203,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    QuestionBank:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        name:
-          type: string
-          description: The name of the question bank.
-          maxLength: 500
-        question_count:
-          type: integer
-          readOnly: true
-        quiz_association_count:
-          type: integer
-          readOnly: true
-      required:
-      - name
-    PatchedQuestionBankRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: The name of the question bank.
-          maxLength: 500
     QuestionBankRequest:
       type: object
       properties:
@@ -264,6 +238,32 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/QuestionBank'
+    PatchedQuestionBankRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: The name of the question bank.
+          maxLength: 500
+    QuestionBank:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          description: The name of the question bank.
+          maxLength: 500
+        question_count:
+          type: integer
+          readOnly: true
+        quiz_association_count:
+          type: integer
+          readOnly: true
+      required:
+      - name
   securitySchemes:
     OrganizationApiKey:
       type: http

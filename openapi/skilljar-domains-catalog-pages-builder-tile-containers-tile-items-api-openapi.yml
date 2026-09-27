@@ -299,42 +299,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TileContainerItem:
-      type: object
-      description: Serializer for TileContainerItem
-      properties:
-        id:
-          type: string
-          readOnly: true
-        order:
-          type: integer
-          minimum: 1
-        item_type:
-          allOf:
-          - $ref: '#/components/schemas/ItemTypeEnum'
-          readOnly: true
-        item_catalog_page_id:
-          type: string
-        item_published_path_id:
-          type: string
-        item_published_course_id:
-          type: string
-        item_plan_id:
-          type: string
-    ItemTypeEnum:
-      enum:
-      - CATALOG_PAGE
-      - PUBLISHED_COURSE
-      - PLAN
-      - PUBLISHED_PATH
-      type: string
-      description: '* `CATALOG_PAGE` - Catalog Page
-
-        * `PUBLISHED_COURSE` - Published Course
-
-        * `PLAN` - Plan
-
-        * `PUBLISHED_PATH` - Published Path'
     TileContainerItemOrderUpdate:
       type: object
       description: Serializer for updating the order of existing TileContainerItem
@@ -361,6 +325,20 @@ components:
         item_plan_id:
           type: string
           readOnly: true
+    ItemTypeEnum:
+      enum:
+      - CATALOG_PAGE
+      - PUBLISHED_COURSE
+      - PLAN
+      - PUBLISHED_PATH
+      type: string
+      description: '* `CATALOG_PAGE` - Catalog Page
+
+        * `PUBLISHED_COURSE` - Published Course
+
+        * `PLAN` - Plan
+
+        * `PUBLISHED_PATH` - Published Path'
     TileContainerItemRequest:
       type: object
       description: Serializer for TileContainerItem
@@ -380,13 +358,6 @@ components:
         item_plan_id:
           type: string
           minLength: 1
-    PatchedTileContainerItemOrderUpdateRequest:
-      type: object
-      description: Serializer for updating the order of existing TileContainerItem
-      properties:
-        order:
-          type: integer
-          minimum: 1
     TileContainerItemOrderUpdateRequest:
       type: object
       description: Serializer for updating the order of existing TileContainerItem
@@ -394,6 +365,35 @@ components:
         order:
           type: integer
           minimum: 1
+    PatchedTileContainerItemOrderUpdateRequest:
+      type: object
+      description: Serializer for updating the order of existing TileContainerItem
+      properties:
+        order:
+          type: integer
+          minimum: 1
+    TileContainerItem:
+      type: object
+      description: Serializer for TileContainerItem
+      properties:
+        id:
+          type: string
+          readOnly: true
+        order:
+          type: integer
+          minimum: 1
+        item_type:
+          allOf:
+          - $ref: '#/components/schemas/ItemTypeEnum'
+          readOnly: true
+        item_catalog_page_id:
+          type: string
+        item_published_path_id:
+          type: string
+        item_published_course_id:
+          type: string
+        item_plan_id:
+          type: string
     PaginatedTileContainerItemList:
       type: object
       required:

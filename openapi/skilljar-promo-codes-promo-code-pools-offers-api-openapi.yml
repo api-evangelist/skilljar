@@ -116,108 +116,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CurrencyCodeEnum:
-      enum:
-      - AUD
-      - BRL
-      - CAD
-      - CNY
-      - EUR
-      - GBP
-      - JPY
-      - KRW
-      - MXN
-      - NZD
-      - RUB
-      - SEK
-      - SGD
-      - USD
-      - ZAR
-      type: string
-      description: '* `AUD` - AUD
-
-        * `BRL` - BRL
-
-        * `CAD` - CAD
-
-        * `CNY` - CNY
-
-        * `EUR` - EUR
-
-        * `GBP` - GBP
-
-        * `JPY` - JPY
-
-        * `KRW` - KRW
-
-        * `MXN` - MXN
-
-        * `NZD` - NZD
-
-        * `RUB` - RUB
-
-        * `SEK` - SEK
-
-        * `SGD` - SGD
-
-        * `USD` - USD
-
-        * `ZAR` - ZAR'
-    PaginatedPromoCodePoolOfferList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PromoCodePoolOffer'
-    PromoCodePoolOffer:
-      type: object
-      properties:
-        offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferItem'
-          readOnly: true
-    OfferTypeEnum:
-      enum:
-      - published_path
-      - domain
-      - published_course
-      - plan
-      type: string
-      description: '* `published_path` - Course Bundle
-
-        * `domain` - Domain
-
-        * `published_course` - Published Course
-
-        * `plan` - Plan'
-    PromoCodePoolOfferRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          writeOnly: true
-          minLength: 1
-          description: Offer ID you wish to attach to a PromoCodePool
     OfferItem:
       type: object
       properties:
@@ -314,6 +212,108 @@ components:
           type: boolean
           description: Returns True if the offer is included in a Plan offer.
           readOnly: true
+    PromoCodePoolOfferRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: Offer ID you wish to attach to a PromoCodePool
+    PaginatedPromoCodePoolOfferList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromoCodePoolOffer'
+    PromoCodePoolOffer:
+      type: object
+      properties:
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferItem'
+          readOnly: true
+    OfferTypeEnum:
+      enum:
+      - published_path
+      - domain
+      - published_course
+      - plan
+      type: string
+      description: '* `published_path` - Course Bundle
+
+        * `domain` - Domain
+
+        * `published_course` - Published Course
+
+        * `plan` - Plan'
+    CurrencyCodeEnum:
+      enum:
+      - AUD
+      - BRL
+      - CAD
+      - CNY
+      - EUR
+      - GBP
+      - JPY
+      - KRW
+      - MXN
+      - NZD
+      - RUB
+      - SEK
+      - SGD
+      - USD
+      - ZAR
+      type: string
+      description: '* `AUD` - AUD
+
+        * `BRL` - BRL
+
+        * `CAD` - CAD
+
+        * `CNY` - CNY
+
+        * `EUR` - EUR
+
+        * `GBP` - GBP
+
+        * `JPY` - JPY
+
+        * `KRW` - KRW
+
+        * `MXN` - MXN
+
+        * `NZD` - NZD
+
+        * `RUB` - RUB
+
+        * `SEK` - SEK
+
+        * `SGD` - SGD
+
+        * `USD` - USD
+
+        * `ZAR` - ZAR'
   securitySchemes:
     OrganizationApiKey:
       type: http

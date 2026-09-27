@@ -195,7 +195,29 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PaginatedUserOverviewList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserOverview'
     UserUpdateRequest:
+      type: object
+      description: Version of the user serializer configured to update a user's name and email address.
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email address
+          description: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          description: First name
+          maxLength: 50
+        last_name:
+          type: string
+          description: Last name
+          maxLength: 50
+    PatchedUserUpdateRequest:
       type: object
       description: Version of the user serializer configured to update a user's name and email address.
       properties:
@@ -273,24 +295,6 @@ components:
           - 'null'
           format: date-time
           readOnly: true
-    PatchedUserUpdateRequest:
-      type: object
-      description: Version of the user serializer configured to update a user's name and email address.
-      properties:
-        email:
-          type: string
-          format: email
-          title: Email address
-          description: Email address
-          maxLength: 254
-        first_name:
-          type: string
-          description: First name
-          maxLength: 50
-        last_name:
-          type: string
-          description: Last name
-          maxLength: 50
     ReadOnlyUser:
       type: object
       description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
@@ -314,10 +318,6 @@ components:
           description: Last name
       required:
       - id
-    PaginatedUserOverviewList:
-      type: array
-      items:
-        $ref: '#/components/schemas/UserOverview'
   securitySchemes:
     OrganizationApiKey:
       type: http

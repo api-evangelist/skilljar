@@ -78,25 +78,19 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CourseSummary:
+    PathItem:
       type: object
       properties:
         id:
           type: string
           readOnly: true
-          description: Known as course_id within the documentation
-        title:
+        slug:
           type: string
           readOnly: true
-          description: Course title
-        lesson_count:
-          type: integer
-          readOnly: true
-          description: Number of lessons in the course
-        required_lesson_count:
-          type: integer
-          readOnly: true
-          description: Number of required lessons in the course (non-optional lessons that count towards course completion)
+        course:
+          $ref: '#/components/schemas/CourseSummary'
+      required:
+      - course
     PaginatedPathItemList:
       type: object
       required:
@@ -122,19 +116,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PathItem'
-    PathItem:
+    CourseSummary:
       type: object
       properties:
         id:
           type: string
           readOnly: true
-        slug:
+          description: Known as course_id within the documentation
+        title:
           type: string
           readOnly: true
-        course:
-          $ref: '#/components/schemas/CourseSummary'
-      required:
-      - course
+          description: Course title
+        lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of lessons in the course
+        required_lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of required lessons in the course (non-optional lessons that count towards course completion)
   securitySchemes:
     OrganizationApiKey:
       type: http

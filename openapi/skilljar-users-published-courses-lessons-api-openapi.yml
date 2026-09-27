@@ -193,62 +193,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    UserLessonProgress:
-      type: object
-      properties:
-        lesson:
-          allOf:
-          - $ref: '#/components/schemas/UserLessonProgressLesson'
-          readOnly: true
-        lesson_progress:
-          $ref: '#/components/schemas/UserLessonProgressLessonProgress'
-      required:
-      - lesson_progress
-    PaginatedUserLessonProgressList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserLessonProgress'
-    UserLessonProgressRequest:
-      type: object
-      properties:
-        lesson_progress:
-          $ref: '#/components/schemas/UserLessonProgressLessonProgressRequest'
-      required:
-      - lesson_progress
-    PatchedUserLessonProgressRequest:
-      type: object
-      properties:
-        lesson_progress:
-          $ref: '#/components/schemas/UserLessonProgressLessonProgressRequest'
-    SuccessStatusEnum:
-      enum:
-      - PASSED
-      - FAILED
-      type: string
-      description: '* `PASSED` - Passed
-
-        * `FAILED` - Failed'
     UserLessonProgressLesson:
       type: object
       description: Lesson information within the user lesson progress endpoint.
@@ -301,6 +245,55 @@ components:
         lesson_progress_id:
           type: string
           minLength: 1
+    PatchedUserLessonProgressRequest:
+      type: object
+      properties:
+        lesson_progress:
+          $ref: '#/components/schemas/UserLessonProgressLessonProgressRequest'
+    UserLessonProgress:
+      type: object
+      properties:
+        lesson:
+          allOf:
+          - $ref: '#/components/schemas/UserLessonProgressLesson'
+          readOnly: true
+        lesson_progress:
+          $ref: '#/components/schemas/UserLessonProgressLessonProgress'
+      required:
+      - lesson_progress
+    PaginatedUserLessonProgressList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserLessonProgress'
+    SuccessStatusEnum:
+      enum:
+      - PASSED
+      - FAILED
+      type: string
+      description: '* `PASSED` - Passed
+
+        * `FAILED` - Failed'
     UserLessonProgressLessonProgress:
       type: object
       description: Lesson progress within the user lesson progress endpoint.
@@ -350,6 +343,13 @@ components:
           - 'null'
         lesson_progress_id:
           type: string
+    UserLessonProgressRequest:
+      type: object
+      properties:
+        lesson_progress:
+          $ref: '#/components/schemas/UserLessonProgressLessonProgressRequest'
+      required:
+      - lesson_progress
     NullEnum:
       enum:
       - null

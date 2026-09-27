@@ -58,18 +58,6 @@ components:
           type: string
           format: date-time
           readOnly: true
-    UserPublishedPathSummary:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        title:
-          type: string
-          readOnly: true
-        course_count:
-          type: integer
-          readOnly: true
     UserPublishedPathEnrollments:
       type: object
       properties:
@@ -103,6 +91,18 @@ components:
       required:
       - published_path
       - published_path_progress
+    UserPublishedPathSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        course_count:
+          type: integer
+          readOnly: true
   securitySchemes:
     OrganizationApiKey:
       type: http

@@ -1346,7 +1346,7 @@ apis:
   - type: OAuthScopes
     url: scopes/skilljar-scopes.yml
 - aid: skilljar:skilljar-tags-api
-  name: Skilljar tags API
+  name: Skilljar Tags API
   description: The tags API from Skilljar — 2 operation(s) for tags.
   humanURL: https://api.skilljar.com/
   baseURL: https://api.skilljar.com/v1/

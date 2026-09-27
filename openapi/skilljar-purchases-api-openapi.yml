@@ -160,64 +160,6 @@ paths:
           description: ''
 components:
   schemas:
-    PurchaseFulfillmentStateEnum:
-      enum:
-      - SUCCESS
-      - FAILED
-      - CANCELLED
-      type: string
-      description: '* `SUCCESS` - SUCCESS
-
-        * `FAILED` - FAILED
-
-        * `CANCELLED` - CANCELLED'
-    CurrencyCodeEnum:
-      enum:
-      - AUD
-      - BRL
-      - CAD
-      - CNY
-      - EUR
-      - GBP
-      - JPY
-      - KRW
-      - MXN
-      - NZD
-      - RUB
-      - SEK
-      - SGD
-      - USD
-      - ZAR
-      type: string
-      description: '* `AUD` - AUD
-
-        * `BRL` - BRL
-
-        * `CAD` - CAD
-
-        * `CNY` - CNY
-
-        * `EUR` - EUR
-
-        * `GBP` - GBP
-
-        * `JPY` - JPY
-
-        * `KRW` - KRW
-
-        * `MXN` - MXN
-
-        * `NZD` - NZD
-
-        * `RUB` - RUB
-
-        * `SEK` - SEK
-
-        * `SGD` - SGD
-
-        * `USD` - USD
-
-        * `ZAR` - ZAR'
     PurchaseFulfillmentRequest:
       type: object
       properties:
@@ -250,142 +192,6 @@ components:
           description: 'Optional: Purchase metadata. For reference only. JSON format is recommended'
       required:
       - state
-    PatchedPurchaseRequest:
-      type: object
-      properties:
-        state:
-          allOf:
-          - $ref: '#/components/schemas/PurchaseStateEnum'
-          description: '''PENDING'', ''SUCCESS'', ''FAILED'', ''REFUNDED'', or ''CANCELLED''
-
-
-            * `PENDING` - PENDING
-
-            * `SUCCESS` - SUCCESS
-
-            * `FAILED` - FAILED
-
-            * `REFUNDED` - REFUNDED
-
-            * `CANCELLED` - CANCELLED'
-        refunded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        refund_cents:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        price_cents:
-          type: integer
-        tax_price_cents:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-    PurchaseRequest:
-      type: object
-      properties:
-        state:
-          allOf:
-          - $ref: '#/components/schemas/PurchaseStateEnum'
-          description: '''PENDING'', ''SUCCESS'', ''FAILED'', ''REFUNDED'', or ''CANCELLED''
-
-
-            * `PENDING` - PENDING
-
-            * `SUCCESS` - SUCCESS
-
-            * `FAILED` - FAILED
-
-            * `REFUNDED` - REFUNDED
-
-            * `CANCELLED` - CANCELLED'
-        refunded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        refund_cents:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        price_cents:
-          type: integer
-        tax_price_cents:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-    PurchaseFulfillment:
-      type: object
-      properties:
-        redirect_url:
-          type: string
-          readOnly: true
-        purchase:
-          allOf:
-          - $ref: '#/components/schemas/Purchase'
-          readOnly: true
-    User:
-      type: object
-      description: 'Version of the user serializer configured to lookup a user given the user''s email.  If a user with this email does
-
-        not yet exist, it will create a new User with given email, first_name and last_name parameters.'
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as user_id within the documentation
-        email:
-          type: string
-          format: email
-          title: Email address
-          description: Email address
-          maxLength: 254
-        first_name:
-          type: string
-          description: First name
-          maxLength: 50
-        last_name:
-          type: string
-          description: Last name
-          maxLength: 50
-        full_name:
-          type: string
-          readOnly: true
-      required:
-      - email
-    PurchaseStateEnum:
-      enum:
-      - CREATED
-      - SUCCESS
-      - FAILED
-      - REFUNDED
-      - CANCELLED
-      - FLAGGED
-      - PENDING
-      type: string
-      description: '* `CREATED` - CREATED
-
-        * `SUCCESS` - SUCCESS
-
-        * `FAILED` - FAILED
-
-        * `REFUNDED` - REFUNDED
-
-        * `CANCELLED` - CANCELLED
-
-        * `FLAGGED` - FLAGGED
-
-        * `PENDING` - PENDING'
     PaymentProcessorEnum:
       enum:
       - NONE
@@ -412,6 +218,50 @@ components:
         * `MES` - Merchant e-Solutions
 
         * `EXTERNAL` - External'
+    PurchaseFulfillment:
+      type: object
+      properties:
+        redirect_url:
+          type: string
+          readOnly: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/Purchase'
+          readOnly: true
+    PurchaseFulfillmentStateEnum:
+      enum:
+      - SUCCESS
+      - FAILED
+      - CANCELLED
+      type: string
+      description: '* `SUCCESS` - SUCCESS
+
+        * `FAILED` - FAILED
+
+        * `CANCELLED` - CANCELLED'
+    PurchaseStateEnum:
+      enum:
+      - CREATED
+      - SUCCESS
+      - FAILED
+      - REFUNDED
+      - CANCELLED
+      - FLAGGED
+      - PENDING
+      type: string
+      description: '* `CREATED` - CREATED
+
+        * `SUCCESS` - SUCCESS
+
+        * `FAILED` - FAILED
+
+        * `REFUNDED` - REFUNDED
+
+        * `CANCELLED` - CANCELLED
+
+        * `FLAGGED` - FLAGGED
+
+        * `PENDING` - PENDING'
     Purchase:
       type: object
       properties:
@@ -509,6 +359,156 @@ components:
           allOf:
           - $ref: '#/components/schemas/CurrencyCodeEnum'
           readOnly: true
+    PatchedPurchaseRequest:
+      type: object
+      properties:
+        state:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseStateEnum'
+          description: '''PENDING'', ''SUCCESS'', ''FAILED'', ''REFUNDED'', or ''CANCELLED''
+
+
+            * `PENDING` - PENDING
+
+            * `SUCCESS` - SUCCESS
+
+            * `FAILED` - FAILED
+
+            * `REFUNDED` - REFUNDED
+
+            * `CANCELLED` - CANCELLED'
+        refunded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        refund_cents:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        price_cents:
+          type: integer
+        tax_price_cents:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+    User:
+      type: object
+      description: 'Version of the user serializer configured to lookup a user given the user''s email.  If a user with this email does
+
+        not yet exist, it will create a new User with given email, first_name and last_name parameters.'
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          title: Email address
+          description: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          description: First name
+          maxLength: 50
+        last_name:
+          type: string
+          description: Last name
+          maxLength: 50
+        full_name:
+          type: string
+          readOnly: true
+      required:
+      - email
+    CurrencyCodeEnum:
+      enum:
+      - AUD
+      - BRL
+      - CAD
+      - CNY
+      - EUR
+      - GBP
+      - JPY
+      - KRW
+      - MXN
+      - NZD
+      - RUB
+      - SEK
+      - SGD
+      - USD
+      - ZAR
+      type: string
+      description: '* `AUD` - AUD
+
+        * `BRL` - BRL
+
+        * `CAD` - CAD
+
+        * `CNY` - CNY
+
+        * `EUR` - EUR
+
+        * `GBP` - GBP
+
+        * `JPY` - JPY
+
+        * `KRW` - KRW
+
+        * `MXN` - MXN
+
+        * `NZD` - NZD
+
+        * `RUB` - RUB
+
+        * `SEK` - SEK
+
+        * `SGD` - SGD
+
+        * `USD` - USD
+
+        * `ZAR` - ZAR'
+    PurchaseRequest:
+      type: object
+      properties:
+        state:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseStateEnum'
+          description: '''PENDING'', ''SUCCESS'', ''FAILED'', ''REFUNDED'', or ''CANCELLED''
+
+
+            * `PENDING` - PENDING
+
+            * `SUCCESS` - SUCCESS
+
+            * `FAILED` - FAILED
+
+            * `REFUNDED` - REFUNDED
+
+            * `CANCELLED` - CANCELLED'
+        refunded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        refund_cents:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        price_cents:
+          type: integer
+        tax_price_cents:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
   securitySchemes:
     OrganizationApiKey:
       type: http

@@ -39,42 +39,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SignupField:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as signup_field_id within the documentation
-        type:
-          $ref: '#/components/schemas/SignupFieldTypeEnum'
-        label:
-          type: string
-        help_text:
-          type: string
-          maxLength: 4096
-        regex_validator:
-          type: string
-          maxLength: 500
-        regex_validator_error_text:
-          type: string
-          maxLength: 100
-        required:
-          type: boolean
-        active:
-          type: boolean
-        order:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          description: 'Default field orders: (1000 Private Domain Code), 3000 First/Last Name, 4000 Email, 5000 Password, 6000 Confirm Password'
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/SignupFieldOption'
-          readOnly: true
-      required:
-      - label
     SignupFieldTypeEnum:
       enum:
       - TEXT
@@ -111,6 +75,42 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SignupField'
+    SignupField:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as signup_field_id within the documentation
+        type:
+          $ref: '#/components/schemas/SignupFieldTypeEnum'
+        label:
+          type: string
+        help_text:
+          type: string
+          maxLength: 4096
+        regex_validator:
+          type: string
+          maxLength: 500
+        regex_validator_error_text:
+          type: string
+          maxLength: 100
+        required:
+          type: boolean
+        active:
+          type: boolean
+        order:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: 'Default field orders: (1000 Private Domain Code), 3000 First/Last Name, 4000 Email, 5000 Password, 6000 Confirm Password'
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/SignupFieldOption'
+          readOnly: true
+      required:
+      - label
     SignupFieldOption:
       type: object
       properties:

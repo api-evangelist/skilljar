@@ -212,34 +212,20 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    LessonContentItemRequest:
-      type: object
-      description: LessonContentItem Serializer
-      properties:
-        content_asset_id:
-          type: string
-          minLength: 1
-        content_html:
-          type: string
-        content_quiz_id:
-          type: string
-          minLength: 1
-        header:
-          type: string
-          minLength: 1
-        lesson_id:
-          type: string
-          minLength: 1
-        order:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-        type:
-          $ref: '#/components/schemas/Type1d9Enum'
-      required:
-      - header
-      - order
-      - type
+    Type1d9Enum:
+      enum:
+      - ASSET
+      - HTML
+      - QUIZ
+      - RATING
+      type: string
+      description: '* `ASSET` - ASSET
+
+        * `HTML` - HTML
+
+        * `QUIZ` - QUIZ
+
+        * `RATING` - RATING'
     LessonContentItemUpdate:
       type: object
       description: LessonContentItem Update Serializer
@@ -266,31 +252,6 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/Type1d9Enum'
-    PaginatedLessonContentItemList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/LessonContentItem'
     PatchedLessonContentItemUpdateRequest:
       type: object
       description: LessonContentItem Update Serializer
@@ -313,20 +274,6 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/Type1d9Enum'
-    Type1d9Enum:
-      enum:
-      - ASSET
-      - HTML
-      - QUIZ
-      - RATING
-      type: string
-      description: '* `ASSET` - ASSET
-
-        * `HTML` - HTML
-
-        * `QUIZ` - QUIZ
-
-        * `RATING` - RATING'
     LessonContentItemUpdateRequest:
       type: object
       description: LessonContentItem Update Serializer
@@ -371,6 +318,59 @@ components:
           type: string
         lesson_id:
           type: string
+        order:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        type:
+          $ref: '#/components/schemas/Type1d9Enum'
+      required:
+      - header
+      - order
+      - type
+    PaginatedLessonContentItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/LessonContentItem'
+    LessonContentItemRequest:
+      type: object
+      description: LessonContentItem Serializer
+      properties:
+        content_asset_id:
+          type: string
+          minLength: 1
+        content_html:
+          type: string
+        content_quiz_id:
+          type: string
+          minLength: 1
+        header:
+          type: string
+          minLength: 1
+        lesson_id:
+          type: string
+          minLength: 1
         order:
           type: integer
           maximum: 2147483647
