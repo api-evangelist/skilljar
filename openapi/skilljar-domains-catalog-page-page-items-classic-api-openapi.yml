@@ -249,13 +249,39 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PatchedClassicCatalogPageItemOrderUpdateRequest:
+    ClassicCatalogPageItemOrderUpdateRequest:
       type: object
       description: Serializer for updating the order of existing CatalogPageItem
       properties:
         order:
           type: integer
           minimum: 1
+    ClassicCatalogPageItemOrderUpdate:
+      type: object
+      description: Serializer for updating the order of existing CatalogPageItem
+      properties:
+        id:
+          type: string
+          readOnly: true
+        order:
+          type: integer
+          minimum: 1
+        type:
+          allOf:
+          - $ref: '#/components/schemas/Type62bEnum'
+          readOnly: true
+        item_catalog_page_id:
+          type: string
+          readOnly: true
+        item_published_path_id:
+          type: string
+          readOnly: true
+        item_published_course_id:
+          type: string
+          readOnly: true
+        item_plan_id:
+          type: string
+          readOnly: true
     PaginatedClassicCatalogPageItemList:
       type: object
       required:
@@ -281,43 +307,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ClassicCatalogPageItem'
-    ClassicCatalogPageItemRequest:
-      type: object
-      description: Serializer for Legacy CatalogPageItem
-      properties:
-        order:
-          type: integer
-          minimum: 1
-        item_catalog_page_id:
-          type: string
-          minLength: 1
-        item_published_path_id:
-          type: string
-          minLength: 1
-        item_published_course_id:
-          type: string
-          minLength: 1
-        item_plan_id:
-          type: string
-          minLength: 1
-    Type62bEnum:
-      enum:
-      - CATALOG_PAGE
-      - COURSE_SERIES
-      - PUBLISHED_COURSE
-      - PLAN
-      - PUBLISHED_PATH
-      type: string
-      description: '* `CATALOG_PAGE` - CATALOG_PAGE
-
-        * `COURSE_SERIES` - COURSE_SERIES
-
-        * `PUBLISHED_COURSE` - PUBLISHED_COURSE
-
-        * `PLAN` - PLAN
-
-        * `PUBLISHED_PATH` - PUBLISHED_PATH'
-    ClassicCatalogPageItemOrderUpdateRequest:
+    PatchedClassicCatalogPageItemOrderUpdateRequest:
       type: object
       description: Serializer for updating the order of existing CatalogPageItem
       properties:
@@ -346,32 +336,42 @@ components:
           type: string
         item_plan_id:
           type: string
-    ClassicCatalogPageItemOrderUpdate:
+    Type62bEnum:
+      enum:
+      - CATALOG_PAGE
+      - COURSE_SERIES
+      - PUBLISHED_COURSE
+      - PLAN
+      - PUBLISHED_PATH
+      type: string
+      description: '* `CATALOG_PAGE` - CATALOG_PAGE
+
+        * `COURSE_SERIES` - COURSE_SERIES
+
+        * `PUBLISHED_COURSE` - PUBLISHED_COURSE
+
+        * `PLAN` - PLAN
+
+        * `PUBLISHED_PATH` - PUBLISHED_PATH'
+    ClassicCatalogPageItemRequest:
       type: object
-      description: Serializer for updating the order of existing CatalogPageItem
+      description: Serializer for Legacy CatalogPageItem
       properties:
-        id:
-          type: string
-          readOnly: true
         order:
           type: integer
           minimum: 1
-        type:
-          allOf:
-          - $ref: '#/components/schemas/Type62bEnum'
-          readOnly: true
         item_catalog_page_id:
           type: string
-          readOnly: true
+          minLength: 1
         item_published_path_id:
           type: string
-          readOnly: true
+          minLength: 1
         item_published_course_id:
           type: string
-          readOnly: true
+          minLength: 1
         item_plan_id:
           type: string
-          readOnly: true
+          minLength: 1
   securitySchemes:
     OrganizationApiKey:
       type: http

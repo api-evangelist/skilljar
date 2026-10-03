@@ -139,6 +139,30 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PatchedTileContainerContentBlockRequest:
+      type: object
+      description: Serializer for TileContainerContentBlock retrieve and update operations
+      properties:
+        header_text:
+          type: string
+          maxLength: 100000
+        header_sub_text:
+          type: string
+          maxLength: 100000
+        alignment:
+          $ref: '#/components/schemas/AlignmentEnum'
+    TileContainerContentBlockRequest:
+      type: object
+      description: Serializer for TileContainerContentBlock retrieve and update operations
+      properties:
+        header_text:
+          type: string
+          maxLength: 100000
+        header_sub_text:
+          type: string
+          maxLength: 100000
+        alignment:
+          $ref: '#/components/schemas/AlignmentEnum'
     TileContainerContentBlock:
       type: object
       description: Serializer for TileContainerContentBlock retrieve and update operations
@@ -168,30 +192,6 @@ components:
         * `center` - Center
 
         * `right` - Right'
-    TileContainerContentBlockRequest:
-      type: object
-      description: Serializer for TileContainerContentBlock retrieve and update operations
-      properties:
-        header_text:
-          type: string
-          maxLength: 100000
-        header_sub_text:
-          type: string
-          maxLength: 100000
-        alignment:
-          $ref: '#/components/schemas/AlignmentEnum'
-    PatchedTileContainerContentBlockRequest:
-      type: object
-      description: Serializer for TileContainerContentBlock retrieve and update operations
-      properties:
-        header_text:
-          type: string
-          maxLength: 100000
-        header_sub_text:
-          type: string
-          maxLength: 100000
-        alignment:
-          $ref: '#/components/schemas/AlignmentEnum'
   securitySchemes:
     OrganizationApiKey:
       type: http

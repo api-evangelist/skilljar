@@ -160,6 +160,69 @@ paths:
           description: ''
 components:
   schemas:
+    PaymentProcessorEnum:
+      enum:
+      - NONE
+      - STRIPE
+      - STRIPE_BTC
+      - PAYPAL
+      - PAYFLOW
+      - CYBERSRC
+      - MES
+      - EXTERNAL
+      type: string
+      description: '* `NONE` - None
+
+        * `STRIPE` - Stripe
+
+        * `STRIPE_BTC` - Stripe Bitcoin
+
+        * `PAYPAL` - PayPal
+
+        * `PAYFLOW` - Payflow
+
+        * `CYBERSRC` - Cybersource
+
+        * `MES` - Merchant e-Solutions
+
+        * `EXTERNAL` - External'
+    PatchedPurchaseRequest:
+      type: object
+      properties:
+        state:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseStateEnum'
+          description: '''PENDING'', ''SUCCESS'', ''FAILED'', ''REFUNDED'', or ''CANCELLED''
+
+
+            * `PENDING` - PENDING
+
+            * `SUCCESS` - SUCCESS
+
+            * `FAILED` - FAILED
+
+            * `REFUNDED` - REFUNDED
+
+            * `CANCELLED` - CANCELLED'
+        refunded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        refund_cents:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        price_cents:
+          type: integer
+        tax_price_cents:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
     PurchaseFulfillmentRequest:
       type: object
       properties:
@@ -192,42 +255,6 @@ components:
           description: 'Optional: Purchase metadata. For reference only. JSON format is recommended'
       required:
       - state
-    PaymentProcessorEnum:
-      enum:
-      - NONE
-      - STRIPE
-      - STRIPE_BTC
-      - PAYPAL
-      - PAYFLOW
-      - CYBERSRC
-      - MES
-      - EXTERNAL
-      type: string
-      description: '* `NONE` - None
-
-        * `STRIPE` - Stripe
-
-        * `STRIPE_BTC` - Stripe Bitcoin
-
-        * `PAYPAL` - PayPal
-
-        * `PAYFLOW` - Payflow
-
-        * `CYBERSRC` - Cybersource
-
-        * `MES` - Merchant e-Solutions
-
-        * `EXTERNAL` - External'
-    PurchaseFulfillment:
-      type: object
-      properties:
-        redirect_url:
-          type: string
-          readOnly: true
-        purchase:
-          allOf:
-          - $ref: '#/components/schemas/Purchase'
-          readOnly: true
     PurchaseFulfillmentStateEnum:
       enum:
       - SUCCESS
@@ -239,6 +266,53 @@ components:
         * `FAILED` - FAILED
 
         * `CANCELLED` - CANCELLED'
+    CurrencyCodeEnum:
+      enum:
+      - AUD
+      - BRL
+      - CAD
+      - CNY
+      - EUR
+      - GBP
+      - JPY
+      - KRW
+      - MXN
+      - NZD
+      - RUB
+      - SEK
+      - SGD
+      - USD
+      - ZAR
+      type: string
+      description: '* `AUD` - AUD
+
+        * `BRL` - BRL
+
+        * `CAD` - CAD
+
+        * `CNY` - CNY
+
+        * `EUR` - EUR
+
+        * `GBP` - GBP
+
+        * `JPY` - JPY
+
+        * `KRW` - KRW
+
+        * `MXN` - MXN
+
+        * `NZD` - NZD
+
+        * `RUB` - RUB
+
+        * `SEK` - SEK
+
+        * `SGD` - SGD
+
+        * `USD` - USD
+
+        * `ZAR` - ZAR'
     PurchaseStateEnum:
       enum:
       - CREATED
@@ -359,7 +433,7 @@ components:
           allOf:
           - $ref: '#/components/schemas/CurrencyCodeEnum'
           readOnly: true
-    PatchedPurchaseRequest:
+    PurchaseRequest:
       type: object
       properties:
         state:
@@ -425,90 +499,16 @@ components:
           readOnly: true
       required:
       - email
-    CurrencyCodeEnum:
-      enum:
-      - AUD
-      - BRL
-      - CAD
-      - CNY
-      - EUR
-      - GBP
-      - JPY
-      - KRW
-      - MXN
-      - NZD
-      - RUB
-      - SEK
-      - SGD
-      - USD
-      - ZAR
-      type: string
-      description: '* `AUD` - AUD
-
-        * `BRL` - BRL
-
-        * `CAD` - CAD
-
-        * `CNY` - CNY
-
-        * `EUR` - EUR
-
-        * `GBP` - GBP
-
-        * `JPY` - JPY
-
-        * `KRW` - KRW
-
-        * `MXN` - MXN
-
-        * `NZD` - NZD
-
-        * `RUB` - RUB
-
-        * `SEK` - SEK
-
-        * `SGD` - SGD
-
-        * `USD` - USD
-
-        * `ZAR` - ZAR'
-    PurchaseRequest:
+    PurchaseFulfillment:
       type: object
       properties:
-        state:
+        redirect_url:
+          type: string
+          readOnly: true
+        purchase:
           allOf:
-          - $ref: '#/components/schemas/PurchaseStateEnum'
-          description: '''PENDING'', ''SUCCESS'', ''FAILED'', ''REFUNDED'', or ''CANCELLED''
-
-
-            * `PENDING` - PENDING
-
-            * `SUCCESS` - SUCCESS
-
-            * `FAILED` - FAILED
-
-            * `REFUNDED` - REFUNDED
-
-            * `CANCELLED` - CANCELLED'
-        refunded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        refund_cents:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        price_cents:
-          type: integer
-        tax_price_cents:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
+          - $ref: '#/components/schemas/Purchase'
+          readOnly: true
   securitySchemes:
     OrganizationApiKey:
       type: http

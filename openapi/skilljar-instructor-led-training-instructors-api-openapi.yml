@@ -238,16 +238,31 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    IltInstructorRequest:
+    PaginatedIltInstructorList:
       type: object
-      description: Serializer for ILT instructors
-      properties:
-        email:
-          type: string
-          format: email
-          minLength: 1
       required:
-      - email
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/IltInstructor'
     PatchedIltInstructorRequest:
       type: object
       description: Serializer for ILT instructors
@@ -275,31 +290,16 @@ components:
           readOnly: true
       required:
       - email
-    PaginatedIltInstructorList:
+    IltInstructorRequest:
       type: object
-      required:
-      - count
-      - results
+      description: Serializer for ILT instructors
       properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/IltInstructor'
+        email:
+          type: string
+          format: email
+          minLength: 1
+      required:
+      - email
   securitySchemes:
     OrganizationApiKey:
       type: http

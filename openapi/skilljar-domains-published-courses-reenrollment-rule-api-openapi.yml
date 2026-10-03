@@ -225,6 +225,14 @@ components:
       required:
       - cycle_duration
       - starts_at
+    CycleDurationUnitEnum:
+      enum:
+      - MONTHS
+      - DAYS
+      type: string
+      description: '* `MONTHS` - Months
+
+        * `DAYS` - Days'
     UpdatePublishedCourseReenrollmentRule:
       type: object
       description: Serializer for updating Reenrollment Rule
@@ -240,6 +248,26 @@ components:
           type: string
           format: date-time
           readOnly: true
+        cycle_duration:
+          type: integer
+          minimum: 1
+        cycle_duration_unit:
+          allOf:
+          - $ref: '#/components/schemas/CycleDurationUnitEnum'
+          description: 'Available choices: MONTHS, DAYS
+
+
+            * `MONTHS` - Months
+
+            * `DAYS` - Days'
+    PatchedUpdatePublishedCourseReenrollmentRuleRequest:
+      type: object
+      description: Serializer for updating Reenrollment Rule
+      properties:
+        starts_at:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the reenrollment rule starts at. Must be in the future and at the top of the hour.
         cycle_duration:
           type: integer
           minimum: 1
@@ -295,34 +323,6 @@ components:
       required:
       - cycle_duration
       - starts_at
-    PatchedUpdatePublishedCourseReenrollmentRuleRequest:
-      type: object
-      description: Serializer for updating Reenrollment Rule
-      properties:
-        starts_at:
-          type: string
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating when the reenrollment rule starts at. Must be in the future and at the top of the hour.
-        cycle_duration:
-          type: integer
-          minimum: 1
-        cycle_duration_unit:
-          allOf:
-          - $ref: '#/components/schemas/CycleDurationUnitEnum'
-          description: 'Available choices: MONTHS, DAYS
-
-
-            * `MONTHS` - Months
-
-            * `DAYS` - Days'
-    CycleDurationUnitEnum:
-      enum:
-      - MONTHS
-      - DAYS
-      type: string
-      description: '* `MONTHS` - Months
-
-        * `DAYS` - Days'
   securitySchemes:
     OrganizationApiKey:
       type: http

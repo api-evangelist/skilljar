@@ -172,6 +172,14 @@ components:
           description: Known as tag_id within the documentation
       required:
       - id
+    PublishedCourseTag:
+      type: object
+      description: Serializer for PublishedCourseTags.
+      properties:
+        tag:
+          $ref: '#/components/schemas/NestedTag'
+      required:
+      - tag
     NestedTag:
       type: object
       description: Serializer for nested Tag models in PublishedCourseTag, PublishedPathTag, etc.
@@ -187,6 +195,14 @@ components:
           readOnly: true
       required:
       - id
+    PublishedCourseTagRequest:
+      type: object
+      description: Serializer for PublishedCourseTags.
+      properties:
+        tag:
+          $ref: '#/components/schemas/NestedTagRequest'
+      required:
+      - tag
     PaginatedPublishedCourseTagList:
       type: object
       required:
@@ -212,22 +228,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PublishedCourseTag'
-    PublishedCourseTag:
-      type: object
-      description: Serializer for PublishedCourseTags.
-      properties:
-        tag:
-          $ref: '#/components/schemas/NestedTag'
-      required:
-      - tag
-    PublishedCourseTagRequest:
-      type: object
-      description: Serializer for PublishedCourseTags.
-      properties:
-        tag:
-          $ref: '#/components/schemas/NestedTagRequest'
-      required:
-      - tag
   securitySchemes:
     OrganizationApiKey:
       type: http

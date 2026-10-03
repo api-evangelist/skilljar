@@ -191,52 +191,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    RatingContentBlock:
-      type: object
-      description: 'Public API serializer for RatingContentBlock.
-
-
-        Follows the HtmlContentBlockSerializer pattern: the block is exposed as a
-
-        standalone resource nested under lessons, with ``content_item_id`` annotated
-
-        from the junction model (LessonContentItem).
-
-
-        ``rating_scale`` is a proxy field — the value lives on ``Course.rating_scale``,
-
-        not on the block itself.'
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Unique identifier for this rating content block
-        content_item_id:
-          type: string
-          readOnly: true
-          description: The associated lesson content item ID (read-only, annotated from LessonContentItem)
-        rating_question:
-          type: string
-          description: The main rating question shown to learners
-          maxLength: 500
-        additional_feedback_question:
-          type: string
-          description: Optional follow-up question for additional feedback
-          maxLength: 500
-        include_additional_feedback:
-          type: boolean
-          description: Whether to show the additional feedback question
-        rating_scale:
-          type: integer
-          description: Rating scale (5 or 10). Stored on Course, not on the block.
-        rating_scale_low_label:
-          type: string
-          description: Label for the low end of the 10-point scale (ignored for 5-star)
-          maxLength: 100
-        rating_scale_high_label:
-          type: string
-          description: Label for the high end of the 10-point scale (ignored for 5-star)
-          maxLength: 100
     RatingContentBlockRequest:
       type: object
       description: 'Public API serializer for RatingContentBlock.
@@ -291,6 +245,52 @@ components:
 
         not on the block itself.'
       properties:
+        rating_question:
+          type: string
+          description: The main rating question shown to learners
+          maxLength: 500
+        additional_feedback_question:
+          type: string
+          description: Optional follow-up question for additional feedback
+          maxLength: 500
+        include_additional_feedback:
+          type: boolean
+          description: Whether to show the additional feedback question
+        rating_scale:
+          type: integer
+          description: Rating scale (5 or 10). Stored on Course, not on the block.
+        rating_scale_low_label:
+          type: string
+          description: Label for the low end of the 10-point scale (ignored for 5-star)
+          maxLength: 100
+        rating_scale_high_label:
+          type: string
+          description: Label for the high end of the 10-point scale (ignored for 5-star)
+          maxLength: 100
+    RatingContentBlock:
+      type: object
+      description: 'Public API serializer for RatingContentBlock.
+
+
+        Follows the HtmlContentBlockSerializer pattern: the block is exposed as a
+
+        standalone resource nested under lessons, with ``content_item_id`` annotated
+
+        from the junction model (LessonContentItem).
+
+
+        ``rating_scale`` is a proxy field — the value lives on ``Course.rating_scale``,
+
+        not on the block itself.'
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Unique identifier for this rating content block
+        content_item_id:
+          type: string
+          readOnly: true
+          description: The associated lesson content item ID (read-only, annotated from LessonContentItem)
         rating_question:
           type: string
           description: The main rating question shown to learners

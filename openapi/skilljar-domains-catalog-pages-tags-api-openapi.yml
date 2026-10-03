@@ -172,6 +172,14 @@ components:
           description: Known as tag_id within the documentation
       required:
       - id
+    CatalogPageTag:
+      type: object
+      description: Serializer for CatalogPageTags.
+      properties:
+        tag:
+          $ref: '#/components/schemas/NestedTag'
+      required:
+      - tag
     NestedTag:
       type: object
       description: Serializer for nested Tag models in PublishedCourseTag, PublishedPathTag, etc.
@@ -187,14 +195,6 @@ components:
           readOnly: true
       required:
       - id
-    CatalogPageTag:
-      type: object
-      description: Serializer for CatalogPageTags.
-      properties:
-        tag:
-          $ref: '#/components/schemas/NestedTag'
-      required:
-      - tag
     CatalogPageTagRequest:
       type: object
       description: Serializer for CatalogPageTags.

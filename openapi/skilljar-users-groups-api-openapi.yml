@@ -42,6 +42,32 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    GroupMembership:
+      type: object
+      properties:
+        id:
+          type: string
+        group:
+          $ref: '#/components/schemas/GroupMembershipGroup'
+        joined_at:
+          type: string
+          format: date-time
+          description: Datetime at which the user was added to the group
+      required:
+      - group
+      - id
+      - joined_at
+    GroupMembershipGroup:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          maxLength: 100
+      required:
+      - id
+      - name
     PaginatedGroupMembershipList:
       type: object
       required:
@@ -67,32 +93,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GroupMembership'
-    GroupMembershipGroup:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-          maxLength: 100
-      required:
-      - id
-      - name
-    GroupMembership:
-      type: object
-      properties:
-        id:
-          type: string
-        group:
-          $ref: '#/components/schemas/GroupMembershipGroup'
-        joined_at:
-          type: string
-          format: date-time
-          description: Datetime at which the user was added to the group
-      required:
-      - group
-      - id
-      - joined_at
   securitySchemes:
     OrganizationApiKey:
       type: http

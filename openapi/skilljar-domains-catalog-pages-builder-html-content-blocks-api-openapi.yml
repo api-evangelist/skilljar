@@ -152,14 +152,14 @@ components:
         html:
           type: string
           maxLength: 100000
-    HtmlContentBlockRequest:
+    PatchedHtmlContentBlockRequest:
       type: object
       description: Serializer for HTML content blocks
       properties:
         html:
           type: string
           maxLength: 100000
-    PatchedHtmlContentBlockRequest:
+    HtmlContentBlockRequest:
       type: object
       description: Serializer for HTML content blocks
       properties:

@@ -195,28 +195,33 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ReadOnlyUser:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+          description: Email address
+        first_name:
+          type: string
+          readOnly: true
+          description: First name
+        last_name:
+          type: string
+          readOnly: true
+          description: Last name
+      required:
+      - id
     PaginatedUserOverviewList:
       type: array
       items:
         $ref: '#/components/schemas/UserOverview'
-    UserUpdateRequest:
-      type: object
-      description: Version of the user serializer configured to update a user's name and email address.
-      properties:
-        email:
-          type: string
-          format: email
-          title: Email address
-          description: Email address
-          maxLength: 254
-        first_name:
-          type: string
-          description: First name
-          maxLength: 50
-        last_name:
-          type: string
-          description: Last name
-          maxLength: 50
     PatchedUserUpdateRequest:
       type: object
       description: Version of the user serializer configured to update a user's name and email address.
@@ -235,6 +240,52 @@ components:
           type: string
           description: Last name
           maxLength: 50
+    UserUpdateRequest:
+      type: object
+      description: Version of the user serializer configured to update a user's name and email address.
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email address
+          description: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          description: First name
+          maxLength: 50
+        last_name:
+          type: string
+          description: Last name
+          maxLength: 50
+    UserUpdate:
+      type: object
+      description: Version of the user serializer configured to update a user's name and email address.
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          title: Email address
+          description: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          description: First name
+          maxLength: 50
+        last_name:
+          type: string
+          description: Last name
+          maxLength: 50
+        inactive_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
     UserOverview:
       type: object
       properties:
@@ -267,57 +318,6 @@ components:
           format: date-time
           readOnly: true
           description: When the student was set inactive. Null if the student is active.
-    UserUpdate:
-      type: object
-      description: Version of the user serializer configured to update a user's name and email address.
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as user_id within the documentation
-        email:
-          type: string
-          format: email
-          title: Email address
-          description: Email address
-          maxLength: 254
-        first_name:
-          type: string
-          description: First name
-          maxLength: 50
-        last_name:
-          type: string
-          description: Last name
-          maxLength: 50
-        inactive_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-    ReadOnlyUser:
-      type: object
-      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
-      properties:
-        id:
-          type: string
-          description: Known as user_id within the documentation
-        email:
-          type: string
-          format: email
-          readOnly: true
-          title: Email address
-          description: Email address
-        first_name:
-          type: string
-          readOnly: true
-          description: First name
-        last_name:
-          type: string
-          readOnly: true
-          description: Last name
-      required:
-      - id
   securitySchemes:
     OrganizationApiKey:
       type: http

@@ -186,43 +186,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    WebPackageMetadataRequest:
-      type: object
-      description: 'This defines the `web_package` section of create & update requests.
-
-
-        Used in `WebPackageSerializer`'
-      properties:
-        title:
-          type: string
-          writeOnly: true
-          minLength: 1
-        sync_completion:
-          type: boolean
-          writeOnly: true
-          default: false
-        redirect_on_completion:
-          type: boolean
-          writeOnly: true
-          default: true
-      required:
-      - title
-    WebPackageUpdateLessonRequest:
-      type: object
-      description: 'Used when replacing an existing Web Package in all its lessons with a different Web Package
-
-
-        Inherits from WebPackageSerializer
-
-        Adds in the `replacement_web_package_id` field'
-      properties:
-        web_package_id:
-          type: string
-          writeOnly: true
-          minLength: 1
-          description: WebPackage that will replace the other in its lessons
-      required:
-      - web_package_id
     PaginatedWebPackageSummaryList:
       type: object
       required:
@@ -248,6 +211,48 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WebPackageSummary'
+    WebPackageRequest:
+      type: object
+      description: 'Used when creating, updating or reading a single WebPackage object.
+
+
+        Inherits from WebPackageSummarySerializer.
+
+        Adds in the `download_url` field as well as the write fields.'
+      properties:
+        content_url:
+          type: string
+          format: uri
+          writeOnly: true
+          minLength: 1
+        web_package:
+          allOf:
+          - $ref: '#/components/schemas/WebPackageMetadataRequest'
+          writeOnly: true
+      required:
+      - content_url
+      - web_package
+    WebPackageMetadataRequest:
+      type: object
+      description: 'This defines the `web_package` section of create & update requests.
+
+
+        Used in `WebPackageSerializer`'
+      properties:
+        title:
+          type: string
+          writeOnly: true
+          minLength: 1
+        sync_completion:
+          type: boolean
+          writeOnly: true
+          default: false
+        redirect_on_completion:
+          type: boolean
+          writeOnly: true
+          default: true
+      required:
+      - title
     WebPackage:
       type: object
       description: 'Used when creating, updating or reading a single WebPackage object.
@@ -281,27 +286,6 @@ components:
         title:
           type: string
           readOnly: true
-    WebPackageRequest:
-      type: object
-      description: 'Used when creating, updating or reading a single WebPackage object.
-
-
-        Inherits from WebPackageSummarySerializer.
-
-        Adds in the `download_url` field as well as the write fields.'
-      properties:
-        content_url:
-          type: string
-          format: uri
-          writeOnly: true
-          minLength: 1
-        web_package:
-          allOf:
-          - $ref: '#/components/schemas/WebPackageMetadataRequest'
-          writeOnly: true
-      required:
-      - content_url
-      - web_package
     WebPackageSummary:
       type: object
       description: 'Only used when listing WebPackages.
@@ -332,6 +316,22 @@ components:
         title:
           type: string
           readOnly: true
+    WebPackageUpdateLessonRequest:
+      type: object
+      description: 'Used when replacing an existing Web Package in all its lessons with a different Web Package
+
+
+        Inherits from WebPackageSerializer
+
+        Adds in the `replacement_web_package_id` field'
+      properties:
+        web_package_id:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: WebPackage that will replace the other in its lessons
+      required:
+      - web_package_id
   securitySchemes:
     OrganizationApiKey:
       type: http

@@ -136,68 +136,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    AssetRequest:
-      type: object
-      description: 'Used when creating, updating or reading a single Asset object.
-
-
-        Inherits from AssetSummarySerializer.
-
-        Adds in the `download_url` field as well as the write fields.'
-      properties:
-        content_url:
-          type: string
-          format: uri
-          writeOnly: true
-          minLength: 1
-        asset:
-          allOf:
-          - $ref: '#/components/schemas/AssetMetadataRequest'
-          writeOnly: true
-    AssetMetadataRequest:
-      type: object
-      description: 'This defines the `asset` section of create & update requests.
-
-
-        Used in `AssetSerializer`'
-      properties:
-        name:
-          type: string
-          writeOnly: true
-          minLength: 1
-          description: In the Dashboard, this is called “Asset Name” or “Display Name”.
-        embed_link_url:
-          type: string
-          writeOnly: true
-          minLength: 1
-        aspect_ratio:
-          allOf:
-          - $ref: '#/components/schemas/AspectRatioEnum'
-          writeOnly: true
-        sync_completion:
-          type: boolean
-          writeOnly: true
-          default: false
-    AssetTypeEnum:
-      enum:
-      - AUDIO_BOTR
-      - HTML
-      - PDF
-      - VIDEO_BOTR
-      - FILE
-      - TEMPLATE
-      type: string
-      description: '* `AUDIO_BOTR` - Audio - JWPlatform
-
-        * `HTML` - HTML Snippet
-
-        * `PDF` - PDF File
-
-        * `VIDEO_BOTR` - Video - JWPlatform
-
-        * `FILE` - Generic File
-
-        * `TEMPLATE` - Template from the database'
     PaginatedAssetList:
       type: object
       required:
@@ -223,6 +161,44 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Asset'
+    AssetRequest:
+      type: object
+      description: 'Used when creating, updating or reading a single Asset object.
+
+
+        Inherits from AssetSummarySerializer.
+
+        Adds in the `download_url` field as well as the write fields.'
+      properties:
+        content_url:
+          type: string
+          format: uri
+          writeOnly: true
+          minLength: 1
+        asset:
+          allOf:
+          - $ref: '#/components/schemas/AssetMetadataRequest'
+          writeOnly: true
+    AssetTypeEnum:
+      enum:
+      - AUDIO_BOTR
+      - HTML
+      - PDF
+      - VIDEO_BOTR
+      - FILE
+      - TEMPLATE
+      type: string
+      description: '* `AUDIO_BOTR` - Audio - JWPlatform
+
+        * `HTML` - HTML Snippet
+
+        * `PDF` - PDF File
+
+        * `VIDEO_BOTR` - Video - JWPlatform
+
+        * `FILE` - Generic File
+
+        * `TEMPLATE` - Template from the database'
     Asset:
       type: object
       description: 'Used when creating, updating or reading a single Asset object.
@@ -272,6 +248,30 @@ components:
       description: '* `16:9` - 16:9
 
         * `4:3` - 4:3'
+    AssetMetadataRequest:
+      type: object
+      description: 'This defines the `asset` section of create & update requests.
+
+
+        Used in `AssetSerializer`'
+      properties:
+        name:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: In the Dashboard, this is called “Asset Name” or “Display Name”.
+        embed_link_url:
+          type: string
+          writeOnly: true
+          minLength: 1
+        aspect_ratio:
+          allOf:
+          - $ref: '#/components/schemas/AspectRatioEnum'
+          writeOnly: true
+        sync_completion:
+          type: boolean
+          writeOnly: true
+          default: false
   securitySchemes:
     OrganizationApiKey:
       type: http

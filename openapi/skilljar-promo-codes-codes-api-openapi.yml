@@ -217,13 +217,19 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PromoCodeRequest:
+    PromoCode:
       type: object
       properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as promo_code_id within the documentation
         code:
           type: string
-          minLength: 1
           maxLength: 40
+        use_count:
+          type: integer
+          readOnly: true
         max_uses:
           type: integer
         active:
@@ -231,7 +237,6 @@ components:
           default: true
         promo_code_pool_id:
           type: string
-          minLength: 1
       required:
       - code
       - max_uses
@@ -272,30 +277,21 @@ components:
         active:
           type: boolean
           default: true
-    PromoCode:
+    PromoCodeUpdateRequest:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as promo_code_id within the documentation
         code:
           type: string
+          minLength: 1
           maxLength: 40
-        use_count:
-          type: integer
-          readOnly: true
         max_uses:
           type: integer
         active:
           type: boolean
           default: true
-        promo_code_pool_id:
-          type: string
       required:
       - code
       - max_uses
-      - promo_code_pool_id
     PaginatedPromoCodeList:
       type: object
       required:
@@ -321,7 +317,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PromoCode'
-    PromoCodeUpdateRequest:
+    PromoCodeRequest:
       type: object
       properties:
         code:
@@ -333,9 +329,13 @@ components:
         active:
           type: boolean
           default: true
+        promo_code_pool_id:
+          type: string
+          minLength: 1
       required:
       - code
       - max_uses
+      - promo_code_pool_id
   securitySchemes:
     OrganizationApiKey:
       type: http

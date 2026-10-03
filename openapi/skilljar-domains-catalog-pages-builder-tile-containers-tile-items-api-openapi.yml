@@ -365,13 +365,6 @@ components:
         order:
           type: integer
           minimum: 1
-    PatchedTileContainerItemOrderUpdateRequest:
-      type: object
-      description: Serializer for updating the order of existing TileContainerItem
-      properties:
-        order:
-          type: integer
-          minimum: 1
     TileContainerItem:
       type: object
       description: Serializer for TileContainerItem
@@ -394,6 +387,13 @@ components:
           type: string
         item_plan_id:
           type: string
+    PatchedTileContainerItemOrderUpdateRequest:
+      type: object
+      description: Serializer for updating the order of existing TileContainerItem
+      properties:
+        order:
+          type: integer
+          minimum: 1
     PaginatedTileContainerItemList:
       type: object
       required:

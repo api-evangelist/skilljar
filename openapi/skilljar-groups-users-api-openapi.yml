@@ -150,31 +150,29 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PaginatedGroupUserList:
+    ReadOnlyUser:
       type: object
-      required:
-      - count
-      - results
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
       properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/GroupUser'
+        id:
+          type: string
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+          description: Email address
+        first_name:
+          type: string
+          readOnly: true
+          description: First name
+        last_name:
+          type: string
+          readOnly: true
+          description: Last name
+      required:
+      - id
     GroupUser:
       type: object
       properties:
@@ -208,29 +206,31 @@ components:
           description: Known as user_id within the documentation
       required:
       - id
-    ReadOnlyUser:
+    PaginatedGroupUserList:
       type: object
-      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
-      properties:
-        id:
-          type: string
-          description: Known as user_id within the documentation
-        email:
-          type: string
-          format: email
-          readOnly: true
-          title: Email address
-          description: Email address
-        first_name:
-          type: string
-          readOnly: true
-          description: First name
-        last_name:
-          type: string
-          readOnly: true
-          description: Last name
       required:
-      - id
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupUser'
   securitySchemes:
     OrganizationApiKey:
       type: http

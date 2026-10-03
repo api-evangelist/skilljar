@@ -183,26 +183,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PatchedTagRequest:
-      type: object
-      description: Serializer for Tag model.
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: Name of the tag.  This is a required field and must be unique within the organization.
-          maxLength: 255
-    TagRequest:
-      type: object
-      description: Serializer for Tag model.
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: Name of the tag.  This is a required field and must be unique within the organization.
-          maxLength: 255
-      required:
-      - name
     PaginatedTagList:
       type: object
       required:
@@ -228,6 +208,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
+    TagRequest:
+      type: object
+      description: Serializer for Tag model.
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Name of the tag.  This is a required field and must be unique within the organization.
+          maxLength: 255
+      required:
+      - name
+    PatchedTagRequest:
+      type: object
+      description: Serializer for Tag model.
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Name of the tag.  This is a required field and must be unique within the organization.
+          maxLength: 255
     Tag:
       type: object
       description: Serializer for Tag model.

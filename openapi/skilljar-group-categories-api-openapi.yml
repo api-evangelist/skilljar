@@ -70,6 +70,16 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    GroupCategory:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+      required:
+      - name
     PaginatedGroupCategoryList:
       type: object
       required:
@@ -95,16 +105,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GroupCategory'
-    GroupCategory:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        name:
-          type: string
-      required:
-      - name
   securitySchemes:
     OrganizationApiKey:
       type: http

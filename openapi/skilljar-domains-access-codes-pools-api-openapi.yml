@@ -240,6 +240,113 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    DomainAccessCodePoolDetailRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
+          maxLength: 255
+        active:
+          type: boolean
+          default: true
+        start_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        end_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        expire_linked_to_domain_membership:
+          type: boolean
+          description: When this is true and an end_date is set, a user who registers with a code from this pool will lose access to the domain on the end_date.
+    DomainAccessCodePoolListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
+          maxLength: 255
+        active:
+          type: boolean
+          default: true
+        start_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        end_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        expire_linked_to_domain_membership:
+          type: boolean
+          description: When this is true and an end_date is set, a user who registers with a code from this pool will lose access to the domain on the end_date.
+        channel:
+          readOnly: true
+          oneOf:
+          - $ref: '#/components/schemas/ChannelEnum'
+          - $ref: '#/components/schemas/NullEnum'
+    PaginatedDomainAccessCodePoolListItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DomainAccessCodePoolListItem'
+    NullEnum:
+      enum:
+      - null
+    PatchedDomainAccessCodePoolDetailRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
+          maxLength: 255
+        active:
+          type: boolean
+          default: true
+        start_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        end_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        expire_linked_to_domain_membership:
+          type: boolean
+          description: When this is true and an end_date is set, a user who registers with a code from this pool will lose access to the domain on the end_date.
     DomainAccessCodePoolDetail:
       type: object
       properties:
@@ -291,113 +398,6 @@ components:
         * `ecommerce` - E-Commerce
 
         * `unknown` - Unknown'
-    PatchedDomainAccessCodePoolDetailRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
-          maxLength: 255
-        active:
-          type: boolean
-          default: true
-        start_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        end_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        expire_linked_to_domain_membership:
-          type: boolean
-          description: When this is true and an end_date is set, a user who registers with a code from this pool will lose access to the domain on the end_date.
-    PaginatedDomainAccessCodePoolListItemList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/DomainAccessCodePoolListItem'
-    DomainAccessCodePoolListItem:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        name:
-          type: string
-          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
-          maxLength: 255
-        active:
-          type: boolean
-          default: true
-        start_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        end_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        expire_linked_to_domain_membership:
-          type: boolean
-          description: When this is true and an end_date is set, a user who registers with a code from this pool will lose access to the domain on the end_date.
-        channel:
-          readOnly: true
-          oneOf:
-          - $ref: '#/components/schemas/ChannelEnum'
-          - $ref: '#/components/schemas/NullEnum'
-    DomainAccessCodePoolDetailRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
-          maxLength: 255
-        active:
-          type: boolean
-          default: true
-        start_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        end_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        expire_linked_to_domain_membership:
-          type: boolean
-          description: When this is true and an end_date is set, a user who registers with a code from this pool will lose access to the domain on the end_date.
-    NullEnum:
-      enum:
-      - null
   securitySchemes:
     OrganizationApiKey:
       type: http

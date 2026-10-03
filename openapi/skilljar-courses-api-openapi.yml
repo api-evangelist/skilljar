@@ -219,112 +219,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CourseRequest:
-      type: object
-      description: Course Serializer
-      properties:
-        enforce_sequential_navigation:
-          type: boolean
-          description: Enforce sequential navigation
-        long_description_html:
-          type: string
-          description: The long description as HTML content
-        short_description:
-          type: string
-          minLength: 1
-          description: The short description of the course
-        title:
-          type: string
-          minLength: 1
-          description: The title of the course
-        labels:
-          type: array
-          items:
-            type: string
-            minLength: 1
-          description: 'A comma separated list of labels ex: ["label1", "label2"]'
-        display_course_and_lesson_time:
-          type: boolean
-          default: false
-          description: Displays course and lesson times on the course tile (course time only) and detail page (both course and lesson times)
-        manual_course_time:
-          type: string
-          minLength: 1
-          default: ''
-          description: Custom text string for the course time.
-          maxLength: 15
-        display_manual_course_time:
-          type: boolean
-          default: false
-          description: The manual course time will display on the detail, curriculum, and lesson pages, as well as the course tile. (If display course and lesson times is also enabled, this will override the summed course time. However, lesson times will still display in the selected format.)
-        course_and_lesson_time_format:
-          allOf:
-          - $ref: '#/components/schemas/CourseAndLessonTimeFormatEnum'
-          description: 'The format to use for displaying course and lesson times. Possible values: "HOURS_MINUTES_SECONDS", "HOURS_MINUTES", "HOURS_MINUTES_VERBOSE", "MINUTES_VERBOSE". If display manual course time is enabled, this will not be used.
-
-
-            * `HOURS_MINUTES_SECONDS` - HH:MM:SS (01:32:47)
-
-            * `HOURS_MINUTES` - HH:MM (01:33)
-
-            * `HOURS_MINUTES_VERBOSE` - X hr Y min (1 hr 33 min)
-
-            * `MINUTES_VERBOSE` - Y min (93 min)'
-      required:
-      - enforce_sequential_navigation
-      - short_description
-      - title
-    PatchedCourseRequest:
-      type: object
-      description: Course Serializer
-      properties:
-        enforce_sequential_navigation:
-          type: boolean
-          description: Enforce sequential navigation
-        long_description_html:
-          type: string
-          description: The long description as HTML content
-        short_description:
-          type: string
-          minLength: 1
-          description: The short description of the course
-        title:
-          type: string
-          minLength: 1
-          description: The title of the course
-        labels:
-          type: array
-          items:
-            type: string
-            minLength: 1
-          description: 'A comma separated list of labels ex: ["label1", "label2"]'
-        display_course_and_lesson_time:
-          type: boolean
-          default: false
-          description: Displays course and lesson times on the course tile (course time only) and detail page (both course and lesson times)
-        manual_course_time:
-          type: string
-          minLength: 1
-          default: ''
-          description: Custom text string for the course time.
-          maxLength: 15
-        display_manual_course_time:
-          type: boolean
-          default: false
-          description: The manual course time will display on the detail, curriculum, and lesson pages, as well as the course tile. (If display course and lesson times is also enabled, this will override the summed course time. However, lesson times will still display in the selected format.)
-        course_and_lesson_time_format:
-          allOf:
-          - $ref: '#/components/schemas/CourseAndLessonTimeFormatEnum'
-          description: 'The format to use for displaying course and lesson times. Possible values: "HOURS_MINUTES_SECONDS", "HOURS_MINUTES", "HOURS_MINUTES_VERBOSE", "MINUTES_VERBOSE". If display manual course time is enabled, this will not be used.
-
-
-            * `HOURS_MINUTES_SECONDS` - HH:MM:SS (01:32:47)
-
-            * `HOURS_MINUTES` - HH:MM (01:33)
-
-            * `HOURS_MINUTES_VERBOSE` - X hr Y min (1 hr 33 min)
-
-            * `MINUTES_VERBOSE` - Y min (93 min)'
     PaginatedCourseList:
       type: object
       required:
@@ -431,6 +325,61 @@ components:
       - enforce_sequential_navigation
       - short_description
       - title
+    CourseRequest:
+      type: object
+      description: Course Serializer
+      properties:
+        enforce_sequential_navigation:
+          type: boolean
+          description: Enforce sequential navigation
+        long_description_html:
+          type: string
+          description: The long description as HTML content
+        short_description:
+          type: string
+          minLength: 1
+          description: The short description of the course
+        title:
+          type: string
+          minLength: 1
+          description: The title of the course
+        labels:
+          type: array
+          items:
+            type: string
+            minLength: 1
+          description: 'A comma separated list of labels ex: ["label1", "label2"]'
+        display_course_and_lesson_time:
+          type: boolean
+          default: false
+          description: Displays course and lesson times on the course tile (course time only) and detail page (both course and lesson times)
+        manual_course_time:
+          type: string
+          minLength: 1
+          default: ''
+          description: Custom text string for the course time.
+          maxLength: 15
+        display_manual_course_time:
+          type: boolean
+          default: false
+          description: The manual course time will display on the detail, curriculum, and lesson pages, as well as the course tile. (If display course and lesson times is also enabled, this will override the summed course time. However, lesson times will still display in the selected format.)
+        course_and_lesson_time_format:
+          allOf:
+          - $ref: '#/components/schemas/CourseAndLessonTimeFormatEnum'
+          description: 'The format to use for displaying course and lesson times. Possible values: "HOURS_MINUTES_SECONDS", "HOURS_MINUTES", "HOURS_MINUTES_VERBOSE", "MINUTES_VERBOSE". If display manual course time is enabled, this will not be used.
+
+
+            * `HOURS_MINUTES_SECONDS` - HH:MM:SS (01:32:47)
+
+            * `HOURS_MINUTES` - HH:MM (01:33)
+
+            * `HOURS_MINUTES_VERBOSE` - X hr Y min (1 hr 33 min)
+
+            * `MINUTES_VERBOSE` - Y min (93 min)'
+      required:
+      - enforce_sequential_navigation
+      - short_description
+      - title
     CourseAndLessonTimeFormatEnum:
       enum:
       - HOURS_MINUTES_SECONDS
@@ -445,6 +394,57 @@ components:
         * `HOURS_MINUTES_VERBOSE` - X hr Y min (1 hr 33 min)
 
         * `MINUTES_VERBOSE` - Y min (93 min)'
+    PatchedCourseRequest:
+      type: object
+      description: Course Serializer
+      properties:
+        enforce_sequential_navigation:
+          type: boolean
+          description: Enforce sequential navigation
+        long_description_html:
+          type: string
+          description: The long description as HTML content
+        short_description:
+          type: string
+          minLength: 1
+          description: The short description of the course
+        title:
+          type: string
+          minLength: 1
+          description: The title of the course
+        labels:
+          type: array
+          items:
+            type: string
+            minLength: 1
+          description: 'A comma separated list of labels ex: ["label1", "label2"]'
+        display_course_and_lesson_time:
+          type: boolean
+          default: false
+          description: Displays course and lesson times on the course tile (course time only) and detail page (both course and lesson times)
+        manual_course_time:
+          type: string
+          minLength: 1
+          default: ''
+          description: Custom text string for the course time.
+          maxLength: 15
+        display_manual_course_time:
+          type: boolean
+          default: false
+          description: The manual course time will display on the detail, curriculum, and lesson pages, as well as the course tile. (If display course and lesson times is also enabled, this will override the summed course time. However, lesson times will still display in the selected format.)
+        course_and_lesson_time_format:
+          allOf:
+          - $ref: '#/components/schemas/CourseAndLessonTimeFormatEnum'
+          description: 'The format to use for displaying course and lesson times. Possible values: "HOURS_MINUTES_SECONDS", "HOURS_MINUTES", "HOURS_MINUTES_VERBOSE", "MINUTES_VERBOSE". If display manual course time is enabled, this will not be used.
+
+
+            * `HOURS_MINUTES_SECONDS` - HH:MM:SS (01:32:47)
+
+            * `HOURS_MINUTES` - HH:MM (01:33)
+
+            * `HOURS_MINUTES_VERBOSE` - X hr Y min (1 hr 33 min)
+
+            * `MINUTES_VERBOSE` - Y min (93 min)'
   securitySchemes:
     OrganizationApiKey:
       type: http

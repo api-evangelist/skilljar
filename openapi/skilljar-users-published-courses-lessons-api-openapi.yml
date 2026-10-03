@@ -193,17 +193,49 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    UserLessonProgressLesson:
+    PaginatedUserLessonProgressList:
       type: object
-      description: Lesson information within the user lesson progress endpoint.
+      required:
+      - count
+      - results
       properties:
-        id:
-          type: string
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserLessonProgress'
+    UserLessonProgress:
+      type: object
+      properties:
+        lesson:
+          allOf:
+          - $ref: '#/components/schemas/UserLessonProgressLesson'
           readOnly: true
-          description: Known as lesson_id within the documentation
-        title:
-          type: string
-          readOnly: true
+        lesson_progress:
+          $ref: '#/components/schemas/UserLessonProgressLessonProgress'
+      required:
+      - lesson_progress
+    UserLessonProgressRequest:
+      type: object
+      properties:
+        lesson_progress:
+          $ref: '#/components/schemas/UserLessonProgressLessonProgressRequest'
+      required:
+      - lesson_progress
     UserLessonProgressLessonProgressRequest:
       type: object
       description: Lesson progress within the user lesson progress endpoint.
@@ -245,47 +277,9 @@ components:
         lesson_progress_id:
           type: string
           minLength: 1
-    PatchedUserLessonProgressRequest:
-      type: object
-      properties:
-        lesson_progress:
-          $ref: '#/components/schemas/UserLessonProgressLessonProgressRequest'
-    UserLessonProgress:
-      type: object
-      properties:
-        lesson:
-          allOf:
-          - $ref: '#/components/schemas/UserLessonProgressLesson'
-          readOnly: true
-        lesson_progress:
-          $ref: '#/components/schemas/UserLessonProgressLessonProgress'
-      required:
-      - lesson_progress
-    PaginatedUserLessonProgressList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserLessonProgress'
+    NullEnum:
+      enum:
+      - null
     SuccessStatusEnum:
       enum:
       - PASSED
@@ -294,6 +288,22 @@ components:
       description: '* `PASSED` - Passed
 
         * `FAILED` - Failed'
+    PatchedUserLessonProgressRequest:
+      type: object
+      properties:
+        lesson_progress:
+          $ref: '#/components/schemas/UserLessonProgressLessonProgressRequest'
+    UserLessonProgressLesson:
+      type: object
+      description: Lesson information within the user lesson progress endpoint.
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as lesson_id within the documentation
+        title:
+          type: string
+          readOnly: true
     UserLessonProgressLessonProgress:
       type: object
       description: Lesson progress within the user lesson progress endpoint.
@@ -343,16 +353,6 @@ components:
           - 'null'
         lesson_progress_id:
           type: string
-    UserLessonProgressRequest:
-      type: object
-      properties:
-        lesson_progress:
-          $ref: '#/components/schemas/UserLessonProgressLessonProgressRequest'
-      required:
-      - lesson_progress
-    NullEnum:
-      enum:
-      - null
   securitySchemes:
     OrganizationApiKey:
       type: http

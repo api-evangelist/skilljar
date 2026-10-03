@@ -275,27 +275,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PageContentBlockItem'
-    PatchedPageContentBlockItemOrderUpdateRequest:
+    PageContentBlockItemOrderUpdate:
       type: object
       description: Serializer for updating the order of existing PageContentBlockItem.
-      properties:
-        order:
-          type: integer
-          minimum: 1
-    PageContentBlockItemRequest:
-      type: object
-      description: Serializer for PageContentBlockItem
-      properties:
-        order:
-          type: integer
-          minimum: 1
-        type:
-          $ref: '#/components/schemas/PageContentBlockItemTypeEnum'
-      required:
-      - type
-    PageContentBlockItem:
-      type: object
-      description: Serializer for PageContentBlockItem
       properties:
         id:
           type: string
@@ -304,7 +286,8 @@ components:
           type: integer
           minimum: 1
         type:
-          $ref: '#/components/schemas/PageContentBlockItemTypeEnum'
+          type: string
+          readOnly: true
         html_content_block_id:
           type: string
           readOnly: true
@@ -314,8 +297,13 @@ components:
         component_content_block_id:
           type: string
           readOnly: true
-      required:
-      - type
+    PatchedPageContentBlockItemOrderUpdateRequest:
+      type: object
+      description: Serializer for updating the order of existing PageContentBlockItem.
+      properties:
+        order:
+          type: integer
+          minimum: 1
     PageContentBlockItemTypeEnum:
       enum:
       - HTML
@@ -340,9 +328,9 @@ components:
         order:
           type: integer
           minimum: 1
-    PageContentBlockItemOrderUpdate:
+    PageContentBlockItem:
       type: object
-      description: Serializer for updating the order of existing PageContentBlockItem.
+      description: Serializer for PageContentBlockItem
       properties:
         id:
           type: string
@@ -351,8 +339,7 @@ components:
           type: integer
           minimum: 1
         type:
-          type: string
-          readOnly: true
+          $ref: '#/components/schemas/PageContentBlockItemTypeEnum'
         html_content_block_id:
           type: string
           readOnly: true
@@ -362,6 +349,19 @@ components:
         component_content_block_id:
           type: string
           readOnly: true
+      required:
+      - type
+    PageContentBlockItemRequest:
+      type: object
+      description: Serializer for PageContentBlockItem
+      properties:
+        order:
+          type: integer
+          minimum: 1
+        type:
+          $ref: '#/components/schemas/PageContentBlockItemTypeEnum'
+      required:
+      - type
   securitySchemes:
     OrganizationApiKey:
       type: http

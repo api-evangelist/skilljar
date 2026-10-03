@@ -148,17 +148,6 @@ components:
       description: '* `in_progress_content` - In Progress Content
 
         * `federated_search` - Federated Search'
-    AlignmentEnum:
-      enum:
-      - left
-      - center
-      - right
-      type: string
-      description: '* `left` - Left
-
-        * `center` - Center
-
-        * `right` - Right'
     PatchedComponentContentBlockRequest:
       type: object
       description: Serializer flattening selected settings fields onto the root representation.
@@ -199,6 +188,17 @@ components:
           $ref: '#/components/schemas/AlignmentEnum'
       required:
       - component
+    AlignmentEnum:
+      enum:
+      - left
+      - center
+      - right
+      type: string
+      description: '* `left` - Left
+
+        * `center` - Center
+
+        * `right` - Right'
     ComponentContentBlock:
       type: object
       description: Serializer flattening selected settings fields onto the root representation.

@@ -89,6 +89,61 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    LessonCourseListItem:
+      type: object
+      description: Lesson information within the user lesson progress endpoint.
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as lesson_id within the documentation
+        title:
+          type: string
+          readOnly: true
+        course:
+          $ref: '#/components/schemas/CourseListItem'
+      required:
+      - course
+    ViltLocation:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the location
+        info_url:
+          type: string
+          description: Link for additional information about the location
+        is_active:
+          type: boolean
+          description: Whether this is an active location
+      required:
+      - is_active
+      - name
+    PaginatedViltSessionEventList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ViltSessionEvent'
     ViltSessionEvent:
       type: object
       properties:
@@ -155,61 +210,6 @@ components:
           type: string
           readOnly: true
           description: Course title
-    ViltLocation:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the location
-        info_url:
-          type: string
-          description: Link for additional information about the location
-        is_active:
-          type: boolean
-          description: Whether this is an active location
-      required:
-      - is_active
-      - name
-    PaginatedViltSessionEventList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ViltSessionEvent'
-    LessonCourseListItem:
-      type: object
-      description: Lesson information within the user lesson progress endpoint.
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as lesson_id within the documentation
-        title:
-          type: string
-          readOnly: true
-        course:
-          $ref: '#/components/schemas/CourseListItem'
-      required:
-      - course
   securitySchemes:
     OrganizationApiKey:
       type: http

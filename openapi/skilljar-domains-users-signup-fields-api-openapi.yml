@@ -187,16 +187,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    UserSignupFieldValue:
-      type: object
-      properties:
-        signup_field:
-          $ref: '#/components/schemas/SignupFieldSummary'
-        value:
-          type: string
-      required:
-      - signup_field
-      - value
     PaginatedUserSignupFieldValueList:
       type: object
       required:
@@ -230,17 +220,6 @@ components:
           items:
             $ref: '#/components/schemas/BulkUserSignupFieldValue'
           readOnly: true
-    UserSignupFieldValueRequest:
-      type: object
-      properties:
-        signup_field:
-          $ref: '#/components/schemas/SignupFieldSummaryRequest'
-        value:
-          type: string
-          minLength: 1
-      required:
-      - signup_field
-      - value
     BulkUserSignupInfoRequest:
       type: object
       properties:
@@ -281,6 +260,16 @@ components:
           type: string
       required:
       - value
+    UserSignupFieldValue:
+      type: object
+      properties:
+        signup_field:
+          $ref: '#/components/schemas/SignupFieldSummary'
+        value:
+          type: string
+      required:
+      - signup_field
+      - value
     BulkUserSignupFieldValueRequest:
       type: object
       description: Saves a single signup field without reconciliation. Must only be used via BulkUserSignupInfoSerializer.
@@ -294,6 +283,17 @@ components:
           minLength: 1
       required:
       - id
+      - value
+    UserSignupFieldValueRequest:
+      type: object
+      properties:
+        signup_field:
+          $ref: '#/components/schemas/SignupFieldSummaryRequest'
+        value:
+          type: string
+          minLength: 1
+      required:
+      - signup_field
       - value
   securitySchemes:
     OrganizationApiKey:

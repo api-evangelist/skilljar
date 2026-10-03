@@ -203,16 +203,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    QuestionBankRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: The name of the question bank.
-          maxLength: 500
-      required:
-      - name
     PaginatedQuestionBankList:
       type: object
       required:
@@ -238,14 +228,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/QuestionBank'
-    PatchedQuestionBankRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: The name of the question bank.
-          maxLength: 500
     QuestionBank:
       type: object
       properties:
@@ -262,6 +244,24 @@ components:
         quiz_association_count:
           type: integer
           readOnly: true
+      required:
+      - name
+    PatchedQuestionBankRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: The name of the question bank.
+          maxLength: 500
+    QuestionBankRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: The name of the question bank.
+          maxLength: 500
       required:
       - name
   securitySchemes:

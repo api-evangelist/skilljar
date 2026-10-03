@@ -250,178 +250,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Path:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        title:
-          type: string
-          maxLength: 500
-        promo_image_url:
-          type: string
-          description: The URL to the promo image of the course
-          readOnly: true
-        short_description:
-          type: string
-          maxLength: 300
-        long_description_html:
-          type: string
-          maxLength: 100000
-        header_html:
-          type: string
-          maxLength: 100000
-        course_name_singular:
-          type: string
-          description: 'Text to replace the word ''course'' on the catalog tile for this learning path. For example: ''1 course'''
-          maxLength: 50
-        course_name_plural:
-          type: string
-          description: 'Text to replace the word ''courses'' on the catalog tile for this learning path. For example: ''3 courses'''
-          maxLength: 50
-        path_item_count:
-          type: integer
-          readOnly: true
-    CreatePathRequest:
-      type: object
-      description: Serializer to create a new Path when publishing one to a domain. Only title is required.
-      properties:
-        title:
-          type: string
-          minLength: 1
-          maxLength: 500
-        short_description:
-          type: string
-          maxLength: 300
-        long_description_html:
-          type: string
-          maxLength: 100000
-        header_html:
-          type: string
-          maxLength: 100000
-        course_name_singular:
-          type: string
-          minLength: 1
-          description: 'Text to replace the word ''course'' on the catalog tile for this learning path. For example: ''1 course'''
-          maxLength: 50
-        course_name_plural:
-          type: string
-          minLength: 1
-          description: 'Text to replace the word ''courses'' on the catalog tile for this learning path. For example: ''3 courses'''
-          maxLength: 50
-      required:
-      - title
-    CreatePath:
-      type: object
-      description: Serializer to create a new Path when publishing one to a domain. Only title is required.
-      properties:
-        id:
-          type: string
-          readOnly: true
-        title:
-          type: string
-          maxLength: 500
-        promo_image_url:
-          type: string
-          description: The URL to the promo image of the course
-          readOnly: true
-        short_description:
-          type: string
-          maxLength: 300
-        long_description_html:
-          type: string
-          maxLength: 100000
-        header_html:
-          type: string
-          maxLength: 100000
-        course_name_singular:
-          type: string
-          description: 'Text to replace the word ''course'' on the catalog tile for this learning path. For example: ''1 course'''
-          maxLength: 50
-        course_name_plural:
-          type: string
-          description: 'Text to replace the word ''courses'' on the catalog tile for this learning path. For example: ''3 courses'''
-          maxLength: 50
-        path_item_count:
-          type: integer
-          readOnly: true
-      required:
-      - title
-    PaginatedPublishedPathList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublishedPath'
-    PublishedPath:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        slug:
-          type: string
-          description: After your Learning Path has been published, we don't recommend changing the URL
-          pattern: ^[a-z0-9]+(-[a-z0-9]+)*$
-          maxLength: 100
-        path:
-          $ref: '#/components/schemas/CreatePath'
-        path_url:
-          type: string
-          readOnly: true
-        hidden:
-          type: boolean
-          description: Hidden paths are only visible on the catalog page to associated groups
-        strict_enforce_group_visibility:
-          type: boolean
-          description: Block access to this path for student it's not visible to
-        offer:
-          allOf:
-          - $ref: '#/components/schemas/Offer'
-          readOnly: true
-        unique_progress_per_enrollment:
-          type: boolean
-          description: When enabled, each new enrollment creates a fresh progress record.
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-        modified_at:
-          type: string
-          format: date-time
-          readOnly: true
-      required:
-      - path
-      - slug
-    Price:
-      type: object
-      properties:
-        amount:
-          type: string
-          default: '0.00'
-        currency_code:
-          type: string
-          default: USD
     UpdatePublishedPath:
       type: object
       description: Serializer for updating PublishedPath instances
@@ -464,63 +292,6 @@ components:
           readOnly: true
       required:
       - slug
-    Offer:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        registration_open:
-          type: boolean
-        registration_url:
-          type: string
-          readOnly: true
-          description: URL used for course registration
-        price:
-          $ref: '#/components/schemas/Price'
-      required:
-      - price
-      - registration_open
-    UpdatePublishedPathRequest:
-      type: object
-      description: Serializer for updating PublishedPath instances
-      properties:
-        slug:
-          type: string
-          minLength: 1
-          description: After your Learning Path has been published, we don't recommend changing the URL
-          pattern: ^[a-z0-9]+(-[a-z0-9]+)*$
-          maxLength: 100
-        hidden:
-          type: boolean
-          description: Hidden paths are only visible on the catalog page to associated groups
-        strict_enforce_group_visibility:
-          type: boolean
-          description: Block access to this path for student it's not visible to
-        unique_progress_per_enrollment:
-          type: boolean
-          description: When enabled, each new enrollment creates a fresh progress record.
-      required:
-      - slug
-    PatchedUpdatePublishedPathRequest:
-      type: object
-      description: Serializer for updating PublishedPath instances
-      properties:
-        slug:
-          type: string
-          minLength: 1
-          description: After your Learning Path has been published, we don't recommend changing the URL
-          pattern: ^[a-z0-9]+(-[a-z0-9]+)*$
-          maxLength: 100
-        hidden:
-          type: boolean
-          description: Hidden paths are only visible on the catalog page to associated groups
-        strict_enforce_group_visibility:
-          type: boolean
-          description: Block access to this path for student it's not visible to
-        unique_progress_per_enrollment:
-          type: boolean
-          description: When enabled, each new enrollment creates a fresh progress record.
     PublishedPathRequest:
       type: object
       properties:
@@ -544,6 +315,235 @@ components:
       required:
       - path
       - slug
+    PublishedPath:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        slug:
+          type: string
+          description: After your Learning Path has been published, we don't recommend changing the URL
+          pattern: ^[a-z0-9]+(-[a-z0-9]+)*$
+          maxLength: 100
+        path:
+          $ref: '#/components/schemas/CreatePath'
+        path_url:
+          type: string
+          readOnly: true
+        hidden:
+          type: boolean
+          description: Hidden paths are only visible on the catalog page to associated groups
+        strict_enforce_group_visibility:
+          type: boolean
+          description: Block access to this path for student it's not visible to
+        offer:
+          allOf:
+          - $ref: '#/components/schemas/Offer'
+          readOnly: true
+        unique_progress_per_enrollment:
+          type: boolean
+          description: When enabled, each new enrollment creates a fresh progress record.
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        modified_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - path
+      - slug
+    PaginatedPublishedPathList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublishedPath'
+    Path:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          maxLength: 500
+        promo_image_url:
+          type: string
+          description: The URL to the promo image of the course
+          readOnly: true
+        short_description:
+          type: string
+          maxLength: 300
+        long_description_html:
+          type: string
+          maxLength: 100000
+        header_html:
+          type: string
+          maxLength: 100000
+        course_name_singular:
+          type: string
+          description: 'Text to replace the word ''course'' on the catalog tile for this learning path. For example: ''1 course'''
+          maxLength: 50
+        course_name_plural:
+          type: string
+          description: 'Text to replace the word ''courses'' on the catalog tile for this learning path. For example: ''3 courses'''
+          maxLength: 50
+        path_item_count:
+          type: integer
+          readOnly: true
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+          default: '0.00'
+        currency_code:
+          type: string
+          default: USD
+    UpdatePublishedPathRequest:
+      type: object
+      description: Serializer for updating PublishedPath instances
+      properties:
+        slug:
+          type: string
+          minLength: 1
+          description: After your Learning Path has been published, we don't recommend changing the URL
+          pattern: ^[a-z0-9]+(-[a-z0-9]+)*$
+          maxLength: 100
+        hidden:
+          type: boolean
+          description: Hidden paths are only visible on the catalog page to associated groups
+        strict_enforce_group_visibility:
+          type: boolean
+          description: Block access to this path for student it's not visible to
+        unique_progress_per_enrollment:
+          type: boolean
+          description: When enabled, each new enrollment creates a fresh progress record.
+      required:
+      - slug
+    CreatePath:
+      type: object
+      description: Serializer to create a new Path when publishing one to a domain. Only title is required.
+      properties:
+        id:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          maxLength: 500
+        promo_image_url:
+          type: string
+          description: The URL to the promo image of the course
+          readOnly: true
+        short_description:
+          type: string
+          maxLength: 300
+        long_description_html:
+          type: string
+          maxLength: 100000
+        header_html:
+          type: string
+          maxLength: 100000
+        course_name_singular:
+          type: string
+          description: 'Text to replace the word ''course'' on the catalog tile for this learning path. For example: ''1 course'''
+          maxLength: 50
+        course_name_plural:
+          type: string
+          description: 'Text to replace the word ''courses'' on the catalog tile for this learning path. For example: ''3 courses'''
+          maxLength: 50
+        path_item_count:
+          type: integer
+          readOnly: true
+      required:
+      - title
+    Offer:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        registration_open:
+          type: boolean
+        registration_url:
+          type: string
+          readOnly: true
+          description: URL used for course registration
+        price:
+          $ref: '#/components/schemas/Price'
+      required:
+      - price
+      - registration_open
+    PatchedUpdatePublishedPathRequest:
+      type: object
+      description: Serializer for updating PublishedPath instances
+      properties:
+        slug:
+          type: string
+          minLength: 1
+          description: After your Learning Path has been published, we don't recommend changing the URL
+          pattern: ^[a-z0-9]+(-[a-z0-9]+)*$
+          maxLength: 100
+        hidden:
+          type: boolean
+          description: Hidden paths are only visible on the catalog page to associated groups
+        strict_enforce_group_visibility:
+          type: boolean
+          description: Block access to this path for student it's not visible to
+        unique_progress_per_enrollment:
+          type: boolean
+          description: When enabled, each new enrollment creates a fresh progress record.
+    CreatePathRequest:
+      type: object
+      description: Serializer to create a new Path when publishing one to a domain. Only title is required.
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 500
+        short_description:
+          type: string
+          maxLength: 300
+        long_description_html:
+          type: string
+          maxLength: 100000
+        header_html:
+          type: string
+          maxLength: 100000
+        course_name_singular:
+          type: string
+          minLength: 1
+          description: 'Text to replace the word ''course'' on the catalog tile for this learning path. For example: ''1 course'''
+          maxLength: 50
+        course_name_plural:
+          type: string
+          minLength: 1
+          description: 'Text to replace the word ''courses'' on the catalog tile for this learning path. For example: ''3 courses'''
+          maxLength: 50
+      required:
+      - title
   securitySchemes:
     OrganizationApiKey:
       type: http

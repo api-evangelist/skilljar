@@ -259,15 +259,31 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PurchaseOfferPrice:
+    PublishedPathEnrollment:
       type: object
       properties:
-        amount:
+        id:
           type: string
-          default: '0.00'
-        currency_code:
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/ReadOnlyUser'
+        enrolled_at:
           type: string
-          default: USD
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        active:
+          type:
+          - boolean
+          - 'null'
+          default: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentPurchase'
+          readOnly: true
+      required:
+      - user
     PaymentProcessorEnum:
       enum:
       - NONE
@@ -294,6 +310,39 @@ components:
         * `MES` - Merchant e-Solutions
 
         * `EXTERNAL` - External'
+    ReadOnlyUser:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+          description: Email address
+        first_name:
+          type: string
+          readOnly: true
+          description: First name
+        last_name:
+          type: string
+          readOnly: true
+          description: Last name
+      required:
+      - id
+    ReadOnlyUserRequest:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Known as user_id within the documentation
+      required:
+      - id
     CreatePublishedPathEnrollmentRequest:
       type: object
       properties:
@@ -315,7 +364,7 @@ components:
           - $ref: '#/components/schemas/EnrollmentPurchaseRequest'
       required:
       - user
-    Price:
+    PurchaseOfferPrice:
       type: object
       properties:
         amount:
@@ -349,29 +398,25 @@ components:
           allOf:
           - $ref: '#/components/schemas/EnrollmentPurchase'
           readOnly: true
-    PurchaseStateEnum:
-      enum:
-      - CREATED
-      - SUCCESS
-      - FAILED
-      - REFUNDED
-      - CANCELLED
-      - FLAGGED
-      - PENDING
-      type: string
-      description: '* `CREATED` - CREATED
-
-        * `SUCCESS` - SUCCESS
-
-        * `FAILED` - FAILED
-
-        * `REFUNDED` - REFUNDED
-
-        * `CANCELLED` - CANCELLED
-
-        * `FLAGGED` - FLAGGED
-
-        * `PENDING` - PENDING'
+    UpdatePublishedPathEnrollmentRequest:
+      type: object
+      properties:
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        active:
+          type: boolean
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+          default: '0.00'
+        currency_code:
+          type: string
+          default: USD
     CreatePublishedPathEnrollment:
       type: object
       properties:
@@ -396,6 +441,29 @@ components:
           - $ref: '#/components/schemas/EnrollmentPurchase'
       required:
       - user
+    PurchaseStateEnum:
+      enum:
+      - CREATED
+      - SUCCESS
+      - FAILED
+      - REFUNDED
+      - CANCELLED
+      - FLAGGED
+      - PENDING
+      type: string
+      description: '* `CREATED` - CREATED
+
+        * `SUCCESS` - SUCCESS
+
+        * `FAILED` - FAILED
+
+        * `REFUNDED` - REFUNDED
+
+        * `CANCELLED` - CANCELLED
+
+        * `FLAGGED` - FLAGGED
+
+        * `PENDING` - PENDING'
     PriceRequest:
       type: object
       properties:
@@ -441,26 +509,6 @@ components:
           - 'null'
           maximum: 2147483647
           minimum: 0
-    PatchedUpdatePublishedPathEnrollmentRequest:
-      type: object
-      properties:
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        active:
-          type: boolean
-    UpdatePublishedPathEnrollmentRequest:
-      type: object
-      properties:
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        active:
-          type: boolean
     EnrollmentPurchaseRequest:
       type: object
       properties:
@@ -477,64 +525,6 @@ components:
           - 'null'
           maximum: 2147483647
           minimum: 0
-    PublishedPathEnrollment:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        user:
-          $ref: '#/components/schemas/ReadOnlyUser'
-        enrolled_at:
-          type: string
-          format: date-time
-        expires_at:
-          type: string
-          format: date-time
-        active:
-          type:
-          - boolean
-          - 'null'
-          default: true
-        purchase:
-          allOf:
-          - $ref: '#/components/schemas/EnrollmentPurchase'
-          readOnly: true
-      required:
-      - user
-    ReadOnlyUserRequest:
-      type: object
-      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
-      properties:
-        id:
-          type: string
-          minLength: 1
-          description: Known as user_id within the documentation
-      required:
-      - id
-    ReadOnlyUser:
-      type: object
-      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
-      properties:
-        id:
-          type: string
-          description: Known as user_id within the documentation
-        email:
-          type: string
-          format: email
-          readOnly: true
-          title: Email address
-          description: Email address
-        first_name:
-          type: string
-          readOnly: true
-          description: First name
-        last_name:
-          type: string
-          readOnly: true
-          description: Last name
-      required:
-      - id
     PaginatedPublishedPathEnrollmentList:
       type: object
       required:
@@ -560,6 +550,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PublishedPathEnrollment'
+    PatchedUpdatePublishedPathEnrollmentRequest:
+      type: object
+      properties:
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        active:
+          type: boolean
   securitySchemes:
     OrganizationApiKey:
       type: http

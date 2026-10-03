@@ -156,14 +156,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    NestedLabelAssociationRequest:
-      type: object
-      description: Serializer for LabelAssociation tying an object to a Label.
-      properties:
-        label:
-          $ref: '#/components/schemas/NestedLabelAssociationLabelRequest'
-      required:
-      - label
     NestedLabelAssociationLabel:
       type: object
       description: Serializer for Label within a LabelAssociation.
@@ -176,6 +168,14 @@ components:
           description: Name of the label
       required:
       - id
+    NestedLabelAssociation:
+      type: object
+      description: Serializer for LabelAssociation tying an object to a Label.
+      properties:
+        label:
+          $ref: '#/components/schemas/NestedLabelAssociationLabel'
+      required:
+      - label
     NestedLabelAssociationLabelRequest:
       type: object
       description: Serializer for Label within a LabelAssociation.
@@ -185,14 +185,6 @@ components:
           minLength: 1
       required:
       - id
-    NestedLabelAssociation:
-      type: object
-      description: Serializer for LabelAssociation tying an object to a Label.
-      properties:
-        label:
-          $ref: '#/components/schemas/NestedLabelAssociationLabel'
-      required:
-      - label
     PaginatedNestedLabelAssociationList:
       type: object
       required:
@@ -218,6 +210,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/NestedLabelAssociation'
+    NestedLabelAssociationRequest:
+      type: object
+      description: Serializer for LabelAssociation tying an object to a Label.
+      properties:
+        label:
+          $ref: '#/components/schemas/NestedLabelAssociationLabelRequest'
+      required:
+      - label
   securitySchemes:
     OrganizationApiKey:
       type: http

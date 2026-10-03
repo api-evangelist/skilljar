@@ -39,42 +39,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SignupFieldTypeEnum:
-      enum:
-      - TEXT
-      - PICKLIST
-      - CHECKBOX
-      type: string
-      description: '* `TEXT` - Free-Form Text
-
-        * `PICKLIST` - Pick-List
-
-        * `CHECKBOX` - Checkbox'
-    PaginatedSignupFieldList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SignupField'
     SignupField:
       type: object
       properties:
@@ -122,6 +86,42 @@ components:
           maxLength: 100
       required:
       - value
+    SignupFieldTypeEnum:
+      enum:
+      - TEXT
+      - PICKLIST
+      - CHECKBOX
+      type: string
+      description: '* `TEXT` - Free-Form Text
+
+        * `PICKLIST` - Pick-List
+
+        * `CHECKBOX` - Checkbox'
+    PaginatedSignupFieldList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SignupField'
   securitySchemes:
     OrganizationApiKey:
       type: http

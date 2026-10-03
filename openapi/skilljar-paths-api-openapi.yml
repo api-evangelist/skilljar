@@ -190,7 +190,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Path'
-    PatchedPathRequest:
+    PathRequest:
       type: object
       properties:
         title:
@@ -249,7 +249,7 @@ components:
         path_item_count:
           type: integer
           readOnly: true
-    PathRequest:
+    PatchedPathRequest:
       type: object
       properties:
         title:

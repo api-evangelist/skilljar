@@ -220,17 +220,66 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    AlignmentEnum:
-      enum:
-      - left
-      - center
-      - right
-      type: string
-      description: '* `left` - Left
+    PatchedQuizRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: The name of the quiz.
+          maxLength: 500
+        html:
+          type: string
+          minLength: 1
+          description: The HTML content of the quiz.
+        passing_percentage_correct:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: Percentage needed to mark quiz as passing.
+        show_results_on_failure:
+          type: boolean
+          description: If set, students who fail the quiz will be able to see the answers they submitted as well as the correct / incorrect status and feedback for each question. Correct answers will not be displayed.  (Students who pass the quiz are shown correct / incorrect status, feedback, and correct answers by default.)
+        max_attempts:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: By default (0), there is no limit to how many times a student may take the quiz.
+        require_correct_response:
+          type: boolean
+          description: If set, the student must answer each question correctly in order to proceed to the next question. When set, there is no limit to the number of attempts to answer the question correctly.
+        randomize_questions:
+          type: boolean
+          description: If set, the student will receive questions in a random order.
+        limit_question_count:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: By default (0), the student will have to answer every question below. Otherwise, they will receive this many questions selected at random.
+        randomize_answers:
+          type: boolean
+          description: If set, the student will receive question answers in a random order (this applies to every question on the quiz).
+        time_limit_seconds:
+          type:
+          - integer
+          - 'null'
+          maximum: 3600000
+          minimum: 0
+          description: Set a time limit on the quiz. If left blank, students will have unlimited time to complete the quiz.
+        show_question_feedback:
+          type: boolean
+          description: If set, students will be able to receive feedback for correct / incorrect answers on their quiz for automatically graded questions (multiple choice, multiple answer, and fill in the blank questions.) If unchecked, all feedback entered previously will be deleted.
+        alignment:
+          allOf:
+          - $ref: '#/components/schemas/AlignmentEnum'
+          description: 'Controls text alignment for quiz description and start screen.
 
-        * `center` - Center
 
-        * `right` - Right'
+            * `left` - Left
+
+            * `center` - Center
+
+            * `right` - Right'
     Quiz:
       type: object
       properties:
@@ -294,66 +343,6 @@ components:
             * `right` - Right'
       required:
       - name
-    PatchedQuizRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: The name of the quiz.
-          maxLength: 500
-        html:
-          type: string
-          minLength: 1
-          description: The HTML content of the quiz.
-        passing_percentage_correct:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          description: Percentage needed to mark quiz as passing.
-        show_results_on_failure:
-          type: boolean
-          description: If set, students who fail the quiz will be able to see the answers they submitted as well as the correct / incorrect status and feedback for each question. Correct answers will not be displayed.  (Students who pass the quiz are shown correct / incorrect status, feedback, and correct answers by default.)
-        max_attempts:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          description: By default (0), there is no limit to how many times a student may take the quiz.
-        require_correct_response:
-          type: boolean
-          description: If set, the student must answer each question correctly in order to proceed to the next question. When set, there is no limit to the number of attempts to answer the question correctly.
-        randomize_questions:
-          type: boolean
-          description: If set, the student will receive questions in a random order.
-        limit_question_count:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          description: By default (0), the student will have to answer every question below. Otherwise, they will receive this many questions selected at random.
-        randomize_answers:
-          type: boolean
-          description: If set, the student will receive question answers in a random order (this applies to every question on the quiz).
-        time_limit_seconds:
-          type:
-          - integer
-          - 'null'
-          maximum: 3600000
-          minimum: 0
-          description: Set a time limit on the quiz. If left blank, students will have unlimited time to complete the quiz.
-        show_question_feedback:
-          type: boolean
-          description: If set, students will be able to receive feedback for correct / incorrect answers on their quiz for automatically graded questions (multiple choice, multiple answer, and fill in the blank questions.) If unchecked, all feedback entered previously will be deleted.
-        alignment:
-          allOf:
-          - $ref: '#/components/schemas/AlignmentEnum'
-          description: 'Controls text alignment for quiz description and start screen.
-
-
-            * `left` - Left
-
-            * `center` - Center
-
-            * `right` - Right'
     QuizRequest:
       type: object
       properties:
@@ -441,6 +430,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Quiz'
+    AlignmentEnum:
+      enum:
+      - left
+      - center
+      - right
+      type: string
+      description: '* `left` - Left
+
+        * `center` - Center
+
+        * `right` - Right'
   securitySchemes:
     OrganizationApiKey:
       type: http
