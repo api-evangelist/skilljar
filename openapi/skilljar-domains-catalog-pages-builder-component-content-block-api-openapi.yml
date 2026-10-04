@@ -140,14 +140,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ComponentEnum:
-      enum:
-      - in_progress_content
-      - federated_search
-      type: string
-      description: '* `in_progress_content` - In Progress Content
-
-        * `federated_search` - Federated Search'
     PatchedComponentContentBlockRequest:
       type: object
       description: Serializer flattening selected settings fields onto the root representation.
@@ -167,27 +159,6 @@ components:
           default: 4
         alignment:
           $ref: '#/components/schemas/AlignmentEnum'
-    ComponentContentBlockRequest:
-      type: object
-      description: Serializer flattening selected settings fields onto the root representation.
-      properties:
-        component:
-          $ref: '#/components/schemas/ComponentEnum'
-        header_text:
-          type: string
-        header_sub_text:
-          type: string
-        include_profile_link:
-          type: boolean
-          default: true
-        max_tiles:
-          type: integer
-          minimum: 1
-          default: 4
-        alignment:
-          $ref: '#/components/schemas/AlignmentEnum'
-      required:
-      - component
     AlignmentEnum:
       enum:
       - left
@@ -206,6 +177,35 @@ components:
         id:
           type: string
           readOnly: true
+        component:
+          $ref: '#/components/schemas/ComponentEnum'
+        header_text:
+          type: string
+        header_sub_text:
+          type: string
+        include_profile_link:
+          type: boolean
+          default: true
+        max_tiles:
+          type: integer
+          minimum: 1
+          default: 4
+        alignment:
+          $ref: '#/components/schemas/AlignmentEnum'
+      required:
+      - component
+    ComponentEnum:
+      enum:
+      - in_progress_content
+      - federated_search
+      type: string
+      description: '* `in_progress_content` - In Progress Content
+
+        * `federated_search` - Federated Search'
+    ComponentContentBlockRequest:
+      type: object
+      description: Serializer flattening selected settings fields onto the root representation.
+      properties:
         component:
           $ref: '#/components/schemas/ComponentEnum'
         header_text:

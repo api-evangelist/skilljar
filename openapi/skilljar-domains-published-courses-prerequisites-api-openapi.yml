@@ -133,15 +133,6 @@ components:
           description: Json containing he prerequisite published course ID
       required:
       - published_course
-    PublishedCourseIdOnly:
-      type: object
-      description: Serializer for published course ID only.
-      properties:
-        id:
-          type: string
-          description: The published course ID
-      required:
-      - id
     PublishedCoursePrerequisiteRequest:
       type: object
       description: Serializer for prerequisites of a published course.
@@ -187,6 +178,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PublishedCoursePrerequisite'
+    PublishedCourseIdOnly:
+      type: object
+      description: Serializer for published course ID only.
+      properties:
+        id:
+          type: string
+          description: The published course ID
+      required:
+      - id
   securitySchemes:
     OrganizationApiKey:
       type: http

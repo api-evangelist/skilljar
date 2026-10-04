@@ -162,24 +162,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    NestedTagRequest:
-      type: object
-      description: Serializer for nested Tag models in PublishedCourseTag, PublishedPathTag, etc.
-      properties:
-        id:
-          type: string
-          minLength: 1
-          description: Known as tag_id within the documentation
-      required:
-      - id
-    PublishedPathTag:
-      type: object
-      description: Serializer for PublishedPathTags.
-      properties:
-        tag:
-          $ref: '#/components/schemas/NestedTag'
-      required:
-      - tag
     NestedTag:
       type: object
       description: Serializer for nested Tag models in PublishedCourseTag, PublishedPathTag, etc.
@@ -193,6 +175,32 @@ components:
         slug:
           type: string
           readOnly: true
+      required:
+      - id
+    PublishedPathTagRequest:
+      type: object
+      description: Serializer for PublishedPathTags.
+      properties:
+        tag:
+          $ref: '#/components/schemas/NestedTagRequest'
+      required:
+      - tag
+    PublishedPathTag:
+      type: object
+      description: Serializer for PublishedPathTags.
+      properties:
+        tag:
+          $ref: '#/components/schemas/NestedTag'
+      required:
+      - tag
+    NestedTagRequest:
+      type: object
+      description: Serializer for nested Tag models in PublishedCourseTag, PublishedPathTag, etc.
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Known as tag_id within the documentation
       required:
       - id
     PaginatedPublishedPathTagList:
@@ -220,14 +228,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PublishedPathTag'
-    PublishedPathTagRequest:
-      type: object
-      description: Serializer for PublishedPathTags.
-      properties:
-        tag:
-          $ref: '#/components/schemas/NestedTagRequest'
-      required:
-      - tag
   securitySchemes:
     OrganizationApiKey:
       type: http

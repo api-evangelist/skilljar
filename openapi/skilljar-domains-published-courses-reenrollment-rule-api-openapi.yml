@@ -225,29 +225,14 @@ components:
       required:
       - cycle_duration
       - starts_at
-    CycleDurationUnitEnum:
-      enum:
-      - MONTHS
-      - DAYS
-      type: string
-      description: '* `MONTHS` - Months
-
-        * `DAYS` - Days'
-    UpdatePublishedCourseReenrollmentRule:
+    PublishedCourseReenrollmentRuleRequest:
       type: object
-      description: Serializer for updating Reenrollment Rule
+      description: Serializer for Reenrollment Rule
       properties:
-        id:
-          type: string
-          readOnly: true
         starts_at:
           type: string
           format: date-time
           description: ISO 8601 formatted datetime string indicating when the reenrollment rule starts at. Must be in the future and at the top of the hour.
-        next_run_at:
-          type: string
-          format: date-time
-          readOnly: true
         cycle_duration:
           type: integer
           minimum: 1
@@ -260,6 +245,9 @@ components:
             * `MONTHS` - Months
 
             * `DAYS` - Days'
+      required:
+      - cycle_duration
+      - starts_at
     PatchedUpdatePublishedCourseReenrollmentRuleRequest:
       type: object
       description: Serializer for updating Reenrollment Rule
@@ -300,14 +288,21 @@ components:
             * `MONTHS` - Months
 
             * `DAYS` - Days'
-    PublishedCourseReenrollmentRuleRequest:
+    UpdatePublishedCourseReenrollmentRule:
       type: object
-      description: Serializer for Reenrollment Rule
+      description: Serializer for updating Reenrollment Rule
       properties:
+        id:
+          type: string
+          readOnly: true
         starts_at:
           type: string
           format: date-time
           description: ISO 8601 formatted datetime string indicating when the reenrollment rule starts at. Must be in the future and at the top of the hour.
+        next_run_at:
+          type: string
+          format: date-time
+          readOnly: true
         cycle_duration:
           type: integer
           minimum: 1
@@ -320,9 +315,14 @@ components:
             * `MONTHS` - Months
 
             * `DAYS` - Days'
-      required:
-      - cycle_duration
-      - starts_at
+    CycleDurationUnitEnum:
+      enum:
+      - MONTHS
+      - DAYS
+      type: string
+      description: '* `MONTHS` - Months
+
+        * `DAYS` - Days'
   securitySchemes:
     OrganizationApiKey:
       type: http

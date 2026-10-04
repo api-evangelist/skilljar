@@ -186,6 +186,36 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    WebPackageSummary:
+      type: object
+      description: 'Only used when listing WebPackages.
+
+
+        Defines the basic fields that will be returned on a WebPackage object in the API.
+
+
+        Does not include the `download_url` field as it is computationally expensive.'
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as web_package_id within the documentation
+        type:
+          type: string
+          readOnly: true
+        redirect_on_completion:
+          type: boolean
+          description: Get redirect_on_completion
+          readOnly: true
+        state:
+          type: string
+          readOnly: true
+        sync_completion:
+          type: boolean
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
     PaginatedWebPackageSummaryList:
       type: object
       required:
@@ -211,6 +241,55 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WebPackageSummary'
+    WebPackage:
+      type: object
+      description: 'Used when creating, updating or reading a single WebPackage object.
+
+
+        Inherits from WebPackageSummarySerializer.
+
+        Adds in the `download_url` field as well as the write fields.'
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as web_package_id within the documentation
+        type:
+          type: string
+          readOnly: true
+        download_url:
+          type: string
+          description: Access URL to download scorm package.
+          readOnly: true
+        redirect_on_completion:
+          type: boolean
+          description: Get redirect_on_completion
+          readOnly: true
+        state:
+          type: string
+          readOnly: true
+        sync_completion:
+          type: boolean
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+    WebPackageUpdateLessonRequest:
+      type: object
+      description: 'Used when replacing an existing Web Package in all its lessons with a different Web Package
+
+
+        Inherits from WebPackageSerializer
+
+        Adds in the `replacement_web_package_id` field'
+      properties:
+        web_package_id:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: WebPackage that will replace the other in its lessons
+      required:
+      - web_package_id
     WebPackageRequest:
       type: object
       description: 'Used when creating, updating or reading a single WebPackage object.
@@ -253,85 +332,6 @@ components:
           default: true
       required:
       - title
-    WebPackage:
-      type: object
-      description: 'Used when creating, updating or reading a single WebPackage object.
-
-
-        Inherits from WebPackageSummarySerializer.
-
-        Adds in the `download_url` field as well as the write fields.'
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as web_package_id within the documentation
-        type:
-          type: string
-          readOnly: true
-        download_url:
-          type: string
-          description: Access URL to download scorm package.
-          readOnly: true
-        redirect_on_completion:
-          type: boolean
-          description: Get redirect_on_completion
-          readOnly: true
-        state:
-          type: string
-          readOnly: true
-        sync_completion:
-          type: boolean
-          readOnly: true
-        title:
-          type: string
-          readOnly: true
-    WebPackageSummary:
-      type: object
-      description: 'Only used when listing WebPackages.
-
-
-        Defines the basic fields that will be returned on a WebPackage object in the API.
-
-
-        Does not include the `download_url` field as it is computationally expensive.'
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as web_package_id within the documentation
-        type:
-          type: string
-          readOnly: true
-        redirect_on_completion:
-          type: boolean
-          description: Get redirect_on_completion
-          readOnly: true
-        state:
-          type: string
-          readOnly: true
-        sync_completion:
-          type: boolean
-          readOnly: true
-        title:
-          type: string
-          readOnly: true
-    WebPackageUpdateLessonRequest:
-      type: object
-      description: 'Used when replacing an existing Web Package in all its lessons with a different Web Package
-
-
-        Inherits from WebPackageSerializer
-
-        Adds in the `replacement_web_package_id` field'
-      properties:
-        web_package_id:
-          type: string
-          writeOnly: true
-          minLength: 1
-          description: WebPackage that will replace the other in its lessons
-      required:
-      - web_package_id
   securitySchemes:
     OrganizationApiKey:
       type: http

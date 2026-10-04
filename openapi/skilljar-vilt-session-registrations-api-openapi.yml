@@ -206,124 +206,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    LessonCourseListItem:
-      type: object
-      description: Lesson information within the user lesson progress endpoint.
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as lesson_id within the documentation
-        title:
-          type: string
-          readOnly: true
-        course:
-          $ref: '#/components/schemas/CourseListItem'
-      required:
-      - course
-    PatchedViltSessionRegistrationUpdateRequest:
-      type: object
-      properties:
-        attended:
-          type: boolean
-    ReadOnlyViltSession:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Known as session_id within the documentation
-      required:
-      - id
-    ViltSessionRegistrationUpdate:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as vilt_session_registration_id within the documentation
-        attended:
-          type: boolean
-      required:
-      - attended
-    ViltSessionRegistrationDetailRequest:
-      type: object
-      properties:
-        vilt_session:
-          $ref: '#/components/schemas/ReadOnlyViltSessionRequest'
-        enrollment_id:
-          type: string
-          writeOnly: true
-          minLength: 1
-    ViltSessionRegistrationDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as vilt_session_registration_id within the documentation
-        attended:
-          type: boolean
-          readOnly: true
-        vilt_session:
-          $ref: '#/components/schemas/ReadOnlyViltSession'
-        student_lesson_progress:
-          allOf:
-          - $ref: '#/components/schemas/StudentLessonProgressCourseItem'
-          readOnly: true
-    StudentLessonProgressCourseItem:
-      type: object
-      properties:
-        id:
-          type: string
-        user:
-          $ref: '#/components/schemas/User'
-        lesson:
-          $ref: '#/components/schemas/LessonCourseListItem'
-      required:
-      - id
-      - lesson
-      - user
-    PaginatedViltSessionRegistrationListItemList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ViltSessionRegistrationListItem'
-    ViltSessionRegistrationUpdateRequest:
-      type: object
-      properties:
-        attended:
-          type: boolean
-      required:
-      - attended
-    ReadOnlyViltSessionRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          minLength: 1
-          description: Known as session_id within the documentation
-      required:
-      - id
     User:
       type: object
       description: 'Version of the user serializer configured to lookup a user given the user''s email.  If a user with this email does
@@ -353,17 +235,43 @@ components:
           readOnly: true
       required:
       - email
-    CourseListItem:
+    ReadOnlyViltSessionRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Known as session_id within the documentation
+      required:
+      - id
+    ViltSessionRegistrationDetailRequest:
+      type: object
+      properties:
+        vilt_session:
+          $ref: '#/components/schemas/ReadOnlyViltSessionRequest'
+        enrollment_id:
+          type: string
+          writeOnly: true
+          minLength: 1
+    ViltSessionRegistrationUpdate:
       type: object
       properties:
         id:
           type: string
           readOnly: true
-          description: Known as course_id within the documentation
-        title:
+          description: Known as vilt_session_registration_id within the documentation
+        attended:
+          type: boolean
+      required:
+      - attended
+    ReadOnlyViltSession:
+      type: object
+      properties:
+        id:
           type: string
-          readOnly: true
-          description: Course title
+          description: Known as session_id within the documentation
+      required:
+      - id
     ViltSessionRegistrationListItem:
       type: object
       properties:
@@ -382,6 +290,98 @@ components:
           readOnly: true
       required:
       - vilt_session
+    CourseListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as course_id within the documentation
+        title:
+          type: string
+          readOnly: true
+          description: Course title
+    ViltSessionRegistrationUpdateRequest:
+      type: object
+      properties:
+        attended:
+          type: boolean
+      required:
+      - attended
+    ViltSessionRegistrationDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as vilt_session_registration_id within the documentation
+        attended:
+          type: boolean
+          readOnly: true
+        vilt_session:
+          $ref: '#/components/schemas/ReadOnlyViltSession'
+        student_lesson_progress:
+          allOf:
+          - $ref: '#/components/schemas/StudentLessonProgressCourseItem'
+          readOnly: true
+    PatchedViltSessionRegistrationUpdateRequest:
+      type: object
+      properties:
+        attended:
+          type: boolean
+    PaginatedViltSessionRegistrationListItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ViltSessionRegistrationListItem'
+    StudentLessonProgressCourseItem:
+      type: object
+      properties:
+        id:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+        lesson:
+          $ref: '#/components/schemas/LessonCourseListItem'
+      required:
+      - id
+      - lesson
+      - user
+    LessonCourseListItem:
+      type: object
+      description: Lesson information within the user lesson progress endpoint.
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as lesson_id within the documentation
+        title:
+          type: string
+          readOnly: true
+        course:
+          $ref: '#/components/schemas/CourseListItem'
+      required:
+      - course
   securitySchemes:
     OrganizationApiKey:
       type: http

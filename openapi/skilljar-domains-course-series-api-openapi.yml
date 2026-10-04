@@ -126,6 +126,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CourseSeries'
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+          default: '0.00'
+        currency_code:
+          type: string
+          default: USD
     Offer:
       type: object
       properties:
@@ -143,15 +152,6 @@ components:
       required:
       - price
       - registration_open
-    Price:
-      type: object
-      properties:
-        amount:
-          type: string
-          default: '0.00'
-        currency_code:
-          type: string
-          default: USD
   securitySchemes:
     OrganizationApiKey:
       type: http

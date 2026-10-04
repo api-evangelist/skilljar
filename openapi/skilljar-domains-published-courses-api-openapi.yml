@@ -257,6 +257,26 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PublishedCourseCreateCourseSummary:
+      type: object
+      description: Serializes reference to course by ID in payload when creating a published course.
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+          readOnly: true
+          description: Course title
+        lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of lessons in the course
+        required_lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of required lessons in the course (non-optional lessons that count towards course completion)
+      required:
+      - id
     PublishedCourseCreate:
       type: object
       description: Serializer for creating a published course.
@@ -318,12 +338,110 @@ components:
           readOnly: true
       required:
       - course
-    PublishedCourseCreateCourseSummary:
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+          default: '0.00'
+        currency_code:
+          type: string
+          default: USD
+    PublishedCourseRequest:
+      type: object
+      properties:
+        slug:
+          type: string
+          description: The URL path of the course on the domain
+          pattern: ^[a-z0-9]+(-[a-z0-9]+)+$
+          maxLength: 100
+        hidden:
+          type: boolean
+          description: Hidden courses are only visible on the catalog page to associated groups
+        strict_enforce_group_visibility:
+          type: boolean
+          description: Block access to this course for students it's not visible to
+        registration_required:
+          type: boolean
+          description: Registration is required for student to access course, false signifies that the course content is public
+        registration_starts_at:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the start of the registration period is scheduled
+        registration_ends_at:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the end of the registration period is scheduled
+        restrict_access_start_end_dates:
+          type: boolean
+          description: Restrict access to the course based on the start and end dates of the registration period
+        allow_self_service_reenroll:
+          type: boolean
+          description: When students complete the course, they will be allowed to re-enroll in the course immediately
+        unique_progress_per_enrollment:
+          type: boolean
+          description: Each time a student re-enrolls in the course, create a new course progress
+        require_all_prerequisites:
+          type: boolean
+          description: Require all prerequisites to be completed before the student can enroll in the course
+    Offer:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        registration_open:
+          type: boolean
+        registration_url:
+          type: string
+          readOnly: true
+          description: URL used for course registration
+        price:
+          $ref: '#/components/schemas/Price'
+      required:
+      - price
+      - registration_open
+    PaginatedPublishedCourseList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublishedCourse'
+    PublishedCourseCreateCourseSummaryRequest:
       type: object
       description: Serializes reference to course by ID in payload when creating a published course.
       properties:
         id:
           type: string
+          minLength: 1
+      required:
+      - id
+    CourseSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as course_id within the documentation
         title:
           type: string
           readOnly: true
@@ -336,8 +454,6 @@ components:
           type: integer
           readOnly: true
           description: Number of required lessons in the course (non-optional lessons that count towards course completion)
-      required:
-      - id
     PublishedCourse:
       type: object
       properties:
@@ -396,123 +512,33 @@ components:
           allOf:
           - $ref: '#/components/schemas/Offer'
           readOnly: true
-    PublishedCourseCreateCourseSummaryRequest:
+    CourseDetail:
       type: object
-      description: Serializes reference to course by ID in payload when creating a published course.
       properties:
         id:
           type: string
-          minLength: 1
-      required:
-      - id
-    PublishedCourseRequest:
-      type: object
-      properties:
-        slug:
+          readOnly: true
+          description: Known as course_id within the documentation
+        title:
           type: string
-          description: The URL path of the course on the domain
-          pattern: ^[a-z0-9]+(-[a-z0-9]+)+$
-          maxLength: 100
-        hidden:
-          type: boolean
-          description: Hidden courses are only visible on the catalog page to associated groups
-        strict_enforce_group_visibility:
-          type: boolean
-          description: Block access to this course for students it's not visible to
-        registration_required:
-          type: boolean
-          description: Registration is required for student to access course, false signifies that the course content is public
-        registration_starts_at:
-          type: string
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating when the start of the registration period is scheduled
-        registration_ends_at:
-          type: string
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating when the end of the registration period is scheduled
-        restrict_access_start_end_dates:
-          type: boolean
-          description: Restrict access to the course based on the start and end dates of the registration period
-        allow_self_service_reenroll:
-          type: boolean
-          description: When students complete the course, they will be allowed to re-enroll in the course immediately
-        unique_progress_per_enrollment:
-          type: boolean
-          description: Each time a student re-enrolls in the course, create a new course progress
-        require_all_prerequisites:
-          type: boolean
-          description: Require all prerequisites to be completed before the student can enroll in the course
-    Price:
-      type: object
-      properties:
-        amount:
-          type: string
-          default: '0.00'
-        currency_code:
-          type: string
-          default: USD
-    PaginatedPublishedCourseList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
+          readOnly: true
+          description: Course title
+        lesson_count:
           type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublishedCourse'
-    PatchedPublishedCourseRequest:
-      type: object
-      properties:
-        slug:
+          readOnly: true
+          description: Number of lessons in the course
+        required_lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of required lessons in the course (non-optional lessons that count towards course completion)
+        short_description:
           type: string
-          description: The URL path of the course on the domain
-          pattern: ^[a-z0-9]+(-[a-z0-9]+)+$
-          maxLength: 100
-        hidden:
-          type: boolean
-          description: Hidden courses are only visible on the catalog page to associated groups
-        strict_enforce_group_visibility:
-          type: boolean
-          description: Block access to this course for students it's not visible to
-        registration_required:
-          type: boolean
-          description: Registration is required for student to access course, false signifies that the course content is public
-        registration_starts_at:
+          readOnly: true
+          description: Course short description
+        long_description_html:
           type: string
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating when the start of the registration period is scheduled
-        registration_ends_at:
-          type: string
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating when the end of the registration period is scheduled
-        restrict_access_start_end_dates:
-          type: boolean
-          description: Restrict access to the course based on the start and end dates of the registration period
-        allow_self_service_reenroll:
-          type: boolean
-          description: When students complete the course, they will be allowed to re-enroll in the course immediately
-        unique_progress_per_enrollment:
-          type: boolean
-          description: Each time a student re-enrolls in the course, create a new course progress
-        require_all_prerequisites:
-          type: boolean
-          description: Require all prerequisites to be completed before the student can enroll in the course
+          readOnly: true
+          description: Course long description in HTML format
     PublishedCourseDetail:
       type: object
       properties:
@@ -571,69 +597,43 @@ components:
           readOnly: true
       required:
       - course
-    CourseSummary:
+    PatchedPublishedCourseRequest:
       type: object
       properties:
-        id:
+        slug:
           type: string
-          readOnly: true
-          description: Known as course_id within the documentation
-        title:
-          type: string
-          readOnly: true
-          description: Course title
-        lesson_count:
-          type: integer
-          readOnly: true
-          description: Number of lessons in the course
-        required_lesson_count:
-          type: integer
-          readOnly: true
-          description: Number of required lessons in the course (non-optional lessons that count towards course completion)
-    CourseDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as course_id within the documentation
-        title:
-          type: string
-          readOnly: true
-          description: Course title
-        lesson_count:
-          type: integer
-          readOnly: true
-          description: Number of lessons in the course
-        required_lesson_count:
-          type: integer
-          readOnly: true
-          description: Number of required lessons in the course (non-optional lessons that count towards course completion)
-        short_description:
-          type: string
-          readOnly: true
-          description: Course short description
-        long_description_html:
-          type: string
-          readOnly: true
-          description: Course long description in HTML format
-    Offer:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        registration_open:
+          description: The URL path of the course on the domain
+          pattern: ^[a-z0-9]+(-[a-z0-9]+)+$
+          maxLength: 100
+        hidden:
           type: boolean
-        registration_url:
+          description: Hidden courses are only visible on the catalog page to associated groups
+        strict_enforce_group_visibility:
+          type: boolean
+          description: Block access to this course for students it's not visible to
+        registration_required:
+          type: boolean
+          description: Registration is required for student to access course, false signifies that the course content is public
+        registration_starts_at:
           type: string
-          readOnly: true
-          description: URL used for course registration
-        price:
-          $ref: '#/components/schemas/Price'
-      required:
-      - price
-      - registration_open
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the start of the registration period is scheduled
+        registration_ends_at:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the end of the registration period is scheduled
+        restrict_access_start_end_dates:
+          type: boolean
+          description: Restrict access to the course based on the start and end dates of the registration period
+        allow_self_service_reenroll:
+          type: boolean
+          description: When students complete the course, they will be allowed to re-enroll in the course immediately
+        unique_progress_per_enrollment:
+          type: boolean
+          description: Each time a student re-enrolls in the course, create a new course progress
+        require_all_prerequisites:
+          type: boolean
+          description: Require all prerequisites to be completed before the student can enroll in the course
     PublishedCourseCreateRequest:
       type: object
       description: Serializer for creating a published course.

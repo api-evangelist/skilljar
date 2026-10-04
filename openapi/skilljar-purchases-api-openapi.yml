@@ -160,112 +160,6 @@ paths:
           description: ''
 components:
   schemas:
-    PaymentProcessorEnum:
-      enum:
-      - NONE
-      - STRIPE
-      - STRIPE_BTC
-      - PAYPAL
-      - PAYFLOW
-      - CYBERSRC
-      - MES
-      - EXTERNAL
-      type: string
-      description: '* `NONE` - None
-
-        * `STRIPE` - Stripe
-
-        * `STRIPE_BTC` - Stripe Bitcoin
-
-        * `PAYPAL` - PayPal
-
-        * `PAYFLOW` - Payflow
-
-        * `CYBERSRC` - Cybersource
-
-        * `MES` - Merchant e-Solutions
-
-        * `EXTERNAL` - External'
-    PatchedPurchaseRequest:
-      type: object
-      properties:
-        state:
-          allOf:
-          - $ref: '#/components/schemas/PurchaseStateEnum'
-          description: '''PENDING'', ''SUCCESS'', ''FAILED'', ''REFUNDED'', or ''CANCELLED''
-
-
-            * `PENDING` - PENDING
-
-            * `SUCCESS` - SUCCESS
-
-            * `FAILED` - FAILED
-
-            * `REFUNDED` - REFUNDED
-
-            * `CANCELLED` - CANCELLED'
-        refunded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        refund_cents:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        price_cents:
-          type: integer
-        tax_price_cents:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-    PurchaseFulfillmentRequest:
-      type: object
-      properties:
-        state:
-          allOf:
-          - $ref: '#/components/schemas/PurchaseFulfillmentStateEnum'
-          writeOnly: true
-          description: '''SUCCESS'', ''FAILED'', or ''CANCELLED''
-
-
-            * `SUCCESS` - SUCCESS
-
-            * `FAILED` - FAILED
-
-            * `CANCELLED` - CANCELLED'
-        error_msg:
-          type: string
-          writeOnly: true
-          minLength: 1
-          description: 'Optional: This error message will be presented to the user after they return to Skilljar, and will be set as the status_msg on the Purchase'
-        payment_processor_order_id:
-          type: string
-          writeOnly: true
-          minLength: 1
-          description: 'Optional: The id of the transaction within the payment processor system, for reference only'
-        payment_processor_response_data:
-          type: string
-          writeOnly: true
-          minLength: 1
-          description: 'Optional: Purchase metadata. For reference only. JSON format is recommended'
-      required:
-      - state
-    PurchaseFulfillmentStateEnum:
-      enum:
-      - SUCCESS
-      - FAILED
-      - CANCELLED
-      type: string
-      description: '* `SUCCESS` - SUCCESS
-
-        * `FAILED` - FAILED
-
-        * `CANCELLED` - CANCELLED'
     CurrencyCodeEnum:
       enum:
       - AUD
@@ -313,29 +207,82 @@ components:
         * `USD` - USD
 
         * `ZAR` - ZAR'
-    PurchaseStateEnum:
-      enum:
-      - CREATED
-      - SUCCESS
-      - FAILED
-      - REFUNDED
-      - CANCELLED
-      - FLAGGED
-      - PENDING
-      type: string
-      description: '* `CREATED` - CREATED
+    User:
+      type: object
+      description: 'Version of the user serializer configured to lookup a user given the user''s email.  If a user with this email does
 
-        * `SUCCESS` - SUCCESS
+        not yet exist, it will create a new User with given email, first_name and last_name parameters.'
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          title: Email address
+          description: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          description: First name
+          maxLength: 50
+        last_name:
+          type: string
+          description: Last name
+          maxLength: 50
+        full_name:
+          type: string
+          readOnly: true
+      required:
+      - email
+    PurchaseFulfillment:
+      type: object
+      properties:
+        redirect_url:
+          type: string
+          readOnly: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/Purchase'
+          readOnly: true
+    PatchedPurchaseRequest:
+      type: object
+      properties:
+        state:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseStateEnum'
+          description: '''PENDING'', ''SUCCESS'', ''FAILED'', ''REFUNDED'', or ''CANCELLED''
 
-        * `FAILED` - FAILED
 
-        * `REFUNDED` - REFUNDED
+            * `PENDING` - PENDING
 
-        * `CANCELLED` - CANCELLED
+            * `SUCCESS` - SUCCESS
 
-        * `FLAGGED` - FLAGGED
+            * `FAILED` - FAILED
 
-        * `PENDING` - PENDING'
+            * `REFUNDED` - REFUNDED
+
+            * `CANCELLED` - CANCELLED'
+        refunded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        refund_cents:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        price_cents:
+          type: integer
+        tax_price_cents:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
     Purchase:
       type: object
       properties:
@@ -433,6 +380,38 @@ components:
           allOf:
           - $ref: '#/components/schemas/CurrencyCodeEnum'
           readOnly: true
+    PurchaseFulfillmentRequest:
+      type: object
+      properties:
+        state:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseFulfillmentStateEnum'
+          writeOnly: true
+          description: '''SUCCESS'', ''FAILED'', or ''CANCELLED''
+
+
+            * `SUCCESS` - SUCCESS
+
+            * `FAILED` - FAILED
+
+            * `CANCELLED` - CANCELLED'
+        error_msg:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: 'Optional: This error message will be presented to the user after they return to Skilljar, and will be set as the status_msg on the Purchase'
+        payment_processor_order_id:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: 'Optional: The id of the transaction within the payment processor system, for reference only'
+        payment_processor_response_data:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: 'Optional: Purchase metadata. For reference only. JSON format is recommended'
+      required:
+      - state
     PurchaseRequest:
       type: object
       properties:
@@ -470,45 +449,66 @@ components:
           - 'null'
           maximum: 2147483647
           minimum: 0
-    User:
-      type: object
-      description: 'Version of the user serializer configured to lookup a user given the user''s email.  If a user with this email does
+    PurchaseFulfillmentStateEnum:
+      enum:
+      - SUCCESS
+      - FAILED
+      - CANCELLED
+      type: string
+      description: '* `SUCCESS` - SUCCESS
 
-        not yet exist, it will create a new User with given email, first_name and last_name parameters.'
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as user_id within the documentation
-        email:
-          type: string
-          format: email
-          title: Email address
-          description: Email address
-          maxLength: 254
-        first_name:
-          type: string
-          description: First name
-          maxLength: 50
-        last_name:
-          type: string
-          description: Last name
-          maxLength: 50
-        full_name:
-          type: string
-          readOnly: true
-      required:
-      - email
-    PurchaseFulfillment:
-      type: object
-      properties:
-        redirect_url:
-          type: string
-          readOnly: true
-        purchase:
-          allOf:
-          - $ref: '#/components/schemas/Purchase'
-          readOnly: true
+        * `FAILED` - FAILED
+
+        * `CANCELLED` - CANCELLED'
+    PaymentProcessorEnum:
+      enum:
+      - NONE
+      - STRIPE
+      - STRIPE_BTC
+      - PAYPAL
+      - PAYFLOW
+      - CYBERSRC
+      - MES
+      - EXTERNAL
+      type: string
+      description: '* `NONE` - None
+
+        * `STRIPE` - Stripe
+
+        * `STRIPE_BTC` - Stripe Bitcoin
+
+        * `PAYPAL` - PayPal
+
+        * `PAYFLOW` - Payflow
+
+        * `CYBERSRC` - Cybersource
+
+        * `MES` - Merchant e-Solutions
+
+        * `EXTERNAL` - External'
+    PurchaseStateEnum:
+      enum:
+      - CREATED
+      - SUCCESS
+      - FAILED
+      - REFUNDED
+      - CANCELLED
+      - FLAGGED
+      - PENDING
+      type: string
+      description: '* `CREATED` - CREATED
+
+        * `SUCCESS` - SUCCESS
+
+        * `FAILED` - FAILED
+
+        * `REFUNDED` - REFUNDED
+
+        * `CANCELLED` - CANCELLED
+
+        * `FLAGGED` - FLAGGED
+
+        * `PENDING` - PENDING'
   securitySchemes:
     OrganizationApiKey:
       type: http

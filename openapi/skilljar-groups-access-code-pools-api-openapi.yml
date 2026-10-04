@@ -150,32 +150,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GroupAccessCodePoolLinkRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          minLength: 1
-      required:
-      - id
-    GroupAccessCodePoolRequest:
-      type: object
-      properties:
-        access_code_pool:
-          $ref: '#/components/schemas/GroupAccessCodePoolLinkRequest'
-      required:
-      - access_code_pool
-    GroupAccessCodePoolLink:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-          readOnly: true
-          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
-      required:
-      - id
     GroupAccessCodePool:
       type: object
       properties:
@@ -213,6 +187,32 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GroupAccessCodePool'
+    GroupAccessCodePoolLink:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          readOnly: true
+          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
+      required:
+      - id
+    GroupAccessCodePoolLinkRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
+    GroupAccessCodePoolRequest:
+      type: object
+      properties:
+        access_code_pool:
+          $ref: '#/components/schemas/GroupAccessCodePoolLinkRequest'
+      required:
+      - access_code_pool
   securitySchemes:
     OrganizationApiKey:
       type: http

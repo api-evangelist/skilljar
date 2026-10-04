@@ -268,12 +268,7 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PatchedPublishedPathPathItemUpdateRequest:
-      type: object
-      properties:
-        order:
-          type: integer
-    PublishedPathPathItemUpdate:
+    PublishedPathPathItem:
       type: object
       properties:
         id:
@@ -282,17 +277,20 @@ components:
         order:
           type: integer
         published_course:
-          allOf:
-          - $ref: '#/components/schemas/PathItemPublishedCourseSummary'
-          readOnly: true
-    PathItemPublishedCourseSummaryRequest:
+          $ref: '#/components/schemas/PathItemPublishedCourseSummary'
+      required:
+      - order
+      - published_course
+    PublishedPathPathItemRequest:
       type: object
       properties:
-        id:
-          type: string
-          minLength: 1
+        order:
+          type: integer
+        published_course:
+          $ref: '#/components/schemas/PathItemPublishedCourseSummaryRequest'
       required:
-      - id
+      - order
+      - published_course
     PaginatedPublishedPathPathItemList:
       type: object
       required:
@@ -318,22 +316,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PublishedPathPathItem'
-    PublishedPathPathItemUpdateRequest:
-      type: object
-      properties:
-        order:
-          type: integer
-    PublishedPathPathItemRequest:
-      type: object
-      properties:
-        order:
-          type: integer
-        published_course:
-          $ref: '#/components/schemas/PathItemPublishedCourseSummaryRequest'
-      required:
-      - order
-      - published_course
-    PublishedPathPathItem:
+    PublishedPathPathItemUpdate:
       type: object
       properties:
         id:
@@ -342,10 +325,14 @@ components:
         order:
           type: integer
         published_course:
-          $ref: '#/components/schemas/PathItemPublishedCourseSummary'
-      required:
-      - order
-      - published_course
+          allOf:
+          - $ref: '#/components/schemas/PathItemPublishedCourseSummary'
+          readOnly: true
+    PublishedPathPathItemUpdateRequest:
+      type: object
+      properties:
+        order:
+          type: integer
     PathItemPublishedCourseSummary:
       type: object
       properties:
@@ -360,6 +347,19 @@ components:
           pattern: ^[-a-zA-Z0-9_]+$
       required:
       - id
+    PathItemPublishedCourseSummaryRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
+    PatchedPublishedPathPathItemUpdateRequest:
+      type: object
+      properties:
+        order:
+          type: integer
   securitySchemes:
     OrganizationApiKey:
       type: http

@@ -116,6 +116,53 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    CurrencyCodeEnum:
+      enum:
+      - AUD
+      - BRL
+      - CAD
+      - CNY
+      - EUR
+      - GBP
+      - JPY
+      - KRW
+      - MXN
+      - NZD
+      - RUB
+      - SEK
+      - SGD
+      - USD
+      - ZAR
+      type: string
+      description: '* `AUD` - AUD
+
+        * `BRL` - BRL
+
+        * `CAD` - CAD
+
+        * `CNY` - CNY
+
+        * `EUR` - EUR
+
+        * `GBP` - GBP
+
+        * `JPY` - JPY
+
+        * `KRW` - KRW
+
+        * `MXN` - MXN
+
+        * `NZD` - NZD
+
+        * `RUB` - RUB
+
+        * `SEK` - SEK
+
+        * `SGD` - SGD
+
+        * `USD` - USD
+
+        * `ZAR` - ZAR'
     PaginatedPromoCodePoolOfferList:
       type: object
       required:
@@ -141,6 +188,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PromoCodePoolOffer'
+    OfferTypeEnum:
+      enum:
+      - published_path
+      - domain
+      - published_course
+      - plan
+      type: string
+      description: '* `published_path` - Course Bundle
+
+        * `domain` - Domain
+
+        * `published_course` - Published Course
+
+        * `plan` - Plan'
     PromoCodePoolOfferRequest:
       type: object
       properties:
@@ -157,20 +218,6 @@ components:
           items:
             $ref: '#/components/schemas/OfferItem'
           readOnly: true
-    OfferTypeEnum:
-      enum:
-      - published_path
-      - domain
-      - published_course
-      - plan
-      type: string
-      description: '* `published_path` - Course Bundle
-
-        * `domain` - Domain
-
-        * `published_course` - Published Course
-
-        * `plan` - Plan'
     OfferItem:
       type: object
       properties:
@@ -267,53 +314,6 @@ components:
           type: boolean
           description: Returns True if the offer is included in a Plan offer.
           readOnly: true
-    CurrencyCodeEnum:
-      enum:
-      - AUD
-      - BRL
-      - CAD
-      - CNY
-      - EUR
-      - GBP
-      - JPY
-      - KRW
-      - MXN
-      - NZD
-      - RUB
-      - SEK
-      - SGD
-      - USD
-      - ZAR
-      type: string
-      description: '* `AUD` - AUD
-
-        * `BRL` - BRL
-
-        * `CAD` - CAD
-
-        * `CNY` - CNY
-
-        * `EUR` - EUR
-
-        * `GBP` - GBP
-
-        * `JPY` - JPY
-
-        * `KRW` - KRW
-
-        * `MXN` - MXN
-
-        * `NZD` - NZD
-
-        * `RUB` - RUB
-
-        * `SEK` - SEK
-
-        * `SGD` - SGD
-
-        * `USD` - USD
-
-        * `ZAR` - ZAR'
   securitySchemes:
     OrganizationApiKey:
       type: http

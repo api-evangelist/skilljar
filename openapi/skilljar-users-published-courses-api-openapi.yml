@@ -176,6 +176,120 @@ components:
           description: ID of the PublishedCourse
         course_progress:
           $ref: '#/components/schemas/CourseProgressRequest'
+    UserEnrollment:
+      type: object
+      properties:
+        course_progress_id:
+          type: string
+          description: ID of the CourseProgress
+        active:
+          type: boolean
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        enrollment_id:
+          type: string
+          description: ID of the Enrollment
+      required:
+      - course_progress_id
+      - enrollment_id
+    CourseProgressRequest:
+      type: object
+      properties:
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Datetime at which the user completed the course.  If null, the user hasn't completed
+        score:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+          description: Course score achieved by student
+        max_score:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+          description: Maximum score possible in course
+        credits_earned:
+          type: string
+          description: Credits earned by completing the course
+          maxLength: 20
+        credit_unit_plural:
+          type: string
+          description: Type of credit earned
+          maxLength: 40
+        success_status:
+          description: 'Success status of course progress: ''PASSED'', ''FAILED'' or null
+
+
+            * `PASSED` - Passed
+
+            * `FAILED` - Failed'
+          oneOf:
+          - $ref: '#/components/schemas/SuccessStatusEnum'
+          - $ref: '#/components/schemas/NullEnum'
+    Certificate:
+      type: object
+      properties:
+        code:
+          type: string
+          readOnly: true
+          description: Certificate validation code
+        validate_url:
+          type: string
+          format: uri
+          readOnly: true
+          description: Link to certificate validation page
+        issued_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When the certificate was issued
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+          description: When the certificate expires.  May be null
+    NullEnum:
+      enum:
+      - null
+    SuccessStatusEnum:
+      enum:
+      - PASSED
+      - FAILED
+      type: string
+      description: '* `PASSED` - Passed
+
+        * `FAILED` - Failed'
+    CourseSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as course_id within the documentation
+        title:
+          type: string
+          readOnly: true
+          description: Course title
+        lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of lessons in the course
+        required_lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of required lessons in the course (non-optional lessons that count towards course completion)
     UserPublishedCourseProgressRequest:
       type: object
       properties:
@@ -281,120 +395,6 @@ components:
           oneOf:
           - $ref: '#/components/schemas/SuccessStatusEnum'
           - $ref: '#/components/schemas/NullEnum'
-    NullEnum:
-      enum:
-      - null
-    SuccessStatusEnum:
-      enum:
-      - PASSED
-      - FAILED
-      type: string
-      description: '* `PASSED` - Passed
-
-        * `FAILED` - Failed'
-    CourseSummary:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as course_id within the documentation
-        title:
-          type: string
-          readOnly: true
-          description: Course title
-        lesson_count:
-          type: integer
-          readOnly: true
-          description: Number of lessons in the course
-        required_lesson_count:
-          type: integer
-          readOnly: true
-          description: Number of required lessons in the course (non-optional lessons that count towards course completion)
-    CourseProgressRequest:
-      type: object
-      properties:
-        completed_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Datetime at which the user completed the course.  If null, the user hasn't completed
-        score:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-          description: Course score achieved by student
-        max_score:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-          description: Maximum score possible in course
-        credits_earned:
-          type: string
-          description: Credits earned by completing the course
-          maxLength: 20
-        credit_unit_plural:
-          type: string
-          description: Type of credit earned
-          maxLength: 40
-        success_status:
-          description: 'Success status of course progress: ''PASSED'', ''FAILED'' or null
-
-
-            * `PASSED` - Passed
-
-            * `FAILED` - Failed'
-          oneOf:
-          - $ref: '#/components/schemas/SuccessStatusEnum'
-          - $ref: '#/components/schemas/NullEnum'
-    Certificate:
-      type: object
-      properties:
-        code:
-          type: string
-          readOnly: true
-          description: Certificate validation code
-        validate_url:
-          type: string
-          format: uri
-          readOnly: true
-          description: Link to certificate validation page
-        issued_at:
-          type: string
-          format: date-time
-          readOnly: true
-          description: When the certificate was issued
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-          description: When the certificate expires.  May be null
-    UserEnrollment:
-      type: object
-      properties:
-        course_progress_id:
-          type: string
-          description: ID of the CourseProgress
-        active:
-          type: boolean
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        enrollment_id:
-          type: string
-          description: ID of the Enrollment
-      required:
-      - course_progress_id
-      - enrollment_id
   securitySchemes:
     OrganizationApiKey:
       type: http

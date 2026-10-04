@@ -229,6 +229,22 @@ components:
           $ref: '#/components/schemas/UserLessonProgressLessonProgress'
       required:
       - lesson_progress
+    NullEnum:
+      enum:
+      - null
+    PatchedUserLessonProgressRequest:
+      type: object
+      properties:
+        lesson_progress:
+          $ref: '#/components/schemas/UserLessonProgressLessonProgressRequest'
+    SuccessStatusEnum:
+      enum:
+      - PASSED
+      - FAILED
+      type: string
+      description: '* `PASSED` - Passed
+
+        * `FAILED` - Failed'
     UserLessonProgressRequest:
       type: object
       properties:
@@ -236,6 +252,17 @@ components:
           $ref: '#/components/schemas/UserLessonProgressLessonProgressRequest'
       required:
       - lesson_progress
+    UserLessonProgressLesson:
+      type: object
+      description: Lesson information within the user lesson progress endpoint.
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as lesson_id within the documentation
+        title:
+          type: string
+          readOnly: true
     UserLessonProgressLessonProgressRequest:
       type: object
       description: Lesson progress within the user lesson progress endpoint.
@@ -277,33 +304,6 @@ components:
         lesson_progress_id:
           type: string
           minLength: 1
-    NullEnum:
-      enum:
-      - null
-    SuccessStatusEnum:
-      enum:
-      - PASSED
-      - FAILED
-      type: string
-      description: '* `PASSED` - Passed
-
-        * `FAILED` - Failed'
-    PatchedUserLessonProgressRequest:
-      type: object
-      properties:
-        lesson_progress:
-          $ref: '#/components/schemas/UserLessonProgressLessonProgressRequest'
-    UserLessonProgressLesson:
-      type: object
-      description: Lesson information within the user lesson progress endpoint.
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as lesson_id within the documentation
-        title:
-          type: string
-          readOnly: true
     UserLessonProgressLessonProgress:
       type: object
       description: Lesson progress within the user lesson progress endpoint.

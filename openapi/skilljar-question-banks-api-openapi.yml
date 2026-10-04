@@ -228,6 +228,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/QuestionBank'
+    QuestionBankRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: The name of the question bank.
+          maxLength: 500
+      required:
+      - name
     QuestionBank:
       type: object
       properties:
@@ -254,16 +264,6 @@ components:
           minLength: 1
           description: The name of the question bank.
           maxLength: 500
-    QuestionBankRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: The name of the question bank.
-          maxLength: 500
-      required:
-      - name
   securitySchemes:
     OrganizationApiKey:
       type: http

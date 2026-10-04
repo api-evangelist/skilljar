@@ -325,20 +325,6 @@ components:
         item_plan_id:
           type: string
           readOnly: true
-    ItemTypeEnum:
-      enum:
-      - CATALOG_PAGE
-      - PUBLISHED_COURSE
-      - PLAN
-      - PUBLISHED_PATH
-      type: string
-      description: '* `CATALOG_PAGE` - Catalog Page
-
-        * `PUBLISHED_COURSE` - Published Course
-
-        * `PLAN` - Plan
-
-        * `PUBLISHED_PATH` - Published Path'
     TileContainerItemRequest:
       type: object
       description: Serializer for TileContainerItem
@@ -358,13 +344,45 @@ components:
         item_plan_id:
           type: string
           minLength: 1
-    TileContainerItemOrderUpdateRequest:
+    PaginatedTileContainerItemList:
       type: object
-      description: Serializer for updating the order of existing TileContainerItem
+      required:
+      - count
+      - results
       properties:
-        order:
+        count:
           type: integer
-          minimum: 1
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/TileContainerItem'
+    ItemTypeEnum:
+      enum:
+      - CATALOG_PAGE
+      - PUBLISHED_COURSE
+      - PLAN
+      - PUBLISHED_PATH
+      type: string
+      description: '* `CATALOG_PAGE` - Catalog Page
+
+        * `PUBLISHED_COURSE` - Published Course
+
+        * `PLAN` - Plan
+
+        * `PUBLISHED_PATH` - Published Path'
     TileContainerItem:
       type: object
       description: Serializer for TileContainerItem
@@ -394,31 +412,13 @@ components:
         order:
           type: integer
           minimum: 1
-    PaginatedTileContainerItemList:
+    TileContainerItemOrderUpdateRequest:
       type: object
-      required:
-      - count
-      - results
+      description: Serializer for updating the order of existing TileContainerItem
       properties:
-        count:
+        order:
           type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/TileContainerItem'
+          minimum: 1
   securitySchemes:
     OrganizationApiKey:
       type: http

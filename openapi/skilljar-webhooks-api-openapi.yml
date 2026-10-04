@@ -613,53 +613,34 @@ components:
         * `VILT_EVENT_REGISTRATION` - VILT Event Registration
 
         * `DASHBOARD_TASK_CREATED` - Dashboard Task Created'
-    PatchedWebHookRequest:
+    NullEnum:
+      enum:
+      - null
+    PaginatedWebHookList:
       type: object
+      required:
+      - count
+      - results
       properties:
-        target_url:
-          type: string
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
           format: uri
-          minLength: 1
-          maxLength: 1024
-        active:
-          type: boolean
-          default: true
-        event_type:
-          description: '''COURSE_COMPLETION'', ''COURSE_ENROLLMENT'', ''DOMAIN_ENROLLMENT'', ''LESSON_COMPLETION'', ''PATH_COMPLETION'', ''PATH_ENROLLMENT'', ''PURCHASE_FULFILLMENT'', ''QUIZ_COMPLETION'', ''VILT_EVENT_REGISTRATION'', ''DASHBOARD_TASK_CREATED'', or null. If null, all events, regardless of type, will be sent to the webhook URL.
-
-
-            * `COURSE_COMPLETION` - Course Completion
-
-            * `COURSE_ENROLLMENT` - Course Enrollment
-
-            * `DOMAIN_ENROLLMENT` - Domain Enrollment
-
-            * `LESSON_COMPLETION` - Lesson Completion
-
-            * `PATH_COMPLETION` - Path Completion
-
-            * `PATH_ENROLLMENT` - Path Enrollment
-
-            * `PURCHASE_FULFILLMENT` - Purchase Fulfillment
-
-            * `QUIZ_COMPLETION` - Quiz Completion
-
-            * `VILT_EVENT_REGISTRATION` - VILT Event Registration
-
-            * `DASHBOARD_TASK_CREATED` - Dashboard Task Created'
-          oneOf:
-          - $ref: '#/components/schemas/EventTypeEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        basic_auth_username:
-          type: string
-          default: ''
-          description: When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the username.
-        basic_auth_password:
-          type: string
-          default: ''
-          description: When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the password.
-        additional_headers:
-          description: Dictionary of string values to include as additional HTTP headers in the webhook request. Key pairs included in this JSON dictionary will be added as individual HTTP headers to all webhook POST requests. Use double quotes for keys and values
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebHook'
     WebHookRequest:
       type: object
       properties:
@@ -709,9 +690,6 @@ components:
           description: Dictionary of string values to include as additional HTTP headers in the webhook request. Key pairs included in this JSON dictionary will be added as individual HTTP headers to all webhook POST requests. Use double quotes for keys and values
       required:
       - target_url
-    NullEnum:
-      enum:
-      - null
     WebHook:
       type: object
       properties:
@@ -768,31 +746,53 @@ components:
           description: Dictionary of string values to include as additional HTTP headers in the webhook request. Key pairs included in this JSON dictionary will be added as individual HTTP headers to all webhook POST requests. Use double quotes for keys and values
       required:
       - target_url
-    PaginatedWebHookList:
+    PatchedWebHookRequest:
       type: object
-      required:
-      - count
-      - results
       properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
+        target_url:
+          type: string
           format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/WebHook'
+          minLength: 1
+          maxLength: 1024
+        active:
+          type: boolean
+          default: true
+        event_type:
+          description: '''COURSE_COMPLETION'', ''COURSE_ENROLLMENT'', ''DOMAIN_ENROLLMENT'', ''LESSON_COMPLETION'', ''PATH_COMPLETION'', ''PATH_ENROLLMENT'', ''PURCHASE_FULFILLMENT'', ''QUIZ_COMPLETION'', ''VILT_EVENT_REGISTRATION'', ''DASHBOARD_TASK_CREATED'', or null. If null, all events, regardless of type, will be sent to the webhook URL.
+
+
+            * `COURSE_COMPLETION` - Course Completion
+
+            * `COURSE_ENROLLMENT` - Course Enrollment
+
+            * `DOMAIN_ENROLLMENT` - Domain Enrollment
+
+            * `LESSON_COMPLETION` - Lesson Completion
+
+            * `PATH_COMPLETION` - Path Completion
+
+            * `PATH_ENROLLMENT` - Path Enrollment
+
+            * `PURCHASE_FULFILLMENT` - Purchase Fulfillment
+
+            * `QUIZ_COMPLETION` - Quiz Completion
+
+            * `VILT_EVENT_REGISTRATION` - VILT Event Registration
+
+            * `DASHBOARD_TASK_CREATED` - Dashboard Task Created'
+          oneOf:
+          - $ref: '#/components/schemas/EventTypeEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        basic_auth_username:
+          type: string
+          default: ''
+          description: When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the username.
+        basic_auth_password:
+          type: string
+          default: ''
+          description: When set, this webhook will include the HTTP Basic Authentication header when making a request to the target_url. This will be the password.
+        additional_headers:
+          description: Dictionary of string values to include as additional HTTP headers in the webhook request. Key pairs included in this JSON dictionary will be added as individual HTTP headers to all webhook POST requests. Use double quotes for keys and values
   securitySchemes:
     OrganizationApiKey:
       type: http

@@ -212,20 +212,34 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Type1d9Enum:
-      enum:
-      - ASSET
-      - HTML
-      - QUIZ
-      - RATING
-      type: string
-      description: '* `ASSET` - ASSET
-
-        * `HTML` - HTML
-
-        * `QUIZ` - QUIZ
-
-        * `RATING` - RATING'
+    LessonContentItemRequest:
+      type: object
+      description: LessonContentItem Serializer
+      properties:
+        content_asset_id:
+          type: string
+          minLength: 1
+        content_html:
+          type: string
+        content_quiz_id:
+          type: string
+          minLength: 1
+        header:
+          type: string
+          minLength: 1
+        lesson_id:
+          type: string
+          minLength: 1
+        order:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        type:
+          $ref: '#/components/schemas/Type1d9Enum'
+      required:
+      - header
+      - order
+      - type
     LessonContentItem:
       type: object
       description: LessonContentItem Serializer
@@ -258,81 +272,6 @@ components:
       - header
       - order
       - type
-    LessonContentItemRequest:
-      type: object
-      description: LessonContentItem Serializer
-      properties:
-        content_asset_id:
-          type: string
-          minLength: 1
-        content_html:
-          type: string
-        content_quiz_id:
-          type: string
-          minLength: 1
-        header:
-          type: string
-          minLength: 1
-        lesson_id:
-          type: string
-          minLength: 1
-        order:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-        type:
-          $ref: '#/components/schemas/Type1d9Enum'
-      required:
-      - header
-      - order
-      - type
-    PaginatedLessonContentItemList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/LessonContentItem'
-    LessonContentItemUpdateRequest:
-      type: object
-      description: LessonContentItem Update Serializer
-      properties:
-        content_asset_id:
-          type: string
-          minLength: 1
-        content_html:
-          type: string
-        content_quiz_id:
-          type: string
-          minLength: 1
-        header:
-          type: string
-          minLength: 1
-        lesson_id:
-          type: string
-          minLength: 1
-        order:
-          type: integer
-        type:
-          $ref: '#/components/schemas/Type1d9Enum'
     LessonContentItemUpdate:
       type: object
       description: LessonContentItem Update Serializer
@@ -381,6 +320,67 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/Type1d9Enum'
+    LessonContentItemUpdateRequest:
+      type: object
+      description: LessonContentItem Update Serializer
+      properties:
+        content_asset_id:
+          type: string
+          minLength: 1
+        content_html:
+          type: string
+        content_quiz_id:
+          type: string
+          minLength: 1
+        header:
+          type: string
+          minLength: 1
+        lesson_id:
+          type: string
+          minLength: 1
+        order:
+          type: integer
+        type:
+          $ref: '#/components/schemas/Type1d9Enum'
+    Type1d9Enum:
+      enum:
+      - ASSET
+      - HTML
+      - QUIZ
+      - RATING
+      type: string
+      description: '* `ASSET` - ASSET
+
+        * `HTML` - HTML
+
+        * `QUIZ` - QUIZ
+
+        * `RATING` - RATING'
+    PaginatedLessonContentItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/LessonContentItem'
   securitySchemes:
     OrganizationApiKey:
       type: http

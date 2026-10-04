@@ -184,20 +184,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PatchedIltMultiSessionEventRequest:
-      type: object
-      description: Serializer for IltMultiSessionEvent for v1 public api
-      properties:
-        lesson:
-          type: string
-          description: Live training lesson id for the multi-session event
-        display_name:
-          type: string
-          minLength: 1
-          description: Name to be displayed for the multi-session event
-        seats_total:
-          type: integer
-          description: How many total seats are available
     IltMultiSessionEventRequest:
       type: object
       description: Serializer for IltMultiSessionEvent for v1 public api
@@ -259,6 +245,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/IltMultiSessionEvent'
+    PatchedIltMultiSessionEventRequest:
+      type: object
+      description: Serializer for IltMultiSessionEvent for v1 public api
+      properties:
+        lesson:
+          type: string
+          description: Live training lesson id for the multi-session event
+        display_name:
+          type: string
+          minLength: 1
+          description: Name to be displayed for the multi-session event
+        seats_total:
+          type: integer
+          description: How many total seats are available
   securitySchemes:
     OrganizationApiKey:
       type: http

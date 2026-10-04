@@ -156,23 +156,6 @@ components:
           description: Name of the label
       required:
       - id
-    NestedLabelAssociation:
-      type: object
-      description: Serializer for LabelAssociation tying an object to a Label.
-      properties:
-        label:
-          $ref: '#/components/schemas/NestedLabelAssociationLabel'
-      required:
-      - label
-    NestedLabelAssociationLabelRequest:
-      type: object
-      description: Serializer for Label within a LabelAssociation.
-      properties:
-        id:
-          type: string
-          minLength: 1
-      required:
-      - id
     PaginatedNestedLabelAssociationList:
       type: object
       required:
@@ -198,12 +181,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/NestedLabelAssociation'
+    NestedLabelAssociationLabelRequest:
+      type: object
+      description: Serializer for Label within a LabelAssociation.
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
     NestedLabelAssociationRequest:
       type: object
       description: Serializer for LabelAssociation tying an object to a Label.
       properties:
         label:
           $ref: '#/components/schemas/NestedLabelAssociationLabelRequest'
+      required:
+      - label
+    NestedLabelAssociation:
+      type: object
+      description: Serializer for LabelAssociation tying an object to a Label.
+      properties:
+        label:
+          $ref: '#/components/schemas/NestedLabelAssociationLabel'
       required:
       - label
   securitySchemes:

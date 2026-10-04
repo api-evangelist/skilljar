@@ -202,22 +202,16 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PatchedLabelRequest:
+    Label:
       type: object
       description: Serializer for Label model.
       properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as label_id within the documentation
         name:
           type: string
-          minLength: 1
-          description: Name of the label.  This is a required field and must be unique within the organization.
-          maxLength: 255
-    LabelRequest:
-      type: object
-      description: Serializer for Label model.
-      properties:
-        name:
-          type: string
-          minLength: 1
           description: Name of the label.  This is a required field and must be unique within the organization.
           maxLength: 255
       required:
@@ -247,20 +241,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Label'
-    Label:
+    LabelRequest:
       type: object
       description: Serializer for Label model.
       properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as label_id within the documentation
         name:
           type: string
+          minLength: 1
           description: Name of the label.  This is a required field and must be unique within the organization.
           maxLength: 255
       required:
       - name
+    PatchedLabelRequest:
+      type: object
+      description: Serializer for Label model.
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Name of the label.  This is a required field and must be unique within the organization.
+          maxLength: 255
   securitySchemes:
     OrganizationApiKey:
       type: http

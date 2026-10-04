@@ -38,6 +38,26 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    StudentPathProgress:
+      type: object
+      properties:
+        path_progress_id:
+          type: string
+          readOnly: true
+        completed_course_count:
+          type: integer
+          readOnly: true
+        completed_required_course_count:
+          type: integer
+          readOnly: true
+        completed_at:
+          type: string
+          format: date-time
+          readOnly: true
+        latest_activity:
+          type: string
+          format: date-time
+          readOnly: true
     UserPublishedPathSummary:
       type: object
       properties:
@@ -83,26 +103,6 @@ components:
       required:
       - published_path
       - published_path_progress
-    StudentPathProgress:
-      type: object
-      properties:
-        path_progress_id:
-          type: string
-          readOnly: true
-        completed_course_count:
-          type: integer
-          readOnly: true
-        completed_required_course_count:
-          type: integer
-          readOnly: true
-        completed_at:
-          type: string
-          format: date-time
-          readOnly: true
-        latest_activity:
-          type: string
-          format: date-time
-          readOnly: true
   securitySchemes:
     OrganizationApiKey:
       type: http

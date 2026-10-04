@@ -78,6 +78,19 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    EmailDomainRulePatch:
+      type: object
+      properties:
+        add:
+          type: array
+          items:
+            type: string
+          description: Email domains to add to the group's auto-enrollment rules.
+        remove:
+          type: array
+          items:
+            type: string
+          description: Email domains to remove from the group's auto-enrollment rules.
     PatchedEmailDomainRulePatchRequest:
       type: object
       properties:
@@ -103,19 +116,6 @@ components:
           description: List of email domains configured for automatic group assignment.
       required:
       - email_domains
-    EmailDomainRulePatch:
-      type: object
-      properties:
-        add:
-          type: array
-          items:
-            type: string
-          description: Email domains to add to the group's auto-enrollment rules.
-        remove:
-          type: array
-          items:
-            type: string
-          description: Email domains to remove from the group's auto-enrollment rules.
   securitySchemes:
     OrganizationApiKey:
       type: http

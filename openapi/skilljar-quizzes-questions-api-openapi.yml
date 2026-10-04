@@ -111,6 +111,36 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    Type5d1Enum:
+      enum:
+      - MULTIPLE_CHOICE
+      - MULTIPLE_ANSWER
+      - FILL_IN_THE_BLANK
+      - FREEFORM
+      type: string
+      description: '* `MULTIPLE_CHOICE` - MULTIPLE_CHOICE
+
+        * `MULTIPLE_ANSWER` - MULTIPLE_ANSWER
+
+        * `FILL_IN_THE_BLANK` - FILL_IN_THE_BLANK
+
+        * `FREEFORM` - FREEFORM'
+    Answer:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        answer_text:
+          type: string
+          maxLength: 1000
+        correct:
+          type: boolean
+        order:
+          type: integer
+          readOnly: true
+      required:
+      - answer_text
     QuestionSummary:
       type: object
       description: Serializer for Question model within a Question Bank or Quiz.
@@ -198,36 +228,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/QuestionSummary'
-    Answer:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        answer_text:
-          type: string
-          maxLength: 1000
-        correct:
-          type: boolean
-        order:
-          type: integer
-          readOnly: true
-      required:
-      - answer_text
-    Type5d1Enum:
-      enum:
-      - MULTIPLE_CHOICE
-      - MULTIPLE_ANSWER
-      - FILL_IN_THE_BLANK
-      - FREEFORM
-      type: string
-      description: '* `MULTIPLE_CHOICE` - MULTIPLE_CHOICE
-
-        * `MULTIPLE_ANSWER` - MULTIPLE_ANSWER
-
-        * `FILL_IN_THE_BLANK` - FILL_IN_THE_BLANK
-
-        * `FREEFORM` - FREEFORM'
   securitySchemes:
     OrganizationApiKey:
       type: http

@@ -162,28 +162,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PublishedCourseGroupVisibilityRequest:
-      type: object
-      description: Serializer for PublishedCourseGroupVisibility overrides
-      properties:
-        student_group:
-          $ref: '#/components/schemas/StudentGroupSummaryRequest'
-        is_visible:
-          type: boolean
-      required:
-      - is_visible
-      - student_group
-    PublishedCourseGroupVisibility:
-      type: object
-      description: Serializer for PublishedCourseGroupVisibility overrides
-      properties:
-        student_group:
-          $ref: '#/components/schemas/StudentGroupSummary'
-        is_visible:
-          type: boolean
-      required:
-      - is_visible
-      - student_group
     StudentGroupSummary:
       type: object
       description: Serializer for student groups for use GroupVisibility serializers
@@ -204,6 +182,17 @@ components:
           minLength: 1
       required:
       - id
+    PublishedCourseGroupVisibility:
+      type: object
+      description: Serializer for PublishedCourseGroupVisibility overrides
+      properties:
+        student_group:
+          $ref: '#/components/schemas/StudentGroupSummary'
+        is_visible:
+          type: boolean
+      required:
+      - is_visible
+      - student_group
     PaginatedPublishedCourseGroupVisibilityList:
       type: object
       required:
@@ -229,6 +218,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PublishedCourseGroupVisibility'
+    PublishedCourseGroupVisibilityRequest:
+      type: object
+      description: Serializer for PublishedCourseGroupVisibility overrides
+      properties:
+        student_group:
+          $ref: '#/components/schemas/StudentGroupSummaryRequest'
+        is_visible:
+          type: boolean
+      required:
+      - is_visible
+      - student_group
   securitySchemes:
     OrganizationApiKey:
       type: http

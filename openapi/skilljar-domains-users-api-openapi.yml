@@ -314,6 +314,43 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    User:
+      type: object
+      description: 'Version of the user serializer configured to lookup a user given the user''s email.  If a user with this email does
+
+        not yet exist, it will create a new User with given email, first_name and last_name parameters.'
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          title: Email address
+          description: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          description: First name
+          maxLength: 50
+        last_name:
+          type: string
+          description: Last name
+          maxLength: 50
+        full_name:
+          type: string
+          readOnly: true
+      required:
+      - email
+    AccessCodeRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
     AccessCodePool:
       type: object
       properties:
@@ -326,53 +363,6 @@ components:
       required:
       - id
       - name
-    BulkUserRequest:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-          minLength: 1
-          description: User's email address
-        first_name:
-          type: string
-          description: User's first name
-          maxLength: 150
-        last_name:
-          type: string
-          description: User's last name
-          maxLength: 150
-        active:
-          type: boolean
-          default: true
-          description: Only active users have access to a private domain
-        marketing_optin:
-          type:
-          - boolean
-          - 'null'
-          description: Indicates user has accepted or rejected the marketing optin message
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating when the access to the domain will expire
-      required:
-      - email
-    PatchedDomainUserUpdateRequest:
-      type: object
-      properties:
-        active:
-          type: boolean
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        access_code:
-          allOf:
-          - $ref: '#/components/schemas/AccessCodeRequest'
-          description: Information about the access code entered by the user, if they used one to join a private domain
     DomainUserUpdate:
       type: object
       properties:
@@ -411,16 +401,6 @@ components:
           type: string
           readOnly: true
           description: Single-use login token, included in response if the domain is configured to used token-based SSO
-    SignupFieldSummary:
-      type: object
-      properties:
-        id:
-          type: string
-        label:
-          type: string
-          readOnly: true
-      required:
-      - id
     DomainUserCreateRequest:
       type: object
       properties:
@@ -444,6 +424,20 @@ components:
           description: ISO 8601 formatted datetime string indicating when the access to the domain will expire - ignored on public domains
       required:
       - user
+    DomainUserUpdateRequest:
+      type: object
+      properties:
+        active:
+          type: boolean
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        access_code:
+          allOf:
+          - $ref: '#/components/schemas/AccessCodeRequest'
+          description: Information about the access code entered by the user, if they used one to join a private domain
     DomainUserCreate:
       type: object
       properties:
@@ -486,52 +480,6 @@ components:
           description: Single-use login token, included in response if the domain is configured to used token-based SSO
       required:
       - user
-    DomainUserUpdateRequest:
-      type: object
-      properties:
-        active:
-          type: boolean
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        access_code:
-          allOf:
-          - $ref: '#/components/schemas/AccessCodeRequest'
-          description: Information about the access code entered by the user, if they used one to join a private domain
-    DomainUserListItem:
-      type: object
-      properties:
-        user:
-          allOf:
-          - $ref: '#/components/schemas/User'
-          readOnly: true
-          description: User details
-        active:
-          type: boolean
-          description: Only active users have access to a private domain
-        marketing_optin:
-          type:
-          - boolean
-          - 'null'
-          description: Indicates user has accepted or rejected the marketing optin message.  Null indicates no marketing option message was shown to user
-        enrolled_at:
-          type: string
-          format: date-time
-          readOnly: true
-          description: ISO 8601 formatted datetime string indicating when the user was first added to the domain
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating when the access to the domain will expire - ignored on public domains
-        access_code:
-          allOf:
-          - $ref: '#/components/schemas/AccessCode'
-          readOnly: true
-          description: Information about the access code entered by the user, if they used one to join a private domain
     DomainUserDetail:
       type: object
       properties:
@@ -569,44 +517,47 @@ components:
           items:
             $ref: '#/components/schemas/UserSignupFieldValue'
           readOnly: true
-    AccessCodeRequest:
+    SignupFieldSummary:
       type: object
       properties:
         id:
           type: string
-          minLength: 1
+        label:
+          type: string
+          readOnly: true
       required:
       - id
-    UserSignupFieldValue:
+    BulkUserRequest:
       type: object
-      properties:
-        signup_field:
-          $ref: '#/components/schemas/SignupFieldSummary'
-        value:
-          type: string
-      required:
-      - signup_field
-      - value
-    UserRequest:
-      type: object
-      description: 'Version of the user serializer configured to lookup a user given the user''s email.  If a user with this email does
-
-        not yet exist, it will create a new User with given email, first_name and last_name parameters.'
       properties:
         email:
           type: string
           format: email
-          title: Email address
-          description: Email address
-          maxLength: 254
+          minLength: 1
+          description: User's email address
         first_name:
           type: string
-          description: First name
-          maxLength: 50
+          description: User's first name
+          maxLength: 150
         last_name:
           type: string
-          description: Last name
-          maxLength: 50
+          description: User's last name
+          maxLength: 150
+        active:
+          type: boolean
+          default: true
+          description: Only active users have access to a private domain
+        marketing_optin:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates user has accepted or rejected the marketing optin message
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the access to the domain will expire
       required:
       - email
     PaginatedDomainUserListItemList:
@@ -634,6 +585,62 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DomainUserListItem'
+    PatchedDomainUserUpdateRequest:
+      type: object
+      properties:
+        active:
+          type: boolean
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        access_code:
+          allOf:
+          - $ref: '#/components/schemas/AccessCodeRequest'
+          description: Information about the access code entered by the user, if they used one to join a private domain
+    UserSignupFieldValue:
+      type: object
+      properties:
+        signup_field:
+          $ref: '#/components/schemas/SignupFieldSummary'
+        value:
+          type: string
+      required:
+      - signup_field
+      - value
+    DomainUserListItem:
+      type: object
+      properties:
+        user:
+          allOf:
+          - $ref: '#/components/schemas/User'
+          readOnly: true
+          description: User details
+        active:
+          type: boolean
+          description: Only active users have access to a private domain
+        marketing_optin:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates user has accepted or rejected the marketing optin message.  Null indicates no marketing option message was shown to user
+        enrolled_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: ISO 8601 formatted datetime string indicating when the user was first added to the domain
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the access to the domain will expire - ignored on public domains
+        access_code:
+          allOf:
+          - $ref: '#/components/schemas/AccessCode'
+          readOnly: true
+          description: Information about the access code entered by the user, if they used one to join a private domain
     BulkDomainUserCreateRequest:
       type: object
       properties:
@@ -646,16 +653,12 @@ components:
           minItems: 1
       required:
       - users
-    User:
+    UserRequest:
       type: object
       description: 'Version of the user serializer configured to lookup a user given the user''s email.  If a user with this email does
 
         not yet exist, it will create a new User with given email, first_name and last_name parameters.'
       properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as user_id within the documentation
         email:
           type: string
           format: email
@@ -670,9 +673,6 @@ components:
           type: string
           description: Last name
           maxLength: 50
-        full_name:
-          type: string
-          readOnly: true
       required:
       - email
     AccessCode:

@@ -273,126 +273,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PaginatedDomainAccessCodeListItemList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/DomainAccessCodeListItem'
-    DomainAccessCodeDetailRequest:
-      type: object
-      properties:
-        code:
-          type: string
-          minLength: 1
-          maxLength: 40
-        active:
-          type: boolean
-          default: true
-        max_uses:
-          type: integer
-          minimum: 0
-        duration:
-          type:
-          - integer
-          - 'null'
-          minimum: 1
-        duration_unit:
-          $ref: '#/components/schemas/DurationUnitEnum'
-    DomainAccessCodeListItem:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        code:
-          type: string
-          maxLength: 40
-        active:
-          type: boolean
-          default: true
-        max_uses:
-          type: integer
-          minimum: 0
-        use_count:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          readOnly: true
-        duration:
-          type:
-          - integer
-          - 'null'
-          minimum: 1
-        duration_unit:
-          $ref: '#/components/schemas/DurationUnitEnum'
-      required:
-      - code
-    PatchedDomainAccessCodeDetailRequest:
-      type: object
-      properties:
-        code:
-          type: string
-          minLength: 1
-          maxLength: 40
-        active:
-          type: boolean
-          default: true
-        max_uses:
-          type: integer
-          minimum: 0
-        duration:
-          type:
-          - integer
-          - 'null'
-          minimum: 1
-        duration_unit:
-          $ref: '#/components/schemas/DurationUnitEnum'
-    DomainAccessCodeUser:
-      type: object
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-          format: email
-          title: Email address
-          readOnly: true
-        first_name:
-          type: string
-          readOnly: true
-        last_name:
-          type: string
-          readOnly: true
-      required:
-      - id
-    DurationUnitEnum:
-      enum:
-      - MONTHS
-      - DAYS
-      type: string
-      description: '* `MONTHS` - Months
-
-        * `DAYS` - Days'
     DomainAccessCodeDetail:
       type: object
       properties:
@@ -425,6 +305,126 @@ components:
           items:
             $ref: '#/components/schemas/DomainAccessCodeUser'
           readOnly: true
+    PaginatedDomainAccessCodeListItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DomainAccessCodeListItem'
+    DomainAccessCodeUser:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+          title: Email address
+          readOnly: true
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+      required:
+      - id
+    DomainAccessCodeListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        code:
+          type: string
+          maxLength: 40
+        active:
+          type: boolean
+          default: true
+        max_uses:
+          type: integer
+          minimum: 0
+        use_count:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          readOnly: true
+        duration:
+          type:
+          - integer
+          - 'null'
+          minimum: 1
+        duration_unit:
+          $ref: '#/components/schemas/DurationUnitEnum'
+      required:
+      - code
+    DurationUnitEnum:
+      enum:
+      - MONTHS
+      - DAYS
+      type: string
+      description: '* `MONTHS` - Months
+
+        * `DAYS` - Days'
+    DomainAccessCodeDetailRequest:
+      type: object
+      properties:
+        code:
+          type: string
+          minLength: 1
+          maxLength: 40
+        active:
+          type: boolean
+          default: true
+        max_uses:
+          type: integer
+          minimum: 0
+        duration:
+          type:
+          - integer
+          - 'null'
+          minimum: 1
+        duration_unit:
+          $ref: '#/components/schemas/DurationUnitEnum'
+    PatchedDomainAccessCodeDetailRequest:
+      type: object
+      properties:
+        code:
+          type: string
+          minLength: 1
+          maxLength: 40
+        active:
+          type: boolean
+          default: true
+        max_uses:
+          type: integer
+          minimum: 0
+        duration:
+          type:
+          - integer
+          - 'null'
+          minimum: 1
+        duration_unit:
+          $ref: '#/components/schemas/DurationUnitEnum'
   securitySchemes:
     OrganizationApiKey:
       type: http

@@ -128,13 +128,9 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ProgressToken:
+    ProgressTokenRequest:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as progress_token_id within the documentation
         completed_at:
           type:
           - string
@@ -157,17 +153,13 @@ components:
           maximum: 2147483647
           minimum: 0
           description: Max possible score
-    SuccessStatusEnum:
-      enum:
-      - PASSED
-      - FAILED
-      type: string
-      description: '* `PASSED` - Passed
-
-        * `FAILED` - Failed'
-    ProgressTokenRequest:
+    ProgressToken:
       type: object
       properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as progress_token_id within the documentation
         completed_at:
           type:
           - string
@@ -215,6 +207,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProgressToken'
+    SuccessStatusEnum:
+      enum:
+      - PASSED
+      - FAILED
+      type: string
+      description: '* `PASSED` - Passed
+
+        * `FAILED` - Failed'
     PatchedProgressTokenRequest:
       type: object
       properties:

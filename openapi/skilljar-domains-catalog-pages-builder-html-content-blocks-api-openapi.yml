@@ -139,6 +139,13 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PatchedHtmlContentBlockRequest:
+      type: object
+      description: Serializer for HTML content blocks
+      properties:
+        html:
+          type: string
+          maxLength: 100000
     HtmlContentBlock:
       type: object
       description: Serializer for HTML content blocks
@@ -149,13 +156,6 @@ components:
         content_block_id:
           type: string
           readOnly: true
-        html:
-          type: string
-          maxLength: 100000
-    PatchedHtmlContentBlockRequest:
-      type: object
-      description: Serializer for HTML content blocks
-      properties:
         html:
           type: string
           maxLength: 100000
