@@ -1,0 +1,12 @@
+{
+ "url": "https://api.skilljar.com/docs/schema.yml",
+ "requested_url": "https://api.skilljar.com/docs/schema.yml",
+ "status": 200,
+ "content_type": "application/yaml; charset=utf-8",
+ "bytes": 733046,
+ "sha256": "ef3f3667f2848b6498903373e6e7487ea07f1659b34c4595ba487f07dce83e37",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
