@@ -567,20 +567,6 @@ paths:
           description: ''
 components:
   schemas:
-    DeactivateReasonEnum:
-      enum:
-      - HTTP_4XX_RESPONSE
-      - RETRY_COUNT
-      - TOO_MANY_REDIRECTS
-      - ORG_DISABLED
-      type: string
-      description: '* `HTTP_4XX_RESPONSE` - HTTP_4XX_RESPONSE
-
-        * `RETRY_COUNT` - RETRY_COUNT
-
-        * `TOO_MANY_REDIRECTS` - TOO_MANY_REDIRECTS
-
-        * `ORG_DISABLED` - ORG_DISABLED'
     EventTypeEnum:
       enum:
       - COURSE_COMPLETION
@@ -613,9 +599,20 @@ components:
         * `VILT_EVENT_REGISTRATION` - VILT Event Registration
 
         * `DASHBOARD_TASK_CREATED` - Dashboard Task Created'
-    NullEnum:
+    DeactivateReasonEnum:
       enum:
-      - null
+      - HTTP_4XX_RESPONSE
+      - RETRY_COUNT
+      - TOO_MANY_REDIRECTS
+      - ORG_DISABLED
+      type: string
+      description: '* `HTTP_4XX_RESPONSE` - HTTP_4XX_RESPONSE
+
+        * `RETRY_COUNT` - RETRY_COUNT
+
+        * `TOO_MANY_REDIRECTS` - TOO_MANY_REDIRECTS
+
+        * `ORG_DISABLED` - ORG_DISABLED'
     PaginatedWebHookList:
       type: object
       required:
@@ -690,6 +687,9 @@ components:
           description: Dictionary of string values to include as additional HTTP headers in the webhook request. Key pairs included in this JSON dictionary will be added as individual HTTP headers to all webhook POST requests. Use double quotes for keys and values
       required:
       - target_url
+    NullEnum:
+      enum:
+      - null
     WebHook:
       type: object
       properties:

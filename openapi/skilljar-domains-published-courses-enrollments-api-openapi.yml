@@ -243,61 +243,17 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CreateEnrollment:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        user:
-          $ref: '#/components/schemas/ReadOnlyUser'
-        enrolled_at:
-          type: string
-          format: date-time
-        expires_at:
-          type: string
-          format: date-time
-        active:
-          type:
-          - boolean
-          - 'null'
-          default: true
-        purchase:
-          allOf:
-          - $ref: '#/components/schemas/EnrollmentPurchase'
-        rating:
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-          description: Student's rating of the course (1-5)
-        feedback:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          description: Student's additional feedback about the course
-      required:
-      - user
-    Price:
+    PriceRequest:
       type: object
       properties:
         amount:
           type: string
+          minLength: 1
           default: '0.00'
         currency_code:
           type: string
+          minLength: 1
           default: USD
-    UpdateEnrollmentRequest:
-      type: object
-      properties:
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        active:
-          type: boolean
     CreateEnrollmentRequest:
       type: object
       properties:
@@ -319,187 +275,6 @@ components:
           - $ref: '#/components/schemas/EnrollmentPurchaseRequest'
       required:
       - user
-    PaginatedEnrollmentList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Enrollment'
-    PurchaseOfferPrice:
-      type: object
-      properties:
-        amount:
-          type: string
-          default: '0.00'
-        currency_code:
-          type: string
-          default: USD
-    ReadOnlyUser:
-      type: object
-      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
-      properties:
-        id:
-          type: string
-          description: Known as user_id within the documentation
-        email:
-          type: string
-          format: email
-          readOnly: true
-          title: Email address
-          description: Email address
-        first_name:
-          type: string
-          readOnly: true
-          description: First name
-        last_name:
-          type: string
-          readOnly: true
-          description: Last name
-      required:
-      - id
-    PriceRequest:
-      type: object
-      properties:
-        amount:
-          type: string
-          minLength: 1
-          default: '0.00'
-        currency_code:
-          type: string
-          minLength: 1
-          default: USD
-    PaymentProcessorEnum:
-      enum:
-      - NONE
-      - STRIPE
-      - STRIPE_BTC
-      - PAYPAL
-      - PAYFLOW
-      - CYBERSRC
-      - MES
-      - EXTERNAL
-      type: string
-      description: '* `NONE` - None
-
-        * `STRIPE` - Stripe
-
-        * `STRIPE_BTC` - Stripe Bitcoin
-
-        * `PAYPAL` - PayPal
-
-        * `PAYFLOW` - Payflow
-
-        * `CYBERSRC` - Cybersource
-
-        * `MES` - Merchant e-Solutions
-
-        * `EXTERNAL` - External'
-    Enrollment:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        user:
-          $ref: '#/components/schemas/ReadOnlyUser'
-        enrolled_at:
-          type: string
-          format: date-time
-        expires_at:
-          type: string
-          format: date-time
-        active:
-          type:
-          - boolean
-          - 'null'
-          default: true
-        purchase:
-          allOf:
-          - $ref: '#/components/schemas/EnrollmentPurchase'
-          readOnly: true
-        rating:
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-          description: Student's rating of the course (1-5)
-        feedback:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          description: Student's additional feedback about the course
-      required:
-      - user
-    EnrollmentPurchaseRequest:
-      type: object
-      properties:
-        purchase_price:
-          $ref: '#/components/schemas/PriceRequest'
-        purchase_state:
-          $ref: '#/components/schemas/PurchaseStateEnum'
-        purchased_at:
-          type: string
-          format: date-time
-        tax_price_cents:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-    EnrollmentPurchase:
-      type: object
-      properties:
-        order_id:
-          type: string
-          readOnly: true
-        offer_price:
-          allOf:
-          - $ref: '#/components/schemas/PurchaseOfferPrice'
-          readOnly: true
-        purchase_price:
-          $ref: '#/components/schemas/Price'
-        quantity:
-          type: integer
-          readOnly: true
-        purchase_state:
-          $ref: '#/components/schemas/PurchaseStateEnum'
-        payment_processor:
-          allOf:
-          - $ref: '#/components/schemas/PaymentProcessorEnum'
-          readOnly: true
-          default: NONE
-        purchase_id:
-          type: string
-          readOnly: true
-        purchased_at:
-          type: string
-          format: date-time
-        tax_price_cents:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
     UpdateEnrollment:
       type: object
       properties:
@@ -537,6 +312,205 @@ components:
           - 'null'
           readOnly: true
           description: Student's additional feedback about the course
+    ReadOnlyUserRequest:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Known as user_id within the documentation
+      required:
+      - id
+    EnrollmentPurchaseRequest:
+      type: object
+      properties:
+        purchase_price:
+          $ref: '#/components/schemas/PriceRequest'
+        purchase_state:
+          $ref: '#/components/schemas/PurchaseStateEnum'
+        purchased_at:
+          type: string
+          format: date-time
+        tax_price_cents:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+    Enrollment:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/ReadOnlyUser'
+        enrolled_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        active:
+          type:
+          - boolean
+          - 'null'
+          default: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentPurchase'
+          readOnly: true
+        rating:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+          description: Student's rating of the course (1-5)
+        feedback:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          description: Student's additional feedback about the course
+      required:
+      - user
+    PaymentProcessorEnum:
+      enum:
+      - NONE
+      - STRIPE
+      - STRIPE_BTC
+      - PAYPAL
+      - PAYFLOW
+      - CYBERSRC
+      - MES
+      - EXTERNAL
+      type: string
+      description: '* `NONE` - None
+
+        * `STRIPE` - Stripe
+
+        * `STRIPE_BTC` - Stripe Bitcoin
+
+        * `PAYPAL` - PayPal
+
+        * `PAYFLOW` - Payflow
+
+        * `CYBERSRC` - Cybersource
+
+        * `MES` - Merchant e-Solutions
+
+        * `EXTERNAL` - External'
+    EnrollmentPurchase:
+      type: object
+      properties:
+        order_id:
+          type: string
+          readOnly: true
+        offer_price:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseOfferPrice'
+          readOnly: true
+        purchase_price:
+          $ref: '#/components/schemas/Price'
+        quantity:
+          type: integer
+          readOnly: true
+        purchase_state:
+          $ref: '#/components/schemas/PurchaseStateEnum'
+        payment_processor:
+          allOf:
+          - $ref: '#/components/schemas/PaymentProcessorEnum'
+          readOnly: true
+          default: NONE
+        purchase_id:
+          type: string
+          readOnly: true
+        purchased_at:
+          type: string
+          format: date-time
+        tax_price_cents:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+    PurchaseOfferPrice:
+      type: object
+      properties:
+        amount:
+          type: string
+          default: '0.00'
+        currency_code:
+          type: string
+          default: USD
+    PaginatedEnrollmentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Enrollment'
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+          default: '0.00'
+        currency_code:
+          type: string
+          default: USD
+    PatchedUpdateEnrollmentRequest:
+      type: object
+      properties:
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        active:
+          type: boolean
+    ReadOnlyUser:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+          description: Email address
+        first_name:
+          type: string
+          readOnly: true
+          description: First name
+        last_name:
+          type: string
+          readOnly: true
+          description: Last name
+      required:
+      - id
     PurchaseStateEnum:
       enum:
       - CREATED
@@ -560,7 +534,7 @@ components:
         * `FLAGGED` - FLAGGED
 
         * `PENDING` - PENDING'
-    PatchedUpdateEnrollmentRequest:
+    UpdateEnrollmentRequest:
       type: object
       properties:
         expires_at:
@@ -570,16 +544,42 @@ components:
           format: date-time
         active:
           type: boolean
-    ReadOnlyUserRequest:
+    CreateEnrollment:
       type: object
-      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
       properties:
         id:
           type: string
-          minLength: 1
-          description: Known as user_id within the documentation
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/ReadOnlyUser'
+        enrolled_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        active:
+          type:
+          - boolean
+          - 'null'
+          default: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentPurchase'
+        rating:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+          description: Student's rating of the course (1-5)
+        feedback:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          description: Student's additional feedback about the course
       required:
-      - id
+      - user
   securitySchemes:
     OrganizationApiKey:
       type: http

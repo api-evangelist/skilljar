@@ -48,15 +48,64 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Price:
+    PublishedCourse:
       type: object
       properties:
-        amount:
+        id:
           type: string
-          default: '0.00'
-        currency_code:
+          readOnly: true
+          description: Known as published_course_id within the documentation
+        course:
+          allOf:
+          - $ref: '#/components/schemas/CourseSummary'
+          readOnly: true
+        slug:
           type: string
-          default: USD
+          description: The URL path of the course on the domain
+          pattern: ^[a-z0-9]+(-[a-z0-9]+)+$
+          maxLength: 100
+        course_url:
+          type: string
+          readOnly: true
+          description: Base URL of the course detail page, or curriculum page if the student is registered
+        hidden:
+          type: boolean
+          description: Hidden courses are only visible on the catalog page to associated groups
+        strict_enforce_group_visibility:
+          type: boolean
+          description: Block access to this course for students it's not visible to
+        registration_required:
+          type: boolean
+          description: Registration is required for student to access course, false signifies that the course content is public
+        registration_starts_at:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the start of the registration period is scheduled
+        registration_ends_at:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating when the end of the registration period is scheduled
+        restrict_access_start_end_dates:
+          type: boolean
+          description: Restrict access to the course based on the start and end dates of the registration period
+        allow_self_service_reenroll:
+          type: boolean
+          description: When students complete the course, they will be allowed to re-enroll in the course immediately
+        unique_progress_per_enrollment:
+          type: boolean
+          description: Each time a student re-enrolls in the course, create a new course progress
+        require_all_prerequisites:
+          type: boolean
+          description: Require all prerequisites to be completed before the student can enroll in the course
+        timezone:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        offer:
+          allOf:
+          - $ref: '#/components/schemas/Offer'
+          readOnly: true
     PaginatedPublishedCourseList:
       type: object
       required:
@@ -118,64 +167,15 @@ components:
           type: integer
           readOnly: true
           description: Number of required lessons in the course (non-optional lessons that count towards course completion)
-    PublishedCourse:
+    Price:
       type: object
       properties:
-        id:
+        amount:
           type: string
-          readOnly: true
-          description: Known as published_course_id within the documentation
-        course:
-          allOf:
-          - $ref: '#/components/schemas/CourseSummary'
-          readOnly: true
-        slug:
+          default: '0.00'
+        currency_code:
           type: string
-          description: The URL path of the course on the domain
-          pattern: ^[a-z0-9]+(-[a-z0-9]+)+$
-          maxLength: 100
-        course_url:
-          type: string
-          readOnly: true
-          description: Base URL of the course detail page, or curriculum page if the student is registered
-        hidden:
-          type: boolean
-          description: Hidden courses are only visible on the catalog page to associated groups
-        strict_enforce_group_visibility:
-          type: boolean
-          description: Block access to this course for students it's not visible to
-        registration_required:
-          type: boolean
-          description: Registration is required for student to access course, false signifies that the course content is public
-        registration_starts_at:
-          type: string
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating when the start of the registration period is scheduled
-        registration_ends_at:
-          type: string
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating when the end of the registration period is scheduled
-        restrict_access_start_end_dates:
-          type: boolean
-          description: Restrict access to the course based on the start and end dates of the registration period
-        allow_self_service_reenroll:
-          type: boolean
-          description: When students complete the course, they will be allowed to re-enroll in the course immediately
-        unique_progress_per_enrollment:
-          type: boolean
-          description: Each time a student re-enrolls in the course, create a new course progress
-        require_all_prerequisites:
-          type: boolean
-          description: Require all prerequisites to be completed before the student can enroll in the course
-        timezone:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        offer:
-          allOf:
-          - $ref: '#/components/schemas/Offer'
-          readOnly: true
+          default: USD
   securitySchemes:
     OrganizationApiKey:
       type: http

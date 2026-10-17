@@ -250,13 +250,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PatchedPageContentBlockItemOrderUpdateRequest:
-      type: object
-      description: Serializer for updating the order of existing PageContentBlockItem.
-      properties:
-        order:
-          type: integer
-          minimum: 1
     PageContentBlockItemOrderUpdateRequest:
       type: object
       description: Serializer for updating the order of existing PageContentBlockItem.
@@ -264,6 +257,64 @@ components:
         order:
           type: integer
           minimum: 1
+    PageContentBlockItemOrderUpdate:
+      type: object
+      description: Serializer for updating the order of existing PageContentBlockItem.
+      properties:
+        id:
+          type: string
+          readOnly: true
+        order:
+          type: integer
+          minimum: 1
+        type:
+          type: string
+          readOnly: true
+        html_content_block_id:
+          type: string
+          readOnly: true
+        tile_container_content_block_id:
+          type: string
+          readOnly: true
+        component_content_block_id:
+          type: string
+          readOnly: true
+    PaginatedPageContentBlockItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PageContentBlockItem'
+    PageContentBlockItemRequest:
+      type: object
+      description: Serializer for PageContentBlockItem
+      properties:
+        order:
+          type: integer
+          minimum: 1
+        type:
+          $ref: '#/components/schemas/PageContentBlockItemTypeEnum'
+      required:
+      - type
     PageContentBlockItem:
       type: object
       description: Serializer for PageContentBlockItem
@@ -304,64 +355,13 @@ components:
         * `TILE_SECTION` - TILE_SECTION
 
         * `IN_PROGRESS_COURSES` - IN_PROGRESS_COURSES'
-    PaginatedPageContentBlockItemList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PageContentBlockItem'
-    PageContentBlockItemOrderUpdate:
+    PatchedPageContentBlockItemOrderUpdateRequest:
       type: object
       description: Serializer for updating the order of existing PageContentBlockItem.
       properties:
-        id:
-          type: string
-          readOnly: true
         order:
           type: integer
           minimum: 1
-        type:
-          type: string
-          readOnly: true
-        html_content_block_id:
-          type: string
-          readOnly: true
-        tile_container_content_block_id:
-          type: string
-          readOnly: true
-        component_content_block_id:
-          type: string
-          readOnly: true
-    PageContentBlockItemRequest:
-      type: object
-      description: Serializer for PageContentBlockItem
-      properties:
-        order:
-          type: integer
-          minimum: 1
-        type:
-          $ref: '#/components/schemas/PageContentBlockItemTypeEnum'
-      required:
-      - type
   securitySchemes:
     OrganizationApiKey:
       type: http

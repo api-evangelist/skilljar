@@ -268,6 +268,25 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PathItemPublishedCourseSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        course_id:
+          type: string
+          readOnly: true
+        slug:
+          type: string
+          readOnly: true
+          pattern: ^[-a-zA-Z0-9_]+$
+      required:
+      - id
+    PublishedPathPathItemUpdateRequest:
+      type: object
+      properties:
+        order:
+          type: integer
     PublishedPathPathItem:
       type: object
       properties:
@@ -281,6 +300,14 @@ components:
       required:
       - order
       - published_course
+    PathItemPublishedCourseSummaryRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
     PublishedPathPathItemRequest:
       type: object
       properties:
@@ -316,6 +343,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PublishedPathPathItem'
+    PatchedPublishedPathPathItemUpdateRequest:
+      type: object
+      properties:
+        order:
+          type: integer
     PublishedPathPathItemUpdate:
       type: object
       properties:
@@ -328,38 +360,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/PathItemPublishedCourseSummary'
           readOnly: true
-    PublishedPathPathItemUpdateRequest:
-      type: object
-      properties:
-        order:
-          type: integer
-    PathItemPublishedCourseSummary:
-      type: object
-      properties:
-        id:
-          type: string
-        course_id:
-          type: string
-          readOnly: true
-        slug:
-          type: string
-          readOnly: true
-          pattern: ^[-a-zA-Z0-9_]+$
-      required:
-      - id
-    PathItemPublishedCourseSummaryRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          minLength: 1
-      required:
-      - id
-    PatchedPublishedPathPathItemUpdateRequest:
-      type: object
-      properties:
-        order:
-          type: integer
   securitySchemes:
     OrganizationApiKey:
       type: http

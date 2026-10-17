@@ -167,15 +167,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PatchedUserPublishedCourseProgressRequest:
-      type: object
-      properties:
-        published_course_id:
-          type: string
-          minLength: 1
-          description: ID of the PublishedCourse
-        course_progress:
-          $ref: '#/components/schemas/CourseProgressRequest'
     UserEnrollment:
       type: object
       properties:
@@ -195,102 +186,7 @@ components:
       required:
       - course_progress_id
       - enrollment_id
-    CourseProgressRequest:
-      type: object
-      properties:
-        completed_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Datetime at which the user completed the course.  If null, the user hasn't completed
-        score:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-          description: Course score achieved by student
-        max_score:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-          description: Maximum score possible in course
-        credits_earned:
-          type: string
-          description: Credits earned by completing the course
-          maxLength: 20
-        credit_unit_plural:
-          type: string
-          description: Type of credit earned
-          maxLength: 40
-        success_status:
-          description: 'Success status of course progress: ''PASSED'', ''FAILED'' or null
-
-
-            * `PASSED` - Passed
-
-            * `FAILED` - Failed'
-          oneOf:
-          - $ref: '#/components/schemas/SuccessStatusEnum'
-          - $ref: '#/components/schemas/NullEnum'
-    Certificate:
-      type: object
-      properties:
-        code:
-          type: string
-          readOnly: true
-          description: Certificate validation code
-        validate_url:
-          type: string
-          format: uri
-          readOnly: true
-          description: Link to certificate validation page
-        issued_at:
-          type: string
-          format: date-time
-          readOnly: true
-          description: When the certificate was issued
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-          description: When the certificate expires.  May be null
-    NullEnum:
-      enum:
-      - null
-    SuccessStatusEnum:
-      enum:
-      - PASSED
-      - FAILED
-      type: string
-      description: '* `PASSED` - Passed
-
-        * `FAILED` - Failed'
-    CourseSummary:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as course_id within the documentation
-        title:
-          type: string
-          readOnly: true
-          description: Course title
-        lesson_count:
-          type: integer
-          readOnly: true
-          description: Number of lessons in the course
-        required_lesson_count:
-          type: integer
-          readOnly: true
-          description: Number of required lessons in the course (non-optional lessons that count towards course completion)
-    UserPublishedCourseProgressRequest:
+    PatchedUserPublishedCourseProgressRequest:
       type: object
       properties:
         published_course_id:
@@ -299,44 +195,6 @@ components:
           description: ID of the PublishedCourse
         course_progress:
           $ref: '#/components/schemas/CourseProgressRequest'
-      required:
-      - course_progress
-    UserPublishedCourseProgress:
-      type: object
-      properties:
-        published_course_id:
-          type: string
-          description: ID of the PublishedCourse
-        domain_name:
-          type: string
-          readOnly: true
-          description: Domain name where the course is published.
-        enrolled_at:
-          type: string
-          format: date-time
-          readOnly: true
-          description: Datetime the user most recently enrolled in the course
-        enrollment_id:
-          type: string
-          readOnly: true
-          description: ID of the Enrollment
-        course:
-          allOf:
-          - $ref: '#/components/schemas/CourseSummary'
-          readOnly: true
-        course_progress:
-          $ref: '#/components/schemas/CourseProgress'
-        certificate:
-          allOf:
-          - $ref: '#/components/schemas/Certificate'
-          readOnly: true
-        all_enrollments:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserEnrollment'
-          readOnly: true
-      required:
-      - course_progress
     CourseProgress:
       type: object
       properties:
@@ -395,6 +253,148 @@ components:
           oneOf:
           - $ref: '#/components/schemas/SuccessStatusEnum'
           - $ref: '#/components/schemas/NullEnum'
+    CourseProgressRequest:
+      type: object
+      properties:
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Datetime at which the user completed the course.  If null, the user hasn't completed
+        score:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+          description: Course score achieved by student
+        max_score:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+          description: Maximum score possible in course
+        credits_earned:
+          type: string
+          description: Credits earned by completing the course
+          maxLength: 20
+        credit_unit_plural:
+          type: string
+          description: Type of credit earned
+          maxLength: 40
+        success_status:
+          description: 'Success status of course progress: ''PASSED'', ''FAILED'' or null
+
+
+            * `PASSED` - Passed
+
+            * `FAILED` - Failed'
+          oneOf:
+          - $ref: '#/components/schemas/SuccessStatusEnum'
+          - $ref: '#/components/schemas/NullEnum'
+    UserPublishedCourseProgressRequest:
+      type: object
+      properties:
+        published_course_id:
+          type: string
+          minLength: 1
+          description: ID of the PublishedCourse
+        course_progress:
+          $ref: '#/components/schemas/CourseProgressRequest'
+      required:
+      - course_progress
+    SuccessStatusEnum:
+      enum:
+      - PASSED
+      - FAILED
+      type: string
+      description: '* `PASSED` - Passed
+
+        * `FAILED` - Failed'
+    CourseSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as course_id within the documentation
+        title:
+          type: string
+          readOnly: true
+          description: Course title
+        lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of lessons in the course
+        required_lesson_count:
+          type: integer
+          readOnly: true
+          description: Number of required lessons in the course (non-optional lessons that count towards course completion)
+    NullEnum:
+      enum:
+      - null
+    UserPublishedCourseProgress:
+      type: object
+      properties:
+        published_course_id:
+          type: string
+          description: ID of the PublishedCourse
+        domain_name:
+          type: string
+          readOnly: true
+          description: Domain name where the course is published.
+        enrolled_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Datetime the user most recently enrolled in the course
+        enrollment_id:
+          type: string
+          readOnly: true
+          description: ID of the Enrollment
+        course:
+          allOf:
+          - $ref: '#/components/schemas/CourseSummary'
+          readOnly: true
+        course_progress:
+          $ref: '#/components/schemas/CourseProgress'
+        certificate:
+          allOf:
+          - $ref: '#/components/schemas/Certificate'
+          readOnly: true
+        all_enrollments:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserEnrollment'
+          readOnly: true
+      required:
+      - course_progress
+    Certificate:
+      type: object
+      properties:
+        code:
+          type: string
+          readOnly: true
+          description: Certificate validation code
+        validate_url:
+          type: string
+          format: uri
+          readOnly: true
+          description: Link to certificate validation page
+        issued_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When the certificate was issued
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+          description: When the certificate expires.  May be null
   securitySchemes:
     OrganizationApiKey:
       type: http

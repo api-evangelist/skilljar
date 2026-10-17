@@ -249,23 +249,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Type62bEnum:
-      enum:
-      - CATALOG_PAGE
-      - COURSE_SERIES
-      - PUBLISHED_COURSE
-      - PLAN
-      - PUBLISHED_PATH
-      type: string
-      description: '* `CATALOG_PAGE` - CATALOG_PAGE
-
-        * `COURSE_SERIES` - COURSE_SERIES
-
-        * `PUBLISHED_COURSE` - PUBLISHED_COURSE
-
-        * `PLAN` - PLAN
-
-        * `PUBLISHED_PATH` - PUBLISHED_PATH'
     ClassicCatalogPageItem:
       type: object
       description: Serializer for Legacy CatalogPageItem
@@ -288,64 +271,6 @@ components:
           type: string
         item_plan_id:
           type: string
-    ClassicCatalogPageItemOrderUpdateRequest:
-      type: object
-      description: Serializer for updating the order of existing CatalogPageItem
-      properties:
-        order:
-          type: integer
-          minimum: 1
-    PaginatedClassicCatalogPageItemList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClassicCatalogPageItem'
-    PatchedClassicCatalogPageItemOrderUpdateRequest:
-      type: object
-      description: Serializer for updating the order of existing CatalogPageItem
-      properties:
-        order:
-          type: integer
-          minimum: 1
-    ClassicCatalogPageItemRequest:
-      type: object
-      description: Serializer for Legacy CatalogPageItem
-      properties:
-        order:
-          type: integer
-          minimum: 1
-        item_catalog_page_id:
-          type: string
-          minLength: 1
-        item_published_path_id:
-          type: string
-          minLength: 1
-        item_published_course_id:
-          type: string
-          minLength: 1
-        item_plan_id:
-          type: string
-          minLength: 1
     ClassicCatalogPageItemOrderUpdate:
       type: object
       description: Serializer for updating the order of existing CatalogPageItem
@@ -372,6 +297,81 @@ components:
         item_plan_id:
           type: string
           readOnly: true
+    PatchedClassicCatalogPageItemOrderUpdateRequest:
+      type: object
+      description: Serializer for updating the order of existing CatalogPageItem
+      properties:
+        order:
+          type: integer
+          minimum: 1
+    ClassicCatalogPageItemRequest:
+      type: object
+      description: Serializer for Legacy CatalogPageItem
+      properties:
+        order:
+          type: integer
+          minimum: 1
+        item_catalog_page_id:
+          type: string
+          minLength: 1
+        item_published_path_id:
+          type: string
+          minLength: 1
+        item_published_course_id:
+          type: string
+          minLength: 1
+        item_plan_id:
+          type: string
+          minLength: 1
+    PaginatedClassicCatalogPageItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClassicCatalogPageItem'
+    ClassicCatalogPageItemOrderUpdateRequest:
+      type: object
+      description: Serializer for updating the order of existing CatalogPageItem
+      properties:
+        order:
+          type: integer
+          minimum: 1
+    Type62bEnum:
+      enum:
+      - CATALOG_PAGE
+      - COURSE_SERIES
+      - PUBLISHED_COURSE
+      - PLAN
+      - PUBLISHED_PATH
+      type: string
+      description: '* `CATALOG_PAGE` - CATALOG_PAGE
+
+        * `COURSE_SERIES` - COURSE_SERIES
+
+        * `PUBLISHED_COURSE` - PUBLISHED_COURSE
+
+        * `PLAN` - PLAN
+
+        * `PUBLISHED_PATH` - PUBLISHED_PATH'
   securitySchemes:
     OrganizationApiKey:
       type: http

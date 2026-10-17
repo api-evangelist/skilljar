@@ -235,15 +235,13 @@ components:
           readOnly: true
       required:
       - email
-    ReadOnlyViltSessionRequest:
+    ViltSessionRegistrationUpdateRequest:
       type: object
       properties:
-        id:
-          type: string
-          minLength: 1
-          description: Known as session_id within the documentation
+        attended:
+          type: boolean
       required:
-      - id
+      - attended
     ViltSessionRegistrationDetailRequest:
       type: object
       properties:
@@ -253,43 +251,6 @@ components:
           type: string
           writeOnly: true
           minLength: 1
-    ViltSessionRegistrationUpdate:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as vilt_session_registration_id within the documentation
-        attended:
-          type: boolean
-      required:
-      - attended
-    ReadOnlyViltSession:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Known as session_id within the documentation
-      required:
-      - id
-    ViltSessionRegistrationListItem:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as vilt_session_registration_id within the documentation
-        attended:
-          type: boolean
-          readOnly: true
-        vilt_session:
-          $ref: '#/components/schemas/ReadOnlyViltSession'
-        user:
-          allOf:
-          - $ref: '#/components/schemas/User'
-          readOnly: true
-      required:
-      - vilt_session
     CourseListItem:
       type: object
       properties:
@@ -301,34 +262,6 @@ components:
           type: string
           readOnly: true
           description: Course title
-    ViltSessionRegistrationUpdateRequest:
-      type: object
-      properties:
-        attended:
-          type: boolean
-      required:
-      - attended
-    ViltSessionRegistrationDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as vilt_session_registration_id within the documentation
-        attended:
-          type: boolean
-          readOnly: true
-        vilt_session:
-          $ref: '#/components/schemas/ReadOnlyViltSession'
-        student_lesson_progress:
-          allOf:
-          - $ref: '#/components/schemas/StudentLessonProgressCourseItem'
-          readOnly: true
-    PatchedViltSessionRegistrationUpdateRequest:
-      type: object
-      properties:
-        attended:
-          type: boolean
     PaginatedViltSessionRegistrationListItemList:
       type: object
       required:
@@ -354,6 +287,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ViltSessionRegistrationListItem'
+    ViltSessionRegistrationDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as vilt_session_registration_id within the documentation
+        attended:
+          type: boolean
+          readOnly: true
+        vilt_session:
+          $ref: '#/components/schemas/ReadOnlyViltSession'
+        student_lesson_progress:
+          allOf:
+          - $ref: '#/components/schemas/StudentLessonProgressCourseItem'
+          readOnly: true
     StudentLessonProgressCourseItem:
       type: object
       properties:
@@ -367,6 +316,46 @@ components:
       - id
       - lesson
       - user
+    ReadOnlyViltSessionRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Known as session_id within the documentation
+      required:
+      - id
+    ViltSessionRegistrationListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as vilt_session_registration_id within the documentation
+        attended:
+          type: boolean
+          readOnly: true
+        vilt_session:
+          $ref: '#/components/schemas/ReadOnlyViltSession'
+        user:
+          allOf:
+          - $ref: '#/components/schemas/User'
+          readOnly: true
+      required:
+      - vilt_session
+    PatchedViltSessionRegistrationUpdateRequest:
+      type: object
+      properties:
+        attended:
+          type: boolean
+    ReadOnlyViltSession:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Known as session_id within the documentation
+      required:
+      - id
     LessonCourseListItem:
       type: object
       description: Lesson information within the user lesson progress endpoint.
@@ -382,6 +371,17 @@ components:
           $ref: '#/components/schemas/CourseListItem'
       required:
       - course
+    ViltSessionRegistrationUpdate:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as vilt_session_registration_id within the documentation
+        attended:
+          type: boolean
+      required:
+      - attended
   securitySchemes:
     OrganizationApiKey:
       type: http

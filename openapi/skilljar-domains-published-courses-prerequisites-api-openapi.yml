@@ -123,16 +123,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PublishedCoursePrerequisite:
-      type: object
-      description: Serializer for prerequisites of a published course.
-      properties:
-        published_course:
-          allOf:
-          - $ref: '#/components/schemas/PublishedCourseIdOnly'
-          description: Json containing he prerequisite published course ID
-      required:
-      - published_course
     PublishedCoursePrerequisiteRequest:
       type: object
       description: Serializer for prerequisites of a published course.
@@ -153,6 +143,16 @@ components:
           description: The published course ID
       required:
       - id
+    PublishedCoursePrerequisite:
+      type: object
+      description: Serializer for prerequisites of a published course.
+      properties:
+        published_course:
+          allOf:
+          - $ref: '#/components/schemas/PublishedCourseIdOnly'
+          description: Json containing he prerequisite published course ID
+      required:
+      - published_course
     PaginatedPublishedCoursePrerequisiteList:
       type: object
       required:

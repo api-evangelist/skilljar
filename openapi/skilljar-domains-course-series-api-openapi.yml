@@ -76,31 +76,23 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CourseSeries:
+    Offer:
       type: object
       properties:
         id:
           type: string
           readOnly: true
-        title:
-          type: string
-          maxLength: 500
-        visible_on_catalog:
+        registration_open:
           type: boolean
-        series_url:
+        registration_url:
           type: string
           readOnly: true
-          description: Base URL of the series detail or catalog page
-        published_course_count:
-          type: integer
-          readOnly: true
-          description: Number of courses in the course series
-        offer:
-          allOf:
-          - $ref: '#/components/schemas/Offer'
-          readOnly: true
+          description: URL used for course registration
+        price:
+          $ref: '#/components/schemas/Price'
       required:
-      - title
+      - price
+      - registration_open
     PaginatedCourseSeriesList:
       type: object
       required:
@@ -126,6 +118,31 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CourseSeries'
+    CourseSeries:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          maxLength: 500
+        visible_on_catalog:
+          type: boolean
+        series_url:
+          type: string
+          readOnly: true
+          description: Base URL of the series detail or catalog page
+        published_course_count:
+          type: integer
+          readOnly: true
+          description: Number of courses in the course series
+        offer:
+          allOf:
+          - $ref: '#/components/schemas/Offer'
+          readOnly: true
+      required:
+      - title
     Price:
       type: object
       properties:
@@ -135,23 +152,6 @@ components:
         currency_code:
           type: string
           default: USD
-    Offer:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        registration_open:
-          type: boolean
-        registration_url:
-          type: string
-          readOnly: true
-          description: URL used for course registration
-        price:
-          $ref: '#/components/schemas/Price'
-      required:
-      - price
-      - registration_open
   securitySchemes:
     OrganizationApiKey:
       type: http

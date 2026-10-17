@@ -165,6 +165,31 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PaginatedPathList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Path'
     PatchedPathRequest:
       type: object
       properties:
@@ -191,31 +216,6 @@ components:
           minLength: 1
           description: 'Text to replace the word ''courses'' on the catalog tile for this learning path. For example: ''3 courses'''
           maxLength: 50
-    PaginatedPathList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Path'
     PathRequest:
       type: object
       properties:

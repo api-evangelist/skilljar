@@ -162,6 +162,17 @@ components:
           description: ISO 8601 datetime indicating when the student group / access code link was created
       required:
       - access_code_pool
+    GroupAccessCodePoolLink:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          readOnly: true
+          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
+      required:
+      - id
     PaginatedGroupAccessCodePoolList:
       type: object
       required:
@@ -187,17 +198,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GroupAccessCodePool'
-    GroupAccessCodePoolLink:
+    GroupAccessCodePoolRequest:
       type: object
       properties:
-        id:
-          type: string
-        name:
-          type: string
-          readOnly: true
-          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
+        access_code_pool:
+          $ref: '#/components/schemas/GroupAccessCodePoolLinkRequest'
       required:
-      - id
+      - access_code_pool
     GroupAccessCodePoolLinkRequest:
       type: object
       properties:
@@ -206,13 +213,6 @@ components:
           minLength: 1
       required:
       - id
-    GroupAccessCodePoolRequest:
-      type: object
-      properties:
-        access_code_pool:
-          $ref: '#/components/schemas/GroupAccessCodePoolLinkRequest'
-      required:
-      - access_code_pool
   securitySchemes:
     OrganizationApiKey:
       type: http

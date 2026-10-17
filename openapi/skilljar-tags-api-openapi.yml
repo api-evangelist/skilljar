@@ -183,17 +183,31 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TagRequest:
+    PaginatedTagList:
       type: object
-      description: Serializer for Tag model.
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: Name of the tag.  This is a required field and must be unique within the organization.
-          maxLength: 255
       required:
-      - name
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
     Tag:
       type: object
       description: Serializer for Tag model.
@@ -222,31 +236,17 @@ components:
           minLength: 1
           description: Name of the tag.  This is a required field and must be unique within the organization.
           maxLength: 255
-    PaginatedTagList:
+    TagRequest:
       type: object
-      required:
-      - count
-      - results
+      description: Serializer for Tag model.
       properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
+        name:
+          type: string
+          minLength: 1
+          description: Name of the tag.  This is a required field and must be unique within the organization.
+          maxLength: 255
+      required:
+      - name
   securitySchemes:
     OrganizationApiKey:
       type: http

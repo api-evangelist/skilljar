@@ -217,6 +217,112 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PromoCodePoolUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+        active:
+          type: boolean
+          default: true
+        starts_at:
+          type: string
+          format: date-time
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating the expiration of the promo code pool
+        expire_content:
+          type: boolean
+      required:
+      - starts_at
+    PatchedPromoCodePoolUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+        active:
+          type: boolean
+          default: true
+        starts_at:
+          type: string
+          format: date-time
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating the expiration of the promo code pool
+        expire_content:
+          type: boolean
+    PaginatedPromoCodePoolListItemList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromoCodePoolListItem'
+    PromoCodePoolCreate:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+        active:
+          type: boolean
+          default: true
+        starts_at:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating the start of the promo code pool
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: ISO 8601 formatted datetime string indicating the expiration of the promo code pool
+        expire_content:
+          type: boolean
+        discount_type:
+          $ref: '#/components/schemas/DiscountTypeEnum'
+        price_cents:
+          type:
+          - integer
+          - 'null'
+        percent_off:
+          type:
+          - integer
+          - 'null'
+        single_use_per_user:
+          type: boolean
+      required:
+      - discount_type
+      - name
+      - starts_at
     PromoCodePoolCreateRequest:
       type: object
       properties:
@@ -254,14 +360,6 @@ components:
       - discount_type
       - name
       - starts_at
-    DiscountTypeEnum:
-      enum:
-      - PRICE_OVERRIDE
-      - PERCENT_OFF
-      type: string
-      description: '* `PRICE_OVERRIDE` - Price in cents
-
-        * `PERCENT_OFF` - Percent off'
     PromoCodePoolUpdate:
       type: object
       properties:
@@ -320,112 +418,14 @@ components:
       required:
       - name
       - starts_at
-    PromoCodePoolUpdateRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-        active:
-          type: boolean
-          default: true
-        starts_at:
-          type: string
-          format: date-time
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating the expiration of the promo code pool
-        expire_content:
-          type: boolean
-      required:
-      - starts_at
-    PaginatedPromoCodePoolListItemList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PromoCodePoolListItem'
-    PatchedPromoCodePoolUpdateRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-        active:
-          type: boolean
-          default: true
-        starts_at:
-          type: string
-          format: date-time
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating the expiration of the promo code pool
-        expire_content:
-          type: boolean
-    PromoCodePoolCreate:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        name:
-          type: string
-        active:
-          type: boolean
-          default: true
-        starts_at:
-          type: string
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating the start of the promo code pool
-        expires_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: ISO 8601 formatted datetime string indicating the expiration of the promo code pool
-        expire_content:
-          type: boolean
-        discount_type:
-          $ref: '#/components/schemas/DiscountTypeEnum'
-        price_cents:
-          type:
-          - integer
-          - 'null'
-        percent_off:
-          type:
-          - integer
-          - 'null'
-        single_use_per_user:
-          type: boolean
-      required:
-      - discount_type
-      - name
-      - starts_at
+    DiscountTypeEnum:
+      enum:
+      - PRICE_OVERRIDE
+      - PERCENT_OFF
+      type: string
+      description: '* `PRICE_OVERRIDE` - Price in cents
+
+        * `PERCENT_OFF` - Percent off'
   securitySchemes:
     OrganizationApiKey:
       type: http

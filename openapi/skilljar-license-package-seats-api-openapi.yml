@@ -176,14 +176,23 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    LicensePackageSeatCreateRequest:
+    LicensePackageSeat:
       type: object
-      description: Create serializer for LicensePackageSeat
+      description: Serializer for LicensePackageSeat
       properties:
+        id:
+          type: string
+          readOnly: true
         student:
-          $ref: '#/components/schemas/LicensePackageStudentCreateRequest'
-      required:
-      - student
+          allOf:
+          - $ref: '#/components/schemas/LicensePackageStudent'
+          readOnly: true
+        enrolled_at:
+          type: string
+          format: date-time
+          readOnly: true
+        active:
+          type: boolean
     LicensePackageStudentCreateRequest:
       type: object
       description: Create serializer for LicensePackageSeat
@@ -213,6 +222,12 @@ components:
           readOnly: true
       required:
       - student
+    LicensePackageSeatUpdateRequest:
+      type: object
+      description: Update serializer for LicensePackageSeat
+      properties:
+        active:
+          type: boolean
     LicensePackageStudent:
       type: object
       description: Serializer for the student of a LicensePackageSeat
@@ -230,44 +245,6 @@ components:
           type: string
           format: email
           readOnly: true
-    LicensePackageSeat:
-      type: object
-      description: Serializer for LicensePackageSeat
-      properties:
-        id:
-          type: string
-          readOnly: true
-        student:
-          allOf:
-          - $ref: '#/components/schemas/LicensePackageStudent'
-          readOnly: true
-        enrolled_at:
-          type: string
-          format: date-time
-          readOnly: true
-        active:
-          type: boolean
-    LicensePackageStudentCreate:
-      type: object
-      description: Create serializer for LicensePackageSeat
-      properties:
-        id:
-          type: string
-        first_name:
-          type: string
-          readOnly: true
-        last_name:
-          type: string
-          readOnly: true
-        email:
-          type: string
-          format: email
-    LicensePackageSeatUpdateRequest:
-      type: object
-      description: Update serializer for LicensePackageSeat
-      properties:
-        active:
-          type: boolean
     LicensePackageSeatUpdate:
       type: object
       description: Update serializer for LicensePackageSeat
@@ -283,6 +260,35 @@ components:
           type: string
           format: date-time
           readOnly: true
+        active:
+          type: boolean
+    LicensePackageSeatCreateRequest:
+      type: object
+      description: Create serializer for LicensePackageSeat
+      properties:
+        student:
+          $ref: '#/components/schemas/LicensePackageStudentCreateRequest'
+      required:
+      - student
+    LicensePackageStudentCreate:
+      type: object
+      description: Create serializer for LicensePackageSeat
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+        email:
+          type: string
+          format: email
+    PatchedLicensePackageSeatUpdateRequest:
+      type: object
+      description: Update serializer for LicensePackageSeat
+      properties:
         active:
           type: boolean
     PaginatedLicensePackageSeatList:
@@ -310,12 +316,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LicensePackageSeat'
-    PatchedLicensePackageSeatUpdateRequest:
-      type: object
-      description: Update serializer for LicensePackageSeat
-      properties:
-        active:
-          type: boolean
   securitySchemes:
     OrganizationApiKey:
       type: http

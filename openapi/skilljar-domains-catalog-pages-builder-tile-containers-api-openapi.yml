@@ -139,18 +139,7 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    AlignmentEnum:
-      enum:
-      - left
-      - center
-      - right
-      type: string
-      description: '* `left` - Left
-
-        * `center` - Center
-
-        * `right` - Right'
-    TileContainerContentBlockRequest:
+    PatchedTileContainerContentBlockRequest:
       type: object
       description: Serializer for TileContainerContentBlock retrieve and update operations
       properties:
@@ -162,7 +151,7 @@ components:
           maxLength: 100000
         alignment:
           $ref: '#/components/schemas/AlignmentEnum'
-    PatchedTileContainerContentBlockRequest:
+    TileContainerContentBlockRequest:
       type: object
       description: Serializer for TileContainerContentBlock retrieve and update operations
       properties:
@@ -192,6 +181,17 @@ components:
           maxLength: 100000
         alignment:
           $ref: '#/components/schemas/AlignmentEnum'
+    AlignmentEnum:
+      enum:
+      - left
+      - center
+      - right
+      type: string
+      description: '* `left` - Left
+
+        * `center` - Center
+
+        * `right` - Right'
   securitySchemes:
     OrganizationApiKey:
       type: http

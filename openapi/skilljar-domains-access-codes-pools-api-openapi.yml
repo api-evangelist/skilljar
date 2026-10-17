@@ -240,6 +240,71 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PatchedDomainAccessCodePoolDetailRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
+          maxLength: 255
+        active:
+          type: boolean
+          default: true
+        start_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        end_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        expire_linked_to_domain_membership:
+          type: boolean
+          description: When this is true and an end_date is set, a user who registers with a code from this pool will lose access to the domain on the end_date.
+    ChannelEnum:
+      enum:
+      - api
+      - import
+      - dashboard
+      - ecommerce
+      - unknown
+      type: string
+      description: '* `api` - API
+
+        * `import` - Import
+
+        * `dashboard` - Dashboard
+
+        * `ecommerce` - E-Commerce
+
+        * `unknown` - Unknown'
+    DomainAccessCodePoolDetailRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
+          maxLength: 255
+        active:
+          type: boolean
+          default: true
+        start_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        end_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        expire_linked_to_domain_membership:
+          type: boolean
+          description: When this is true and an end_date is set, a user who registers with a code from this pool will lose access to the domain on the end_date.
     PaginatedDomainAccessCodePoolListItemList:
       type: object
       required:
@@ -265,88 +330,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DomainAccessCodePoolListItem'
-    DomainAccessCodePoolListItem:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        name:
-          type: string
-          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
-          maxLength: 255
-        active:
-          type: boolean
-          default: true
-        start_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        end_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        expire_linked_to_domain_membership:
-          type: boolean
-          description: When this is true and an end_date is set, a user who registers with a code from this pool will lose access to the domain on the end_date.
-        channel:
-          readOnly: true
-          oneOf:
-          - $ref: '#/components/schemas/ChannelEnum'
-          - $ref: '#/components/schemas/NullEnum'
-    PatchedDomainAccessCodePoolDetailRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
-          maxLength: 255
-        active:
-          type: boolean
-          default: true
-        start_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        end_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        expire_linked_to_domain_membership:
-          type: boolean
-          description: When this is true and an end_date is set, a user who registers with a code from this pool will lose access to the domain on the end_date.
-    NullEnum:
-      enum:
-      - null
-    DomainAccessCodePoolDetailRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
-          maxLength: 255
-        active:
-          type: boolean
-          default: true
-        start_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        end_date:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        expire_linked_to_domain_membership:
-          type: boolean
-          description: When this is true and an end_date is set, a user who registers with a code from this pool will lose access to the domain on the end_date.
     DomainAccessCodePoolDetail:
       type: object
       properties:
@@ -381,23 +364,40 @@ components:
         code_count:
           type: integer
           readOnly: true
-    ChannelEnum:
+    DomainAccessCodePoolListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          description: Name of the access code pool.  This may have been auto-generated when creating individual codes in the dashboard.
+          maxLength: 255
+        active:
+          type: boolean
+          default: true
+        start_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        end_date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        expire_linked_to_domain_membership:
+          type: boolean
+          description: When this is true and an end_date is set, a user who registers with a code from this pool will lose access to the domain on the end_date.
+        channel:
+          readOnly: true
+          oneOf:
+          - $ref: '#/components/schemas/ChannelEnum'
+          - $ref: '#/components/schemas/NullEnum'
+    NullEnum:
       enum:
-      - api
-      - import
-      - dashboard
-      - ecommerce
-      - unknown
-      type: string
-      description: '* `api` - API
-
-        * `import` - Import
-
-        * `dashboard` - Dashboard
-
-        * `ecommerce` - E-Commerce
-
-        * `unknown` - Unknown'
+      - null
   securitySchemes:
     OrganizationApiKey:
       type: http

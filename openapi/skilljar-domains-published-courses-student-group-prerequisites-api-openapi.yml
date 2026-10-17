@@ -162,6 +162,15 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    StudentGroupSummaryRequest:
+      type: object
+      description: Serializer for student groups for use GroupVisibility serializers
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
     StudentGroupSummary:
       type: object
       description: Serializer for student groups for use GroupVisibility serializers
@@ -173,15 +182,22 @@ components:
           readOnly: true
       required:
       - id
-    StudentGroupSummaryRequest:
+    PublishedCourseStudentGroupPrerequisite:
       type: object
-      description: Serializer for student groups for use GroupVisibility serializers
+      description: Serializer for PublishedCourseStudentGroupPrerequisite
       properties:
-        id:
-          type: string
-          minLength: 1
+        student_group:
+          $ref: '#/components/schemas/StudentGroupSummary'
       required:
-      - id
+      - student_group
+    PublishedCourseStudentGroupPrerequisiteRequest:
+      type: object
+      description: Serializer for PublishedCourseStudentGroupPrerequisite
+      properties:
+        student_group:
+          $ref: '#/components/schemas/StudentGroupSummaryRequest'
+      required:
+      - student_group
     PaginatedPublishedCourseStudentGroupPrerequisiteList:
       type: object
       required:
@@ -207,22 +223,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PublishedCourseStudentGroupPrerequisite'
-    PublishedCourseStudentGroupPrerequisite:
-      type: object
-      description: Serializer for PublishedCourseStudentGroupPrerequisite
-      properties:
-        student_group:
-          $ref: '#/components/schemas/StudentGroupSummary'
-      required:
-      - student_group
-    PublishedCourseStudentGroupPrerequisiteRequest:
-      type: object
-      description: Serializer for PublishedCourseStudentGroupPrerequisite
-      properties:
-        student_group:
-          $ref: '#/components/schemas/StudentGroupSummaryRequest'
-      required:
-      - student_group
   securitySchemes:
     OrganizationApiKey:
       type: http

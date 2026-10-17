@@ -160,6 +160,72 @@ paths:
           description: ''
 components:
   schemas:
+    PurchaseRequest:
+      type: object
+      properties:
+        state:
+          allOf:
+          - $ref: '#/components/schemas/PurchaseStateEnum'
+          description: '''PENDING'', ''SUCCESS'', ''FAILED'', ''REFUNDED'', or ''CANCELLED''
+
+
+            * `PENDING` - PENDING
+
+            * `SUCCESS` - SUCCESS
+
+            * `FAILED` - FAILED
+
+            * `REFUNDED` - REFUNDED
+
+            * `CANCELLED` - CANCELLED'
+        refunded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        refund_cents:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        price_cents:
+          type: integer
+        tax_price_cents:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+    User:
+      type: object
+      description: 'Version of the user serializer configured to lookup a user given the user''s email.  If a user with this email does
+
+        not yet exist, it will create a new User with given email, first_name and last_name parameters.'
+      properties:
+        id:
+          type: string
+          readOnly: true
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          title: Email address
+          description: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          description: First name
+          maxLength: 50
+        last_name:
+          type: string
+          description: Last name
+          maxLength: 50
+        full_name:
+          type: string
+          readOnly: true
+      required:
+      - email
     CurrencyCodeEnum:
       enum:
       - AUD
@@ -207,82 +273,6 @@ components:
         * `USD` - USD
 
         * `ZAR` - ZAR'
-    User:
-      type: object
-      description: 'Version of the user serializer configured to lookup a user given the user''s email.  If a user with this email does
-
-        not yet exist, it will create a new User with given email, first_name and last_name parameters.'
-      properties:
-        id:
-          type: string
-          readOnly: true
-          description: Known as user_id within the documentation
-        email:
-          type: string
-          format: email
-          title: Email address
-          description: Email address
-          maxLength: 254
-        first_name:
-          type: string
-          description: First name
-          maxLength: 50
-        last_name:
-          type: string
-          description: Last name
-          maxLength: 50
-        full_name:
-          type: string
-          readOnly: true
-      required:
-      - email
-    PurchaseFulfillment:
-      type: object
-      properties:
-        redirect_url:
-          type: string
-          readOnly: true
-        purchase:
-          allOf:
-          - $ref: '#/components/schemas/Purchase'
-          readOnly: true
-    PatchedPurchaseRequest:
-      type: object
-      properties:
-        state:
-          allOf:
-          - $ref: '#/components/schemas/PurchaseStateEnum'
-          description: '''PENDING'', ''SUCCESS'', ''FAILED'', ''REFUNDED'', or ''CANCELLED''
-
-
-            * `PENDING` - PENDING
-
-            * `SUCCESS` - SUCCESS
-
-            * `FAILED` - FAILED
-
-            * `REFUNDED` - REFUNDED
-
-            * `CANCELLED` - CANCELLED'
-        refunded_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        refund_cents:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        price_cents:
-          type: integer
-        tax_price_cents:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
     Purchase:
       type: object
       properties:
@@ -380,6 +370,53 @@ components:
           allOf:
           - $ref: '#/components/schemas/CurrencyCodeEnum'
           readOnly: true
+    PaymentProcessorEnum:
+      enum:
+      - NONE
+      - STRIPE
+      - STRIPE_BTC
+      - PAYPAL
+      - PAYFLOW
+      - CYBERSRC
+      - MES
+      - EXTERNAL
+      type: string
+      description: '* `NONE` - None
+
+        * `STRIPE` - Stripe
+
+        * `STRIPE_BTC` - Stripe Bitcoin
+
+        * `PAYPAL` - PayPal
+
+        * `PAYFLOW` - Payflow
+
+        * `CYBERSRC` - Cybersource
+
+        * `MES` - Merchant e-Solutions
+
+        * `EXTERNAL` - External'
+    PurchaseFulfillment:
+      type: object
+      properties:
+        redirect_url:
+          type: string
+          readOnly: true
+        purchase:
+          allOf:
+          - $ref: '#/components/schemas/Purchase'
+          readOnly: true
+    PurchaseFulfillmentStateEnum:
+      enum:
+      - SUCCESS
+      - FAILED
+      - CANCELLED
+      type: string
+      description: '* `SUCCESS` - SUCCESS
+
+        * `FAILED` - FAILED
+
+        * `CANCELLED` - CANCELLED'
     PurchaseFulfillmentRequest:
       type: object
       properties:
@@ -412,7 +449,30 @@ components:
           description: 'Optional: Purchase metadata. For reference only. JSON format is recommended'
       required:
       - state
-    PurchaseRequest:
+    PurchaseStateEnum:
+      enum:
+      - CREATED
+      - SUCCESS
+      - FAILED
+      - REFUNDED
+      - CANCELLED
+      - FLAGGED
+      - PENDING
+      type: string
+      description: '* `CREATED` - CREATED
+
+        * `SUCCESS` - SUCCESS
+
+        * `FAILED` - FAILED
+
+        * `REFUNDED` - REFUNDED
+
+        * `CANCELLED` - CANCELLED
+
+        * `FLAGGED` - FLAGGED
+
+        * `PENDING` - PENDING'
+    PatchedPurchaseRequest:
       type: object
       properties:
         state:
@@ -449,66 +509,6 @@ components:
           - 'null'
           maximum: 2147483647
           minimum: 0
-    PurchaseFulfillmentStateEnum:
-      enum:
-      - SUCCESS
-      - FAILED
-      - CANCELLED
-      type: string
-      description: '* `SUCCESS` - SUCCESS
-
-        * `FAILED` - FAILED
-
-        * `CANCELLED` - CANCELLED'
-    PaymentProcessorEnum:
-      enum:
-      - NONE
-      - STRIPE
-      - STRIPE_BTC
-      - PAYPAL
-      - PAYFLOW
-      - CYBERSRC
-      - MES
-      - EXTERNAL
-      type: string
-      description: '* `NONE` - None
-
-        * `STRIPE` - Stripe
-
-        * `STRIPE_BTC` - Stripe Bitcoin
-
-        * `PAYPAL` - PayPal
-
-        * `PAYFLOW` - Payflow
-
-        * `CYBERSRC` - Cybersource
-
-        * `MES` - Merchant e-Solutions
-
-        * `EXTERNAL` - External'
-    PurchaseStateEnum:
-      enum:
-      - CREATED
-      - SUCCESS
-      - FAILED
-      - REFUNDED
-      - CANCELLED
-      - FLAGGED
-      - PENDING
-      type: string
-      description: '* `CREATED` - CREATED
-
-        * `SUCCESS` - SUCCESS
-
-        * `FAILED` - FAILED
-
-        * `REFUNDED` - REFUNDED
-
-        * `CANCELLED` - CANCELLED
-
-        * `FLAGGED` - FLAGGED
-
-        * `PENDING` - PENDING'
   securitySchemes:
     OrganizationApiKey:
       type: http

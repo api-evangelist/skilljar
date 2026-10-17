@@ -38,6 +38,18 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    UserPublishedPathSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        course_count:
+          type: integer
+          readOnly: true
     StudentPathProgress:
       type: object
       properties:
@@ -57,18 +69,6 @@ components:
         latest_activity:
           type: string
           format: date-time
-          readOnly: true
-    UserPublishedPathSummary:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        title:
-          type: string
-          readOnly: true
-        course_count:
-          type: integer
           readOnly: true
     UserPublishedPathEnrollments:
       type: object

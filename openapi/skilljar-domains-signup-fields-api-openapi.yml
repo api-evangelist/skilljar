@@ -39,17 +39,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SignupFieldOption:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        value:
-          type: string
-          maxLength: 100
-      required:
-      - value
     PaginatedSignupFieldList:
       type: object
       required:
@@ -111,6 +100,17 @@ components:
           readOnly: true
       required:
       - label
+    SignupFieldOption:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        value:
+          type: string
+          maxLength: 100
+      required:
+      - value
     SignupFieldTypeEnum:
       enum:
       - TEXT

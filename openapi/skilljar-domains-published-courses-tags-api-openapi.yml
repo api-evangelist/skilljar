@@ -185,14 +185,6 @@ components:
           $ref: '#/components/schemas/NestedTag'
       required:
       - tag
-    PublishedCourseTagRequest:
-      type: object
-      description: Serializer for PublishedCourseTags.
-      properties:
-        tag:
-          $ref: '#/components/schemas/NestedTagRequest'
-      required:
-      - tag
     PaginatedPublishedCourseTagList:
       type: object
       required:
@@ -218,6 +210,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PublishedCourseTag'
+    PublishedCourseTagRequest:
+      type: object
+      description: Serializer for PublishedCourseTags.
+      properties:
+        tag:
+          $ref: '#/components/schemas/NestedTagRequest'
+      required:
+      - tag
     NestedTagRequest:
       type: object
       description: Serializer for nested Tag models in PublishedCourseTag, PublishedPathTag, etc.

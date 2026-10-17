@@ -89,6 +89,46 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ViltLocation:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the location
+        info_url:
+          type: string
+          description: Link for additional information about the location
+        is_active:
+          type: boolean
+          description: Whether this is an active location
+      required:
+      - is_active
+      - name
+    PaginatedViltSessionEventList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ViltSessionEvent'
     ViltSessionEvent:
       type: object
       properties:
@@ -144,46 +184,6 @@ components:
       - id
       - lesson
       - seats_total
-    PaginatedViltSessionEventList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ViltSessionEvent'
-    ViltLocation:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the location
-        info_url:
-          type: string
-          description: Link for additional information about the location
-        is_active:
-          type: boolean
-          description: Whether this is an active location
-      required:
-      - is_active
-      - name
     CourseListItem:
       type: object
       properties:

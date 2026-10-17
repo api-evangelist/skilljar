@@ -238,14 +238,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PatchedIltInstructorRequest:
-      type: object
-      description: Serializer for ILT instructors
-      properties:
-        email:
-          type: string
-          format: email
-          minLength: 1
     IltInstructor:
       type: object
       description: Serializer for ILT instructors
@@ -300,6 +292,14 @@ components:
           minLength: 1
       required:
       - email
+    PatchedIltInstructorRequest:
+      type: object
+      description: Serializer for ILT instructors
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 1
   securitySchemes:
     OrganizationApiKey:
       type: http

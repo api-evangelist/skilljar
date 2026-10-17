@@ -335,31 +335,17 @@ components:
           type: string
           description: This field has been replaced by the use of Signup Fields.
           deprecated: true
-    DomainRequest:
-      type: object
-      properties:
-        catalog_title:
-          type: string
-          minLength: 1
-          description: HTML content displayed at the top of the catalog page
-        access:
-          allOf:
-          - $ref: '#/components/schemas/AccessEnum'
-          description: 'Domain access settings
+    AccessEnum:
+      enum:
+      - PUBLIC
+      - PRIVATE
+      - PRIVATE_CODE
+      type: string
+      description: '* `PUBLIC` - Public: catalog is visible to anyone.
 
+        * `PRIVATE` - Login required: catalog is visible once the user signs up.
 
-            * `PUBLIC` - Public: catalog is visible to anyone.
-
-            * `PRIVATE` - Login required: catalog is visible once the user signs up.
-
-            * `PRIVATE_CODE` - Access code required: catalog is visible once the user signs up with an access code.'
-        access_code_message_html:
-          type: string
-          minLength: 1
-        marketing_message:
-          type: string
-          description: This field has been replaced by the use of Signup Fields.
-          deprecated: true
+        * `PRIVATE_CODE` - Access code required: catalog is visible once the user signs up with an access code.'
     PaginatedDomainList:
       type: object
       required:
@@ -410,23 +396,46 @@ components:
           type: string
           description: This field has been replaced by the use of Signup Fields.
           deprecated: true
-    AccessEnum:
-      enum:
-      - PUBLIC
-      - PRIVATE
-      - PRIVATE_CODE
-      type: string
-      description: '* `PUBLIC` - Public: catalog is visible to anyone.
+    DomainRequest:
+      type: object
+      properties:
+        catalog_title:
+          type: string
+          minLength: 1
+          description: HTML content displayed at the top of the catalog page
+        access:
+          allOf:
+          - $ref: '#/components/schemas/AccessEnum'
+          description: 'Domain access settings
 
-        * `PRIVATE` - Login required: catalog is visible once the user signs up.
 
-        * `PRIVATE_CODE` - Access code required: catalog is visible once the user signs up with an access code.'
-    CatalogPageGroupVisibilityRequest:
+            * `PUBLIC` - Public: catalog is visible to anyone.
+
+            * `PRIVATE` - Login required: catalog is visible once the user signs up.
+
+            * `PRIVATE_CODE` - Access code required: catalog is visible once the user signs up with an access code.'
+        access_code_message_html:
+          type: string
+          minLength: 1
+        marketing_message:
+          type: string
+          description: This field has been replaced by the use of Signup Fields.
+          deprecated: true
+    StudentGroupSummaryRequest:
+      type: object
+      description: Serializer for student groups for use GroupVisibility serializers
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
+    CatalogPageGroupVisibility:
       type: object
       description: Serializer for CatalogPageGroupVisibility overrides
       properties:
         student_group:
-          $ref: '#/components/schemas/StudentGroupSummaryRequest'
+          $ref: '#/components/schemas/StudentGroupSummary'
         is_visible:
           type: boolean
       required:
@@ -441,15 +450,6 @@ components:
         name:
           type: string
           readOnly: true
-      required:
-      - id
-    StudentGroupSummaryRequest:
-      type: object
-      description: Serializer for student groups for use GroupVisibility serializers
-      properties:
-        id:
-          type: string
-          minLength: 1
       required:
       - id
     PaginatedCatalogPageGroupVisibilityList:
@@ -477,12 +477,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CatalogPageGroupVisibility'
-    CatalogPageGroupVisibility:
+    CatalogPageGroupVisibilityRequest:
       type: object
       description: Serializer for CatalogPageGroupVisibility overrides
       properties:
         student_group:
-          $ref: '#/components/schemas/StudentGroupSummary'
+          $ref: '#/components/schemas/StudentGroupSummaryRequest'
         is_visible:
           type: boolean
       required:

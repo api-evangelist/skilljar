@@ -162,6 +162,37 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    StudentGroupSummaryRequest:
+      type: object
+      description: Serializer for student groups for use GroupVisibility serializers
+      properties:
+        id:
+          type: string
+          minLength: 1
+      required:
+      - id
+    PublishedPathGroupVisibilityRequest:
+      type: object
+      description: Serializer for PublishedPathGroupVisibility overrides
+      properties:
+        student_group:
+          $ref: '#/components/schemas/StudentGroupSummaryRequest'
+        is_visible:
+          type: boolean
+      required:
+      - is_visible
+      - student_group
+    PublishedPathGroupVisibility:
+      type: object
+      description: Serializer for PublishedPathGroupVisibility overrides
+      properties:
+        student_group:
+          $ref: '#/components/schemas/StudentGroupSummary'
+        is_visible:
+          type: boolean
+      required:
+      - is_visible
+      - student_group
     StudentGroupSummary:
       type: object
       description: Serializer for student groups for use GroupVisibility serializers
@@ -198,37 +229,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PublishedPathGroupVisibility'
-    PublishedPathGroupVisibilityRequest:
-      type: object
-      description: Serializer for PublishedPathGroupVisibility overrides
-      properties:
-        student_group:
-          $ref: '#/components/schemas/StudentGroupSummaryRequest'
-        is_visible:
-          type: boolean
-      required:
-      - is_visible
-      - student_group
-    StudentGroupSummaryRequest:
-      type: object
-      description: Serializer for student groups for use GroupVisibility serializers
-      properties:
-        id:
-          type: string
-          minLength: 1
-      required:
-      - id
-    PublishedPathGroupVisibility:
-      type: object
-      description: Serializer for PublishedPathGroupVisibility overrides
-      properties:
-        student_group:
-          $ref: '#/components/schemas/StudentGroupSummary'
-        is_visible:
-          type: boolean
-      required:
-      - is_visible
-      - student_group
   securitySchemes:
     OrganizationApiKey:
       type: http

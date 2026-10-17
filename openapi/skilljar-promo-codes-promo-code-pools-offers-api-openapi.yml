@@ -116,6 +116,47 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PaginatedPromoCodePoolOfferList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromoCodePoolOffer'
+    PromoCodePoolOffer:
+      type: object
+      properties:
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferItem'
+          readOnly: true
+    PromoCodePoolOfferRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: Offer ID you wish to attach to a PromoCodePool
     CurrencyCodeEnum:
       enum:
       - AUD
@@ -163,31 +204,6 @@ components:
         * `USD` - USD
 
         * `ZAR` - ZAR'
-    PaginatedPromoCodePoolOfferList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PromoCodePoolOffer'
     OfferTypeEnum:
       enum:
       - published_path
@@ -202,22 +218,6 @@ components:
         * `published_course` - Published Course
 
         * `plan` - Plan'
-    PromoCodePoolOfferRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          writeOnly: true
-          minLength: 1
-          description: Offer ID you wish to attach to a PromoCodePool
-    PromoCodePoolOffer:
-      type: object
-      properties:
-        offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferItem'
-          readOnly: true
     OfferItem:
       type: object
       properties:

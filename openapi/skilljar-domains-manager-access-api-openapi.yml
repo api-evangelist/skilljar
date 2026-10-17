@@ -73,61 +73,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    InvalidIds:
-      type: object
-      description: Serializer for returning invalid IDs from the update request.
-      properties:
-        course_ids:
-          type: array
-          items:
-            type: string
-        path_ids:
-          type: array
-          items:
-            type: string
-        license_ids:
-          type: array
-          items:
-            type: string
-    ManagerAccess:
-      type: object
-      description: Serializer for returning a user's third-party manager access settings.
-      properties:
-        user:
-          $ref: '#/components/schemas/ReadOnlyUser'
-        manager_access:
-          allOf:
-          - $ref: '#/components/schemas/ManagerAccessDetails'
-          readOnly: true
-        invalid_ids:
-          allOf:
-          - $ref: '#/components/schemas/InvalidIds'
-          readOnly: true
-      required:
-      - user
-    ReadOnlyUser:
-      type: object
-      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
-      properties:
-        id:
-          type: string
-          description: Known as user_id within the documentation
-        email:
-          type: string
-          format: email
-          readOnly: true
-          title: Email address
-          description: Email address
-        first_name:
-          type: string
-          readOnly: true
-          description: First name
-        last_name:
-          type: string
-          readOnly: true
-          description: Last name
-      required:
-      - id
     ManagerAccessDetails:
       type: object
       description: Serializer for a user's third-party manager access details.
@@ -162,6 +107,38 @@ components:
       - license_ids
       - path_access_level
       - path_ids
+    ManagerAccess:
+      type: object
+      description: Serializer for returning a user's third-party manager access settings.
+      properties:
+        user:
+          $ref: '#/components/schemas/ReadOnlyUser'
+        manager_access:
+          allOf:
+          - $ref: '#/components/schemas/ManagerAccessDetails'
+          readOnly: true
+        invalid_ids:
+          allOf:
+          - $ref: '#/components/schemas/InvalidIds'
+          readOnly: true
+      required:
+      - user
+    InvalidIds:
+      type: object
+      description: Serializer for returning invalid IDs from the update request.
+      properties:
+        course_ids:
+          type: array
+          items:
+            type: string
+        path_ids:
+          type: array
+          items:
+            type: string
+        license_ids:
+          type: array
+          items:
+            type: string
     ManagerAccessUpdateRequestRequest:
       type: object
       description: Serializer for updating a user's third-party manager access settings.
@@ -197,6 +174,29 @@ components:
       - course_access_level
       - group_name
       - path_access_level
+    ReadOnlyUser:
+      type: object
+      description: Version of the user serializer configured to lookup a user given the user's id.  It will not create new users.
+      properties:
+        id:
+          type: string
+          description: Known as user_id within the documentation
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+          description: Email address
+        first_name:
+          type: string
+          readOnly: true
+          description: First name
+        last_name:
+          type: string
+          readOnly: true
+          description: Last name
+      required:
+      - id
   securitySchemes:
     OrganizationApiKey:
       type: http

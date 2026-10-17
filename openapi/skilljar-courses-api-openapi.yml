@@ -219,31 +219,20 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PaginatedCourseList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Course'
+    CourseAndLessonTimeFormatEnum:
+      enum:
+      - HOURS_MINUTES_SECONDS
+      - HOURS_MINUTES
+      - HOURS_MINUTES_VERBOSE
+      - MINUTES_VERBOSE
+      type: string
+      description: '* `HOURS_MINUTES_SECONDS` - HH:MM:SS (01:32:47)
+
+        * `HOURS_MINUTES` - HH:MM (01:33)
+
+        * `HOURS_MINUTES_VERBOSE` - X hr Y min (1 hr 33 min)
+
+        * `MINUTES_VERBOSE` - Y min (93 min)'
     Course:
       type: object
       description: Course Serializer
@@ -380,20 +369,6 @@ components:
       - enforce_sequential_navigation
       - short_description
       - title
-    CourseAndLessonTimeFormatEnum:
-      enum:
-      - HOURS_MINUTES_SECONDS
-      - HOURS_MINUTES
-      - HOURS_MINUTES_VERBOSE
-      - MINUTES_VERBOSE
-      type: string
-      description: '* `HOURS_MINUTES_SECONDS` - HH:MM:SS (01:32:47)
-
-        * `HOURS_MINUTES` - HH:MM (01:33)
-
-        * `HOURS_MINUTES_VERBOSE` - X hr Y min (1 hr 33 min)
-
-        * `MINUTES_VERBOSE` - Y min (93 min)'
     PatchedCourseRequest:
       type: object
       description: Course Serializer
@@ -445,6 +420,31 @@ components:
             * `HOURS_MINUTES_VERBOSE` - X hr Y min (1 hr 33 min)
 
             * `MINUTES_VERBOSE` - Y min (93 min)'
+    PaginatedCourseList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Course'
   securitySchemes:
     OrganizationApiKey:
       type: http
