@@ -54,6 +54,19 @@
     builder: Fivetran
   status: not-a-workflow
   arazzo: null
+- slug: skilljar-zendesk-own
+  label: Zendesk (own)
+  partner: zendesk
+  partner_name: Zendesk (own)
+  category: Knowledge and Content Management
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.zendesk.com/marketplace/apps/support/157403/skilljar/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
 - slug: skilljar-zoom-own
   label: Zoom (own)
   partner: zoom
